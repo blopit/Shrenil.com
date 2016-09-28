@@ -55,7 +55,7 @@ var Boxlayout = (function() {
 		// if currently navigating the work items
 		isAnimating = false,
 		// close work panel trigger
-		$closeWorkItem = $workPanelsContainer.find( 'nav > span.bl-icon-close' ),
+		$closeWorkItem = $workPanelsContainer.find( 'nav > span.fa-times' ),
 		transEndEventNames = {
 			'WebkitTransition' : 'webkitTransitionEnd',
 			'MozTransition' : 'transitionend',
@@ -86,7 +86,7 @@ var Boxlayout = (function() {
 					$el.addClass( 'bl-expand-item' );
 				}
 
-			} ).find( 'span.bl-icon-close' ).on( 'click', function() {
+			} ).find( 'span.fa-times' ).on( 'click', function() {
 
 				// close the expanded section and scale up the others
 				$section.data( 'open', false ).removeClass( 'bl-expand' ).on( transEndEventName, function( event ) {

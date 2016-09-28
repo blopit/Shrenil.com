@@ -291,7 +291,7 @@ body {
 	content: "\e003";
 }
 
-.bl-main > section .bl-icon-close {
+.bl-main > section .fa-times {
 	position: absolute;
 	top: 20px;
 	right: 20px;
@@ -301,8 +301,8 @@ body {
 	pointer-events: none;
 }
 
-.bl-icon-close:before {
-	content: "\e005";
+.bl-main > section .fa-times:hover {
+    color: lightgray;
 }
 
 .bl-content,
@@ -562,14 +562,14 @@ section.bl-expand .bl-box {
 }*/
 
 .bl-content,
-.bl-icon-close {
+.fa-times {
 	-webkit-transition: opacity 0.1s linear 0s;
 	-moz-transition: opacity 0.1s linear 0s;
 	transition: opacity 0.1s linear 0s;
 }
 
 section.bl-expand .bl-content,
-section.bl-expand .bl-icon-close {
+section.bl-expand .fa-times {
 	pointer-events: auto;
 	opacity: 1;
 	-webkit-transition: opacity 0.3s linear 0.5s;
