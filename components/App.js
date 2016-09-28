@@ -16,13 +16,16 @@ var App = React.createClass({
 		};
 	},
 
+	setBackgroundColor( color ){
+		console.log("");
+	},
 
 	render(){
 
 		return (
 
 			<div>
-				<h1>Your Google Maps Locations</h1>
+				<h1>Your Google Maps Locaions</h1>
 
 
 			</div>

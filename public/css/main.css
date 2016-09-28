@@ -3,6 +3,12 @@ body {
   margin: 0;
   background-color: #bada55; }
 
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer; }
+
 .bacterium {
   position: fixed;
   top: 0;

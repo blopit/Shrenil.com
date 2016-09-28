@@ -4,6 +4,13 @@ body {
   background-color: $badass;
 }
 
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+}
+
 // The canvas
 .bacterium {
     position: fixed;

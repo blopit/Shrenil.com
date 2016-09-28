@@ -1,25 +1,403 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-	<meta charset="UTF-8">
-	<title>Your First Webapp With React</title>
-	<link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/flatly/bootstrap.min.css" type="text/css" rel="stylesheet" />
-	<link href="assets/css/styles.css" type="text/css" rel="stylesheet" />
-</head>
-<body>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Shrenil.com</title>
 
-	<div id="main" class="container">
 
-		<!-- The App will be rendered here -->
-		
-	</div>
 
-	<!-- Including the Google Maps API and the GMaps library -->
-	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.12/gmaps.min.js"></script>
 
-	<!-- Our compiled JavaScript source file -->
-	<script src="./compiled.js"></script>
+        <link rel="stylesheet" href="public/css/style.css">
 
-</body>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Righteous|Varela+Round" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
+        <script src="http://cdn.jsdelivr.net/emojione/1.5.2/lib/js/emojione.min.js"></script>
+
+
+  </head>
+
+  <body>
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Fullscreen Layout with Page Transitions</title>
+		<meta name="description" content="Fullscreen Layout with Page Transitions" />
+		<meta name="keywords" content="fullscreen layout, boxes, responsive, page transitions, css transitions, jquery, portfolio, template" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="http://tympanus.net/Development/favicon.ico">
+	</head>
+	<body>
+		<div class="container">
+			<div id="bl-main" class="bl-main">
+				<section>
+					<div class="bl-box">
+						<div class="hvr-underline-from-center">
+							<h2 class="bl-icon fa fa-user fa-4x">	<div class="icon-text">About Me</div>
+							</h2>
+						</div>
+					</div>
+					<div class="bl-content right-text convert-emoji">
+						<h2>About Me</h2>
+						<div class="vbox">
+							<div class="hbox main-center center-text">
+								<div class="image-wrap"><img src="public/images/shrenp.jpg"/></div>
+
+							</div>
+							<div class="center-text slab-text">
+								<h1>Shrenil Patel</h1>
+								<h3>- An Inside Look -</h3>
+							</div>
+							<p class="convert-emoji"> Hey! I'm <b>Shrenil Patel</b>. Third year software engineering student at  University of Waterloo and I like to be cool all the time :sunglasses:. Be it making something cool, eating something cool, finding something, or even learning something cool. If you're working on some cool tech you <b>bet</b> I want in!
+							</p>
+							<div class="accordion">
+								<div class="accordion__control acc_pink">Hobbies &amp; Interests<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>Hackathons <span class="comment">&nbsp;&nbsp;&nbsp;//Really interested in OpenCV &amp; image processing ATM!</span></li>
+										  <li>Board Games</li>
+										  <li>Video Games</li>
+										  <li>Camping</li>
+										  <li>Brain Teasers &amp; Riddles</li>
+										  <li>Traveling<span class="comment">&nbsp;&nbsp;&nbsp;//been to like ~20 countries</span></li>
+										  <li>Cartoons + Anime</li>
+										  <li>Bad Puns<span class="comment">&nbsp;&nbsp;&nbsp;//Try me! I'm a master. I guess you could call me a PUNdit</span></li>
+										  <li>Bad Pickup Lines</li>
+										  <li>Exploring</li>
+										  <li>Writing short stories</li>
+										  <li>Creating sick beats</li>
+										  <li>Ai competitions</li>
+										  <li>Chatting with friends</li>
+										</ul>
+									</p>
+								</div>
+								<div class="accordion__control acc_pink">Contact<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<b>Github</b> - <a href="https://github.com/blopit">github.com/blopit</a>
+										<b>Email</b> - <a href="mailto:patel.shrenil@gmail.com?Subject=Hello!%20you are so coool" target="_top">patel.shrenil@gmail.com</a>
+										</br>
+									  	<b>Phone</b> - <a href="tel:226-868-6885">+1 226-868-688</a>
+									</p>
+								</div>
+							</div>
+							</br></br></br>
+						</div>
+
+					</div>
+					<span class="bl-icon bl-icon-close"></span>
+				</section>
+				<section id="bl-work-section">
+					<div class="bl-box">
+						<div class="hvr-underline-from-center">
+							<h2 class="bl-icon fa fa-wrench fa-4x">
+								<div class="icon-text">Skills</div>
+							</h2>
+						</div>
+					</div>
+					<div class="bl-content right-text ">
+						<h2>Skills</h2>
+						<div class="center-text slab-text">
+							<h1>How I pay my bills</h1>
+						</div>
+
+						<!--<p class="convert-emoji"> "With great power comes great responsibility" - Uncle Ben
+							</p>-->
+							<div class="accordion">
+								<div class="accordion__control acc_purple">Proficient Languages<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>Python</li>
+										  <li>Javascript</li>
+										  <li>Java</li>
+										  <li>C++</li>
+										  <li>C</li>
+										  <li>HTML/CSS</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_purple">Familiar Languages<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>Objective-C</li>
+										  <li>C#</li>
+										  <li>Visual Basic</li>
+										  <li>VB .Net</li>
+										  <li>Arduino</li>
+										  <li>Processing</li>
+										  <li>MIPS assembly</li>
+										  <li>ARM assembly</li>
+										  <li>uC++</li>
+										  <li>GML</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_purple">Frameworks + Libraries + SDKs<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>Node.js</li>
+										  <li>React + react-native</li>
+										  <li>AngularJS</li>
+										  <li>Jquery</li>
+										  <li>Express</li>
+										  <li>AJAX</li>
+										  <li>Bootstrap</li>
+										  <li>Mustache</li>
+										  <li>Underscore.js</li>
+										  <li>SASS</li>
+										</ul>
+										<ul>
+										  <li>OpenCV</li>
+										  <li>Selenium</li>
+										  <li>SQLAlchemy</li>
+										  <li>Cacoa</li>
+										</ul>
+										<ul>
+										  <li>Andoid SDK</li>
+										  <li>iOS SDK</li>
+										  <li>Windows SDK</li>
+										  <li>Mac OSX SDK</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_purple">Database<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>MySQL</li>
+										  <li>MongoDB</li>
+										  <li>SQLite</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_purple">Tools<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>REGEX</li>
+										</ul>
+										<ul>
+										  <li>Windows</li>
+										  <li>UN*X<span class="comment">&nbsp;&nbsp;&nbsp;//Mac OSX, Ubuntu...</span></li>
+										</ul>
+										<ul>
+										  <li>Git</li>
+										  <li>SVN</li>
+										  <li>git-svn</li>
+										  <li>Github</li>
+										  <li>Bitbucket</li>
+										  <li>SourceTree</li>
+										  <li>TortoiseGit/SVN</li>
+										 </ul>
+										<ul>
+										  <li>JIRA</li>
+										  <li>Trello</li>
+										  <li>FogBugz</li>
+										  <li>ReviewBoard</li>
+										</ul>
+										<ul>
+										  <li>Heroku</li>
+										  <li>AWS</li>
+										</ul>
+										<ul>
+										  <li>Vim</li>
+										  <li>XCode</li>
+										  <li>Eclipse</li>
+										  <li>Netbeans</li>
+										  <li>Sublime Text 2</li>
+										  <li>Jetbrains IDEs<span class="comment">&nbsp;&nbsp;&nbsp;//Pycharm, Webstorm</span></li>
+										  <li>Android Studio</li>
+										</ul>
+										<ul>
+										  <li>FileZilla</li>
+										  <li>Cyberduck</li>
+										  <li>Sequel Pro</li>
+										  <li>MAMP</li>
+										  <li>Postman</li>
+										</ul>
+										<ul>
+										  <li>Adobe Creative Suite</li>
+										  <li>MSOffice</li>
+										  <li>Balsamiq</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_purple">Other<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+										<ul>
+										  <li>Ability to quickly learn and execute multiple new tasks simultaneously</li>
+										  <li>
+										  	Cooperative, adaptable and tolerant of others; follows instructions and regulations without supervision
+										  </li>
+										  <li>
+										  	Excellent written and verbal English skills. Told by every English teacher to become a writer!
+										  </li>
+										  <li>I can name the capital of most countries <span class="comment">&nbsp;&nbsp;&nbsp;//Try me</span></li>
+										  <li>I can come up with a pickup line for any name</li>
+										  <li>I can make most babies cry by simply looking at them</li>
+									</p>
+								</div>
+
+
+							</div>
+							</br></br></br>
+
+					</div>
+					<span class="bl-icon bl-icon-close"></span>
+				</section>
+				<section>
+					<div class="bl-box">
+						<div class="hvr-underline-from-center">
+							<h2 class="bl-icon fa fa-briefcase fa-4x">
+								<div class="icon-text">Experience</div>
+							</h2>
+						</div>
+					</div>
+					<div class="bl-content right-text">
+						<h2>Experience</h2>
+						<div class="center-text slab-text">
+								<h1>Started From the Bottom Now We Here</h1>
+							</div>
+							<p class="convert-emoji">
+							</p>
+							<div class="accordion">
+								<div class="accordion__control acc_blue">Desire2Learn<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<div class="hbox main-space">
+										<h3>Software Developer/Designer</h3>
+										<h3>Toronto</h3>
+										<h3>May 2016 – Aug 2016</h3>
+									</div>
+									<p>
+										<ul>
+										  <li>Designed and implemented a flash card module that generates personal review sessions based on how well a user ‘feels’ they have answered. This allowed users to memorize exponentially quicker and also allowed their understanding of a subject to be accurately quantified</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_blue">SpringBoard Data Management<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<div class="hbox main-space">
+										<h3>Mobile Developer</h3>
+										<h3>Mississauga</h3>
+										<h3>Sept 2015 – Dec 2015</h3>
+									</div>
+									<p>
+										<ul>
+										  	<li>Re-hauled and shipped a mobile iOS application based on specifications of a client company. Implemented secure authentication for accounts. Reduced app load times by 80%</li>
+											<li>Implemented a solution to the dubbed ‘impossible’ problem of parsing deductions PDFs. This project made the jobs of 33 employees of the client redundant
+											</li>
+										</ul>
+									</p>
+								</div>
+
+								<div class="accordion__control acc_blue">Minted LLC<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<div class="hbox main-space">
+										<h3>Software Developer</h3>
+										<h3>San Francisco</h3>
+										<h3>Aug 2014 – Dec 2014</h3>
+									</div>
+									<p>
+										<ul>
+											<li>Developed a feature that extracted metadata from uploaded images and converted them to a printer-safe colour space. Resulted in a 50% reduction to reprint requests received</li>
+											<li>Made conversion loss trackers, increased supported image formats, made quick fixes to major bugs that deleted user data, fixed major site issues during Cyber Monday loads
+											</li>
+										</ul>
+									</p>
+								</div>
+
+								<!--<div class="accordion__control acc_blue">Contact<span class="accordion__indicator"></span></div>
+								<div class="accordion__panel">
+									<p>
+									</p>
+								</div>-->
+
+							</div>
+							</br></br></br>
+					</div>
+					<span class="bl-icon bl-icon-close"></span>
+				</section>
+				<section>
+					<div class="bl-box">
+						<div class="hvr-underline-from-center">
+							<h2 class="bl-icon fa fa-code-fork fa-4x">
+								<div class="icon-text">Projects</div>
+							</h2>
+						</div>
+					</div>
+					<div class="bl-content">
+						<h2>Personal Projects</h2>
+						<p>Soon~...</p> </br>
+						<b>Github</b> - <a href="https://github.com/blopit">github.com/blopit</a>
+					</div>
+					<span class="bl-icon bl-icon-close"></span>
+				</section>
+				<!-- Panel items for the works -->
+				<div class="bl-panel-items" id="bl-panel-work-items">
+					<div data-panel="panel-1">
+						<div>
+							<img src="images/1.jpg" />
+							<h3>Fixie bespoke</h3>
+							<p>Iphone artisan direct trade ethical Austin. Fixie bespoke banh mi ugh, deep v vinyl hashtag. Tumblr gentrify keffiyeh pop-up iphone twee biodiesel. Occupy american apparel freegan cliche. Mustache trust fund 8-bit jean shorts mumblecore thundercats. Pour-over small batch forage cray, banjo post-ironic flannel keffiyeh cred ethnic semiotics next level tousled fashion axe. Sustainable cardigan keytar fap bushwick bespoke.</p>
+						</div>
+					</div>
+					<div data-panel="panel-2">
+						<div>
+							<img src="images/2.jpg" />
+							<h3>Chillwave mustache</h3>
+							<p>Squid vinyl scenester literally pug, hashtag tofu try-hard typewriter polaroid craft beer mlkshk cardigan photo booth PBR. Chillwave 90's gentrify american apparel carles disrupt. Pinterest semiotics single-origin coffee craft beer thundercats irony, tumblr bushwick intelligentsia pickled. Narwhal mustache godard master cleanse street art, occupy ugh selfies put a bird on it cray salvia four loko gluten-free shoreditch.</p>
+						</div>
+					</div>
+					<div data-panel="panel-3">
+						<div>
+							<img src="images/3.jpg" />
+							<h3>Austin hella</h3>
+							<p>Ethical cray wayfarers leggings vice, seitan banksy small batch ethnic master cleanse. Pug chillwave etsy, scenester meh occupy blue bottle tousled blog tonx pinterest selvage mixtape swag cosby sweater. Synth tousled direct trade, hella Austin craft beer ugh chambray.</p>
+						</div>
+					</div>
+					<div data-panel="panel-4">
+						<div>
+							<img src="images/4.jpg" />
+							<h3>Brooklyn dreamcatcher</h3>
+							<p>Fashion axe 90's pug fap. Blog wayfarers brooklyn dreamcatcher, bicycle rights retro YOLO. Wes anderson lomo 90's food truck 3 wolf moon, twee jean shorts. Iphone small batch twee wolf yr before they sold out. Brooklyn echo park cred, portland pug selvage flannel seitan tousled mcsweeney's.</p>
+						</div>
+					</div>
+					<nav>
+						<span class="bl-next-work">&gt; Next Project</span>
+						<span class="bl-icon bl-icon-close"></span>
+					</nav>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+		<script>
+			$(function() {
+				Boxlayout.init();
+			});
+		</script>
+</html>
+
+        <script src="js/index.js"></script>
+
+
+
+
+  </body>
 </html>
