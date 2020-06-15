@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Pun Finder</title>
+    </head>
+    <style>
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
+    <body style="background-color: gray;">
+
+        <div id="container">
+            <div id="case">
+                <section>
+                  <ul class="input-list style-2 clearfix">
+                    <li>
+                      <input type="text" id="txtJob" placeholder="word here">
+                    </li>
+                    <li>
+                        <input id="numJob" type="number" min="1" max="500" placeholder="Number of Results" list="nums" autocomplete="off">
+                        <datalist id="nums">
+                          <option value=10>10</option>
+                          <option value=30>30</option>
+                          <option value=50>50</option>
+                          <option value=100>100</option>
+                          <option value=500>500</option>
+                        </datalist>
+                    </li>
+
+                  </ul>
+                </section>
+                <button id ="btn" class="button" onclick="getPuns()">
+                            Get Puns
+                        </button>
+            </div>
+            </br>
+            <div id="wrapper" style = "visibility: hidden;">
+
+                <h1 id="hr">Results</h1>
+                <table id="keywords" cellspacing="0" cellpadding="0" table></table>
+            </div>
+
+            <script src="jquery-1.11.3.js" type="text/javascript"></script>
+            <script src="main.js" type="text/javascript"></script>
+            <script src="jquery.tablesorter.min.js" type="text/javascript"></script>
+
+
+        </br>
+        </br>
+        </br>
+        </br>
+    </div>
+
+        <div id="footer">
+          <h2>github : <a href="https://github.com/blopit/PunGenAPI">
+            https://github.com/blopit/PunGenAPI</a></h2>
+        </div>
+
+    </body>
+</html>

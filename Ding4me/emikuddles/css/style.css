@@ -1,0 +1,234 @@
+/*
+< 768 (mobile)
+768 - sm (tablet)
+992 - md (desktop)
+1200 - lg (lg desk)
+*/
+
+/*fonts:
+font-family: 'Gloria Hallelujah', cursive;
+font-family: 'Indie Flower', cursive;
+*/
+
+body {
+    background-color: #BDD0B0;
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255, 255, 255, .35) 50%);
+    background-size: 100px 100px;
+    color: #89AF9D;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.container-fluid {
+    margin: 0 auto;
+    background-color: #E4E7CC;
+    width: 75%;
+}
+
+i {
+    color: white;
+    float: right;
+    padding: 10px;
+
+}
+
+#nav {
+    height: 45px;
+    background-color: navy;
+}
+
+#navbar {
+    width: 75%;
+    background-color: #89AF9D;
+    margin: 0 auto;
+}
+
+#navbar > div > ul > li {
+    border: none;
+    background-color: black;
+    text-align: center;
+    width: 85%;
+    margin: 10px auto;
+}
+
+#navbar div ul li a {
+    color: white;
+}
+
+#navbar div ul li a:hover {
+    border-radius: 0;
+    color: blue;
+}
+
+#post-container {
+    float: left;
+    flex: 6;
+    padding: 10px;
+}
+
+#sidebar-container {
+    float: right;
+    flex: 3;
+    padding: 10px;
+    margin-top: 14px;
+    position: relative;
+    transition: top 1s;
+    -webkit-transition: top 1s;
+}
+
+.post-title {
+    margin: 4px;
+}
+
+.post {
+    background-color: #F1F1E4;
+    padding: 10px 24px 24px;
+    margin: 24px 0px;
+}
+
+/*
+uncomment for some weird shit
+.post:hover {
+    animation: squigglevision 1s infinite alternate;
+}*/
+
+.sidebar-post-title {
+    color: #D0514F;
+    margin: 4px;
+}
+
+.sidebar-post {
+    background-color: #F1F1E4;
+    padding: 10px 24px 10px 24px;
+    margin: 10px 0px;
+}
+
+.seperator-container {
+    text-align: center;
+}
+
+.seperator {
+    display: inline-block;
+    height: 2px;
+    width: 30%;
+    background: #d0514f; /* Old browsers */
+    background: -moz-linear-gradient(left, transparent 0%, #d0514f 10%, #d0514f 90%, transparent 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, transparent 0%, #d0514f 10%, #d0514f 90%, transparent 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, transparent 0%, #d0514f 10%, #d0514f 90%, transparent 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0514f', endColorstr='#d0514f', GradientType=1); /* IE6-9 */
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+}
+
+.post p {
+    margin: 5px 0 10px;
+}
+
+.post p img {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-default {
+    border-radius: 0;
+    padding: 4px;
+    background-color: lightgreen;
+}
+
+#top-banner img {
+    margin: 0 auto;
+}
+
+#main-content {
+    float: left;
+}
+
+#sidebar-md {
+    background-color: darkgray;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+.sidebar-footer-columns {
+    width: 33%;
+    float: left;
+    background-color: darkgray;
+    padding: 10px 24px;
+}
+
+.sidebar-footer-columns a {
+    margin-left: 20px;
+}
+
+footer {
+    margin: 0 auto;
+    background-color: #89AF9D;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+}
+
+.hide {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .post {
+        padding: 1px 9px 6px;
+        float: left;
+    }
+
+    #sidebar-md {
+        float: right;
+    }
+
+    #sidebar-md a {
+        margin-left: 10px;
+    }
+}
+
+@keyframes squigglevision {
+    0% {
+        filter: url("#turbulence-1");
+    }
+    12.5% {
+        filter: url("#turbulence-2");
+    }
+    25% {
+        filter: url("#turbulence-3");
+    }
+    37.5% {
+        filter: url("#turbulence-4");
+    }
+    50% {
+        filter: url("#turbulence-5");
+    }
+    62.5% {
+        filter: url("#turbulence-4");
+    }
+    75% {
+        filter: url("#turbulence-3");
+    }
+    87.5% {
+        filter: url("#turbulence-2");
+    }
+    100% {
+        filter: url("#turbulence-1");
+    }
+}
+
+.squiggle {
+    animation: squigglevision 1s infinite alternate;
+}
+
+.p-squiggle {
+    filter: url("#turbulence-1");
+}

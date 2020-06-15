@@ -1,0 +1,1 @@
+[27-Feb-2017 07:46:56 UTC] PHP Fatal error:  Call to undefined function apply_filters() in /home/blopit/public_html/dorkydeer/wp-includes/load.php on line 316

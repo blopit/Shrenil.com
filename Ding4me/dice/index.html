@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <style type="text/css">
+
+  </style>
+
+  <title>Bar Chart Example</title>
+
+
+</head>
+
+<body>
+  <form id="myForm">
+    <input type="text" id="wordName" name="wordName" placeholder="2d6"/>
+    <input type="submit" value="ROLL"></input>
+  </form>
+
+  <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+
+
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+
+google.load("visualization", "1.1", {
+    packages: ["corechart"]
+});
+google.setOnLoadCallback(drawChart);
+
+var wordInput = document.getElementById("wordName");
+var form_el = document.getElementById("myForm");
+
+form_el.addEventListener("submit", function(evt) {
+    evt.preventDefault();
+    var str = wordInput.value;
+    var matches = str.match(/^(\d+)d(\d+)(?:x(\d+)$)?$/);
+
+    var mult = 1;
+    var dice = 1;
+    var sides = 1;
+
+    if (matches) {
+      if (matches[1]) {
+        dice = Math.max(1,parseInt(matches[1]));
+      }
+      if (matches[2]) {
+        sides = Math.max(1,parseInt(matches[2]));
+      }
+      if (matches[3]) {
+        mult = Math.max(1,parseInt(matches[3]));
+      }
+
+      if (Math.pow(sides,dice * mult) > 2500000) {
+        mult = 1;
+        dice = 1;
+        sides = 1;
+      }
+    }
+
+    drawChart(dice * mult, sides);
+});
+
+function product(A, B) {
+    var ret = [];
+    for (var i = 0; i < A.length; i++) {
+        for (var j = 0; j < B.length; j++) {
+            ret.push(A[i].concat(B[j]));
+        }
+    }
+    return ret;
+}
+
+function getDice(d) {
+    var ret = [];
+    for (var i = 1; i < d + 1; i++) {
+        ret.push([i]);
+    }
+    return ret;
+}
+
+function getRoll(x, d) {
+    var total = getDice(d);
+    for (var i = 1; i < x; i++) {
+        total = product(total, getDice(d));
+    }
+    return total;
+}
+
+function sum(data) {
+    var sum = 0;
+    for (var i = 0; i < data.length; i++) {
+        sum += data[i];
+    }
+    return sum;
+}
+
+function getSums(x, d) {
+    var data = getRoll(x, d);
+    var sums = [];
+    for (var i = 0; i < data.length; i++) {
+        sums.push(sum(data[i]));
+    }
+    return sums;
+}
+
+function getCounts(x, d) {
+    var counts = {};
+    var arr = getSums(x, d);
+    console.log(arr);
+    for (var i = 0; i < arr.length; i++) {
+        var num = arr[i];
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+    }
+    return counts;
+}
+
+function generateData(x, d) {
+    var counts = getCounts(x, d);
+
+    var total = 0;
+    for (var key in counts) {
+        total += counts[key];
+    }
+
+    var data = [
+        ['Characters', 'Percent Chance']
+    ];
+    for (var key in counts) {
+        data.push([key, counts[key] / total * 100]);
+    }
+    return data;
+}
+
+function drawChart(x, d) {
+  var x = x || 2;
+  var d = d || 6;
+    var data = google.visualization.arrayToDataTable(generateData(x, d));
+
+    var options = {
+        chart: {
+            title: 'Awesome Stuff',
+            subtitle: 'about email address length',
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
+
+    chart.draw(data, options);
+}
+
+//]]>
+
+</script>
+
+</body>
+
+</html>
+

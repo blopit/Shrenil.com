@@ -128,7 +128,7 @@ body, html { font-size: 100%; padding: 0; margin: 0; height: 100%;}
 
 body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
-    color: #f2ede3;
+    color: white;
     background: #333;
     font-size: 0.9em;
     font-weight: 300;
@@ -213,7 +213,7 @@ body {
 }
 
 .bl-main > section:hover {
-	background-position:500%;
+    background-position: 500%;
 }
 
 .bl-box {
@@ -613,8 +613,8 @@ section.bl-expand .fa-times {
   content: "";
   position: absolute;
   z-index: -1;
-  left: 50%;
-  right: 50%;
+  left: 51%;
+  right: 51%;
   bottom: 0;
   background: #fff;
   height: 4px;
@@ -644,7 +644,31 @@ section.bl-expand .fa-times {
 }
 
 .right-text {
-	font-family: 'Righteous', cursive;
+	/*text-decoration: underline;*/
+}
+
+.hr {
+    height: 0;
+    margin-top: -1.5em;
+    margin-bottom: 2.5em;
+    margin-left: auto;
+
+    border-style: solid;
+    border-width: 2px;
+    -webkit-transition: all 0.3s ease-out 0.5;
+    -moz-transition: all 0.3s ease-out 0.5;
+    transition: all 0.3s ease-out 0.5;
+}
+
+.hr:before {
+    opacity: 0;
+    margin-right: 100%;
+    color: black;
+    transition: opacity 0.45s;
+}
+.bl-content:hover .hr:before {
+    margin-right: 50%;
+    opacity: 1;
 }
 
 .slab-text {

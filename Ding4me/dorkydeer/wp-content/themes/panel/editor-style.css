@@ -1,0 +1,243 @@
+/*
+Theme Name: Comics
+Description: Used to style the TinyMCE editor.
+*/
+
+
+html .mceContentBody {
+	max-width: 750px;
+}
+
+body.mceContentBody {
+	background: #fdfdfa;
+	color: #666;
+	font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 1.6;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6 {
+	clear: both;
+	color: #fe7050;
+	font-family: Alegreya, "Times New Roman", serif;
+	font-weight: normal;
+}
+h1 {
+	font-size: 29px;
+	margin: 0;
+}
+h2,
+h3,
+h4 {
+	font-size: 23px;
+	margin: .8em 0;
+}
+h5,
+h6 {
+	font-size: 18px;
+	margin: .8em 0;
+}
+hr {
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin-bottom: 1.6em;
+}
+
+/* Text elements */
+p {
+	margin-bottom: 1.6em;
+}
+ul, ol {
+	margin: 0 0 1.6em 1.6em;
+	padding: 0;
+}
+ul {
+	list-style: disc;
+}
+ul ul {
+	list-style: square;
+}
+ul ul ul {
+	list-style: circle;
+}
+ol {
+	list-style: decimal;
+}
+ol ol {
+	list-style: lower-alpha;
+}
+ol ol ol {
+	list-style: lower-roman;
+}
+li > ul,
+li > ol {
+	margin-bottom: 0;
+	margin-left: 1.6em;
+}
+del {
+	color: #666;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	margin: 0 1.6em 1.6em;
+}
+b, strong {
+	font-weight: bold;
+}
+dfn, cite, em, i {
+	border-bottom: 0;
+	font-style: italic;
+}
+blockquote {
+	border-left: 5px solid #999;
+	font-style: italic;
+	margin: 0 0 1.6em 1.6em;
+	padding: 0 1.6em;
+}
+blockquote blockquote {
+	padding-right: 0;
+}
+address {
+	font-style: italic;
+	margin: 0 0 1.6em;
+}
+pre {
+	background: rgba(0,0,0,.03);
+	font-family: "Courier 10 Pitch", Courier, monospace;
+	font-size: 15px;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	padding: 1.6em;
+	overflow: auto;
+	max-width: 100%;
+}
+code, kbd, tt, var {
+	font: 15px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+abbr, acronym {
+	border-bottom: 1px dotted #666;
+	cursor: help;
+}
+mark, ins {
+	background: #fff9c0;
+	border-bottom: 0;
+	color: #666;
+	text-decoration: none;
+}
+sup,
+sub {
+	font-size: 75%;
+	height: 0;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	bottom: 1ex;
+}
+sub {
+	top: .5ex;
+}
+small {
+	font-size: 75%;
+}
+big {
+	font-size: 125%;
+}
+figure {
+	margin: 0;
+}
+table {
+	margin: 0 0 1.6em;
+	width: 100%;
+}
+td {
+	border-bottom: 1px solid #eee;
+	color: #666;
+	font-size: 18px;
+	padding: 5px 3px;
+}
+th {
+	border-bottom: 5px solid #999;
+	color: #666;
+	font-size: 18px;
+	padding: 5px 3px;
+	text-align: left;
+}
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	max-width: 100%; /* Adhere to container width. */
+}
+
+/* Links */
+a {
+	color: #fe7050;
+}
+a:visited {
+	color: #fe7050;
+}
+a:hover,
+a:focus,
+a:active {
+	color: rgba(254,112,80,.7);
+}
+
+/* Alignment */
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+/* Images */
+.wp-caption {
+	background: transparent;
+	border: 1px solid #ccc;
+	border-radius: 0;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+}
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin: 0 auto;
+	padding: 7px 1% 0 1%;
+	max-width: 98%;
+}
+.wp-caption-dd {
+	color: #999;
+	font-size: 14px;
+	font-style: italic;
+	padding: 0 1%;
+	text-align: center;
+}
+.wp-caption .wp-caption-dd {
+	margin: 0.8075em 0;
+}
+.site-content .gallery {
+	margin-bottom: 1.6em;
+}
+.gallery-caption {
+}
+.site-content .gallery a img {
+	border: none;
+	height: auto;
+	max-width: 90%;
+}
+.site-content .gallery dd {
+	margin: 0;
+}

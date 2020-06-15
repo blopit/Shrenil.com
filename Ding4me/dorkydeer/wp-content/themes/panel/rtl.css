@@ -1,0 +1,278 @@
+/* =Reset
+-------------------------------------------------------------- */
+
+caption, th, td {
+	text-align: right;
+}
+
+/* =Global
+----------------------------------------------- */
+
+/* Text elements */
+
+ul, ol {
+	margin: 0 1.6em 1.6em 0;
+}
+
+li > ul,
+li > ol {
+	margin-right: 1.6em;
+	margin-left: auto;
+}
+
+blockquote {
+	border-right: 5px solid #999;
+	margin: 0 1.6em 1.6em 0;
+	border-left: none;
+}
+
+blockquote blockquote {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+textarea {
+	padding-right: 3px;
+	padding-left: 0;
+}
+
+/* Alignment */
+.alignright {
+	float: right;
+	margin-left: 1.5em;
+	margin-right: auto;
+}
+
+.alignleft {
+	float: left;
+	margin-right: 1.5em;
+	margin-left: auto;
+}
+
+/* Text meant only for screen readers */
+
+.screen-reader-text:focus {
+	right: 5px;
+	left: auto;
+}
+
+
+/* =Blog Layout
+----------------------------------------------- */
+
+.content-area {
+	float: right;
+	margin: 0 0 0 -25%;
+}
+
+.site-content {
+	margin: 0 0 0 25%;
+}
+
+#secondary {
+	float: left;
+}
+
+/* =Comics Layout
+----------------------------------------------- */
+
+.home-thumbnail {
+	float: right;
+	margin-left: 3%;
+	margin-right: auto;
+}
+
+.home-content-wrapper {
+	float: right;
+}
+
+.home-thumbnail + .home-content-wrapper {
+	margin-right: 5%;
+	margin-left: auto;
+}
+
+.home .entry-summary,
+.home .entry-header {
+	text-align: right;
+}
+
+.home .comments-link a {
+	left: 0;
+	right: auto;
+}
+
+/* =Header
+----------------------------------------------- */
+
+.site-branding {
+	float: right;
+}
+
+/* =Menu
+----------------------------------------------- */
+
+.navigation-main {
+	float: left;
+	text-align: left;
+}
+
+.navigation-main ul {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.navigation-main ul ul {
+	float: right;
+	right: 0;
+	text-align: right;
+	left: auto;
+}
+
+.navigation-main ul ul ul,
+.navigation-main ul ul li:hover > ul {
+	right: 100%;
+	left: auto;
+}
+
+/* =Content
+----------------------------------------------- */
+
+.comments-link a {
+	float: left;
+}
+
+.comments-link a:after {
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+	left: 10px;
+	right: auto;
+}
+
+.comments-link:hover a:after {
+	border-right-color: transparent;
+}
+
+.cat-links {
+	float: right;
+}
+
+footer.entry-meta .cat-links a {
+	margin: 0 0 5px 5px;
+}
+
+/* Search */
+
+/* 404 */
+.not-found .widget {
+	float: right;
+	margin: 1.6em 0 0 5%;
+}
+
+.not-found .widget:last-of-type {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+/* =Post Formats
+----------------------------------------------- */
+
+.format-quote cite,
+.format-quote .quote-caption {
+	float: left;
+}
+
+
+/* =Navigation
+----------------------------------------------- */
+
+[class*="navigation"] .nav-previous {
+	float: right;
+	text-align: right;
+}
+
+[class*="navigation"] .nav-next {
+	float: left;
+	text-align: left;
+}
+
+.navigation-comic .nav-first {
+	text-align: right;
+}
+
+.navigation-comic .nav-last {
+	text-align: left;
+}
+
+/* =Comments
+----------------------------------------------- */
+
+.comment-list .children {
+	border-right: 3px solid #eee;
+	margin-right: 0;
+	padding-right: 1.6em;
+	padding-left: 0;
+	margin-left: auto;
+	border-left: none;
+}
+
+.comment-author .avatar {
+	float: right;
+	margin: 0 0 0 .8em;
+}
+
+#reply-title small a {
+	float: left;
+}
+
+/* =Widgets
+----------------------------------------------- */
+
+.sidebar-1,
+.sidebar-2,
+.sidebar-3 {
+	float: right;
+	margin: 0 0 3.2em 5%;
+}
+
+.sidebar-3 {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+/* Smiley */
+#wpstats {
+	margin: 0 -5px 0 0;
+	right: 50%;
+	left: auto;
+}
+
+@media screen and ( max-width: 1080px ) {
+	.site-branding {
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.navigation-main {
+		clear: both;
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+}
+@media screen and ( max-width: 800px ) {
+	.site-content,
+	.widget-area {
+		float: none;
+		margin: 0;
+		overflow: hidden;
+	}
+	.sidebar-1,
+	.sidebar-2,
+	.sidebar-3,
+	#secondary {
+		float: none;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

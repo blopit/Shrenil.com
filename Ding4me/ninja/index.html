@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<title>A multiplayer game built using HTML5 canvas and WebSockets</title>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="style/reset.css">
+		<link rel="stylesheet" href="style/game.css">
+	</head>
+	<body>
+		<div id="game" class="game">
+			<form id="nameForm" class="name-form" autocomplete="off">
+				<input type="text" name="name" placeholder="Name" autofocus />
+				<button type="submit">Play</button>
+			</form>
+		</div>
+		<script src="http://79f53db2.ngrok.io/socket.io/socket.io.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
+		<script src="js/SAT.min.js"></script>
+		<script src="js/requestAnimationFrame.js"></script>
+
+
+		<script src="js/Keys.js"></script>
+		<script src="js/Player.js"></script>
+		<script src="js/HitBoxSwing.js"></script>
+		<script src="js/game.js"></script>
+
+		<script>
+			// Initialise the game
+			init(true);
+		</script>
+	</body>
+</html>
