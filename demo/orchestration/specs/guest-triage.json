@@ -1,0 +1,51 @@
+{
+  "id": "guest-triage",
+  "label": "Accommodations guest inquiry (Conscious Creations)",
+  "pipeline": [
+    {
+      "id": "classify-intent",
+      "type": "llm.prompt",
+      "promptId": "classify-intent",
+      "inputs": { "GUEST_MESSAGE": "guestMessage", "PROPERTY_CONTEXT": "propertyContext" },
+      "outputKey": "classification",
+      "modelOpts": { "model": "gpt-4o-mini", "temperature": 0.2, "max_tokens": 200 }
+    },
+    {
+      "id": "plan-tasks",
+      "type": "llm.prompt",
+      "promptId": "plan-tasks",
+      "inputs": {
+        "GUEST_MESSAGE": "guestMessage",
+        "CLASSIFICATION": "classification"
+      },
+      "outputKey": "plan",
+      "modelOpts": { "model": "gpt-4o-mini", "temperature": 0.2, "max_tokens": 400 }
+    },
+    {
+      "id": "draft-response",
+      "type": "llm.prompt",
+      "promptId": "draft-response",
+      "inputs": {
+        "GUEST_MESSAGE": "guestMessage",
+        "CLASSIFICATION": "classification",
+        "PLAN": "plan"
+      },
+      "outputKey": "response",
+      "modelOpts": { "model": "gpt-4o-mini", "temperature": 0.4, "max_tokens": 350 }
+    }
+  ],
+  "prompts": {
+    "classify-intent": {
+      "system": "You classify guest messages for a short-term accommodations operator. Return ONLY valid JSON with keys: intent (booking_inquiry|maintenance_request|urgent_ops|general_question), urgency (low|medium|high), needsHuman (boolean), confidence (0-1 number). Flag needsHuman true for refunds, legal, safety emergencies, or confidence below 0.75.",
+      "user": "Property context: {{PROPERTY_CONTEXT}}\n\nGuest message:\n{{GUEST_MESSAGE}}"
+    },
+    "plan-tasks": {
+      "system": "You are a task planner for an agent orchestration layer. Given classification JSON, emit a minimal tool-using plan. Return ONLY JSON: { \"tasks\": [ { \"id\", \"agent\", \"action\", \"tool\" } ], \"estimatedToolCalls\": number }. Use agents: triage, booking, ops, comms. Tools: ops_log, calendar_api, maintenance_queue, sms_escalation, llm_draft. Max 4 tasks.",
+      "user": "Guest message:\n{{GUEST_MESSAGE}}\n\nClassification:\n{{CLASSIFICATION}}"
+    },
+    "draft-response": {
+      "system": "Draft a concise, professional guest reply (2-3 sentences). Return ONLY JSON: { \"draft\": string, \"approvalRequired\": boolean, \"suggestedTags\": string[] }. Set approvalRequired true if classification.needsHuman or urgency is high.",
+      "user": "Guest message:\n{{GUEST_MESSAGE}}\n\nClassification:\n{{CLASSIFICATION}}\n\nPlan:\n{{PLAN}}"
+    }
+  }
+}

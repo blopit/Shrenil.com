@@ -1,0 +1,26 @@
+{
+  "name": "shrenp.com",
+  "defaultProfile": "ftp",
+  "profiles": {
+    "ftp": {
+      "host": "shrenp.com",
+      "protocol": "ftp",
+      "port": 21,
+      "username": "YOUR_CPANEL_USERNAME",
+      "password": "${env:SHRENIL_SFTP_PASSWORD}",
+      "remotePath": "/public_html",
+      "uploadOnSave": true,
+      "passive": true
+    },
+    "sftp": {
+      "host": "shrenp.com",
+      "protocol": "sftp",
+      "port": 22,
+      "username": "YOUR_CPANEL_USERNAME",
+      "password": "${env:SHRENIL_SFTP_PASSWORD}",
+      "remotePath": "/public_html",
+      "uploadOnSave": true
+    }
+  },
+  "ignore": [".vscode/**", ".git/**", ".DS_Store", "node_modules/**", "Ding4me/**"]
+}

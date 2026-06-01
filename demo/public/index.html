@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guest Triage Orchestration — Live Demo</title>
+  <link rel="stylesheet" href="demo.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Righteous" rel="stylesheet" />
+</head>
+<body>
+  <header class="header">
+    <a class="back" href="../../index.html">← shrenp.com</a>
+    <h1>Agent orchestration demo</h1>
+    <p class="sub">3-stage pipeline from <a href="https://github.com/blopit/Infinite-Summoner" target="_blank" rel="noopener">Infinite-Summoner</a> · accommodations guest triage · <code>gpt-4o-mini</code> in live mode</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel input-panel">
+      <label for="guestMessage">Guest message</label>
+      <textarea id="guestMessage" rows="5" placeholder="Paste a guest SMS or email…"></textarea>
+
+      <div class="samples">
+        <span>Try:</span>
+        <button type="button" class="sample" data-sample="booking">Booking</button>
+        <button type="button" class="sample" data-sample="maintenance">Maintenance</button>
+        <button type="button" class="sample" data-sample="urgent">Urgent</button>
+      </div>
+
+      <div class="controls">
+        <label class="mode">
+          <input type="radio" name="mode" value="mock" checked /> Mock (free)
+        </label>
+        <label class="mode">
+          <input type="radio" name="mode" value="live" /> Live LLM
+        </label>
+        <button type="button" id="runBtn" class="run">Run pipeline</button>
+      </div>
+      <p id="status" class="status"></p>
+    </section>
+
+    <section class="panel flow-panel">
+      <h2>Pipeline</h2>
+      <ol class="pipeline" id="pipelineSteps">
+        <li data-stage="classify-intent"><span class="step-num">1</span> Classify intent</li>
+        <li data-stage="plan-tasks"><span class="step-num">2</span> Plan tasks &amp; tools</li>
+        <li data-stage="draft-response"><span class="step-num">3</span> Draft reply <span class="hitl">HITL?</span></li>
+      </ol>
+      <p class="flow-note">Same <code>runPipeline</code> pattern as Infinite-Summoner forge specs — linear stages, <code>outputKey</code> threading, JSON tool outputs.</p>
+    </section>
+
+    <section class="panel output-panel">
+      <h2>Stage outputs</h2>
+      <pre id="outputJson" class="output">Run the pipeline to see classification → plan → draft.</pre>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <p>Built for Conscious Creations / accommodations ops · Canada remote agent roles</p>
+  </footer>
+  <script type="module" src="demo.js"></script>
+</body>
+</html>
