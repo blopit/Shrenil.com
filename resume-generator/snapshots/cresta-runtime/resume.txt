@@ -1,0 +1,53 @@
+                                                Shren Patel
+                                    Senior Backend Engineer — AI Agent Runtime
+                 patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                                linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years engineering with platform + infra depth. Built CentrOS runtime — durable execution, session/conversation
+state, checkpointing, crash recovery, autoscaling, versioned rollouts, LLM streaming — 0 silent run loss across 6 months;
+3,980+ Vitest tests on main. Strong Python + Node/TypeScript; comfortable owning on-call for real-time AI.
+
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                    Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Built CentrOS runtime: durable workflow execution, checkpointing, crash recovery, retries, versioned rollouts, LLM
+  streaming — Temporal-style semantics for live agent workflows; 0 silent run loss over 6 months.
+• Designed runtime contracts beneath agent behavior: explicit state machines, durable storage, event sourcing, idem-
+  potent retries, observability across 3 span types (streaming/tool/state) — Kubernetes-native autoscaling.
+• Built eval harness + LangFuse trace pipeline: golden datasets, task-level scorers, regression suites, prompt versioning,
+  failure taxonomy — caught 22+ silent regressions before release.
+• Designed HITL interrupt model: confidence-gated handoff, approval checkpoints before irreversible actions, reversible
+  operations, audit trails, escalation policy — 100% of high-risk tool calls human-reviewed.
+Vertical automation & ops dogfood Conscious Creations                                                Sep 2022 – Present
+Remote · Canada • Python · FastAPI · LLM tool-calling · workflow automation
+• Designed AI-to-human handoff: shared state contract, full conversation history, durable IDs, operator-readable
+  summaries — 0 lost context across 100% of escalation events in live ops.
+Senior Frontend Developer Faire                                                                    Jun 2021 – Aug 2022
+Remote · Canada • React · TypeScript · MobX · Jest · Storybook · A/B testing
+• Drove site-wide perf gains via A/B testing + staged rollouts; same guardrail discipline now applied to agent versioning,
+  shadow traﬀic, and canary releases at CentrOS — 5+ wins shipped.
+Software Developer Minted LLC                                                                      Aug 2014 – Dec 2014
+San Francisco • Python · image processing · color space conversion · AWS
+• Built conversion-loss trackers + shipped 3+ hotfixes during Cyber Monday peak (10x+ traﬀic spike) — early
+  production-incident response discipline.
+SKILLS
+
+Runtime & Distributed Systems:
+• Stateful runtime · session state · checkpointing · crash recovery · replay
+• LLM streaming · partial output handling · timeouts · cancellation · backpressure
+• Distributed systems · Kubernetes · autoscaling · versioned rollouts · canary
+• Observability: trace spans · latency histograms · failure taxonomy · incident response
+• Workflow engines: Temporal · LangGraph state graphs
+Languages:
+• Python · Go (familiar) · TypeScript · Node.js
+Infra:
+• GCP · AWS · Kubernetes · Docker · serverless · IaC · CI/CD
+
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>CentrOS — reliable executor of digital tasks · by Shren Patel</title>
+    <meta name="description" content="CentrOS is the agent orchestration platform Shren Patel built: typed contracts, eval gates, policy lanes, and a human-in-the-loop owner inbox. Durable runtime under every agent demo that actually has to ship.">
+    <meta name="keywords" content="CentrOS, agent orchestration runtime, durable agent execution, multi-agent orchestration, typed contracts, policy lanes, risk tiers, eval gates, owner inbox, HITL, human-in-the-loop, approval workflows, audit trails, governance, LangGraph alternative, Temporal-style runtime, LangFuse observability, MCP tool registry, RAG, structured outputs, workflow automation, Shren Patel">
+    <meta name="author" content="Shren Patel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="CentrOS — reliable executor of digital tasks">
+    <meta property="og:description" content="The agent orchestration platform Shren Patel built. Durable runtime, typed contracts, eval gates, policy lanes, owner-inbox HITL.">
+    <meta property="og:image" content="../public/images/shrenp.jpg">
+    <meta property="og:url" content="https://shrenp.com/centros">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CentrOS",
+      "description": "Agent orchestration platform with typed contracts, eval gates, policy lanes, and a human-in-the-loop owner inbox. Built as a portfolio showcase by Shren Patel.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Cross-platform",
+      "softwareVersion": "0.4",
+      "url": "https://shrenp.com/centros",
+      "author": {
+        "@type": "Person",
+        "name": "Shren Patel",
+        "url": "https://shrenp.com"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/LimitedAvailability",
+        "description": "Closed-source showcase — reach out for collaboration."
+      },
+      "featureList": [
+        "Typed contracts with risk tiers (R1–R3)",
+        "Policy lanes: A (auto) / B (confirm) / C (careful)",
+        "Eval gates: Evidence · Adversary · Verifier · Rollback · Stop-Ship",
+        "Owner inbox HITL: Approve / Hold / Deny",
+        "Router → Executor → Adversary → Verifier four-agent pipeline",
+        "RAG-backed retrieval, structured tool I/O",
+        "PostgreSQL-durable contract state",
+        "Workbench modes (Ask · Books · Legal · Plan)"
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Righteous&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
+  </head>
+
+  <body>
+
+    <!-- ============ Sticky top nav ============ -->
+    <nav class="topnav" aria-label="Primary">
+      <div class="topnav__inner">
+        <a href="../" class="topnav__brand">← Shren Patel</a>
+        <ul class="topnav__links">
+          <li><a href="#problem">Problem</a></li>
+          <li><a href="#concepts">Concepts</a></li>
+          <li><a href="#pipeline">Pipeline</a></li>
+          <li><a href="#inbox">Inbox</a></li>
+          <li><a href="#demo">Demo</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ============ 1. Product hero ============ -->
+    <header id="top" class="hero product-hero">
+      <div class="product-hero__inner">
+        <div class="product-hero__eyebrow">
+          <span>A platform <a href="../">Shren Patel</a> built · <a href="../">← back to portfolio</a></span>
+        </div>
+        <h1 class="product-hero__wordmark">CentrOS</h1>
+        <p class="product-hero__tagline">Reliable executor of digital tasks.</p>
+        <p class="product-hero__pitch">
+          I built CentrOS as a production orchestration platform — the runtime
+          underneath every agent demo that actually has to ship. Typed contracts move
+          through gated multi-agent execution, land in a human approval inbox when the
+          blast radius is high, and leave an audit trail you can read like a story.
+        </p>
+        <div class="product-hero__ctas">
+          <a class="btn btn--primary" href="#demo">Try the live demo →</a>
+          <a class="btn btn--ghost" href="https://github.com/shrenilpatel/Centros" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </div>
+        <div class="product-hero__status">
+          <span><strong>v0.4</strong></span>
+          <span>dogfooded since Feb 2026</span>
+          <span>TypeScript</span>
+          <span>3,980+ tests</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+    <!-- ============ 2. Problem ============ -->
+    <section id="problem" class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// why CentrOS exists</span>
+        <h2 class="section__title">Three reasons agent demos don't survive production.</h2>
+        <p class="section__lede">
+          I kept hitting the same three walls when building agentic workflows for real ops.
+          CentrOS is what falls out when you take those walls seriously instead of
+          papering over them with prompts.
+        </p>
+
+        <div class="problem-row">
+          <p class="problem-row__claim">Most agents are <em>stateless prompts</em>. Real ops need durable state.</p>
+          <p class="problem-row__body">
+            Crash recovery, checkpointing, replay, idempotent retries — these are not
+            optional when an agent's action touches money, communication, or anything a
+            human will be embarrassed by tomorrow. CentrOS contracts are PostgreSQL rows
+            with explicit lifecycle states; runtime crashes resume from the last gate, not
+            the beginning.
+          </p>
+        </div>
+
+        <div class="problem-row">
+          <p class="problem-row__claim">Most demos <em>auto-execute</em>. Real ops need approval gates.</p>
+          <p class="problem-row__body">
+            Legal sign-offs, monetary actions, irreversible writes — every workflow I
+            actually run has a step where a human has to say "yes." CentrOS makes that
+            step a first-class part of the runtime: policy lanes route high-blast-radius
+            actions to an owner inbox, and an audit trail captures who approved what and
+            on what evidence.
+          </p>
+        </div>
+
+        <div class="problem-row">
+          <p class="problem-row__claim">Most platforms ship <em>one workflow</em>. Real ops scale through reusable patterns.</p>
+          <p class="problem-row__body">
+            When I add a new vertical, I don't want to build a new platform. CentrOS is
+            structured so that a new vertical = new triggers + new atomic work units +
+            new tool boundaries + new linters + new approval rules. The runtime, the gate
+            engine, the owner inbox, and the observability layer don't change.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. What CentrOS does ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// what CentrOS does</span>
+        <h2 class="section__title">Three pillars.</h2>
+        <p class="section__lede">
+          Everything in CentrOS rolls up into one of three concerns. If a feature can't
+          be filed under one of these, I don't build it.
+        </p>
+
+        <div class="product-pillars">
+          <div class="product-pillar">
+            <h3>Durable runtime</h3>
+            <p>Typed contracts, eval gates, rollback, crash recovery. Built on PostgreSQL
+              durability — not in-memory state, not "we'll add persistence later."</p>
+          </div>
+          <div class="product-pillar">
+            <h3>Governed autonomy</h3>
+            <p>Every action lands in a policy lane. Lanes B and C route to the owner
+              inbox before any write. Audit trails are state, not afterthoughts.</p>
+          </div>
+          <div class="product-pillar">
+            <h3>Reusable workflows</h3>
+            <p>Same shell (Workbench), different controls per vertical. Motel ops today,
+              hospitality-adjacent ops next, the same primitives carry both.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. Core concepts ============ -->
+    <section id="concepts" class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// vocabulary</span>
+        <h2 class="section__title">The five terms that run the platform.</h2>
+        <p class="section__lede">
+          If you read the rest of this page or browse the repo, these five terms are the
+          backbone. Learn them once and the rest of the architecture explains itself.
+        </p>
+
+        <div class="concept-grid">
+          <article class="concept-card">
+            <p class="concept-card__term">Contract</p>
+            <p class="concept-card__def">A typed, atomic work unit with risk tier, policy lane, and required gates. Lives as a row in PostgreSQL with a strict lifecycle.</p>
+            <p class="concept-card__why"><strong>Why:</strong> makes agent intent inspectable, durable, and resumable across crashes.</p>
+          </article>
+
+          <article class="concept-card">
+            <p class="concept-card__term">Risk tier</p>
+            <p class="concept-card__def">R1 / R2 / R3 — escalates with the blast radius of the action. Communications &lt; money &lt; regulatory.</p>
+            <p class="concept-card__why"><strong>Why:</strong> the runtime can refuse high-tier work without manual escalation criteria; tier maps to lane.</p>
+          </article>
+
+          <article class="concept-card">
+            <p class="concept-card__term">Policy lane</p>
+            <p class="concept-card__def">A (auto), B (confirm), C (careful). Determines whether the executor proceeds, waits for owner sign-off, or pauses for adversarial review first.</p>
+            <p class="concept-card__why"><strong>Why:</strong> maps intent to autonomy level — not the other way around.</p>
+          </article>
+
+          <article class="concept-card">
+            <p class="concept-card__term">Gate</p>
+            <p class="concept-card__def">Evidence · Adversary · Verifier · Rollback · Stop-Ship. Every contract must pass its required gates before close. Failure is a first-class outcome with its own state.</p>
+            <p class="concept-card__why"><strong>Why:</strong> non-deterministic systems need deterministic acceptance criteria.</p>
+          </article>
+
+          <article class="concept-card">
+            <p class="concept-card__term">Workbench mode</p>
+            <p class="concept-card__def">Ask · Books · Legal · Plan. The same shell renders different tool boundaries and linters depending on which mode the operator opens.</p>
+            <p class="concept-card__why"><strong>Why:</strong> verticals share infrastructure but need domain-specific controls at the edges.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. The four agents ============ -->
+    <section id="pipeline" class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// the four-agent pipeline</span>
+        <h2 class="section__title">Router · Executor · Adversary · Verifier.</h2>
+        <p class="section__lede">
+          Every contract moves through four agents. Click any to see what it reads, what
+          it writes, what it can fail at, and what the next agent picks up.
+        </p>
+
+        <div class="pipeline">
+          <!-- Router -->
+          <button class="pipe-stage" type="button" aria-expanded="false" aria-controls="agent-1">
+            <span class="pipe-stage__num">1</span>
+            <span>
+              <span class="pipe-stage__name">Router</span>
+              <span class="pipe-stage__hint">classify · assign lane · materialize contract</span>
+            </span>
+            <span class="pipe-stage__indicator" aria-hidden="true">+</span>
+          </button>
+          <div id="agent-1" class="pipe-detail">
+            <p>The router reads the intake event and decides what it actually is.
+              Then it produces a typed contract with the right risk tier and policy lane.</p>
+            <dl>
+              <dt>Reads</dt><dd>Raw intake (email body, webhook payload, calendar event, GitHub hook).</dd>
+              <dt>Writes</dt><dd>Contract row with intent classification (DO / DECIDE / DEVELOP / DOCUMENT), risk tier, lane, required gates.</dd>
+              <dt>Fails when</dt><dd>Intent is genuinely ambiguous → escalates to owner inbox as an unclassified contract rather than guessing.</dd>
+              <dt>Hands off to</dt><dd>Executor (lane A) or owner inbox (lane C straight to confirm).</dd>
+            </dl>
+            <p class="pipe-detail__equiv">
+              <strong>Equivalent layer to:</strong> LangGraph state-machine entry node,
+              Temporal workflow signal handler, MCP capability discovery.
+            </p>
+          </div>
+
+          <!-- Executor -->
+          <button class="pipe-stage" type="button" aria-expanded="true" aria-controls="agent-2">
+            <span class="pipe-stage__num">2</span>
+            <span>
+              <span class="pipe-stage__name">Executor</span>
+              <span class="pipe-stage__hint">tool calls · RAG · state writes · checkpointing</span>
+            </span>
+            <span class="pipe-stage__indicator" aria-hidden="true">+</span>
+          </button>
+          <div id="agent-2" class="pipe-detail is-open">
+            <p>The executor does the actual work. It calls tools from a per-contract
+              tool registry, pulls retrieval-backed context, and writes state at every
+              checkpoint so the runtime can resume from the last gate if anything dies.</p>
+            <dl>
+              <dt>Reads</dt><dd>Contract spec + retrieval results from the RAG layer + tool registry permissions.</dd>
+              <dt>Writes</dt><dd>Tool-call evidence, intermediate state, checkpoints, structured outputs (Zod-validated).</dd>
+              <dt>Fails when</dt><dd>A tool returns an error, validation fails, or the contract enters an illegal state — the DB layer enforces it.</dd>
+              <dt>Hands off to</dt><dd>Adversary, with everything the executor did captured as evidence.</dd>
+            </dl>
+            <p class="pipe-detail__equiv">
+              <strong>Equivalent layer to:</strong> LangChain / CrewAI tool-use loops,
+              Temporal durable activities, agent-runtime function execution.
+            </p>
+          </div>
+
+          <!-- Adversary -->
+          <button class="pipe-stage" type="button" aria-expanded="false" aria-controls="agent-3">
+            <span class="pipe-stage__num">3</span>
+            <span>
+              <span class="pipe-stage__name">Adversary</span>
+              <span class="pipe-stage__hint">critique · find failure modes · escalate</span>
+            </span>
+            <span class="pipe-stage__indicator" aria-hidden="true">+</span>
+          </button>
+          <div id="agent-3" class="pipe-detail">
+            <p>The adversary's job is to find what the executor missed. It reviews the
+              evidence and asks: "what could go wrong if this ships?" If it finds a real
+              issue, it escalates the contract — back to the executor for a retry, or
+              straight to the owner inbox for a human call.</p>
+            <dl>
+              <dt>Reads</dt><dd>Executor evidence + contract acceptance criteria + adversarial prompts tuned per workflow.</dd>
+              <dt>Writes</dt><dd>Critique notes, severity axes, escalation recommendation.</dd>
+              <dt>Fails when</dt><dd>Critique is shallow (eval flags low confidence) — itself a trigger for human review.</dd>
+              <dt>Hands off to</dt><dd>Verifier, with adversary critique appended to the evidence trail.</dd>
+            </dl>
+            <p class="pipe-detail__equiv">
+              <strong>Equivalent layer to:</strong> LLM-as-judge eval patterns, golden-dataset
+              regression scorers, safety review checkpoints.
+            </p>
+          </div>
+
+          <!-- Verifier -->
+          <button class="pipe-stage pipe-stage--hitl" type="button" aria-expanded="false" aria-controls="agent-4">
+            <span class="pipe-stage__num">4</span>
+            <span>
+              <span class="pipe-stage__name">Verifier</span>
+              <span class="pipe-stage__hint">acceptance check · gate pass · close or escalate</span>
+            </span>
+            <span class="pipe-stage__indicator" aria-hidden="true">+</span>
+          </button>
+          <div id="agent-4" class="pipe-detail">
+            <p>The verifier is the gate runner. It checks that all required gates passed,
+              writes the contract's final acceptance state, and either closes the
+              contract (lane A) or routes it to the owner inbox (lane B/C).</p>
+            <dl>
+              <dt>Reads</dt><dd>All evidence + adversary critique + required gate list from the contract spec.</dd>
+              <dt>Writes</dt><dd>Final gate-pass state, audit summary, close timestamp or escalation reason.</dd>
+              <dt>Fails when</dt><dd>Any required gate is unfulfilled — contract enters <code>gate-pending</code> until owner resolves it.</dd>
+              <dt>Hands off to</dt><dd>Owner inbox (lane B/C) or contract archive (lane A passed).</dd>
+            </dl>
+            <p class="pipe-detail__equiv">
+              <strong>Equivalent layer to:</strong> LangFuse trace span aggregation,
+              CI gate-pass checks, approval-workflow state machines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. Contract lifecycle ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// contract lifecycle</span>
+        <h2 class="section__title">Where every contract goes.</h2>
+        <p class="section__lede">
+          Click a state to read what it means and what transitions into it.
+        </p>
+
+        <div class="lifecycle" role="group" aria-label="Contract lifecycle states">
+          <button class="lifecycle__node" type="button" data-state="draft" aria-pressed="false">draft</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node" type="button" data-state="routed" aria-pressed="false">routed</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node" type="button" data-state="executing" aria-pressed="false">executing</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node" type="button" data-state="eval-pending" aria-pressed="false">eval-pending</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node" type="button" data-state="gate-pending" aria-pressed="false">gate-pending</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node" type="button" data-state="approved" aria-pressed="false">approved</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node" type="button" data-state="executed" aria-pressed="false">executed</button>
+          <span class="lifecycle__arrow" aria-hidden="true">→</span>
+          <button class="lifecycle__node lifecycle__node--terminal" type="button" data-state="archived" aria-pressed="true">archived</button>
+        </div>
+        <div class="lifecycle" role="group" aria-label="Failure transitions">
+          <span class="lifecycle__branch" aria-hidden="true">↘ failure paths:</span>
+          <button class="lifecycle__node lifecycle__node--fail lifecycle__node--terminal" type="button" data-state="rolled-back" aria-pressed="false">rolled-back</button>
+          <button class="lifecycle__node lifecycle__node--fail lifecycle__node--terminal" type="button" data-state="held" aria-pressed="false">held</button>
+          <button class="lifecycle__node lifecycle__node--fail lifecycle__node--terminal" type="button" data-state="stop-ship" aria-pressed="false">stop-ship</button>
+        </div>
+        <div class="lifecycle-detail" id="lifecycleDetail">
+          <strong>archived</strong>
+          <p>Contract closed and durable. Evidence, tool calls, gate decisions, and approver
+            (if any) are retained for audit. Read-only from this point — the audit trail
+            outlives the runtime.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. Owner inbox mock ============ -->
+    <section id="inbox" class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// owner inbox</span>
+        <h2 class="section__title">Where humans actually decide.</h2>
+        <p class="section__lede">
+          Lane B and lane C contracts route here. The operator sees the contract title,
+          a trust strip summarising agent confidence, the full evidence timeline, and
+          three actions: Approve, Hold, Deny.
+        </p>
+
+        <div class="inbox-mock" role="img" aria-label="CentrOS owner inbox interface mock">
+          <div class="inbox-mock__header">
+            <strong>Owner inbox</strong>
+            <span>3 contracts pending · lane B/C only</span>
+          </div>
+          <div class="inbox-mock__body">
+            <div class="inbox-mock__list">
+              <div class="inbox-mock__row inbox-mock__row--active">
+                <span class="inbox-mock__tier inbox-mock__tier--r2">R2</span>
+                <div>
+                  <p class="inbox-mock__title">Refund — Booking #4421 · $284 CAD</p>
+                  <p class="inbox-mock__meta">router → executor → adversary → verifier · 8 evidence items</p>
+                  <div class="inbox-mock__trust" aria-label="trust strip: 4 of 5">
+                    <span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span></span>
+                  </div>
+                </div>
+                <div class="inbox-mock__actions">
+                  <button type="button" class="inbox-mock__btn inbox-mock__btn--approve" tabindex="-1">Approve</button>
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Hold</button>
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Deny</button>
+                </div>
+              </div>
+
+              <div class="inbox-mock__row">
+                <span class="inbox-mock__tier inbox-mock__tier--r1">R1</span>
+                <div>
+                  <p class="inbox-mock__title">Reply to guest — late check-in for unit 12</p>
+                  <p class="inbox-mock__meta">router → executor → adversary → verifier · 5 evidence items</p>
+                  <div class="inbox-mock__trust" aria-label="trust strip: 5 of 5">
+                    <span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span>
+                  </div>
+                </div>
+                <div class="inbox-mock__actions">
+                  <button type="button" class="inbox-mock__btn inbox-mock__btn--approve" tabindex="-1">Approve</button>
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Hold</button>
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Deny</button>
+                </div>
+              </div>
+
+              <div class="inbox-mock__row">
+                <span class="inbox-mock__tier inbox-mock__tier--r3">R3</span>
+                <div>
+                  <p class="inbox-mock__title">Tax filing draft — quarterly remittance</p>
+                  <p class="inbox-mock__meta">adversary flagged: source doc &gt;90d old · 11 evidence items</p>
+                  <div class="inbox-mock__trust" aria-label="trust strip: 2 of 5, warn">
+                    <span class="is-on"></span><span class="is-warn"></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="inbox-mock__actions">
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Approve</button>
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Hold</button>
+                  <button type="button" class="inbox-mock__btn" tabindex="-1">Deny</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="inbox-mock__evidence">
+              <h4>Evidence timeline · Refund #4421</h4>
+              <ol>
+                <li><strong>router</strong> → classified as DECIDE · R2 · lane B</li>
+                <li><strong>executor</strong> → fetched booking, cancellation policy, refund window</li>
+                <li><strong>executor</strong> → drafted refund authorisation ($284, partial)</li>
+                <li><strong>adversary</strong> → "matches policy; guest 1d outside full-refund window — partial is correct"</li>
+                <li><strong>verifier</strong> → Evidence ✓ · Adversary ✓ · Verifier ✓ · waiting on owner</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:1.25rem;color:var(--text-muted);max-width:720px;">
+          The owner inbox is the only place CentrOS lets agents act on R2/R3 work. Approvals
+          are reversible by design: every action has a rollback path, and the audit trail
+          captures who approved on what evidence. Lane A contracts never touch this surface —
+          they auto-close once gates pass.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 8. Verticals ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// verticals</span>
+        <h2 class="section__title">Where I dogfood it.</h2>
+        <p class="section__lede">
+          CentrOS isn't a thought experiment. I run it on workflows I actually owe
+          someone an answer on.
+        </p>
+
+        <div class="vertical-grid">
+          <div class="vertical-card">
+            <h3>Motel operations</h3>
+            <p class="vertical-card__meta">23 units · GTA · primary dogfood vertical</p>
+            <ul>
+              <li>Triggers: guest email/SMS, vendor invoices, maintenance tickets, compliance asks</li>
+              <li>Atomic work units: guest reply, refund decision, booking adjustment, vendor PO, compliance log entry</li>
+              <li>Lane B/C ratio: roughly 60% — most actions touch revenue or regulated communication</li>
+              <li>Linters: refund policy bounds, communication tone, regulatory date windows</li>
+            </ul>
+          </div>
+
+          <div class="vertical-card">
+            <h3>Conscious Creations</h3>
+            <p class="vertical-card__meta">Accommodations consulting · lighter-weight automations</p>
+            <ul>
+              <li>Triggers: client guest enquiries, ops workflow asks</li>
+              <li>Built the <a href="../demo/public/index.html">public guest-triage demo</a> here — Infinite-Summoner <code>runPipeline</code> pattern</li>
+              <li>Python/FastAPI automations alongside CentrOS contracts for shared workflows</li>
+              <li>Pairs with operator judgment — never fakes domain licensure</li>
+            </ul>
+          </div>
+        </div>
+
+        <p style="margin-top:1.5rem;font-style:italic;color:var(--text-muted);text-align:center;font-size:1.05rem;">
+          New vertical = new triggers, new atomic work units, new tool boundaries, new linters,
+          new approval rules. Not a new platform.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 9. Vs the parts ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// vs the parts</span>
+        <h2 class="section__title">One runtime, not five integrations.</h2>
+        <p class="section__lede">
+          All of these tools are good. Stitched together, they leave seams — different
+          governance models, different observability surfaces, different state stores.
+          CentrOS is one runtime where the seams don't exist.
+        </p>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>What you'd stitch together</th>
+              <th>CentrOS gives you</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>LangGraph state machine</td><td>Router + policy lanes + contract state</td></tr>
+            <tr><td>Temporal durable execution</td><td>Contract lifecycle + gate runner + rollback gate</td></tr>
+            <tr><td>LangFuse traces &amp; eval scores</td><td>Gate evidence + run history + owner inbox audit trail</td></tr>
+            <tr><td>Pydantic typed tool I/O</td><td>Zod contract schemas + Drizzle row schemas + linter passes</td></tr>
+            <tr><td>MCP tool servers</td><td>Tool registry + scoped auth + audit logs per call</td></tr>
+            <tr><td>n8n / Workato / Zapier connectors</td><td>Same trigger surface + risk lanes + approval gates + verifier</td></tr>
+            <tr><td>Separate approval-workflow tool</td><td>Owner inbox: Approve / Hold / Deny on the same contract row</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 10. Stack ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// stack</span>
+        <h2 class="section__title">What it's built on.</h2>
+
+        <div class="stack-grid">
+          <div class="stack-cell">
+            <h4>Data</h4>
+            <ul>
+              <li>PostgreSQL</li>
+              <li>Drizzle ORM</li>
+              <li>Zod schemas</li>
+              <li>Migration-managed</li>
+            </ul>
+          </div>
+          <div class="stack-cell">
+            <h4>Runtime</h4>
+            <ul>
+              <li>TypeScript</li>
+              <li>Node.js</li>
+              <li>Hono</li>
+              <li>Vitest</li>
+            </ul>
+          </div>
+          <div class="stack-cell">
+            <h4>Agents</h4>
+            <ul>
+              <li>LLM tool-calling</li>
+              <li>OpenAI SDK</li>
+              <li>Anthropic SDK</li>
+              <li>Structured outputs</li>
+            </ul>
+          </div>
+          <div class="stack-cell">
+            <h4>UI</h4>
+            <ul>
+              <li>Expo · React Native</li>
+              <li>Workbench shell</li>
+              <li>Owner inbox</li>
+              <li>Modes: Ask · Books · Legal · Plan</li>
+            </ul>
+          </div>
+          <div class="stack-cell">
+            <h4>CI / Eval</h4>
+            <ul>
+              <li>Vitest suite (3,980+)</li>
+              <li>Contract / gate tests</li>
+              <li>Synthetic eval cases</li>
+              <li>Gate-pass on main</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11. Try it ============ -->
+    <section id="demo" class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// try it</span>
+        <h2 class="section__title">Live demo — guest triage in 3 stages.</h2>
+        <p class="section__lede">
+          The same 3-stage pipeline from the main site, embedded here for convenience.
+          Mock mode runs entirely in-browser. Classification → plan → draft, with HITL
+          escalation surfaced in the JSON output.
+        </p>
+
+        <div class="demo-frame-wrap">
+          <iframe
+            class="demo-frame"
+            src="../demo/public/index.html"
+            title="CentrOS guest-triage orchestration demo"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-forms"
+          ></iframe>
+        </div>
+
+        <p class="demo-meta">
+          <span><strong>Mock mode:</strong> in-browser, free, deterministic.</span>
+          <span><strong>Live mode:</strong> needs <code>cd demo &amp;&amp; npm start</code> + <code>OPENAI_API_KEY</code>.</span>
+          <span><a href="../demo/public/index.html">Open demo full-screen ↗</a></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 12. Status ============ -->
+    <section class="section">
+      <div class="wrap">
+        <span class="section__eyebrow">// status</span>
+        <h2 class="section__title">Where this actually is.</h2>
+        <p class="section__lede">
+          I'd rather be honest about scope than oversell a project. CentrOS is real, it
+          runs real workflows, and it's young.
+        </p>
+
+        <dl class="status-block">
+          <div class="status-block__row">
+            <dt>Built since</dt>
+            <dd>Feb 2026 · ~4 months of dense engineering</dd>
+          </div>
+          <div class="status-block__row">
+            <dt>Status</dt>
+            <dd>Closed showcase · dogfooded on a real 23-unit vertical · not packaged for adoption</dd>
+          </div>
+          <div class="status-block__row">
+            <dt>Practice behind it</dt>
+            <dd>3+ years of LLM tool-calling, multi-agent patterns, RAG, HITL — formalised into CentrOS Feb 2026</dd>
+          </div>
+          <div class="status-block__row">
+            <dt>Want access or to collaborate?</dt>
+            <dd><a href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20collab%20%2F%20access">Email me ↗</a></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ 13. Hire the builder ============ -->
+    <section class="section">
+      <div class="wrap">
+        <div class="hire-pivot">
+          <h3>I'm Shren Patel — I built CentrOS.</h3>
+          <p>
+            Open to Canada-remote <strong>Staff AI Engineer</strong>, <strong>Agent Runtime</strong>,
+            <strong>AI Platform</strong>, <strong>AI Architect</strong>, <strong>Workflow Automation</strong>,
+            and <strong>Forward-Deployed</strong> roles. The platform is the proof; let's talk
+            about how it maps to your problem.
+          </p>
+          <div class="hire-pivot__ctas">
+            <a class="btn btn--primary" href="../#roles">← Pick the role you're hiring for</a>
+            <a class="btn btn--ghost" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20intro">Email Shren</a>
+            <a class="btn btn--ghost" href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        © <span data-year>2026</span> Shren Patel · Built solo ·
+        <a href="../">← shrenp.com</a> ·
+        <a href="https://github.com/shrenilpatel/Centros" target="_blank" rel="noopener">source on GitHub</a>
+      </div>
+    </footer>
+
+    <script src="../public/js/portfolio.js" defer></script>
+    <script>
+      // Lifecycle node click-toggle (page-local, no shared JS needed)
+      (function () {
+        const states = {
+          draft: "Contract materialised but not yet routed. Risk tier and lane assigned by the router on the next tick.",
+          routed: "Contract has been classified and assigned a policy lane. Lane A proceeds to executor; lane B/C waits for owner confirmation first.",
+          executing: "Executor is calling tools, pulling RAG context, and writing checkpoints. Crash here resumes from the last checkpoint, not the beginning.",
+          "eval-pending": "Executor finished; adversary is critiquing the evidence trail. Low-confidence outcomes route to gate-pending or held.",
+          "gate-pending": "Required gates haven't all passed. Verifier holds the contract until evidence/adversary/verifier all return ✓ or the owner intervenes.",
+          approved: "Owner approved a lane B/C contract from the inbox. Executor proceeds to perform the action.",
+          executed: "Action complete. Final state written. Contract awaits archival.",
+          archived: "Contract closed and durable. Evidence, tool calls, gate decisions, and approver (if any) are retained for audit. Read-only from this point — the audit trail outlives the runtime.",
+          "rolled-back": "A gate detected an issue post-execution. Rollback gate reversed the action and the contract closed with a failure summary in the audit trail.",
+          held: "Owner clicked Hold from the inbox. Contract paused until evidence is refreshed or owner re-decides.",
+          "stop-ship": "Critical gate (e.g., adversary flagged a hard violation) fired. Contract is hard-blocked and only an admin override can release it."
+        };
+        const detail = document.getElementById('lifecycleDetail');
+        const nodes = document.querySelectorAll('.lifecycle__node');
+        nodes.forEach((node) => {
+          node.addEventListener('click', () => {
+            const state = node.dataset.state;
+            nodes.forEach((n) => n.setAttribute('aria-pressed', String(n === node)));
+            const body = states[state] || '';
+            detail.innerHTML = '<strong>' + state + '</strong><p>' + body + '</p>';
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

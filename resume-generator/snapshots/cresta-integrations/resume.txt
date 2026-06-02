@@ -1,0 +1,56 @@
+                                                Shren Patel
+                                  Senior Backend Engineer — AI Agent Integrations
+                 patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                                linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years backend engineering, third-party enterprise integrations. Built CentrOS MCP-style tool registry + AI-to-
+human handoff: scoped OAuth, JSON-schema validation, idempotent retries, audit logs, session lifecycle; 0 lost context
+across 100% of escalation events; 3,980+ Vitest tests on main. Reliability seam agent automation needs in enterprise
+ecosystems.
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                    Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Built CentrOS tool/integration layer: standardized API contracts, scoped OAuth, schema validation, idempotent
+  retries, side-effect logging, audit trails — every agent-invoked external action is 1 typed call with full provenance.
+• Designed agent runtime on LangGraph state graphs + Temporal-style durability: durable execution, checkpointing,
+  crash recovery, retries, versioned rollouts — 0 silent run loss across 6 months.
+• Designed AI-to-human handoff with 100% context preservation: shared state contract, event history, durable IDs,
+  operator-readable summaries, ownership transitions surviving interruption — 0 lost context in escalations.
+• Dogfooded CentrOS on 23-unit motel vertical (guest comms, refunds, vendor invoices, compliance) — 3,980+ Vitest
+  tests across 347 files passing on main; CI-backed live ops.
+Vertical automation & ops dogfood Conscious Creations                                                Sep 2022 – Present
+Remote · Canada • Python · FastAPI · LLM tool-calling · workflow automation
+• Designed AI-to-human handoff: shared state contract, full conversation history, durable IDs, operator-readable
+  summaries — 0 lost context across 100% of escalation events in live ops.
+• Prototyped accommodations workflows on CentrOS: 3-stage guest-triage pipeline (classify → plan → draft) in
+  Python/FastAPI with HITL approval gates before any irreversible action.
+Creator, WEBTOON Original — AXED WEBTOON                                                           Jun 2018 – Dec 2020
+Remote • Python · OpenCV · image processing
+• Designed queue → tooling → review → ship operator workflow at 2M+ monthly views on WEBTOON Original —
+  precursor to today’s HITL agent + human production system at CentrOS.
+Senior Frontend Developer Faire                                                                    Jun 2021 – Aug 2022
+Remote · Canada • React · TypeScript · MobX · Jest · Storybook · A/B testing
+• Drove site-wide perf gains via A/B testing + staged rollouts; same guardrail discipline now applied to agent versioning,
+  shadow traﬀic, and canary releases at CentrOS — 5+ wins shipped.
+SKILLS
+
+Integrations & Real-Time Systems:
+• REST · gRPC · webhooks · OAuth · third-party enterprise APIs
+• Context propagation · session lifecycle · AI-to-human handoff · state contracts
+• Idempotency · retries · timeouts · audit logs · rollback · graceful degradation
+• Real-time / streaming architectures · low-latency orchestration · async patterns
+• Observability: handoff statistics · context-transfer quality · API failure patterns
+Distributed Systems & Infra:
+• Distributed systems · scalable backend services · API design
+• Kubernetes · Docker · AWS · GCP · serverless · CI/CD
+Languages:
+• Python · TypeScript · Node.js · Go (familiar)
+
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

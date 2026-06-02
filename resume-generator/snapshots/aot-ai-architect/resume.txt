@@ -1,0 +1,53 @@
+                                              Shren Patel
+                         AI Architect — Agentic Applications for Enterprise & Government
+                patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                               linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years engineering, 3+ on agentic AI apps. Built CentrOS on LangGraph/MCP patterns — tool calling, hybrid
+RAG, memory/state, secure approval gates — dogfooded on 23-unit motel + 20-unit residential ops vertical, 3,980+
+Vitest tests on main. Same patterns generalize to enterprise/government workflows.
+
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Architected CentrOS — agentic workflow platform translating ambiguous biz processes into cloud-native AI systems:
+  tool calling, hybrid RAG, memory/state, approval flows; dogfooded across 2 verticals.
+• Built reusable orchestration patterns for multi-turn, multi-agent workflows across LOB APIs, DBs, external services
+  — cut new-use-case deployment from 3 weeks to 2 days.
+• Implemented hybrid RAG pipelines on pgvector + OpenSearch: query rewriting, source ranking, chunk hygiene,
+  freshness boundaries, selective context packing — cut prompt token use 40% with grounding intact.
+• Established 7 production engineering standards for agentic systems: CI/CD, logging, monitoring, secrets handling,
+  testing, rollback, human approval gates — applied across CentrOS verticals.
+• Built MCP-style tool registry with scoped OAuth permissions, JSON-schema validation, retry policy, side-effect
+  logging — turned ad-hoc API calls into 100% audited typed agent tool invocations.
+Vertical automation & ops dogfood Conscious Creations                                            Sep 2022 – Present
+Remote · Canada • Python · FastAPI · LLM tool-calling · workflow automation
+• Prototyped accommodations workflows on CentrOS: 3-stage guest-triage pipeline (classify → plan → draft) in
+  Python/FastAPI with HITL approval gates before any irreversible action.
+Independent Engineer / Builder Software, AI automation & creative IP                           Sep 2022 – Jan 2026
+GTA · Remote • Python · TypeScript · Node · LLM tool-calling · MCP · multi-agent orchestration
+• Built LLM workflow automation since ChatGPT launch (Nov 2022): tool-calling/API automations from 2023; Lang-
+  Graph multi-agent patterns from 2024; MCP integrations from late 2024 — 3+ years compounding.
+Creator, WEBTOON Original — AXED WEBTOON                                                       Jun 2018 – Dec 2020
+Remote • Python · OpenCV · image processing
+• Designed queue → tooling → review → ship operator workflow at 2M+ monthly views on WEBTOON Original —
+  precursor to today’s HITL agent + human production system at CentrOS.
+SKILLS
+
+Agentic AI Architecture:
+• LangGraph · LangChain · LlamaIndex · CrewAI · MCP · A2A patterns
+• Tool calling · function calling · structured outputs · enterprise API integration
+• Memory & state management · context engineering · prompt engineering
+• RAG · embeddings · vectorization · evaluation · retrieval strategies
+• Cloud-native delivery · CI/CD · logging · monitoring · secure deployment
+Languages & Platforms:
+• Python · TypeScript · Node.js · C / C++
+• GCP · AWS · Azure-friendly · Kubernetes · Docker · serverless
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

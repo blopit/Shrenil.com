@@ -1,0 +1,97 @@
+slug: cresta-runtime
+company: Cresta
+role: "Senior Software Engineer, Backend — AI Agent Runtime"
+posting_url: "https://job-boards.greenhouse.io/cresta/jobs/4675293008"
+
+headline: "Senior Backend Engineer — AI Agent Runtime"
+
+summary: >
+  10+ years engineering with platform + infra depth. Built CentrOS runtime —
+  durable execution, session/conversation state, checkpointing, crash
+  recovery, autoscaling, versioned rollouts, LLM streaming — 0 silent run
+  loss across 6 months; 3,980+ Vitest tests on main. Strong Python +
+  Node/TypeScript; comfortable owning on-call for real-time AI.
+
+must_have_keywords:
+  - runtime
+  - stateful
+  - checkpointing
+  - crash recovery
+  - distributed systems
+  - Python
+  - Kubernetes
+  - observability
+  - LLM streaming
+  - autoscaling
+
+nice_to_have_keywords:
+  - Temporal
+  - serverless
+  - on-call
+  - developer tooling
+  - incident response
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-runtime, centros-platform, centros-eval, centros-hitl] }
+  - { job_id: conscious-creations, bullets: [cc-handoff] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: minted, bullets: [minted-cyber] }
+
+bullet_overrides:
+  centros-runtime: "Built CentrOS runtime: durable workflow execution, checkpointing, crash recovery, retries, versioned rollouts, LLM streaming — Temporal-style semantics for live agent workflows; 0 silent run loss over 6 months."
+  centros-platform: "Designed runtime contracts beneath agent behavior: explicit state machines, durable storage, event sourcing, idempotent retries, observability across 3 span types (streaming/tool/state) — Kubernetes-native autoscaling."
+
+skills_emphasis:
+  - title: "Runtime & Distributed Systems"
+    items:
+      - "Stateful runtime · session state · checkpointing · crash recovery · replay"
+      - "LLM streaming · partial output handling · timeouts · cancellation · backpressure"
+      - "Distributed systems · Kubernetes · autoscaling · versioned rollouts · canary"
+      - "Observability: trace spans · latency histograms · failure taxonomy · incident response"
+      - "Workflow engines: Temporal · LangGraph state graphs"
+  - title: "Languages"
+    items:
+      - "Python · Go (familiar) · TypeScript · Node.js"
+  - title: "Infra"
+    items:
+      - "GCP · AWS · Kubernetes · Docker · serverless · IaC · CI/CD"
+
+application:
+  why_company: >
+    Cresta runs real-time AI inside contact centers — latency, durable
+    state, and on-call discipline are not optional. I want to work inside
+    the constraint envelope of real-time AI at scale, on the runtime
+    layer specifically.
+  why_role: >
+    Senior Backend Engineer for AI Agent Runtime targets exactly the
+    surface I've been building underneath CentrOS: durable execution,
+    checkpointing, crash recovery, autoscaling, LLM streaming. Owning
+    on-call for a real-time AI runtime is a feature, not a tax.
+  cover_letter:
+    tone: "infra-engineer, on-call-fluent, pragmatic"
+    paragraphs: 3
+    must_mention: [runtime, durable execution, checkpointing, crash recovery, on-call, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "Describe a real-time / streaming AI system you've owned in production."
+      a: >
+        CentrOS runtime: durable workflow execution, checkpointing, crash
+        recovery, retries, versioned rollouts, LLM streaming on LangGraph
+        state graphs + Temporal-style semantics. 0 silent run loss across
+        6 months in live ops; 3,980+ Vitest tests on main. Comfortable
+        owning on-call — at Minted I shipped 3+ hotfixes mid-Cyber-Monday
+        through 10x+ traffic spike with no revenue impact.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    TypeScript: 8
+    Kubernetes: 5
+    Docker: 8
+    Temporal: 2
+    LangGraph: 2
+    "distributed systems": 8
+    observability: 6
+    "on-call": 6
+    GCP: 6
+    AWS: 8

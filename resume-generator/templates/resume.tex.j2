@@ -1,0 +1,95 @@
+\documentclass[((( font_size )))pt]{article}
+
+\usepackage[a4paper,
+            left=((( margin_h )))in,
+            right=((( margin_h )))in,
+            top=((( margin_v )))in,
+            bottom=((( margin_v )))in]{geometry}
+\usepackage{fontspec}
+\setmainfont[
+  BoldFont={lmroman10-bold.otf},
+  ItalicFont={lmroman10-italic.otf},
+  BoldItalicFont={lmromandemi10-oblique.otf},
+]{lmroman10-regular.otf}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+% --- colors ---------------------------------------------------------
+\definecolor{accent}{HTML}{073642}
+\definecolor{muted}{HTML}{586e75}
+
+% --- section headings ----------------------------------------------
+\titleformat{\section}{\normalsize\bfseries\color{accent}\MakeUppercase}{}{0pt}{}[\vspace{-4pt}\rule{\linewidth}{0.4pt}]
+\titlespacing*{\section}{0pt}{((( section_spacing_above )))pt}{((( section_spacing_below )))pt}
+
+% --- lists ----------------------------------------------------------
+\setlist[itemize]{leftmargin=12pt, topsep=2pt, partopsep=0pt, parsep=0pt, itemsep=((( bullet_spacing )))pt, label=•}
+
+% --- spacing --------------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\pagenumbering{gobble}
+\pagestyle{empty}
+
+\begin{document}
+
+% =================== HEADER ===================
+\begin{center}
+  {\LARGE \textbf{((( name | tex )))}}\\[2pt]
+  {\normalsize \color{muted} ((( headline | tex )))}\\[4pt]
+  \small
+  \href{mailto:((( email )))}{((( email | tex )))}
+  \hspace{4pt}·\hspace{4pt}
+  ((( phone | tex )))
+  \hspace{4pt}·\hspace{4pt}
+  ((( location | tex )))
+  \\[1pt]
+  ((* for link in links *))
+    ((* if not loop.first *))\hspace{4pt}·\hspace{4pt}((* endif *))
+    \href{((( link.url )))}{((( link.label | tex )))}
+  ((* endfor *))
+\end{center}
+
+\vspace{2pt}
+
+% =================== SUMMARY ===================
+\section*{Summary}
+((( summary | tex ))).
+
+% =================== EXPERIENCE ===================
+\section*{Experience}
+((* for entry in experience *))
+\textbf{((( entry.role | tex )))} \enskip ((( entry.company | tex ))) \hfill \textit{((( entry.dates | tex )))}
+((* if entry.location *))\\{\small\color{muted}((( entry.location | tex )))((* if entry.stack *)) \enskip•\enskip ((( entry.stack | tex )))((* endif *))}((* endif *))
+\begin{itemize}
+((* for b in entry.bullets *))
+  \item ((( b | tex )))
+((* endfor *))
+\end{itemize}
+((* if not loop.last *))\vspace{((( entry_spacing )))pt}((* endif *))
+((* endfor *))
+
+% =================== SKILLS ===================
+\section*{Skills}
+((* for group in skills *))
+\textbf{((( group.title | tex ))):}
+\begin{itemize}
+((* for line in group.lines *))
+  \item ((( line | tex )))
+((* endfor *))
+\end{itemize}
+((* if not loop.last *))\vspace{1pt}((* endif *))
+((* endfor *))
+
+% =================== EDUCATION ===================
+\section*{Education}
+((* for e in education *))
+\textbf{((( e.school | tex )))} \enskip ((( e.degree | tex ))) \hfill \textit{((( e.years | tex )))}((* if e.location *))\\{\small\color{muted}((( e.location | tex )))}((* endif *))
+((* if not loop.last *))\\((* endif *))
+((* endfor *))
+
+\end{document}

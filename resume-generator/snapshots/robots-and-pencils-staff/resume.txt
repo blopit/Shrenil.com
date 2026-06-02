@@ -1,0 +1,57 @@
+                                                Shren Patel
+                              Staff AI Engineer — Serverless Agentic Workflows on AWS
+                 patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                                linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years software across mature production environments — strong Python + Node.js. Built CentrOS — multi-agent
+orchestration with function/tool calling, RAG over pgvector + OpenSearch, streaming LLM responses, Langfuse evals,
+event-driven workflows; 3,980+ Vitest tests on main. Reliability and integration quality over novelty.
+
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                    Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Built CentrOS production AI workflow services in Python + Node.js — multi-agent orchestration, function/tool
+  calling, RAG, streaming LLM responses across event-driven pipelines; 3,980+ tests on main.
+• Implemented hybrid vector retrieval + streaming-response patterns (pgvector, OpenSearch-style) with chunk hygiene,
+  freshness rules, source ranking — cut token spend 40% while improving grounding signal.
+• Added Langfuse-style observability + synthetic AI testing: traces, replay cases, regression suites, token-cost reporting
+  — caught 22+ regressions before release across CentrOS verticals.
+• Built MCP-style tool registry with scoped OAuth permissions, JSON-schema validation, retry policy, side-effect
+  logging — turned ad-hoc API calls into 100% audited typed agent tool invocations.
+• Dogfooded CentrOS on 23-unit motel vertical (guest comms, refunds, vendor invoices, compliance) — 3,980+ Vitest
+  tests across 347 files passing on main; CI-backed live ops.
+Creator, WEBTOON Original — AXED WEBTOON                                                           Jun 2018 – Dec 2020
+Remote • Python · OpenCV · image processing
+• Built Python/JS image-processing + consistency-check pipelines for 445K+ subscriber WEBTOON Original at
+  2x/week ship cadence — 10% fewer re-uploads, hundreds of operator hours saved.
+• Designed queue → tooling → review → ship operator workflow at 2M+ monthly views on WEBTOON Original —
+  precursor to today’s HITL agent + human production system at CentrOS.
+iOS Mobile & Web Developer Coursera                                                                Jan 2017 – Apr 2017
+Mountain View, CA • React · Python · iOS SDK · Swift · NLP/search
+• Built Python search tooling lifting course content discovery 60% (pre-LLM NLP era) — same retrieval problem
+  CentrOS now solves with embeddings, hybrid RAG, and pgvector.
+Senior Frontend Developer Faire                                                                    Jun 2021 – Aug 2022
+Remote · Canada • React · TypeScript · MobX · Jest · Storybook · A/B testing
+• Drove site-wide perf gains via A/B testing + staged rollouts; same guardrail discipline now applied to agent versioning,
+  shadow traﬀic, and canary releases at CentrOS — 5+ wins shipped.
+SKILLS
+
+AI Workflow Engineering:
+• Multi-agent orchestration · tool/function calling · streaming LLM responses
+• RAG · embeddings · vector retrieval (OpenSearch · pgvector · FAISS)
+• Langfuse-style tracing · synthetic AI testing · token-cost optimization · evals
+• Workflow orchestration · state machines · event-driven async patterns
+Languages:
+• Python · Node.js · TypeScript
+Cloud (AWS-heavy):
+• AWS Lambda · API Gateway · DynamoDB · S3 · SQS · EventBridge · Step Functions
+• Docker · serverless architectures · CI/CD · production logging & monitoring
+
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

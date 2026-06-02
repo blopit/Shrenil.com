@@ -1,0 +1,57 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper, left=0.75in, right=0.75in, top=0.7in, bottom=0.7in]{geometry}
+\usepackage{fontspec}
+\setmainfont[
+  BoldFont={lmroman10-bold.otf},
+  ItalicFont={lmroman10-italic.otf},
+  BoldItalicFont={lmromandemi10-oblique.otf},
+]{lmroman10-regular.otf}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+\definecolor{muted}{HTML}{586e75}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\pagenumbering{gobble}
+\pagestyle{empty}
+
+\begin{document}
+
+% --- HEADER ---
+\begin{center}
+  {\LARGE \textbf{((( name | tex )))}}\\[2pt]
+  {\small \color{muted}
+    \href{mailto:((( email )))}{((( email | tex )))}
+    \hspace{4pt}·\hspace{4pt}
+    ((( phone | tex )))
+    \hspace{4pt}·\hspace{4pt}
+    ((( location | tex )))
+    \\[1pt]
+    ((* for link in links *))
+      ((* if not loop.first *))\hspace{4pt}·\hspace{4pt}((* endif *))
+      \href{((( link.url )))}{((( link.label | tex )))}
+    ((* endfor *))
+  }
+\end{center}
+
+\vspace{12pt}
+
+% --- ADDRESS LINE ---
+\textbf{((( company | tex )))} \hfill \textit{Re: ((( role | tex )))}
+
+\vspace{8pt}
+
+% --- BODY ---
+((( body | tex )))
+
+\vspace{12pt}
+
+% --- SIGN-OFF ---
+Sincerely,\\
+((( name | tex )))
+
+\end{document}

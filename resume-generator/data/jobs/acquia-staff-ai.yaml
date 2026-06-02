@@ -1,0 +1,103 @@
+slug: acquia-staff-ai
+company: Acquia
+role: Staff AI Engineer
+posting_url: "https://job-boards.greenhouse.io/acquia/jobs/7821888"
+
+headline: "Staff AI Engineer — Stateful Multi-Agent Orchestration"
+
+summary: >
+  10+ years shipping software, 3+ on production AI agents. Built CentrOS —
+  stateful multi-agent runtime: LangGraph state graphs, Temporal-style
+  durability, Pydantic tool contracts, LangFuse traces, hybrid RAG, HITL
+  approvals; 3,980+ Vitest tests on main, 0 silent run loss across 6 months.
+  Exact architecture this role calls for.
+
+must_have_keywords:
+  - LangGraph
+  - Temporal
+  - Pydantic
+  - LangFuse
+  - RAG
+  - tool-calling
+  - human-in-the-loop
+  - multi-agent
+  - Python
+  - orchestration
+
+nice_to_have_keywords:
+  - observability
+  - retrieval
+  - prompt management
+  - evaluation
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-eval, centros-rag, centros-hitl] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: coursera, bullets: [coursera-search] }
+
+bullet_overrides: {}
+
+skills_emphasis:
+  - title: "AI / Agents"
+    items:
+      - "LangGraph state graphs · Temporal-style durability · Pydantic tool contracts · LangFuse tracing"
+      - "Multi-agent orchestration · task decomposition · router/executor/verifier patterns"
+      - "RAG · retrieval pipelines · embeddings · context optimization · prompt management"
+      - "Human-in-the-loop approvals · audit trails · governance · eval-gated rollout"
+      - "Tool & function calling · structured outputs · MCP servers"
+  - title: "Languages"
+    items:
+      - "Python 3 (primary) · TypeScript · Node.js"
+  - title: "Cloud & Infra"
+    items:
+      - "GCP · AWS · Kubernetes · Docker · serverless · CI/CD"
+      - "Vector DBs: pgvector · OpenSearch · FAISS"
+
+application:
+  why_company: >
+    Acquia owns Drupal — the most consequential open-source CMS in
+    production. Adding stateful agent orchestration to a CMS that runs
+    critical content infrastructure is a real engineering problem, not
+    a hackathon. That's the work I want.
+  why_role: >
+    Staff AI Engineer with explicit ownership of stateful multi-agent
+    runtime is exactly what I've been building at CentrOS. The role's call
+    for LangGraph + Temporal + Pydantic + LangFuse maps 1:1 to the
+    architecture I'd otherwise spend my first 6 months proposing.
+  cover_letter:
+    tone: "direct, technical, warm"
+    paragraphs: 3
+    must_mention: [LangGraph, Temporal, Pydantic, LangFuse, HITL, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "What attracts you to this role at Acquia?"
+      a: >
+        Two things. First: Acquia's scale forces stateful orchestration to
+        actually mean something — durable execution, idempotent tool calls,
+        eval-gated rollout — which is the part of agent engineering I find
+        most underrated in the broader market. Second: I'd rather ship the
+        runtime once than ship 8 prototypes; Acquia's role scope reads like
+        the former.
+      char_limit: 700
+    - q: "Describe a production agent system you've shipped."
+      a: >
+        CentrOS — multi-agent runtime on LangGraph state graphs with
+        Temporal-style durability, Pydantic tool contracts, LangFuse traces,
+        hybrid RAG, and HITL approval interrupts. Dogfooded on a 23-unit
+        motel operations vertical (guest comms, refunds, compliance) with
+        3,980+ Vitest tests on main; 0 silent run loss across 6 months.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    TypeScript: 8
+    LangGraph: 2
+    Temporal: 2
+    Pydantic: 6
+    LangFuse: 2
+    RAG: 3
+    Kubernetes: 5
+    Docker: 8
+    GCP: 6
+    AWS: 8

@@ -1,0 +1,56 @@
+                                                Shren Patel
+                               Enterprise AI Architect — Production Agent Blueprints
+                 patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                                linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years engineering, 3+ architecting production AI agents. Built CentrOS as a reusable orchestration blueprint —
+LangGraph state graphs, Temporal durability, Pydantic tool contracts, LangFuse evals — then codified 5+ platform
+primitives so new workflows ship in 2 days vs weeks. 3,980+ Vitest tests on main.
+
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                    Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Architected CentrOS as 1 reusable AI orchestration layer: stateful multi-agent workflows, typed tool contracts, RAG,
+  observability, governance — production-ready blueprints replacing 4+ bespoke stack assemblies.
+• Designed agent runtime on LangGraph state graphs + Temporal-style durability: durable execution, checkpointing,
+  crash recovery, retries, versioned rollouts — 0 silent run loss across 6 months.
+• Built eval harness + LangFuse trace pipeline: golden datasets, task-level scorers, regression suites, prompt versioning,
+  failure taxonomy — caught 22+ silent regressions before release.
+• Defined org standards across 5 dimensions (state, prompts, retrieval, tool contracts, observability) — turned alpha
+  patterns into production blueprints; new workflows ship in 2 days vs weeks.
+• Built MCP-style tool registry with scoped OAuth permissions, JSON-schema validation, retry policy, side-effect
+  logging — turned ad-hoc API calls into 100% audited typed agent tool invocations.
+Independent Engineer / Builder Software, AI automation & creative IP                                Sep 2022 – Jan 2026
+GTA · Remote • Python · TypeScript · Node · LLM tool-calling · MCP · multi-agent orchestration
+• Built LLM workflow automation since ChatGPT launch (Nov 2022): tool-calling/API automations from 2023; Lang-
+  Graph multi-agent patterns from 2024; MCP integrations from late 2024 — 3+ years compounding.
+Creator, WEBTOON Original — AXED WEBTOON                                                           Jun 2018 – Dec 2020
+Remote • Python · OpenCV · image processing
+• Designed queue → tooling → review → ship operator workflow at 2M+ monthly views on WEBTOON Original —
+  precursor to today’s HITL agent + human production system at CentrOS.
+iOS Mobile & Web Developer Coursera                                                                Jan 2017 – Apr 2017
+Mountain View, CA • React · Python · iOS SDK · Swift · NLP/search
+• Built React GUI-creation infrastructure at Coursera; cut new-view setup from days to 1 hour and compounded across
+  5+ teams as the company standard.
+• Built Python search tooling lifting course content discovery 60% (pre-LLM NLP era) — same retrieval problem
+  CentrOS now solves with embeddings, hybrid RAG, and pgvector.
+SKILLS
+
+AI Architecture:
+• Architectural reviews · reference architectures · reusable orchestration blueprints
+• LangGraph · Temporal · Pydantic · LangFuse · LangChain · LlamaIndex · CrewAI
+• RAG architecture · embedding strategies · context window optimization · evaluation harnesses
+• Production AI: CI/CD · containerization · monitoring · rollback · inference cost control
+• Human-in-the-loop governance · audit trails · approval gates · standards setting
+Languages & Platforms:
+• Python 3 · TypeScript · Node.js
+• GCP · AWS · Kubernetes · Docker · serverless
+
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

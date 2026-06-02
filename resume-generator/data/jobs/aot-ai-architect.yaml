@@ -1,0 +1,97 @@
+slug: aot-ai-architect
+company: AOT Technologies
+role: AI Architect
+posting_url: "https://job-boards.greenhouse.io/aottechnologies/jobs/5228675008"
+
+headline: "AI Architect — Agentic Applications for Enterprise & Government"
+
+summary: >
+  10+ years engineering, 3+ on agentic AI apps. Built CentrOS on LangGraph/MCP
+  patterns — tool calling, hybrid RAG, memory/state, secure approval gates —
+  dogfooded on 23-unit motel + 20-unit residential ops vertical, 3,980+
+  Vitest tests on main. Same patterns generalize to enterprise/government
+  workflows.
+
+must_have_keywords:
+  - agentic
+  - LangGraph
+  - LangChain
+  - tool calling
+  - RAG
+  - memory
+  - state management
+  - prompt engineering
+  - Python
+  - cloud
+
+nice_to_have_keywords:
+  - MCP
+  - A2A
+  - evaluation
+  - embeddings
+  - architecture
+  - Docker
+  - Kubernetes
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-rag, centros-hitl, centros-tools] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+
+bullet_overrides:
+  centros-platform: "Architected CentrOS — agentic workflow platform translating ambiguous biz processes into cloud-native AI systems: tool calling, hybrid RAG, memory/state, approval flows; dogfooded across 2 verticals."
+  centros-runtime: "Built reusable orchestration patterns for multi-turn, multi-agent workflows across LOB APIs, DBs, external services — cut new-use-case deployment from 3 weeks to 2 days."
+  centros-hitl: "Established 7 production engineering standards for agentic systems: CI/CD, logging, monitoring, secrets handling, testing, rollback, human approval gates — applied across CentrOS verticals."
+
+skills_emphasis:
+  - title: "Agentic AI Architecture"
+    items:
+      - "LangGraph · LangChain · LlamaIndex · CrewAI · MCP · A2A patterns"
+      - "Tool calling · function calling · structured outputs · enterprise API integration"
+      - "Memory & state management · context engineering · prompt engineering"
+      - "RAG · embeddings · vectorization · evaluation · retrieval strategies"
+      - "Cloud-native delivery · CI/CD · logging · monitoring · secure deployment"
+  - title: "Languages & Platforms"
+    items:
+      - "Python · TypeScript · Node.js · C / C++"
+      - "GCP · AWS · Azure-friendly · Kubernetes · Docker · serverless"
+
+application:
+  why_company: >
+    AOT builds agentic apps for enterprise and government — verticals where
+    messy operational workflows meet hard compliance and audit requirements.
+    I've been dogfooding that exact problem on a 23-unit operations
+    vertical; the patterns generalize.
+  why_role: >
+    AI Architect for agentic apps means translating ambiguous business
+    processes into cloud-native AI systems that actually ship into
+    regulated environments. That's the work, not the demo — and the
+    work is what I want.
+  cover_letter:
+    tone: "senior, regulated-environment-fluent, candid"
+    paragraphs: 3
+    must_mention: [LangGraph, MCP, RAG, governance, regulated, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "What's your experience translating messy enterprise workflows into agentic systems?"
+      a: >
+        At CentrOS I mapped a 23-unit motel + 20-unit residential ops
+        vertical from email/SMS/Slack/PDF chaos into 12+ typed agent
+        workflows with HITL boundaries — guest comms, refunds, vendor
+        invoices, compliance. 3,980+ Vitest tests on main covering live
+        ops; 0 silent run loss across 6 months. Same patterns generalize
+        directly to enterprise + government workflows.
+      char_limit: 800
+  years_experience:
+    Python: 10
+    TypeScript: 8
+    LangGraph: 2
+    LangChain: 3
+    MCP: 1
+    RAG: 3
+    "tool calling": 3
+    "memory & state": 3
+    Kubernetes: 5
+    Docker: 8

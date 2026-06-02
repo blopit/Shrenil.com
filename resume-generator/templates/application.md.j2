@@ -1,0 +1,160 @@
+# Application: {{ job.company }} — {{ job.role }}
+
+> Single-screen field reference. Copy-paste each section into the corresponding
+> Greenhouse / Lever / Ashby field. Posting: {{ job.posting_url or "n/a" }}
+
+---
+
+## Personal info
+
+| Field            | Value                                                     |
+| ---------------- | --------------------------------------------------------- |
+| Full name        | {{ profile.name }}                                        |
+| Email            | {{ profile.contact.email }}                               |
+| Phone            | {{ profile.contact.phone }}                               |
+| Current location | {{ application.logistics.current_location }}              |
+| Pronouns         | {{ application.identity.pronouns or "—" }}                |
+{% for link in profile.contact.links -%}
+| {{ link.label }} | {{ link.url }} |
+{% endfor %}
+{%- if application.profile_links.linkedin %}
+| LinkedIn         | {{ application.profile_links.linkedin }} |
+{%- endif %}
+{%- if application.profile_links.github %}
+| GitHub           | {{ application.profile_links.github }} |
+{%- endif %}
+{%- if application.profile_links.portfolio %}
+| Portfolio        | {{ application.profile_links.portfolio }} |
+{%- endif %}
+
+---
+
+## Work authorization
+
+{% for code, c in application.work_authorization.countries.items() -%}
+- **{{ code }}** — authorized: **{{ "Yes" if c.authorized else "No" }}** · requires sponsorship: **{{ "Yes" if c.requires_sponsorship else "No" }}**{% if c.visa_type %} · visa: **{{ c.visa_type }}**{% endif %}
+{% if c.notes %}  > {{ c.notes | trim }}
+{% endif %}
+{% endfor %}
+
+---
+
+## Compensation expectations
+
+- **Base floor (walk-away):** {{ application.compensation.currency }} {{ "{:,}".format(application.compensation.base_floor) if application.compensation.base_floor else "—" }}
+- **Base target:** {{ application.compensation.currency }} {{ "{:,}".format(application.compensation.base_target) if application.compensation.base_target else "—" }}
+- **Base ceiling (stretch):** {{ application.compensation.currency }} {{ "{:,}".format(application.compensation.base_ceiling) if application.compensation.base_ceiling else "—" }}
+- **Total comp target (base + equity + bonus):** {{ application.compensation.currency }} {{ "{:,}".format(application.compensation.total_target) if application.compensation.total_target else "—" }}
+- **Currently disclosed:** {{ "Yes" if application.compensation.willing_to_disclose_current else "No (politely decline)" }}
+- **Open to contract:** {{ "Yes" if application.compensation.open_to_contract else "No" }}
+{% if application.compensation.notes %}
+> {{ application.compensation.notes | trim }}
+{% endif %}
+
+---
+
+## Logistics
+
+| Field                  | Value                                                            |
+| ---------------------- | ---------------------------------------------------------------- |
+| Earliest start date    | {{ application.logistics.earliest_start_date or "—" }}            |
+| Notice period          | {{ "{} weeks".format(application.logistics.notice_period_weeks) if application.logistics.notice_period_weeks is not none else "—" }} |
+| Preferred timezone     | {{ application.logistics.preferred_timezone_band }}              |
+| Remote only            | {{ "Yes" if application.logistics.remote_only else "No" }}        |
+| Willing to relocate    | {{ "Yes" if application.logistics.willing_to_relocate else "No" }} |
+| Travel willingness     | {{ application.logistics.travel_willingness or "—" }}             |
+
+---
+
+## Why this company?
+
+{{ overlay.why_company | default("> ⚠ no `application.why_company` set in data/jobs/" + job.slug + ".yaml", true) | trim }}
+
+## Why this role?
+
+{{ overlay.why_role | default("> ⚠ no `application.why_role` set in data/jobs/" + job.slug + ".yaml", true) | trim }}
+
+---
+
+## Referral / how heard
+
+- **Source:** {{ overlay.referral_override or application.referral.default_source }}
+{%- if application.referral.default_referrer %}
+- **Referrer:** {{ application.referral.default_referrer }}
+{%- endif %}
+
+---
+
+{%- if overlay.custom_questions %}
+## Custom screener questions
+{% for q in overlay.custom_questions %}
+### Q: {{ q.q }}{% if q.char_limit %} _(≤{{ q.char_limit }} chars)_{% endif %}
+
+{{ q.a | trim }}
+
+_({{ q.a | trim | length }} chars used)_
+
+{% endfor %}
+---
+{%- endif %}
+
+## Per-tech years of experience
+{% if overlay.years_experience %}
+| Skill | Years |
+| ----- | ----- |
+{% for skill, years in overlay.years_experience.items() | sort -%}
+| {{ skill }} | {{ years }} |
+{% endfor %}
+{% else %}
+_(none specified for this role — add `application.years_experience` to data/jobs/{{ job.slug }}.yaml)_
+{% endif %}
+
+---
+
+## Cover letter
+
+{% if cover_letter_body %}
+{{ cover_letter_body | trim }}
+{% else %}
+> ⚠ no cover letter drafted yet. Run: `resume cover-letter {{ job.slug }}`
+{%- if overlay.cover_letter.must_mention %}
+>
+> Must mention: {{ overlay.cover_letter.must_mention | join(" · ") }}
+{%- endif %}
+{% endif %}
+
+---
+
+## Voluntary EEO disclosures
+
+| Field                  | Value                                                  |
+| ---------------------- | ------------------------------------------------------ |
+| Pronouns               | {{ application.identity.pronouns or "Prefer not to answer" }} |
+| Gender                 | {{ application.identity.gender or "Prefer not to answer" }} |
+| Race / ethnicity       | {{ application.identity.race_ethnicity or "Prefer not to answer" }} |
+| Hispanic / Latino      | {{ application.identity.hispanic_or_latino or "Prefer not to answer" }} |
+| Nationality            | {{ application.identity.nationality or "Prefer not to answer" }} |
+| Veteran status         | {{ application.identity.veteran_status or "Prefer not to answer" }} |
+| Disability status      | {{ application.identity.disability_status or "Prefer not to answer" }} |
+| LGBTQ+ (where asked)   | {{ application.identity.lgbtq or "Prefer not to answer" }} |
+
+---
+
+## Relevant STAR stories
+
+{% set surfaced = application.stories_for_tags(story_tags) %}
+{% if surfaced %}
+{% for s in surfaced %}
+### {{ s.id }} — _{{ s.tags | join(" · ") }}_
+
+**Prompt:** {{ s.prompt | trim }}
+
+- **Situation:** {{ s.situation | trim }}
+- **Task:** {{ s.task | trim }}
+- **Action:** {{ s.action | trim }}
+- **Result:** {{ s.result | trim }}
+
+{% endfor %}
+{% else %}
+_(no stories matched the requested tags — try `--stories` without filter or check tag spelling)_
+{% endif %}

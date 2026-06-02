@@ -1,0 +1,55 @@
+                                                Shren Patel
+                                   Staff AI Engineer — GTM Workflow Automation
+                 patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                                linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years engineering, 3+ applying LLMs to production workflows. Built CentrOS multi-agent orchestration across
+Slack, email, calendar, CRM APIs + knowledge sources — MCP tool schemas, hybrid RAG, structured outputs,
+LangFuse evals, human escalation. 5+ reusable primitives ship new workflows in 2 days. Agents as operational
+infrastructure.
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                    Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Built CentrOS multi-agent orchestration connecting 5+ surfaces (Slack, email, calendar, CRM APIs, knowledge
+  sources) into agentic GTM workflows — MCP tool schemas, hybrid RAG, human escalation.
+• Created MCP-style tool interfaces with stable contracts, permission scoping, audit logs, reusable actions — cut
+  custom-integration time 70% letting agents safely invoke skills across internal systems.
+• Implemented hybrid RAG pipelines grounded in live business context: freshness boundaries, retrieval ranking, source
+  attribution — cut grounding errors 60% while keeping every answer verifiable.
+• Built eval harness + LangFuse trace pipeline: golden datasets, task-level scorers, regression suites, prompt versioning,
+  failure taxonomy — caught 22+ silent regressions before release.
+• Designed HITL interrupt model: confidence-gated handoff, approval checkpoints before irreversible actions, reversible
+  operations, audit trails, escalation policy — 100% of high-risk tool calls human-reviewed.
+Vertical automation & ops dogfood Conscious Creations                                                Sep 2022 – Present
+Remote · Canada • Python · FastAPI · LLM tool-calling · workflow automation
+• Prototyped accommodations workflows on CentrOS: 3-stage guest-triage pipeline (classify → plan → draft) in
+  Python/FastAPI with HITL approval gates before any irreversible action.
+Creator, WEBTOON Original — AXED WEBTOON                                                           Jun 2018 – Dec 2020
+Remote • Python · OpenCV · image processing
+• Designed queue → tooling → review → ship operator workflow at 2M+ monthly views on WEBTOON Original —
+  precursor to today’s HITL agent + human production system at CentrOS.
+iOS Mobile & Web Developer Coursera                                                                Jan 2017 – Apr 2017
+Mountain View, CA • React · Python · iOS SDK · Swift · NLP/search
+• Built Python search tooling lifting course content discovery 60% (pre-LLM NLP era) — same retrieval problem
+  CentrOS now solves with embeddings, hybrid RAG, and pgvector.
+SKILLS
+
+Agentic Workflow Automation:
+• Multi-agent orchestration: router-dispatcher, sequential chains, parallel fan-out
+• MCP servers · function calling · structured outputs · tool registries
+• RAG · retrieval pipelines · embeddings · source attribution · freshness control
+• Workflow integrations: Slack · email · calendar · CRM · BigQuery · APIs
+• Observability · evaluation · cost controls · human escalation · governance
+Languages & Cloud:
+• Python · Node.js · TypeScript
+• GCP: BigQuery · Cloud Functions · Cloud Run · Vertex AI
+• AWS: Lambda · Step Functions · DynamoDB · S3
+
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

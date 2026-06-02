@@ -1,3 +1,11 @@
 .vscode/sftp.json
 .env
 .env.local
+
+# resume-generator
+resume-generator/output/
+resume-generator/.venv/
+resume-generator/**/__pycache__/
+resume-generator/**/*.pyc
+resume-generator/build/
+resume-generator/.tectonic-cache/

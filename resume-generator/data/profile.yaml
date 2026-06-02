@@ -1,0 +1,17 @@
+name: Shren Patel
+default_headline: "AI Agent Orchestration Engineer"
+
+contact:
+  email: patel.shrenil@gmail.com
+  phone: "+1 613-551-9989"
+  location: "Canada remote · NA-friendly · EST/PST"
+  links:
+    - { label: "linkedin.com/in/shrenp", url: "https://linkedin.com/in/shrenp" }
+    - { label: "github.com/blopit",      url: "https://github.com/blopit" }
+    - { label: "shrenil.com",            url: "https://shrenil.com" }
+
+education:
+  - school: University of Waterloo
+    degree: "Bachelor of Software Engineering (BSE) — Computer Software Engineering"
+    years: "2012 – 2018"
+    location: "Waterloo, ON"

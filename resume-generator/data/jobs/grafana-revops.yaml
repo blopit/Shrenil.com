@@ -1,0 +1,101 @@
+slug: grafana-revops
+company: Grafana Labs
+role: "Staff AI Engineer, Revenue Operations"
+posting_url: "https://job-boards.greenhouse.io/grafanalabs/jobs/5839190004"
+
+headline: "Staff AI Engineer — GTM Workflow Automation"
+
+summary: >
+  10+ years engineering, 3+ applying LLMs to production workflows. Built
+  CentrOS multi-agent orchestration across Slack, email, calendar, CRM
+  APIs + knowledge sources — MCP tool schemas, hybrid RAG, structured
+  outputs, LangFuse evals, human escalation. 5+ reusable primitives ship
+  new workflows in 2 days. Agents as operational infrastructure.
+
+must_have_keywords:
+  - multi-agent
+  - MCP
+  - RAG
+  - function calling
+  - structured outputs
+  - workflow automation
+  - Python
+  - Node.js
+  - observability
+  - human escalation
+
+nice_to_have_keywords:
+  - GCP
+  - BigQuery
+  - Cloud Functions
+  - Cloud Run
+  - LangChain
+  - CrewAI
+  - evaluation
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-tools, centros-rag, centros-eval, centros-hitl] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-search] }
+
+bullet_overrides:
+  centros-platform: "Built CentrOS multi-agent orchestration connecting 5+ surfaces (Slack, email, calendar, CRM APIs, knowledge sources) into agentic GTM workflows — MCP tool schemas, hybrid RAG, human escalation."
+  centros-tools: "Created MCP-style tool interfaces with stable contracts, permission scoping, audit logs, reusable actions — cut custom-integration time 70% letting agents safely invoke skills across internal systems."
+  centros-rag: "Implemented hybrid RAG pipelines grounded in live business context: freshness boundaries, retrieval ranking, source attribution — cut grounding errors 60% while keeping every answer verifiable."
+
+skills_emphasis:
+  - title: "Agentic Workflow Automation"
+    items:
+      - "Multi-agent orchestration: router-dispatcher, sequential chains, parallel fan-out"
+      - "MCP servers · function calling · structured outputs · tool registries"
+      - "RAG · retrieval pipelines · embeddings · source attribution · freshness control"
+      - "Workflow integrations: Slack · email · calendar · CRM · BigQuery · APIs"
+      - "Observability · evaluation · cost controls · human escalation · governance"
+  - title: "Languages & Cloud"
+    items:
+      - "Python · Node.js · TypeScript"
+      - "GCP: BigQuery · Cloud Functions · Cloud Run · Vertex AI"
+      - "AWS: Lambda · Step Functions · DynamoDB · S3"
+
+application:
+  why_company: >
+    Grafana Labs treats observability as a first-class engineering
+    discipline — and is now treating AI workflow automation the same way.
+    I want to apply agent orchestration to the GTM surface inside a
+    company that won't let me ship without proper traces.
+  why_role: >
+    Staff AI Engineer for Revenue Operations turns LLMs into operational
+    infrastructure — exactly the framing I've been operating under at
+    CentrOS. Slack + email + calendar + MCP + RAG + observability + human
+    escalation is the stack I'd build anyway; doing it inside Grafana
+    adds the eval discipline I want.
+  cover_letter:
+    tone: "staff-engineer, observability-pilled, results-focused"
+    paragraphs: 3
+    must_mention: [MCP, RAG, observability, human escalation, GTM, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "Describe a workflow automation that materially shifted business outcomes."
+      a: >
+        At CentrOS I built multi-agent orchestration across Slack, email,
+        calendar, CRM APIs, and knowledge sources — MCP tool schemas,
+        hybrid RAG, structured outputs, LangFuse evals, human escalation.
+        5+ reusable primitives let new workflows ship in 2 days vs weeks.
+        Treating agents as operational infrastructure (not side projects)
+        is what made GTM-style automations actually trustworthy.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    "Node.js": 8
+    TypeScript: 8
+    MCP: 1
+    RAG: 3
+    LangGraph: 2
+    LangChain: 3
+    "function calling": 3
+    "structured outputs": 3
+    GCP: 6
+    BigQuery: 5
+    observability: 6

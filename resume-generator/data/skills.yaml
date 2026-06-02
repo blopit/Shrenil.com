@@ -1,0 +1,43 @@
+# Master skill taxonomy. Per-job configs can either reference these groups
+# (by title) or override with their own `skills_emphasis` block.
+groups:
+  - title: "AI / Agents"
+    items:
+      - "Multi-agent orchestration · task decomposition · router/executor/verifier patterns"
+      - "Tool & function calling · structured outputs (instructor, pydantic-ai) · JSON-schema validated arguments"
+      - "Stateful workflows · checkpointing · crash recovery · replay (LangGraph, Temporal patterns)"
+      - "Human-in-the-loop approvals · escalation paths · audit trails · governance"
+      - "Hybrid RAG · retrieval pipelines · embeddings · context engineering · prompt management"
+      - "Eval harnesses (Braintrust · Ragas · LLM-as-judge · golden datasets) · regression gates"
+      - "LangFuse tracing · OpenTelemetry · latency, token-cost, & failure-mode monitoring"
+      - "Anthropic prompt caching · semantic cache · token budgeting · context-window optimization"
+      - "MCP servers · webhooks · OAuth-scoped tool access · third-party API integrations"
+
+  - title: "Languages"
+    items:
+      - "Python 3 · TypeScript · JavaScript · Node.js"
+      - "C · C++ · Objective-C · HTML5 · CSS"
+
+  - title: "Frameworks & Libraries"
+    items:
+      - "LangGraph · LangChain · LlamaIndex · CrewAI · Anthropic MCP · Claude SDK · instructor · pydantic-ai"
+      - "FastAPI · Hono · Django · Express · SQLAlchemy · Drizzle ORM"
+      - "React · React Native · MobX · Redux · Jest · Storybook · Vitest"
+      - "TensorFlow · OpenCV · Hugging Face"
+
+  - title: "Cloud & Infra"
+    items:
+      - "GCP: BigQuery · Cloud Functions · Cloud Run · Vertex AI"
+      - "AWS: Lambda · Step Functions · DynamoDB · S3 · SQS · EventBridge · API Gateway"
+      - "Kubernetes · Docker · serverless · event-driven pipelines · CI/CD"
+
+  - title: "Data"
+    items:
+      - "PostgreSQL · MySQL · MongoDB · SQLite"
+      - "Vector DBs: pgvector · OpenSearch · FAISS"
+
+  - title: "Integrations & Ops"
+    items:
+      - "REST · gRPC · webhooks · OAuth"
+      - "Slack · email · calendar · CRM-style workflows"
+      - "PDF / document parsing pipelines"

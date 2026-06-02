@@ -1,0 +1,198 @@
+# Universal application data — answers to the questions every Greenhouse /
+# Lever / Ashby form asks. Per-job customization (why this company, why this
+# role, custom screener Qs, per-tech years) lives under `application:` inside
+# each data/jobs/<slug>.yaml.
+#
+# `resume application <slug>` renders this + the job overlay into a Markdown
+# report you can copy-paste into the form.
+
+work_authorization:
+  countries:
+    CA:
+      authorized: true
+      requires_sponsorship: false
+      visa_type: "Canadian citizen"
+    US:
+      authorized: false
+      requires_sponsorship: true
+      visa_type: "TN eligible (Canadian citizen)"
+      notes: >
+        TN visa is a same-day-at-border, employer-petition-free work-auth
+        path for Canadians on the USMCA professional list. Software
+        Engineer qualifies. No US lottery, no LCA timeline overhead.
+
+compensation:
+  currency: USD
+  base_floor: 170000           # walk-away base
+  base_target: 200000          # comfortable base
+  base_ceiling: 240000         # stretch base
+  total_target: 280000         # base + equity + bonus
+  willing_to_disclose_current: false
+  open_to_contract: true       # explicitly flagged for some roles
+  notes: >
+    Comp range is wide because I'm open to staff IC, senior IC, or
+    contract — happy to align on scope before locking a number. Total
+    comp matters more to me than base; meaningful equity in agentic-AI
+    companies tips the calculus.
+
+logistics:
+  current_location: "Cornwall, ON, Canada"
+  preferred_timezone_band: "ET (UTC−5/−4), comfortable working ±4h"
+  willing_to_relocate: false
+  remote_only: true
+  earliest_start_date: "2026-07-15"
+  notice_period_weeks: 2
+  travel_willingness: "Up to ~10% for quarterly onsites / offsites"
+
+identity:                       # voluntary EEO
+  pronouns: "he/him"
+  gender: "Man"
+  race_ethnicity: "Asian"
+  hispanic_or_latino: "No"
+  nationality: "Canadian (born India)"
+  veteran_status: "I am not a protected veteran"
+  disability_status: "No, I do not have a disability"
+  lgbtq: "Prefer not to answer"
+
+profile_links:
+  linkedin: "https://linkedin.com/in/shrenp"
+  github: "https://github.com/blopit"
+  portfolio: "https://shrenil.com"
+  resume_repo: null
+  twitter: null
+  bluesky: null
+  scholar: null
+  stackoverflow: null
+
+referral:
+  default_source: "Company website / careers page"
+  default_referrer: null        # set per-job if someone referred you
+
+# Reusable STAR-format answers to the standard behavioural prompts.
+# `resume application <slug>` can surface a curated subset via tags.
+stories:
+  - id: scale-incident
+    prompt: "Tell me about a high-impact production incident you handled."
+    situation: >
+      Cyber Monday at Minted (San Francisco, 2014). Print catalog handling
+      10x+ peak traffic spike across a multi-stage image upload + color-space
+      pipeline; revenue concentrated in a single 36-hour window.
+    task: >
+      I owned the post-upload pipeline. I had to keep conversion-loss flat
+      while everything around me scaled non-linearly — and detect failures
+      fast enough to ship hotfixes mid-event.
+    action: >
+      Built conversion-loss trackers fronting each pipeline stage, alerting
+      on drift the moment a stage started dropping uploads. Shipped 3+
+      hotfixes mid-event (image-MIME edge case, color-conversion timeout,
+      retry-storm protection). Kept a live war-room channel with ops.
+    result: >
+      Caught and fixed 3 production regressions inside the 36-hour window
+      with no revenue impact; the trackers became standard instrumentation
+      after the event. First time I learned that observability is the
+      hot-path tool, not a post-mortem one.
+    tags: [incident, scale, ownership, instrumentation, on-call]
+
+  - id: hitl-handoff
+    prompt: "Tell me about a time you designed for failure or graceful degradation."
+    situation: >
+      Building CentrOS — an AI agent orchestration platform. Agents make
+      decisions that touch real money, real guests, real refunds. A
+      hallucinated action isn't an inconvenience, it's a chargeback.
+    task: >
+      Design a handoff model where the agent can stop, ask, transfer
+      context to a human, and resume — without losing operator trust
+      or context fidelity.
+    action: >
+      Designed the HITL interrupt: confidence-gated handoffs, approval
+      checkpoints before any irreversible action, reversible operations,
+      durable IDs that survive process restarts, and operator-readable
+      summaries. Audit-trailed every escalation.
+    result: >
+      100% of high-risk tool calls now route through human review with 0
+      lost context across escalation events. Operator trust held even when
+      model confidence dipped. The pattern shipped into production on the
+      23-unit motel dogfood vertical.
+    tags: [hitl, failure-modes, ownership, ai-safety, design]
+
+  - id: cross-team-influence
+    prompt: "Tell me about a time you influenced engineering practice across teams without authority."
+    situation: >
+      Coursera, 2017. Teams shipping React surfaces were each rolling
+      their own GUI infrastructure — duplicate state patterns, duplicate
+      form libraries, duplicate test scaffolding. Velocity was bleeding.
+    task: >
+      As a 3-month early-career engineer with no formal mandate, ship
+      something other teams would actually adopt instead of forking.
+    action: >
+      Built a React GUI-creation infrastructure: stable component primitives,
+      opinionated state pattern, batteries-included new-view scaffold. Cut
+      new-view setup from days to ~1 hour. Pitched it to the 5+ teams that
+      most needed it; ran 1-on-1 onboardings.
+    result: >
+      5+ teams adopted as their default. Compounded as the company GUI
+      standard over the following 12 months. Lesson: developer-experience
+      wins are won 1 team at a time, not by RFC.
+    tags: [leadership, cross-team, platform, developer-experience, influence]
+
+  - id: ambiguity-into-system
+    prompt: "Tell me about a time you turned a messy operational problem into a clean system."
+    situation: >
+      Running the 23-unit motel dogfood vertical for CentrOS. Real guest
+      comms, refunds, vendor invoices, compliance flows — all coming
+      through email, SMS, Slack, and PDF, none of it shaped.
+    task: >
+      Convert that mess into something an agent fleet could safely act on,
+      without burning trust the first time it got something wrong.
+    action: >
+      Mapped recurring workflows (intake, scheduling, follow-ups,
+      exceptions). Identified the 12+ workflows where agents could
+      automate vs. where HITL had to stay. Built typed tool contracts,
+      eval gates, and audit trails so every agent action was provable.
+    result: >
+      3,980+ Vitest tests on main covering the live ops surface. Zero
+      silent run loss across 6 months. The vertical became the proving
+      ground for every primitive CentrOS now exposes.
+    tags: [ambiguity, design, ownership, dogfood, evals]
+
+  - id: shipped-velocity
+    prompt: "Tell me about a time you traded perfection for speed and still shipped well."
+    situation: >
+      Coursera iOS, 2017. The course-download feature was on the roadmap
+      for two years. I had a 4-month contract window. Either ship it or
+      it ships never.
+    task: >
+      Build offline-sync that 24M+ learners can rely on, integrate Swift +
+      legacy Objective-C, without rewriting the world.
+    action: >
+      Cut scope ruthlessly — picked the offline-sync model that matched
+      existing course-content storage, skipped a custom resume-on-disconnect
+      layer, and leaned on Apple's URLSession background-download instead
+      of building one. Shipped behind a flag.
+    result: >
+      Course-download feature shipped in 4 months, lifted course completion
+      20%+. Lesson: pick the boring sync model and ship it; the cool one
+      ships nothing.
+    tags: [velocity, scope-cutting, shipping, judgment]
+
+  - id: founder-mode
+    prompt: "Tell me about a time you owned end-to-end product, not just engineering."
+    situation: >
+      AXED creative IP (book + 2-season animated TV adaptation). Started
+      as a hobby comic on WEBTOON Original (445K+ subscribers, 2M+ monthly
+      views, 2018–2020).
+    task: >
+      Take an audience-validated creative property all the way through to
+      licensable IP and a TV production deal — solo, on top of a
+      full-time engineering career.
+    action: >
+      Built the operator workflows + image-processing pipelines that let
+      a 2x/week content factory ship at that scale. Negotiated IP rights
+      sale to 1 publisher + 1 animated TV studio. Formalized the content
+      automation tooling into CentrOS in Feb 2026.
+    result: >
+      Book release + animated TV adaptation (releasing 2025). Content
+      pipeline became the seed of the CentrOS platform. Lesson: the
+      operator workflow is the actual moat — model + tooling is just
+      execution leverage.
+    tags: [ownership, founder, product, ip, creative]

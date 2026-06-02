@@ -1,0 +1,93 @@
+slug: acquia-enterprise-architect
+company: Acquia
+role: Enterprise AI Architect
+posting_url: "https://job-boards.greenhouse.io/acquia/jobs/7852641"
+
+headline: "Enterprise AI Architect — Production Agent Blueprints"
+
+summary: >
+  10+ years engineering, 3+ architecting production AI agents. Built CentrOS
+  as a reusable orchestration blueprint — LangGraph state graphs, Temporal
+  durability, Pydantic tool contracts, LangFuse evals — then codified 5+
+  platform primitives so new workflows ship in 2 days vs weeks. 3,980+
+  Vitest tests on main.
+
+must_have_keywords:
+  - LangGraph
+  - Temporal
+  - Pydantic
+  - LangFuse
+  - RAG
+  - architecture
+  - production
+  - multi-agent
+  - Python
+  - evaluation
+
+nice_to_have_keywords:
+  - architectural review
+  - blueprint
+  - tool-calling
+  - retrieval
+  - governance
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-eval, centros-platform-leverage, centros-tools] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-react, coursera-search] }
+
+bullet_overrides:
+  centros-platform: "Architected CentrOS as 1 reusable AI orchestration layer: stateful multi-agent workflows, typed tool contracts, RAG, observability, governance — production-ready blueprints replacing 4+ bespoke stack assemblies."
+  centros-platform-leverage: "Defined org standards across 5 dimensions (state, prompts, retrieval, tool contracts, observability) — turned alpha patterns into production blueprints; new workflows ship in 2 days vs weeks."
+
+skills_emphasis:
+  - title: "AI Architecture"
+    items:
+      - "Architectural reviews · reference architectures · reusable orchestration blueprints"
+      - "LangGraph · Temporal · Pydantic · LangFuse · LangChain · LlamaIndex · CrewAI"
+      - "RAG architecture · embedding strategies · context window optimization · evaluation harnesses"
+      - "Production AI: CI/CD · containerization · monitoring · rollback · inference cost control"
+      - "Human-in-the-loop governance · audit trails · approval gates · standards setting"
+  - title: "Languages & Platforms"
+    items:
+      - "Python 3 · TypeScript · Node.js"
+      - "GCP · AWS · Kubernetes · Docker · serverless"
+
+application:
+  why_company: >
+    Acquia at architect level means setting the agent patterns for an
+    enterprise-scale CMS. I've watched too many AI initiatives die in
+    production from missing blueprints — codifying that pattern at
+    Acquia is the highest-leverage architect role I see on the market.
+  why_role: >
+    Enterprise AI Architect is where the work I do anyway — defining
+    reusable orchestration blueprints, eval gates, state contracts —
+    turns into org-wide leverage. Building 1 great system isn't the
+    prize; making 5 teams ship them safely is.
+  cover_letter:
+    tone: "senior-architect, principled, low-bullshit"
+    paragraphs: 3
+    must_mention: [blueprints, eval gates, state contracts, governance, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "What's your approach to standardizing agent patterns across teams?"
+      a: >
+        I codify 5 dimensions: state model, prompt strategy, retrieval
+        quality, tool contracts, observability. Each gets a reference
+        implementation, an eval gate, and a deprecation path for the
+        previous pattern. Teams adopt because the golden path is faster
+        and safer than rolling their own — not because of a mandate.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    TypeScript: 8
+    LangGraph: 2
+    Temporal: 2
+    Pydantic: 6
+    LangFuse: 2
+    architecture: 5
+    Kubernetes: 5
+    AWS: 8
+    GCP: 6

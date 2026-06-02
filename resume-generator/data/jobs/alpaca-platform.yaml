@@ -1,0 +1,97 @@
+slug: alpaca-platform
+company: Alpaca
+role: Senior AI Platform Engineer
+posting_url: "https://job-boards.greenhouse.io/alpaca/jobs/5993920004"
+
+headline: "Senior AI Platform Engineer — Governed Agent Execution"
+
+summary: >
+  10+ years platform engineering. Built CentrOS governed agent-execution
+  layer — connectors, scoped OAuth, secrets brokerage, audit trails,
+  approval gates, self-service templates. 100% of high-risk tool calls
+  human-reviewed; 5+ primitives cut new-workflow setup weeks → 2 days.
+  Exact regulated-environment platform this role builds.
+
+must_have_keywords:
+  - platform
+  - agentic
+  - governance
+  - approval
+  - audit
+  - Kubernetes
+  - OAuth
+  - secrets
+  - observability
+  - GCP
+
+nice_to_have_keywords:
+  - infrastructure-as-code
+  - self-service
+  - LangGraph
+  - connectors
+  - isolation
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform-leverage, centros-tools, centros-hitl, centros-runtime] }
+  - { job_id: coursera, bullets: [coursera-react] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: minted, bullets: [minted-cyber] }
+
+bullet_overrides:
+  centros-platform-leverage: "Built reusable AI platform layer — 5+ primitives (connectors, policy-aware tool exec, secrets brokerage, approval gates, eval hooks) — letting teams deploy AI safely without bespoke setup."
+  centros-tools: "Designed execution boundaries for higher-autonomy agents: access scoping, audit trails, approval criteria, OAuth token brokerage, just-in-time credentials — 100% of privileged calls policy-enforced."
+  centros-hitl: "Created golden paths + 4+ self-service templates for AI workflow deployment — opinionated defaults, guardrails, failure visibility — letting non-expert teams ship without platform escalation."
+
+skills_emphasis:
+  - title: "AI Platform Engineering"
+    items:
+      - "Connector layer · execution environments · sandboxing · isolation boundaries"
+      - "Governance: access scoping · audit trails · approval gates · escalation policy"
+      - "OAuth · secrets management · just-in-time credentials · scoped permissions"
+      - "Self-service templates · golden paths · workflow registry · platform observability"
+      - "Agentic frameworks: LangGraph · Google ADK · Claude SDK"
+  - title: "Cloud & Infra"
+    items:
+      - "GCP (primary) · AWS · Kubernetes · Docker · infrastructure-as-code · CI/CD"
+  - title: "Languages"
+    items:
+      - "Python · TypeScript · Node.js"
+
+application:
+  why_company: >
+    Alpaca runs regulated financial workloads where agent autonomy comes
+    with audit trails, scoped credentials, and approval gates as
+    non-negotiables. That's exactly the governance surface I've been
+    building into CentrOS — I want to scale it inside a real regulated
+    environment, not a sandbox.
+  why_role: >
+    Senior AI Platform Engineer building governed agent execution is the
+    role I'd write for myself. CentrOS's connectors, scoped OAuth, secrets
+    brokerage, audit trails, and self-service templates map directly onto
+    Alpaca's platform charter — I'd be shipping in week 1, not researching.
+  cover_letter:
+    tone: "platform-engineer, security-aware, pragmatic"
+    paragraphs: 3
+    must_mention: [governed execution, scoped OAuth, audit trails, golden paths, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "What experience do you have building governance + audit into AI platforms?"
+      a: >
+        At CentrOS I built every external tool call as 1 typed invocation
+        with a full audit row — scoped OAuth, JSON-schema validation,
+        idempotent retries, side-effect logging. 100% of high-risk tool
+        calls route through HITL approval with reversible operations and
+        durable IDs. The governance is the platform, not a wrapper around it.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    TypeScript: 8
+    Kubernetes: 5
+    Docker: 8
+    OAuth: 6
+    GCP: 6
+    AWS: 8
+    LangGraph: 2
+    "Claude SDK": 2
+    observability: 6

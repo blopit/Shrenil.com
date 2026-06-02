@@ -1,0 +1,53 @@
+                                                 Shren Patel
+                              Senior AI Platform Engineer — Governed Agent Execution
+                 patel.shrenil@gmail.com · +1 613-551-9989 · Canada remote · NA-friendly · EST/PST
+                                linkedin.com/in/shrenp · github.com/blopit · shrenil.com
+
+SUMMARY
+
+10+ years platform engineering. Built CentrOS governed agent-execution layer — connectors, scoped OAuth, secrets
+brokerage, audit trails, approval gates, self-service templates. 100% of high-risk tool calls human-reviewed; 5+ primitives
+cut new-workflow setup weeks → 2 days. Exact regulated-environment platform this role builds.
+
+EXPERIENCE
+
+Founder CentrOS — AI Agent Orchestration Platform                                                     Feb 2026 – Present
+Remote · Canada • TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling
+• Built reusable AI platform layer — 5+ primitives (connectors, policy-aware tool exec, secrets brokerage, approval
+  gates, eval hooks) — letting teams deploy AI safely without bespoke setup.
+• Designed execution boundaries for higher-autonomy agents: access scoping, audit trails, approval criteria, OAuth
+  token brokerage, just-in-time credentials — 100% of privileged calls policy-enforced.
+• Created golden paths + 4+ self-service templates for AI workflow deployment — opinionated defaults, guardrails,
+  failure visibility — letting non-expert teams ship without platform escalation.
+• Designed agent runtime on LangGraph state graphs + Temporal-style durability: durable execution, checkpointing,
+  crash recovery, retries, versioned rollouts — 0 silent run loss across 6 months.
+iOS Mobile & Web Developer Coursera                                                                 Jan 2017 – Apr 2017
+Mountain View, CA • React · Python · iOS SDK · Swift · NLP/search
+• Built React GUI-creation infrastructure at Coursera; cut new-view setup from days to 1 hour and compounded across
+  5+ teams as the company standard.
+Senior Frontend Developer Faire                                                                     Jun 2021 – Aug 2022
+Remote · Canada • React · TypeScript · MobX · Jest · Storybook · A/B testing
+• Drove site-wide perf gains via A/B testing + staged rollouts; same guardrail discipline now applied to agent versioning,
+  shadow traﬀic, and canary releases at CentrOS — 5+ wins shipped.
+Software Developer Minted LLC                                                                       Aug 2014 – Dec 2014
+San Francisco • Python · image processing · color space conversion · AWS
+• Built conversion-loss trackers + shipped 3+ hotfixes during Cyber Monday peak (10x+ traﬀic spike) — early
+  production-incident response discipline.
+SKILLS
+
+AI Platform Engineering:
+• Connector layer · execution environments · sandboxing · isolation boundaries
+• Governance: access scoping · audit trails · approval gates · escalation policy
+• OAuth · secrets management · just-in-time credentials · scoped permissions
+• Self-service templates · golden paths · workflow registry · platform observability
+• Agentic frameworks: LangGraph · Google ADK · Claude SDK
+Cloud & Infra:
+• GCP (primary) · AWS · Kubernetes · Docker · infrastructure-as-code · CI/CD
+Languages:
+• Python · TypeScript · Node.js
+
+EDUCATION
+
+University of Waterloo Bachelor of Software Engineering (BSE) — Computer Software Engineering 2012 – 2018
+Waterloo, ON
+

@@ -1,0 +1,97 @@
+slug: cresta-integrations
+company: Cresta
+role: "Senior Software Engineer, Backend — AI Agent Integrations"
+posting_url: "https://job-boards.greenhouse.io/cresta/jobs/4918465008"
+
+headline: "Senior Backend Engineer — AI Agent Integrations"
+
+summary: >
+  10+ years backend engineering, third-party enterprise integrations. Built
+  CentrOS MCP-style tool registry + AI-to-human handoff: scoped OAuth,
+  JSON-schema validation, idempotent retries, audit logs, session lifecycle;
+  0 lost context across 100% of escalation events; 3,980+ Vitest tests on
+  main. Reliability seam agent automation needs in enterprise ecosystems.
+
+must_have_keywords:
+  - integrations
+  - API
+  - context propagation
+  - session lifecycle
+  - AI-to-human handoff
+  - Kubernetes
+  - Docker
+  - observability
+  - real-time
+  - distributed systems
+
+nice_to_have_keywords:
+  - CCaaS
+  - REST
+  - gRPC
+  - OAuth
+  - audit log
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-tools, centros-runtime, centros-hitl, centros-dogfood] }
+  - { job_id: conscious-creations, bullets: [cc-handoff, cc-fastapi] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+  - { job_id: faire, bullets: [faire-perf] }
+
+bullet_overrides:
+  centros-tools: "Built CentrOS tool/integration layer: standardized API contracts, scoped OAuth, schema validation, idempotent retries, side-effect logging, audit trails — every agent-invoked external action is 1 typed call with full provenance."
+  centros-hitl: "Designed AI-to-human handoff with 100% context preservation: shared state contract, event history, durable IDs, operator-readable summaries, ownership transitions surviving interruption — 0 lost context in escalations."
+
+skills_emphasis:
+  - title: "Integrations & Real-Time Systems"
+    items:
+      - "REST · gRPC · webhooks · OAuth · third-party enterprise APIs"
+      - "Context propagation · session lifecycle · AI-to-human handoff · state contracts"
+      - "Idempotency · retries · timeouts · audit logs · rollback · graceful degradation"
+      - "Real-time / streaming architectures · low-latency orchestration · async patterns"
+      - "Observability: handoff statistics · context-transfer quality · API failure patterns"
+  - title: "Distributed Systems & Infra"
+    items:
+      - "Distributed systems · scalable backend services · API design"
+      - "Kubernetes · Docker · AWS · GCP · serverless · CI/CD"
+  - title: "Languages"
+    items:
+      - "Python · TypeScript · Node.js · Go (familiar)"
+
+application:
+  why_company: >
+    Cresta operates at the reliability seam where contact-center AI either
+    earns operator trust or burns it. The third-party integration surface —
+    context propagation, session lifecycle, AI-to-human handoff — is where
+    most agent platforms quietly break. I want to ship the version that
+    doesn't.
+  why_role: >
+    Senior Backend Engineer for AI Agent Integrations is a precise match
+    for the CentrOS tool registry + handoff layer I've been building.
+    Idempotent retries, audit logs, scoped OAuth, session continuity —
+    that's the exact contract set I'd otherwise reinvent here.
+  cover_letter:
+    tone: "backend-engineer, integrations-first, pragmatic"
+    paragraphs: 3
+    must_mention: [integrations, context propagation, AI-to-human handoff, audit logs, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "Describe your experience with AI-to-human handoff in production."
+      a: >
+        At CentrOS I designed handoff with 100% context preservation:
+        shared state contract, full event history, durable IDs, operator-
+        readable summaries, ownership transitions surviving interruption.
+        0 lost context across escalation events in live ops on the 23-unit
+        motel vertical. That's exactly the seam contact-center AI either
+        earns operator trust on or burns it.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    TypeScript: 8
+    "Node.js": 8
+    OAuth: 6
+    REST: 10
+    gRPC: 4
+    Kubernetes: 5
+    Docker: 8
+    "distributed systems": 8

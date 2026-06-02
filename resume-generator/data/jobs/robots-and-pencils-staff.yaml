@@ -1,0 +1,98 @@
+slug: robots-and-pencils-staff
+company: Robots & Pencils
+role: Staff AI Engineer
+posting_url: "https://job-boards.greenhouse.io/robotsandpencils/jobs/5227351008"
+
+headline: "Staff AI Engineer — Serverless Agentic Workflows on AWS"
+
+summary: >
+  10+ years software across mature production environments — strong Python +
+  Node.js. Built CentrOS — multi-agent orchestration with function/tool
+  calling, RAG over pgvector + OpenSearch, streaming LLM responses,
+  Langfuse evals, event-driven workflows; 3,980+ Vitest tests on main.
+  Reliability and integration quality over novelty.
+
+must_have_keywords:
+  - Python
+  - Node.js
+  - AWS Lambda
+  - Step Functions
+  - DynamoDB
+  - OpenSearch
+  - RAG
+  - tool calling
+  - multi-agent
+  - Langfuse
+
+nice_to_have_keywords:
+  - EventBridge
+  - SQS
+  - embeddings
+  - streaming
+  - Docker
+  - synthetic testing
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-rag, centros-eval, centros-tools, centros-dogfood] }
+  - { job_id: webtoon, bullets: [webtoon-pipeline, webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-search] }
+  - { job_id: faire, bullets: [faire-perf] }
+
+bullet_overrides:
+  centros-platform: "Built CentrOS production AI workflow services in Python + Node.js — multi-agent orchestration, function/tool calling, RAG, streaming LLM responses across event-driven pipelines; 3,980+ tests on main."
+  centros-rag: "Implemented hybrid vector retrieval + streaming-response patterns (pgvector, OpenSearch-style) with chunk hygiene, freshness rules, source ranking — cut token spend 40% while improving grounding signal."
+  centros-eval: "Added Langfuse-style observability + synthetic AI testing: traces, replay cases, regression suites, token-cost reporting — caught 22+ regressions before release across CentrOS verticals."
+
+skills_emphasis:
+  - title: "AI Workflow Engineering"
+    items:
+      - "Multi-agent orchestration · tool/function calling · streaming LLM responses"
+      - "RAG · embeddings · vector retrieval (OpenSearch · pgvector · FAISS)"
+      - "Langfuse-style tracing · synthetic AI testing · token-cost optimization · evals"
+      - "Workflow orchestration · state machines · event-driven async patterns"
+  - title: "Languages"
+    items:
+      - "Python · Node.js · TypeScript"
+  - title: "Cloud (AWS-heavy)"
+    items:
+      - "AWS Lambda · API Gateway · DynamoDB · S3 · SQS · EventBridge · Step Functions"
+      - "Docker · serverless architectures · CI/CD · production logging & monitoring"
+
+application:
+  why_company: >
+    Robots & Pencils ships integration-heavy AI workflows into production
+    for clients where reliability matters more than novelty. I trust
+    agencies that pick that frame; I work the same way.
+  why_role: >
+    Staff AI Engineer building serverless agentic workflows on AWS targets
+    the exact stack — Lambda + Step Functions + DynamoDB + OpenSearch +
+    Langfuse evals — that I've been threading into CentrOS. I'd ship into
+    multiple verticals in the first year, which is the leverage I want.
+  cover_letter:
+    tone: "staff-engineer, client-facing-aware, ship-focused"
+    paragraphs: 3
+    must_mention: [serverless, AWS, multi-agent, Langfuse, RAG, CentrOS]
+    drafted: false
+    body: null
+  custom_questions:
+    - q: "What's your AWS-serverless agent experience?"
+      a: >
+        CentrOS production AI workflow services in Python + Node.js across
+        event-driven pipelines — multi-agent orchestration, function/tool
+        calling, hybrid RAG over pgvector + OpenSearch-style retrieval,
+        streaming LLM responses, Langfuse-style observability with synthetic
+        AI testing. 3,980+ tests on main. Same patterns map directly to
+        Lambda + Step Functions + DynamoDB + SQS + EventBridge.
+      char_limit: 700
+  years_experience:
+    Python: 10
+    "Node.js": 8
+    AWS: 8
+    "AWS Lambda": 6
+    "Step Functions": 4
+    DynamoDB: 5
+    OpenSearch: 2
+    RAG: 3
+    "multi-agent": 2
+    Langfuse: 2
+    Docker: 8
