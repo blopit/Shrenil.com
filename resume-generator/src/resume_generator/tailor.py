@@ -34,11 +34,12 @@ engineer. You have:
   3. A raw job-posting text from the user.
 
 Your job:
-  - Pick 8–14 bullets total across roles, weighted toward the candidate's
-    most-recent and most-relevant work. Always include 3–5 CentrOS bullets if
-    relevant; lighter inclusion of older roles (Coursera, D2L, SpringBoard,
+  - Pick 7–9 bullets total across roles, weighted toward the candidate's
+    most-recent and most-relevant work. Always include exactly 3 CentrOS
+    bullets; lighter inclusion of older roles (Coursera, D2L, SpringBoard,
     Minted, TransGaming) — at most 1 bullet each, and only if it directly maps
-    to a JD requirement.
+    to a JD requirement. The 1-page layout overflows past 9 bullets even at
+    its densest tier, so 9 is a hard ceiling, not a target.
   - Optionally override 1–3 high-impact CentrOS bullets via `bullet_overrides`
     so the wording mirrors specific JD phrases.
   - Write a 2–3 sentence summary that mirrors the JD's key phrases without
@@ -53,6 +54,7 @@ Hard rules:
     outside the fence.
   - All bullet ids you reference MUST exist in the bullet pool you were given.
   - All experience entry ids you reference MUST exist.
+  - Never more than 9 bullets total across `experience_selection`.
   - Do not invent companies, dates, or skills the candidate doesn't have.
 """
 
@@ -146,12 +148,57 @@ def draft_job_config(
     body = "".join(
         block.text for block in response.content if getattr(block, "type", None) == "text"
     )
-    return _strip_fence(body)
+    return _cap_draft(_strip_fence(body))
 
 
 def _strip_fence(s: str) -> str:
     m = re.search(r"```(?:yaml|yml)?\s*\n(.*?)```", s, re.DOTALL)
     return m.group(1).strip() if m else s.strip()
+
+
+# The 1-page layout overflows past this many bullets even at the densest
+# density tier (`build` refuses with "resume overflows 1 page"). The prompt
+# asks for 7–9; this is the deterministic ceiling if the model overshoots.
+MAX_TOTAL_BULLETS = 9
+
+
+def cap_bullet_budget(
+    selection: list[models.ExperienceSelection], limit: int = MAX_TOTAL_BULLETS
+) -> list[models.ExperienceSelection]:
+    """Drop bullets from the END of the selection (oldest roles first) until
+    the total is <= ``limit``. The first entry (CentrOS) always keeps >= 1.
+    ``bullet_overrides`` is left alone — build.py ignores overrides whose
+    bullet is not selected. Entries emptied by the cap are removed."""
+    kept = [list(s.bullets) for s in selection]
+    total = sum(len(b) for b in kept)
+    i = len(kept) - 1
+    while total > limit and i >= 0:
+        if kept[i] and (i > 0 or len(kept[i]) > 1):
+            kept[i].pop()
+            total -= 1
+        else:
+            i -= 1
+    return [
+        s.model_copy(update={"bullets": b})
+        for s, b in zip(selection, kept)
+        if b or not s.bullets
+    ]
+
+
+def _cap_draft(draft_yaml: str) -> str:
+    """Enforce MAX_TOTAL_BULLETS on the model's draft. Re-serialises only when
+    the cap bites; anything malformed passes through untouched so that
+    ``validate_draft`` is the one to report it."""
+    try:
+        parsed = yaml.safe_load(draft_yaml)
+        job = models.JobConfig.model_validate(parsed)
+    except Exception:  # noqa: BLE001
+        return draft_yaml
+    if sum(len(s.bullets) for s in job.experience_selection) <= MAX_TOTAL_BULLETS:
+        return draft_yaml
+    capped = cap_bullet_budget(job.experience_selection)
+    parsed["experience_selection"] = [s.model_dump() for s in capped]
+    return yaml.safe_dump(parsed, sort_keys=False, allow_unicode=True, width=100).strip()
 
 
 def validate_draft(draft_yaml: str, data_dir: Path) -> tuple[bool, str]:
