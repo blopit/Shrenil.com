@@ -110,6 +110,10 @@ class JobConfig(BaseModel):
     headline: str
     summary: str
     must_have_keywords: list[str] = Field(default_factory=list)
+    # JD terms the tailor could not place in the résumé text — written by
+    # tailor.prune_uncovered_keywords so the gap is visible, not claimed.
+    # Not rendered and not checked by any guardrail.
+    dropped_keywords: list[str] = Field(default_factory=list)
     nice_to_have_keywords: list[str] = Field(default_factory=list)
     experience_selection: list[ExperienceSelection]
     bullet_overrides: dict[str, str] = Field(default_factory=dict)

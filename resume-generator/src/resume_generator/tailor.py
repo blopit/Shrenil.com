@@ -20,7 +20,7 @@ from pathlib import Path
 
 import yaml
 
-from . import models
+from . import models, verify
 
 
 SYSTEM_INSTRUCTIONS = """\
@@ -45,7 +45,14 @@ Your job:
   - Write a 2–3 sentence summary that mirrors the JD's key phrases without
     keyword-stuffing.
   - Extract 8–12 must-have ATS keywords (exact terms the JD uses) plus 4–8
-    nice-to-haves.
+    nice-to-haves. `must_have_keywords` may contain ONLY terms you have
+    actually placed, verbatim, somewhere in the résumé you are composing —
+    the `summary`, the `headline`, a `skills_emphasis` item, or a
+    `bullet_overrides` rewrite. (A pool bullet you select unchanged counts
+    only if its existing text already contains the exact term.) The build
+    fails on any must-have the rendered PDF does not contain, so a JD term
+    you cannot honestly place goes in `dropped_keywords` instead — that list
+    is how the candidate sees what the JD wanted that the résumé lacks.
   - Produce a `skills_emphasis` block (2–4 groups) reordering items so the
     JD-aligned skills lead.
 
@@ -55,6 +62,9 @@ Hard rules:
   - All bullet ids you reference MUST exist in the bullet pool you were given.
   - All experience entry ids you reference MUST exist.
   - Never more than 9 bullets total across `experience_selection`.
+  - Every `must_have_keywords` term appears verbatim in the summary, headline,
+    a skills_emphasis item, or a bullet_overrides rewrite. Terms you could not
+    place go in `dropped_keywords`, never in `must_have_keywords`.
   - Do not invent companies, dates, or skills the candidate doesn't have.
 """
 
@@ -78,7 +88,9 @@ headline: "<Headline tag-line>"
 summary: >
   <2-3 sentences mirroring the JD's key phrases>
 must_have_keywords:
-  - <term>
+  - <term placed verbatim in summary / headline / a skills item / an override>
+dropped_keywords:
+  - <JD term you could not honestly place — never also listed above>
 nice_to_have_keywords:
   - <term>
 experience_selection:
@@ -113,6 +125,9 @@ def draft_job_config(
     # The static context — profile, pool, schema — goes in cacheable blocks.
     profile_yaml = _load_profile_yaml(data_dir)
     pool_yaml = _load_pool_yaml(data_dir)
+    # Parsed once here, before the call, so a malformed pool fails fast and
+    # the post-draft keyword prune has the bullet texts to check against.
+    pool = models.load_experience(data_dir)
 
     system_blocks = [
         {"type": "text", "text": SYSTEM_INSTRUCTIONS},
@@ -148,7 +163,7 @@ def draft_job_config(
     body = "".join(
         block.text for block in response.content if getattr(block, "type", None) == "text"
     )
-    return _cap_draft(_strip_fence(body))
+    return _prune_draft(_cap_draft(_strip_fence(body)), pool)
 
 
 def _strip_fence(s: str) -> str:
@@ -199,6 +214,107 @@ def _cap_draft(draft_yaml: str) -> str:
     capped = cap_bullet_budget(job.experience_selection)
     parsed["experience_selection"] = [s.model_dump() for s in capped]
     return yaml.safe_dump(parsed, sort_keys=False, allow_unicode=True, width=100).strip()
+
+
+def rendered_text_for_draft(draft: dict, pool: models.ExperiencePool) -> str:
+    """Every string the résumé build will typeset from this draft, one per
+    line, in the order ``templates/resume.tex.j2`` renders them:
+
+      headline · summary · per selected entry: role, company, dates, and —
+      only when the entry has a location, exactly as the template nests
+      them — location and stack · each selected bullet (``bullet_overrides``
+      REPLACES the pooled text, the same rule as ``build.resolved_bullets``)
+      · each ``skills_emphasis`` group title and item.
+
+    Profile text (name, contact, education) is rendered too but is not the
+    draft's to change, so it is deliberately left out — the prune is then
+    conservative on a keyword only the profile could satisfy. Ids that do
+    not resolve in the pool are skipped; ``validate_draft`` reports them."""
+    lines: list[str] = []
+    for key in ("headline", "summary"):
+        val = draft.get(key)
+        if isinstance(val, str):
+            lines.append(val)
+
+    overrides = draft.get("bullet_overrides") or {}
+    entries_by_id = {e.id: e for e in pool.entries}
+    for sel in draft.get("experience_selection") or []:
+        entry = entries_by_id.get(sel.get("job_id"))
+        if entry is None:
+            continue
+        lines += [entry.role, entry.company, entry.dates]
+        if entry.location:
+            lines.append(entry.location)
+            if entry.stack:
+                lines.append(entry.stack)
+        by_id = {b.id: b.text for b in entry.bullets}
+        for bid in sel.get("bullets") or []:
+            if bid in by_id:
+                lines.append(overrides.get(bid, by_id[bid]))
+
+    for group in draft.get("skills_emphasis") or []:
+        title = group.get("title")
+        if isinstance(title, str):
+            lines.append(title)
+        lines += [item for item in group.get("items") or [] if isinstance(item, str)]
+
+    return "\n".join(lines)
+
+
+def _guardrail_finds(rendered_text: str, keyword: str) -> bool:
+    """True iff the build's ATS guardrail would count ``keyword`` as present.
+
+    Mirrors ``verify.check_ats_keywords`` by delegating to it, so the prune
+    and the guardrail cannot drift: both sides are ``.lower()``-ed and the
+    keyword is substring-matched — no whitespace collapse, no tokenising."""
+    passed, _ = verify.check_ats_keywords(rendered_text, [keyword])
+    return passed
+
+
+def prune_uncovered_keywords(draft: dict, rendered_text: str) -> dict:
+    """Keep a must-have only if the guardrail would find it in
+    ``rendered_text``; move the rest to ``dropped_keywords`` (appended after
+    any the model already listed, order preserved, de-duplicated). Returns a
+    new dict with ``dropped_keywords`` placed right after
+    ``must_have_keywords``; the input is not mutated. ``nice_to_have_keywords``
+    is left alone — only must-haves fail the build."""
+    must = list(draft.get("must_have_keywords") or [])
+    kept = [kw for kw in must if _guardrail_finds(rendered_text, kw)]
+    newly_dropped = [kw for kw in must if not _guardrail_finds(rendered_text, kw)]
+    if not newly_dropped:
+        return dict(draft)
+
+    dropped: list[str] = []
+    for kw in list(draft.get("dropped_keywords") or []) + newly_dropped:
+        if kw not in dropped:
+            dropped.append(kw)
+
+    out: dict = {}
+    for key, val in draft.items():
+        if key == "dropped_keywords":
+            continue
+        out[key] = kept if key == "must_have_keywords" else val
+        if key == "must_have_keywords":
+            out["dropped_keywords"] = dropped
+    if "dropped_keywords" not in out:
+        out["dropped_keywords"] = dropped
+    return out
+
+
+def _prune_draft(draft_yaml: str, pool: models.ExperiencePool) -> str:
+    """Enforce must-have coverage on the model's (already capped) draft.
+    Same discipline as ``_cap_draft``: re-serialises only when a keyword is
+    dropped; anything malformed passes through untouched so that
+    ``validate_draft`` is the one to report it."""
+    try:
+        parsed = yaml.safe_load(draft_yaml)
+        models.JobConfig.model_validate(parsed)
+    except Exception:  # noqa: BLE001
+        return draft_yaml
+    pruned = prune_uncovered_keywords(parsed, rendered_text_for_draft(parsed, pool))
+    if pruned == parsed:
+        return draft_yaml
+    return yaml.safe_dump(pruned, sort_keys=False, allow_unicode=True, width=100).strip()
 
 
 def validate_draft(draft_yaml: str, data_dir: Path) -> tuple[bool, str]:
