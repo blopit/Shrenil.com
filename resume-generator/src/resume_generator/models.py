@@ -117,6 +117,12 @@ class JobConfig(BaseModel):
     nice_to_have_keywords: list[str] = Field(default_factory=list)
     experience_selection: list[ExperienceSelection]
     bullet_overrides: dict[str, str] = Field(default_factory=dict)
+    # Override ids the tailor discarded because the rewrite would fail the
+    # build's hard bullet lints (verify.check_bullet_lints: ≤30 words, ≥1
+    # digit) — written by tailor.enforce_override_lints so the discard is
+    # visible; each such bullet renders from its pooled text instead.
+    # Not rendered and not checked by any guardrail.
+    dropped_overrides: list[str] = Field(default_factory=list)
     skills_emphasis: list[SkillGroup] = Field(default_factory=list)
     application: "JobApplicationOverlay | None" = None
 

@@ -2,7 +2,7 @@
 
 The 1-page layout overflows past ``MAX_TOTAL_BULLETS`` even at the densest
 density tier, and ``build`` then refuses the package. The prompt asks the
-model for 7–9 bullets; ``cap_bullet_budget`` is the ceiling that holds when
+model for 7–8 bullets; ``cap_bullet_budget`` is the ceiling that holds when
 the model overshoots. ``draft_job_config`` is exercised against a fake
 ``anthropic`` module so the tests run offline.
 """
@@ -42,17 +42,32 @@ OVERLONG = [_sel("centros-founder", 5), _sel("conscious-creations", 3), _sel("fa
 # ---------------------------------------------------------------------------
 
 
-def test_cap_drops_from_the_end_until_nine() -> None:
+def test_cap_drops_from_the_end_until_eight() -> None:
     capped = tailor_mod.cap_bullet_budget(OVERLONG)
 
-    assert _total(capped) == tailor_mod.MAX_TOTAL_BULLETS == 9
+    assert _total(capped) == tailor_mod.MAX_TOTAL_BULLETS == 8
     # First (CentrOS) entry is untouched — drops come from the tail.
     assert capped[0] == OVERLONG[0]
-    assert [s.job_id for s in capped] == ["centros-founder", "conscious-creations", "faire"]
-    assert capped[1].bullets == OVERLONG[1].bullets
-    assert capped[2].bullets == ["faire-0"]  # 2 → 1; coursera 2 → 0 and removed
+    assert [s.job_id for s in capped] == ["centros-founder", "conscious-creations"]
+    assert capped[1].bullets == OVERLONG[1].bullets  # 5 + 3 = 8; faire 2 → 0 and coursera 2 → 0, both removed
     # Input is not mutated.
     assert _total(OVERLONG) == 12
+
+
+# The exact 9-bullet / 6-role shape that overflowed 1 page on the 2026-09-10
+# live run — each role costs a header line on top of its bullets.
+LIVE_NINE = [_sel("centros-founder", 3), _sel("conscious-creations", 2), _sel("independent-builder", 1),
+             _sel("faire", 1), _sel("webtoon", 1), _sel("coursera", 1)]
+
+
+def test_cap_reduces_the_live_nine_bullet_six_role_shape_to_eight() -> None:
+    capped = tailor_mod.cap_bullet_budget(LIVE_NINE)
+
+    assert _total(capped) == 8
+    # The oldest role goes, and takes its header line with it.
+    assert [s.job_id for s in capped] == ["centros-founder", "conscious-creations", "independent-builder",
+                                          "faire", "webtoon"]
+    assert _total(LIVE_NINE) == 9
 
 
 def test_cap_is_a_no_op_under_budget() -> None:
@@ -96,7 +111,7 @@ def test_cap_draft_truncates_an_overlong_selection() -> None:
     out = tailor_mod._cap_draft(_draft_yaml(OVERLONG))
     job = models.JobConfig.model_validate(yaml.safe_load(out))
 
-    assert _total(job.experience_selection) == 9
+    assert _total(job.experience_selection) == 8
     assert job.experience_selection[0].bullets == OVERLONG[0].bullets
     assert job.bullet_overrides == {"centros-founder-0": "rewritten", "coursera-1": "dropped-but-harmless"}
 

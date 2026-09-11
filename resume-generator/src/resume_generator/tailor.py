@@ -34,14 +34,19 @@ engineer. You have:
   3. A raw job-posting text from the user.
 
 Your job:
-  - Pick 7–9 bullets total across roles, weighted toward the candidate's
+  - Pick 7–8 bullets total across roles, weighted toward the candidate's
     most-recent and most-relevant work. Always include exactly 3 CentrOS
     bullets; lighter inclusion of older roles (Coursera, D2L, SpringBoard,
     Minted, TransGaming) — at most 1 bullet each, and only if it directly maps
-    to a JD requirement. The 1-page layout overflows past 9 bullets even at
-    its densest tier, so 9 is a hard ceiling, not a target.
+    to a JD requirement. The 1-page layout overflows past 8 bullets even at
+    its densest tier — every extra role also costs a header line — so 8 is a
+    hard ceiling, not a target.
   - Optionally override 1–3 high-impact CentrOS bullets via `bullet_overrides`
-    so the wording mirrors specific JD phrases.
+    so the wording mirrors specific JD phrases. A rewrite must be at most 30
+    words and contain at least one digit: the build lints every rendered
+    bullet on exactly those two rules and fails on either, so a rewrite that
+    breaks one is discarded before the build and the pooled text is used
+    instead.
   - Write a 2–3 sentence summary that mirrors the JD's key phrases without
     keyword-stuffing.
   - Extract 8–12 must-have ATS keywords (exact terms the JD uses) plus 4–8
@@ -61,7 +66,9 @@ Hard rules:
     outside the fence.
   - All bullet ids you reference MUST exist in the bullet pool you were given.
   - All experience entry ids you reference MUST exist.
-  - Never more than 9 bullets total across `experience_selection`.
+  - Never more than 8 bullets total across `experience_selection`.
+  - Every `bullet_overrides` rewrite is at most 30 words and contains at
+    least one digit.
   - Every `must_have_keywords` term appears verbatim in the summary, headline,
     a skills_emphasis item, or a bullet_overrides rewrite. Terms you could not
     place go in `dropped_keywords`, never in `must_have_keywords`.
@@ -163,7 +170,9 @@ def draft_job_config(
     body = "".join(
         block.text for block in response.content if getattr(block, "type", None) == "text"
     )
-    return _prune_draft(_cap_draft(_strip_fence(body)), pool)
+    # Order matters: the lint runs before the prune so the prune only counts
+    # override text that will survive to the build.
+    return _prune_draft(_lint_overrides_draft(_cap_draft(_strip_fence(body))), pool)
 
 
 def _strip_fence(s: str) -> str:
@@ -172,9 +181,12 @@ def _strip_fence(s: str) -> str:
 
 
 # The 1-page layout overflows past this many bullets even at the densest
-# density tier (`build` refuses with "resume overflows 1 page"). The prompt
-# asks for 7–9; this is the deterministic ceiling if the model overshoots.
-MAX_TOTAL_BULLETS = 9
+# density tier (`build` refuses with "resume overflows 1 page"). Measured on
+# the 2026-09-10 live run: every 9-bullet package spread over 6–7 roles
+# overflowed (each role costs a header line on top of its bullets); every
+# 8-bullet package over <=6 roles fit. The prompt asks for 7–8; this is the
+# deterministic ceiling if the model overshoots.
+MAX_TOTAL_BULLETS = 8
 
 
 def cap_bullet_budget(
@@ -214,6 +226,75 @@ def _cap_draft(draft_yaml: str) -> str:
     capped = cap_bullet_budget(job.experience_selection)
     parsed["experience_selection"] = [s.model_dump() for s in capped]
     return yaml.safe_dump(parsed, sort_keys=False, allow_unicode=True, width=100).strip()
+
+
+def override_lint_failures(text: str) -> list[str]:
+    """The hard bullet-lint rules ``text`` breaks, in the build's own wording
+    (``"31w (>30)"``, ``"no digit"``); empty when it passes both.
+
+    Mirrors the word-count and digit rules of ``verify.check_bullet_lints``
+    — the same ``verify._WORD_RE`` / ``verify._DIGIT_RE`` are imported, not
+    re-typed, and the thresholds are the same literals — so the tailor cannot
+    drift from what the build enforces. (That check's third hard rule, an
+    unfilled ``<<METRIC:>>`` placeholder, is deliberately not mirrored here:
+    the pool tolerates placeholders by design and the build refuses them by
+    name before it typesets anything.)"""
+    failures: list[str] = []
+    wc = len(verify._WORD_RE.findall(text))
+    if wc > 30:
+        failures.append(f"{wc}w (>30)")
+    if not verify._DIGIT_RE.search(text):
+        failures.append("no digit")
+    return failures
+
+
+def enforce_override_lints(draft: dict) -> dict:
+    """Remove every ``bullet_overrides`` rewrite that would fail the build's
+    hard bullet lints (``override_lint_failures``); the bullet then renders
+    from its pooled text, which the build lints anyway. Removed ids are
+    appended to ``dropped_overrides`` (after any already listed, order
+    preserved, de-duplicated) so the discard is visible, not silent. Returns
+    a new dict with ``dropped_overrides`` placed right after
+    ``bullet_overrides``; the input is not mutated. Runs BEFORE the keyword
+    prune so the prune counts only text that will actually be rendered."""
+    overrides = draft.get("bullet_overrides") or {}
+    failing = [
+        bid for bid, text in overrides.items()
+        if isinstance(text, str) and override_lint_failures(text)
+    ]
+    if not failing:
+        return dict(draft)
+
+    dropped: list[str] = []
+    for bid in list(draft.get("dropped_overrides") or []) + failing:
+        if bid not in dropped:
+            dropped.append(bid)
+    kept = {bid: text for bid, text in overrides.items() if bid not in failing}
+
+    out: dict = {}
+    for key, val in draft.items():
+        if key == "dropped_overrides":
+            continue
+        out[key] = kept if key == "bullet_overrides" else val
+        if key == "bullet_overrides":
+            out["dropped_overrides"] = dropped
+    return out
+
+
+def _lint_overrides_draft(draft_yaml: str) -> str:
+    """Enforce the build's bullet lints on the model's (already capped)
+    ``bullet_overrides``. Same discipline as ``_cap_draft``: re-serialises
+    only when an override is dropped; anything malformed passes through
+    untouched so that ``validate_draft`` is the one to report it."""
+    try:
+        parsed = yaml.safe_load(draft_yaml)
+        models.JobConfig.model_validate(parsed)
+    except Exception:  # noqa: BLE001
+        return draft_yaml
+    linted = enforce_override_lints(parsed)
+    if linted == parsed:
+        return draft_yaml
+    return yaml.safe_dump(linted, sort_keys=False, allow_unicode=True, width=100).strip()
 
 
 def rendered_text_for_draft(draft: dict, pool: models.ExperiencePool) -> str:
@@ -302,7 +383,8 @@ def prune_uncovered_keywords(draft: dict, rendered_text: str) -> dict:
 
 
 def _prune_draft(draft_yaml: str, pool: models.ExperiencePool) -> str:
-    """Enforce must-have coverage on the model's (already capped) draft.
+    """Enforce must-have coverage on the model's (already capped and
+    override-linted) draft.
     Same discipline as ``_cap_draft``: re-serialises only when a keyword is
     dropped; anything malformed passes through untouched so that
     ``validate_draft`` is the one to report it."""
