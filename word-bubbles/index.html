@@ -1,0 +1,2414 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Word Bubbles Daily</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A daily word puzzle: swipe through scrambled letter bubbles to spell the hidden words.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
+<style>
+/* Layout: one fixed phone-height column. Goal (theme + word slots) on top, the word being spelled floating in the middle,
+   a bubble field that is laid out to the exact space left, and a thin scorecard at the bottom. Nothing scrolls. */
+:root {
+  --bg: #edf3fb;
+  --blob1: rgba(255, 170, 214, 0.55);
+  --blob2: rgba(160, 208, 255, 0.65);
+  --blob3: rgba(178, 255, 226, 0.55);
+  --fg: #172033;
+  --muted: #5d6c88;
+  --glass: rgba(255, 255, 255, 0.52);
+  --glass-strong: rgba(255, 255, 255, 0.74);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 12px 32px rgba(32, 48, 90, 0.12);
+  --bubble-hi: rgba(255, 255, 255, 0.98);
+  --bubble-mid: rgba(255, 255, 255, 0.72);
+  --bubble-lo: rgba(190, 214, 255, 0.6);
+  --bubble-border: rgba(255, 255, 255, 0.95);
+  --bubble-shadow: 0 10px 22px rgba(30, 45, 90, 0.14), inset 0 -8px 14px rgba(110, 150, 220, 0.18), inset 0 2px 3px rgba(255, 255, 255, 0.95);
+  --accent: #0e86b3;
+  --accent-2: #2c6fe3;
+  --accent-soft: rgba(14, 134, 179, 0.16);
+  --accent-glow: rgba(14, 134, 179, 0.35);
+  --on-accent: #ffffff;
+  --good: #1f9e67;
+  --bad: #e04e52;
+  --bad-soft: rgba(224, 78, 82, 0.16);
+  --hint: #e5a11c;
+  --gold-1: #f6c95a;
+  --gold-2: #e3a21f;
+  --on-gold: #2b1d00;
+  --slot-border: rgba(23, 32, 51, 0.24);
+  --slot-bg: rgba(23, 32, 51, 0.06);
+  --dim: rgba(10, 16, 30, 0.35);
+  --font-display: "Fredoka", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  --font-body: "Nunito", ui-rounded, "SF Pro Rounded", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --r-xl: 26px; --r-l: 18px; --r-m: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1120;
+    --blob1: rgba(214, 72, 160, 0.28);
+    --blob2: rgba(46, 118, 230, 0.32);
+    --blob3: rgba(32, 190, 150, 0.22);
+    --fg: #e6edf7;
+    --muted: #93a2bd;
+    --glass: rgba(255, 255, 255, 0.07);
+    --glass-strong: rgba(255, 255, 255, 0.11);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    --bubble-hi: rgba(255, 255, 255, 0.42);
+    --bubble-mid: rgba(255, 255, 255, 0.12);
+    --bubble-lo: rgba(120, 160, 255, 0.14);
+    --bubble-border: rgba(255, 255, 255, 0.28);
+    --bubble-shadow: 0 10px 22px rgba(0, 0, 0, 0.35), inset 0 -8px 14px rgba(60, 100, 200, 0.16), inset 0 2px 3px rgba(255, 255, 255, 0.35);
+    --accent: #38b6e0;
+    --accent-2: #5b8cf2;
+    --accent-soft: rgba(56, 182, 224, 0.2);
+    --accent-glow: rgba(56, 182, 224, 0.4);
+    --on-accent: #06111f;
+    --good: #3ccf8c;
+    --bad: #ff6b6e;
+    --bad-soft: rgba(255, 107, 110, 0.2);
+    --hint: #f3b73a;
+  --gold-1: #f3c45a;
+  --gold-2: #d99a1c;
+  --on-gold: #241800;
+    --gold-1: #f3c45a;
+    --gold-2: #d99a1c;
+    --on-gold: #241800;
+    --slot-border: rgba(230, 237, 247, 0.28);
+    --slot-bg: rgba(230, 237, 247, 0.07);
+    --dim: rgba(0, 0, 0, 0.55);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1120;
+  --blob1: rgba(214, 72, 160, 0.28);
+  --blob2: rgba(46, 118, 230, 0.32);
+  --blob3: rgba(32, 190, 150, 0.22);
+  --fg: #e6edf7;
+  --muted: #93a2bd;
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-strong: rgba(255, 255, 255, 0.11);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --bubble-hi: rgba(255, 255, 255, 0.42);
+  --bubble-mid: rgba(255, 255, 255, 0.12);
+  --bubble-lo: rgba(120, 160, 255, 0.14);
+  --bubble-border: rgba(255, 255, 255, 0.28);
+  --bubble-shadow: 0 10px 22px rgba(0, 0, 0, 0.35), inset 0 -8px 14px rgba(60, 100, 200, 0.16), inset 0 2px 3px rgba(255, 255, 255, 0.35);
+  --accent: #38b6e0;
+  --accent-2: #5b8cf2;
+  --accent-soft: rgba(56, 182, 224, 0.2);
+  --accent-glow: rgba(56, 182, 224, 0.4);
+  --on-accent: #06111f;
+  --good: #3ccf8c;
+  --bad: #ff6b6e;
+  --bad-soft: rgba(255, 107, 110, 0.2);
+  --hint: #f3b73a;
+  --slot-border: rgba(230, 237, 247, 0.28);
+  --slot-bg: rgba(230, 237, 247, 0.07);
+  --dim: rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { height: 100%; box-sizing: border-box; overflow: hidden; }
+body {
+  height: 100%;
+  margin: 0;
+  padding-block: 8px 8px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  overflow: hidden;
+}
+.bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--bg);
+  background-image:
+    radial-gradient(46% 36% at 10% 6%, var(--blob1), transparent 70%),
+    radial-gradient(42% 34% at 92% 18%, var(--blob2), transparent 70%),
+    radial-gradient(52% 40% at 50% 104%, var(--blob3), transparent 70%);
+}
+button { font-family: inherit; }
+button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+#app { height: 100%; max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; flex: none; }
+.brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.logo {
+  width: 22px; height: 22px; border-radius: 50%; flex: none;
+  background: radial-gradient(circle at 32% 28%, var(--bubble-hi) 0%, var(--bubble-mid) 48%, var(--bubble-lo) 100%);
+  border: 1px solid var(--bubble-border); box-shadow: var(--bubble-shadow);
+}
+.brand h1 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+.brand .day { color: var(--muted); font-weight: 800; font-size: 13px; font-variant-numeric: tabular-nums; }
+.top-actions { display: flex; gap: 8px; }
+.icon-btn {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--glass-border);
+  background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  color: var(--fg); font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: var(--glass-shadow);
+  display: inline-flex; align-items: center; justify-content: center; padding: 0;
+}
+.icon-btn svg { width: 17px; height: 17px; }
+
+/* difficulty tabs */
+.tabs {
+  position: relative; display: flex; padding: 3px; border-radius: 999px; flex: none;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: var(--glass-shadow);
+}
+.tabs .thumb {
+  position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc((100% - 6px) / 3); border-radius: 999px;
+  background: var(--glass-strong); box-shadow: 0 2px 10px rgba(20, 30, 60, 0.12);
+  transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+}
+.tab {
+  position: relative; z-index: 1; flex: 1; border: 0; background: transparent; padding: 7px 0; border-radius: 999px;
+  font-weight: 800; font-size: 13px; color: var(--muted); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px; transition: color 0.2s;
+}
+.tab.active { color: var(--fg); }
+.tab .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.tab[data-level="easy"] .dot { background: var(--good); }
+.tab[data-level="medium"] .dot { background: var(--hint); }
+.tab[data-level="hard"] .dot { background: var(--bad); }
+.tab .check { font-size: 11px; color: var(--good); min-width: 10px; }
+
+/* stage: the goal, tray, board and scorecard sit together in the middle of the screen */
+.stage { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+
+.goal { flex: none; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.eyebrow { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+.theme { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 26px; line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; }
+.progress { font-size: 13px; font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; }
+.slots { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding-top: 2px; }
+.slot {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px; height: 30px; padding: 0 11px; border-radius: 999px;
+  border: 1.5px dashed var(--slot-border); color: var(--muted);
+  font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: 0.06em;
+}
+.slot i { width: 6px; height: 6px; border-radius: 50%; background: var(--slot-border); display: inline-block; }
+.slot.hinted { border-style: solid; border-color: var(--hint); color: var(--fg); }
+.slot.solved {
+  border: 1.5px solid transparent; background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: var(--on-accent);
+  animation: pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3) backwards;
+}
+
+/* the word tray: picked bubbles land here as tiles, left to right */
+.preview { flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
+.pill {
+  position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 52px; padding: 0 84px; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); box-shadow: var(--glass-shadow);
+}
+.pill.shake { animation: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+.pill-prompt { color: var(--muted); font-size: 14px; font-weight: 800; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pill.is-empty { padding: 0 18px; }
+.pill-word { display: flex; align-items: center; gap: 5px; }
+.pill-word.locked { gap: 0; }
+.chunk {
+  height: 42px; min-width: 42px; padding: 0 11px; border-radius: 12px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 32% 28%, var(--bubble-hi) 0%, var(--bubble-mid) 48%, var(--bubble-lo) 100%);
+  border: 1px solid var(--bubble-border); box-shadow: 0 4px 10px rgba(30, 45, 90, 0.12); color: var(--fg);
+  font-family: var(--font-display); font-weight: 600; font-size: 21px; letter-spacing: 0.02em; line-height: 1;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), border-radius 0.25s, background 0.25s, color 0.25s, opacity 0.2s, box-shadow 0.25s;
+}
+.chunk.landing { opacity: 0; }
+.pill-word.locked .chunk { background: linear-gradient(180deg, var(--accent-2), var(--accent)); color: var(--on-accent); border-radius: 0; border-color: transparent; box-shadow: none; }
+.pill-word.locked .chunk:first-child { border-radius: 999px 0 0 999px; padding-left: 14px; }
+.pill-word.locked .chunk:last-child { border-radius: 0 999px 999px 0; padding-right: 14px; }
+.pill-word.locked .chunk:only-child { border-radius: 999px; }
+.pill .count { position: absolute; right: 50px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pill .count.nomatch { color: var(--bad); }
+.pill-btn {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800;
+  background: var(--slot-bg); color: var(--muted); transition: transform 0.15s;
+}
+.pill-btn:active { transform: translateY(-50%) scale(0.92); }
+.msg { height: 18px; line-height: 18px; text-align: center; font-size: 12px; font-weight: 800; color: var(--muted); }
+
+/* a chunk in flight between the board and the tray, or a finished word dropping into its slot */
+.fly {
+  position: fixed; z-index: 30; pointer-events: none; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, var(--bubble-hi) 0%, var(--bubble-mid) 48%, var(--bubble-lo) 100%);
+  border: 1px solid var(--bubble-border); box-shadow: var(--bubble-shadow); color: var(--fg);
+  font-family: var(--font-display); font-weight: 600; font-size: 21px; letter-spacing: 0.02em; line-height: 1; white-space: nowrap; overflow: hidden;
+  transition: left 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), top 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), border-radius 0.32s, background-color 0.32s;
+}
+.fly.tile { border-radius: 11px; background: var(--accent-soft); border-color: transparent; box-shadow: none; }
+.fly.word { border-radius: 999px; background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: var(--on-accent); border-color: transparent; box-shadow: 0 10px 24px var(--accent-glow); font-size: 15px; letter-spacing: 0.06em; }
+.slot.arriving { opacity: 0; animation: none; }
+
+
+/* day switcher */
+.daynav { flex: none; display: flex; align-items: center; justify-content: center; gap: 6px; position: relative; }
+.daynav-label { display: flex; align-items: baseline; gap: 6px; min-width: 170px; justify-content: center; font-variant-numeric: tabular-nums; }
+.daynav-label b { font-weight: 800; font-size: 15px; }
+.daynav .day { color: var(--muted); font-weight: 800; font-size: 13px; }
+.nav-btn {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass); color: var(--fg);
+  font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0 0 2px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform 0.15s, opacity 0.2s;
+}
+.nav-btn:active { transform: scale(0.92); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.daynav #todayBtn { position: absolute; right: 0; }
+.stage.slide-left { animation: slideL 0.28s ease-out; }
+.stage.slide-right { animation: slideR 0.28s ease-out; }
+@keyframes slideL { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes slideR { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
+
+/* combo: clean words in a row warm the tray up */
+.combo {
+  position: absolute; left: 8px; top: 50%; transform: translateY(-50%); height: 30px; padding: 0 10px; border-radius: 999px;
+  display: inline-flex; align-items: center; font-weight: 800; font-size: 14px; font-variant-numeric: tabular-nums;
+  background: var(--accent-soft); color: var(--accent); animation: pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+}
+.pill { transition: box-shadow 0.4s, border-color 0.4s; }
+.pill[data-heat="1"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft), var(--glass-shadow); }
+.pill[data-heat="2"] { border-color: var(--hint); box-shadow: 0 0 0 4px rgba(229, 161, 28, 0.22), 0 10px 30px rgba(229, 161, 28, 0.3); }
+.pill[data-heat="2"] .combo { background: rgba(229, 161, 28, 0.2); color: var(--hint); }
+.pill[data-heat="3"] { border-color: var(--bad); box-shadow: 0 0 0 4px var(--bad-soft), 0 12px 34px rgba(224, 78, 82, 0.35); }
+.pill[data-heat="3"] .combo { background: var(--bad-soft); color: var(--bad); }
+.combo.bump { animation: bump 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.4); }
+@keyframes bump { 0% { transform: translateY(-50%) scale(1); } 40% { transform: translateY(-50%) scale(1.35); } 100% { transform: translateY(-50%) scale(1); } }
+
+
+/* chrome recedes while you spell and returns when the tray is empty (no layout change, so nothing moves) */
+.top, .daynav, .tabs, .status, .progress { transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease; }
+body.focus .top, body.focus .daynav, body.focus .tabs { opacity: 0.22; transform: scale(0.94); filter: blur(1.5px); }
+body.focus .status, body.focus .progress { opacity: 0.4; }
+@media (hover: hover) { body.focus .top:hover, body.focus .daynav:hover, body.focus .tabs:hover, body.focus .status:hover { opacity: 1; transform: none; filter: none; } }
+
+/* rank meter (replaces par) */
+.rank { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 110px; }
+.rank-top { display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums; }
+.rank-top b { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--fg); }
+.rank-top span { font-size: 13px; font-weight: 800; color: var(--muted); }
+.rankbar { width: 100%; height: 5px; border-radius: 3px; background: var(--slot-bg); overflow: hidden; }
+.rankbar i { display: block; height: 100%; width: 0; border-radius: 3px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rank.bump { animation: bumpr 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.4); }
+@keyframes bumpr { 40% { transform: scale(1.15); } }
+
+/* bonus strip: what you've found, and how many are still makeable */
+.bonusbar { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 420px; height: 32px; padding: 0 4px; font-size: 12px; font-weight: 800; color: var(--hint); }
+.bonus-list { flex: 1; min-width: 0; display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; white-space: nowrap; }
+.bonus-list::-webkit-scrollbar { display: none; }
+/* bonus chips match the hidden-word slots, in gold */
+.bchip {
+  display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; flex: none;
+  background: linear-gradient(135deg, var(--gold-1), var(--gold-2)); color: var(--on-gold);
+  font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.06em;
+}
+.bchip.new { animation: pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3) backwards; }
+.bchip.arriving { opacity: 0; animation: none; }
+.pill-word.locked.gold .chunk { background: linear-gradient(180deg, var(--gold-1), var(--gold-2)); color: var(--on-gold); }
+.fly.word.gold { background: linear-gradient(135deg, var(--gold-1), var(--gold-2)); color: var(--on-gold); box-shadow: 0 10px 24px rgba(229, 161, 28, 0.35); }
+.bonus-empty { color: var(--muted); font-weight: 700; }
+.bonus-left { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
+.result .tip { color: var(--fg); font-size: 14px; }
+.result .tip b { color: var(--hint); letter-spacing: 0.04em; }
+
+/* bonus words */
+.bonus-btn {
+  position: absolute; right: 50px; top: 50%; transform: translateY(-50%); height: 30px; padding: 0 10px; border-radius: 999px; border: 0; cursor: pointer;
+  background: rgba(229, 161, 28, 0.18); color: var(--hint); font-weight: 800; font-size: 13px; animation: pop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+}
+.chip-btn .meter { display: inline-flex; gap: 3px; margin-left: 2px; }
+.chip-btn .meter i { width: 6px; height: 6px; border-radius: 50%; background: var(--slot-border); }
+.chip-btn .meter i.on { background: var(--hint); }
+.chip-btn .free { color: var(--good); }
+.bonus-line { color: var(--hint) !important; font-size: 13px !important; }
+
+/* a few bubbles rise when a board is finished */
+.celebrate {
+  position: fixed; z-index: 25; pointer-events: none; width: var(--s, 14px); height: var(--s, 14px); border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, var(--bubble-hi) 0%, var(--bubble-mid) 48%, var(--bubble-lo) 100%);
+  border: 1px solid var(--bubble-border); box-shadow: var(--bubble-shadow);
+  animation: risepop var(--t, 900ms) cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+@keyframes risepop { 0% { transform: translate(0, 0) scale(0.4); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(var(--dx, 0px), var(--dy, -120px)) scale(1.05); opacity: 0; } }
+.countdown { color: var(--muted); font-weight: 800; font-size: 13px; font-variant-numeric: tabular-nums; }
+.tab .check { font-variant-numeric: tabular-nums; }
+.msg.bad { color: var(--bad); }
+.msg.good { color: var(--good); }
+.msg.hint { color: var(--hint); }
+
+/* bubble field: a honeycomb sized to the space that is left; positions never change while you play */
+.board { position: relative; flex: 1 1 auto; min-height: 110px; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.bub {
+  position: absolute; left: 0; top: 0; width: var(--d, 60px); height: var(--d, 60px);
+  transform: translate(var(--x, 0px), var(--y, 0px));
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.15), width 0.3s, height 0.3s;
+}
+.bub.consumed { display: none; }
+.board.boot .bub { transition: none; }
+.bub-body {
+  position: relative; width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 32% 28%, var(--bubble-hi) 0%, var(--bubble-mid) 48%, var(--bubble-lo) 100%);
+  border: 1px solid var(--bubble-border); box-shadow: var(--bubble-shadow);
+  color: var(--fg); font-family: var(--font-display); font-weight: 600; letter-spacing: 0.02em; line-height: 1; cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s, opacity 0.25s;
+}
+.bub.enter .bub-body { animation: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.3) backwards; }
+.bub.hinted .bub-body { box-shadow: 0 0 0 3px var(--hint), 0 10px 22px rgba(229, 161, 28, 0.35); }
+.bub.hinted .bub-body::after {
+  content: attr(data-hint); position: absolute; top: -5px; right: -3px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px;
+  background: var(--hint); color: #1b1b1b; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.bub.selected .bub-body { transform: scale(0.84); opacity: 0.3; box-shadow: none; }
+.bub.popping .bub-body { transform: scale(0.5); opacity: 0; }
+
+/* scorecard */
+.status { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 13px; font-weight: 800; padding: 0 4px; font-variant-numeric: tabular-nums; min-height: 30px; }
+.spare { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--muted); }
+.spare .dots { display: flex; gap: 5px; align-items: center; }
+.spare .dots i { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--slot-border); transition: background 0.25s, border-color 0.25s, transform 0.25s; }
+.spare .dots i.on { background: var(--good); border-color: transparent; }
+.spare .dots i.lost { animation: lose 0.4s ease-out; }
+.status.over .spare { color: var(--bad); }
+.status.over .dots { color: var(--bad); font-size: 15px; }
+.chip-btn {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--glass-border); background: var(--glass); color: var(--fg); font-weight: 800; font-size: 13px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--glass-shadow); transition: transform 0.15s;
+}
+.chip-btn:active { transform: scale(0.95); }
+.chip-btn svg { width: 15px; height: 15px; }
+.chip-btn .cost { color: var(--hint); }
+@keyframes lose { 0% { transform: scale(1.5); background: var(--bad); } 100% { transform: scale(1); } }
+.text-btn { border: 0; background: transparent; color: var(--accent); font-weight: 800; font-size: 14px; padding: 6px 8px; cursor: pointer; border-radius: 999px; }
+.text-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* result card */
+#result { justify-content: center; overflow: auto; }
+.result {
+  padding: 20px 18px; border-radius: var(--r-xl);
+  background: var(--glass-strong); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); box-shadow: var(--glass-shadow);
+  text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; animation: rise 0.35s ease-out;
+}
+.result h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 32px; letter-spacing: -0.02em; text-wrap: balance; }
+.result p { margin: 0; color: var(--muted); font-weight: 700; font-size: 14px; max-width: 34ch; }
+.result .words { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.result .summary { width: 100%; display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: var(--r-l); background: var(--accent-soft); font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.result .summary div { display: flex; justify-content: space-between; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.btn { height: 44px; padding: 0 18px; border-radius: 999px; border: 0; font-weight: 800; font-size: 15px; cursor: pointer; transition: transform 0.15s; display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.result .actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+.result .actions .btn.primary { grid-column: 1 / -1; }
+.result-tag { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.btn:active { transform: scale(0.96); }
+.btn.primary { background: linear-gradient(180deg, var(--accent-2), var(--accent)); color: var(--on-accent); box-shadow: 0 8px 20px var(--accent-glow); }
+.btn.secondary { background: var(--glass); border: 1px solid var(--glass-border); color: var(--fg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.sharebox { width: 100%; margin: 0; white-space: pre-wrap; text-align: left; font-size: 13px; padding: 10px 12px; border-radius: var(--r-m); background: var(--slot-bg); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; user-select: all; -webkit-user-select: all; }
+.toast { color: var(--good) !important; }
+
+/* overlay cards */
+.overlay { position: fixed; inset: 0; z-index: 20; background: var(--dim); display: flex; align-items: center; justify-content: center; padding: max(16px, env(safe-area-inset-left, 0px)); animation: fade 0.2s; }
+.card {
+  width: 100%; max-width: 400px; max-height: calc(100% - 20px); overflow: auto; padding: 22px 20px; border-radius: var(--r-xl);
+  background: var(--glass-strong); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: var(--glass-shadow);
+  display: flex; flex-direction: column; gap: 14px; animation: rise 0.25s ease-out;
+}
+.card h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 24px; }
+.card p, .card li { margin: 0; font-size: 15px; line-height: 1.45; font-weight: 700; color: var(--fg); }
+.card p.sub { color: var(--muted); font-size: 14px; }
+.card ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.demo { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 6px 0; }
+.demo .ball {
+  width: 46px; height: 46px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 32% 28%, var(--bubble-hi) 0%, var(--bubble-mid) 48%, var(--bubble-lo) 100%);
+  border: 1px solid var(--bubble-border); box-shadow: var(--bubble-shadow); font-family: var(--font-display); font-weight: 600; font-size: 14px;
+}
+.demo .arrow { color: var(--muted); font-weight: 800; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stat { padding: 10px 4px; border-radius: var(--r-m); background: var(--accent-soft); text-align: center; }
+.stat b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 26px; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.days { display: flex; flex-direction: column; gap: 6px; }
+.dayrow { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 12px; border-radius: var(--r-m); background: var(--slot-bg); font-variant-numeric: tabular-nums; }
+.dayrow.current { box-shadow: inset 0 0 0 2px var(--accent); }
+.dayrow .dn { font-weight: 800; min-width: 54px; }
+.dayrow .dd { color: var(--muted); font-size: 12px; font-weight: 800; min-width: 52px; }
+.dayrow .lv { display: flex; gap: 5px; flex: 1; }
+.dayrow .lv i { width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--slot-border); display: inline-block; }
+.dayrow .lv i.done { border-color: transparent; }
+.dayrow .lv i.done.easy { background: var(--good); }
+.dayrow .lv i.done.medium { background: var(--hint); }
+.dayrow .lv i.done.hard { background: var(--bad); }
+.dayrow .btn { height: 32px; padding: 0 12px; font-size: 13px; }
+.btn.danger { background: var(--bad-soft); color: var(--bad); border: 1px solid transparent; }
+.brand .text-btn { padding: 4px 8px; font-size: 13px; }
+
+@keyframes pop { 0% { transform: scale(0.4); opacity: 0; } 70% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes shake { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-7px); } 40%, 60% { transform: translateX(7px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+@media (max-height: 600px) {
+  .theme { font-size: 22px; }
+  .pill { height: 40px; }
+  .pill-word { font-size: 19px; }
+  .slot { height: 26px; font-size: 13px; }
+  #app { gap: 6px; }
+}
+.actions-row { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; width: 100%; }
+.btn.mini {
+  height: 62px; padding: 6px 4px; flex-direction: column; gap: 4px; font-size: 12px; border-radius: var(--r-l);
+  background: var(--glass); border: 1px solid var(--glass-border); color: var(--fg); white-space: nowrap;
+}
+.btn.mini svg { width: 20px; height: 20px; }
+.result .actions { display: flex; width: 100%; }
+.result .actions .btn.primary { flex: 1; }
+.card { position: relative; overflow: hidden; }
+.card .days { overflow-y: auto; min-height: 0; flex: 1 1 auto; margin: 0 -6px; padding: 0 6px; overscroll-behavior: contain; }
+.card > :not(.days) { flex: none; }
+.card-x {
+  position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--slot-bg); color: var(--muted); font-size: 24px; line-height: 1; display: flex; align-items: center; justify-content: center;
+}
+.card-x:active { transform: scale(0.92); }
+.days-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--muted); font-weight: 700; }
+#resetBtn.danger { background: var(--bad-soft); color: var(--bad); }
+.stars { display: inline-flex; gap: 2px; letter-spacing: 0; }
+.stars i { font-style: normal; color: var(--slot-border); transition: color 0.3s, transform 0.3s; }
+.stars i.on { color: var(--gold-2); }
+.rank-top b .stars { font-size: 18px; }
+.stars.big { gap: 6px; font-size: 40px; line-height: 1; }
+.stars.big i.on { animation: starland 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) backwards; }
+.stars.big i:nth-child(1) { animation-delay: 0.35s; }
+.stars.big i:nth-child(2) { animation-delay: 0.5s; }
+.stars.big i:nth-child(3) { animation-delay: 0.65s; }
+.stars.big.static i.on { animation: none; }
+@keyframes starland { 0% { transform: scale(2.6) rotate(-25deg); opacity: 0; } 60% { transform: scale(0.9) rotate(4deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
+.star-row { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.stars.time i.on { color: var(--accent); }
+.stars.big.time { font-size: 30px; gap: 4px; }
+.stars.big.time i:nth-child(1) { animation-delay: 0.5s; }
+.stars.big.time i:nth-child(2) { animation-delay: 0.65s; }
+.time-note { font-size: 12px; font-weight: 800; color: var(--muted); }
+.slot.bonus-solved { border: 1.5px solid transparent; background: linear-gradient(135deg, var(--gold-1), var(--gold-2)); color: var(--on-gold); }
+/* live medal meter under the score meter */
+.clock { display: inline-flex; align-items: center; gap: 4px; margin-left: 8px; font-size: 13px; font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; }
+.clock .medal-dot { width: 12px; height: 12px; }
+.timebar { position: relative; width: 100%; height: 6px; margin-top: 4px; border-radius: 3px; overflow: hidden; background: var(--slot-bg); }
+.timebar i { display: block; height: 100%; width: 100%; border-radius: 3px; transition: width 0.5s linear; }
+.timebar.gold i { background: linear-gradient(90deg, #f6d36b, #e0a51a); }
+.timebar.silver i { background: linear-gradient(90deg, #e3e8ef, #a3adbb); }
+.timebar.bronze i { background: linear-gradient(90deg, #e8a974, #b8743d); }
+.timebar.refill i { transition: none; }
+/* keep the meters on the screen's centre line, whatever the button widths */
+.status { display: grid; grid-template-columns: 92px minmax(0, 1fr) 92px; align-items: center; gap: 6px; }
+.status .chip-btn { width: 92px; justify-content: center; padding: 0 6px; gap: 5px; }
+.rank { align-items: stretch; min-width: 0; width: 100%; max-width: 190px; justify-self: center; }
+.rank-top { justify-content: center; }
+.record .medal-dot, .medal-dot.record { background: radial-gradient(circle at 35% 30%, #f4e1ff, #a764f0 55%, #6a2fb8); }
+.timebar.record i { background: linear-gradient(90deg, #c592ff, #7a3fe0); }
+.medal-step.record .medal-dot { display: none; }
+.regional .medal-dot, .medal-dot.regional { background: radial-gradient(circle at 35% 30%, #d9f1ff, #3aa0e6 55%, #1c5f9a); }
+.medal-step.regional .medal-dot { display: none; }
+.medal-ladder { flex-wrap: wrap; justify-content: center; }
+.medal-step.country .medal-dot { display: none; }
+.record-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; width: 100%; }
+.record-pill { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px; border-radius: var(--r-m); background: rgba(138, 76, 230, 0.1); min-width: 0; }
+.record-pill .rp-label { font-size: 11px; font-weight: 800; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.record-pill .rp-time { font-size: 16px; font-weight: 800; color: var(--fg); font-variant-numeric: tabular-nums; }
+.record-pill.empty .rp-time { color: var(--muted); }
+.record-pill.hit { background: linear-gradient(135deg, var(--gold-1), var(--gold-2)); box-shadow: 0 6px 16px rgba(229, 161, 28, 0.35); animation: starland 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.8s backwards; }
+.record-pill.hit .rp-label, .record-pill.hit .rp-time { color: var(--on-gold); }
+.mine-icon { font-size: 22px; line-height: 1; }
+.medal-step .pill-icon { font-size: 13px; line-height: 1; }
+.medal-step.record, .medal-step.country, .medal-step.local { color: var(--fg); }
+.medal-step.empty { color: var(--muted); }
+.new-record { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: #8a4ce6; }
+/* in-game stars: no meter, each star pops in when earned */
+.live-stars { display: flex; justify-content: center; gap: 4px; font-size: 20px; line-height: 1; }
+.live-stars i { font-style: normal; color: var(--slot-border); }
+.live-stars i.on { color: var(--gold-2); }
+.live-stars i.pop { animation: starearn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.5); }
+@keyframes starearn { 0% { transform: scale(0.3) rotate(-40deg); } 60% { transform: scale(1.6) rotate(10deg); } 100% { transform: none; } }
+/* time medals */
+.medals { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.medal-mine { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 16px; color: var(--fg); font-variant-numeric: tabular-nums; }
+.medal-ladder { display: flex; gap: 6px; }
+.medal-step { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; background: var(--slot-bg); color: var(--muted); font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.medal-step.hit { color: var(--fg); box-shadow: inset 0 0 0 2px currentColor; }
+.medal-dot { width: 14px; height: 14px; border-radius: 50%; flex: none; background: var(--slot-border); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15); }
+.medal-mine .medal-dot { width: 22px; height: 22px; }
+.gold .medal-dot { background: radial-gradient(circle at 35% 30%, #fff1b8, #e9b322 55%, #b98510); }
+.silver .medal-dot { background: radial-gradient(circle at 35% 30%, #ffffff, #c4ccd8 55%, #8c96a6); }
+.bronze .medal-dot { background: radial-gradient(circle at 35% 30%, #ffd9b8, #cd8a4f 55%, #8f5527); }
+@keyframes starpop { 0% { transform: scale(0.2) rotate(-30deg); opacity: 0; } 100% { transform: none; opacity: 1; } }
+/* star meter: one bar from 0, with a star at each breakpoint */
+.rank { gap: 2px; padding: 0 11px; }
+.rank-top b { font-size: 16px; font-variant-numeric: tabular-nums; }
+.rankbar { position: relative; width: 100%; height: 22px; background: none; overflow: visible; }
+.rankbar .track { position: absolute; left: 0; right: 0; top: 50%; height: 6px; margin-top: -3px; border-radius: 3px; background: var(--slot-bg); overflow: hidden; }
+.rankbar .track i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold-1), var(--gold-2)); transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rankbar .mark {
+  position: absolute; top: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 13px; line-height: 1;
+  background: var(--bg); color: var(--slot-border); border: 2px solid var(--slot-border); transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.rankbar .mark.on { background: var(--gold-2); border-color: var(--gold-2); color: var(--on-gold); animation: starpop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4); }
+</style>
+
+<div class="bg" aria-hidden="true"></div>
+<main id="app">
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"></span>
+      <h1>Word Bubbles</h1>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="soundBtn" aria-label="Sound on" type="button"></button>
+      <button class="icon-btn" id="daysBtn" aria-label="Days and statistics" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3"/></svg>
+      </button>
+      <button class="icon-btn" id="helpBtn" aria-label="How to play" type="button">?</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Difficulty">
+    <span class="thumb" aria-hidden="true"></span>
+    <button class="tab" role="tab" type="button" data-level="easy"><span class="dot"></span>Easy<span class="check"></span></button>
+    <button class="tab" role="tab" type="button" data-level="medium"><span class="dot"></span>Medium<span class="check"></span></button>
+    <button class="tab" role="tab" type="button" data-level="hard"><span class="dot"></span>Hard<span class="check"></span></button>
+  </nav>
+
+  <div class="daynav" id="daynav">
+    <button class="nav-btn" id="prevDay" type="button" aria-label="Previous day">‹</button>
+    <div class="daynav-label"><b id="dayName">Today</b><span class="day" id="dayLabel">#1</span></div>
+    <button class="nav-btn" id="nextDay" type="button" aria-label="Next day">›</button>
+    <button class="text-btn" id="todayBtn" type="button" hidden>Today</button>
+  </div>
+
+  <section id="play" class="stage">
+    <div class="goal">
+      <h2 class="theme" id="themeText"></h2>
+      <div class="slots" id="found" aria-label="Hidden words"></div>
+      <div class="bonusbar" id="bonusBar" hidden><span class="bonus-list" id="bonusList" aria-label="Bonus words found"></span><span class="bonus-left" id="bonusLeft"></span></div>
+    </div>
+    <div class="preview">
+      <div class="pill" id="pill">
+        <span class="combo" id="combo" hidden></span>
+        <span class="pill-prompt" id="pillPrompt"></span>
+        <span class="pill-word" id="pillWord" hidden aria-live="polite"></span>
+        <span class="count" id="pillCount" hidden></span>
+        <button class="bonus-btn" id="bonusBtn" type="button" hidden aria-label="Collect bonus word">✦ Bonus</button>
+        <button class="pill-btn" id="clearBtn" type="button" aria-label="Clear" hidden>×</button>
+      </div>
+      <div class="msg" id="msg" aria-live="polite"></div>
+    </div>
+    <div class="board" id="board" aria-label="Letter bubbles">
+      <div class="bubbles" id="bubbles"></div>
+    </div>
+    <div class="status" id="score">
+      <button class="chip-btn" id="shuffleBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>Shuffle
+      </button>
+      <span class="rank" id="rank"><span class="rank-top"><b id="points">0</b><span>pts</span><span class="clock" id="clock"><span class="medal-dot" id="clockDot"></span><span id="clockTime">0:00</span></span></span><span class="live-stars" id="liveStars" aria-hidden="true"><i>★</i><i>★</i><i>★</i></span><span class="timebar" id="timebar" aria-hidden="true"><i id="tfill"></i></span></span>
+      <button class="chip-btn" id="hintBtn" type="button">Hint</button>
+    </div>
+  </section>
+
+  <section id="result" class="stage" hidden></section>
+</main>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="card" id="card" role="dialog" aria-modal="true"></div>
+</div>
+
+
+<style>
+/* ---- mobile-first polish ---- */
+#app, .overlay { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.sharebox { -webkit-user-select: all; user-select: all; }
+button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+/* 44px touch targets */
+.icon-btn { width: 40px; height: 40px; }
+.icon-btn::after, .nav-btn::after { content: ""; position: absolute; inset: -4px; }
+.icon-btn, .nav-btn { position: relative; }
+.nav-btn { width: 44px; height: 44px; }
+.chip-btn { height: 44px; padding: 0 16px; font-size: 14px; }
+.tab { padding: 10px 0; font-size: 14px; }
+.btn { height: 48px; }
+.dayrow .btn { height: 40px; padding: 0 14px; }
+/* pressed feedback everywhere, since phones have no hover */
+.chip-btn:active, .icon-btn:active, .nav-btn:active, .tab:active, .btn:active { transform: scale(0.94); }
+.bub:active .bub-body { transform: scale(0.92); }
+/* keep the board in the thumb zone on tall phones */
+@media (min-height: 760px) { .stage { justify-content: center; padding-bottom: 2vh; } }
+/* small phones: tighten the chrome so the board keeps its size */
+@media (max-height: 680px) {
+  .top { min-height: 40px; }
+  .tab { padding: 8px 0; }
+  .nav-btn { width: 40px; height: 40px; }
+  .theme { font-size: 21px; }
+  .slot { height: 26px; font-size: 13px; padding: 0 9px; }
+  .pill { height: 48px; }
+  .chip-btn { height: 40px; }
+}
+@media (max-width: 360px) {
+  .brand h1 { font-size: 18px; }
+  .chip-btn { padding: 0 12px; }
+  .rank { min-width: 96px; }
+}
+</style>
+<script id="engine">
+/* ========================================================================
+   ENGINE — pure functions, no DOM. Builds each day's boards deterministically.
+   ======================================================================== */
+const WB = (function () {
+  'use strict';
+
+  const EPOCH_UTC = Date.UTC(2026, 8, 1);           // Day #1 = Sep 1, 2026 (local date)
+  const LEVELS = ['easy', 'medium', 'hard'];
+
+  // weights = how often a bubble gets 1, 2 or 3 letters. Smaller bubbles = more pieces = harder.
+  const META = {
+    easy:     { label: 'Easy',     icon: '🟢', weights: { 1: 0.10, 2: 0.45, 3: 0.45 }, showLengths: true },
+    medium:   { label: 'Medium',   icon: '🟡', weights: { 1: 0.22, 2: 0.48, 3: 0.30 }, showLengths: false },
+    hard:     { label: 'Hard',     icon: '🔴', weights: { 1: 0.30, 2: 0.45, 3: 0.25 }, showLengths: false },
+    tutorial: { label: 'Tutorial', icon: '🫧', weights: { 1: 0,    2: 0.5,  3: 0.5  }, showLengths: true }
+  };
+
+  const TUTORIAL = { t: 'Weather', w: ['RAINBOW'], chunks: [['RA', 'IN', 'BOW']], order: ['BOW', 'RA', 'IN'] };
+
+  /* ---------- PUZZLES: one entry per day, rotates when the list runs out. Add days here. ---------- */
+  const PUZZLES = [
+    { easy: { t: 'Breakfast',          w: ['TOAST', 'BACON', 'CEREAL'] },
+      medium: { t: 'In the garden',    w: ['SHOVEL', 'TULIP', 'COMPOST', 'GNOME'] },
+      hard: { t: 'Card games',         w: ['POKER', 'BRIDGE', 'RUMMY', 'SOLITAIRE', 'BLACKJACK'] } },
+    { easy: { t: 'Pets',               w: ['PUPPY', 'KITTEN', 'HAMSTER'] },
+      medium: { t: 'Weather',          w: ['THUNDER', 'DRIZZLE', 'BREEZE', 'FROST'] },
+      hard: { t: 'On the chessboard',  w: ['ROOK', 'BISHOP', 'KNIGHT', 'QUEEN', 'CHECKMATE'] } },
+    { easy: { t: 'Fruit',              w: ['MANGO', 'GRAPE', 'LEMON'] },
+      medium: { t: 'Musical instruments', w: ['VIOLIN', 'TRUMPET', 'CELLO', 'BANJO'] },
+      hard: { t: 'Types of bread',     w: ['BAGUETTE', 'CIABATTA', 'SOURDOUGH', 'BRIOCHE', 'FOCACCIA'] } },
+    { easy: { t: 'Colors',             w: ['PURPLE', 'ORANGE', 'YELLOW'] },
+      medium: { t: 'In the kitchen',   w: ['SPATULA', 'WHISK', 'BLENDER', 'KETTLE'] },
+      hard: { t: 'Greek letters',      w: ['ALPHA', 'OMEGA', 'SIGMA', 'LAMBDA', 'EPSILON'] } },
+    { easy: { t: 'On the farm',        w: ['HORSE', 'SHEEP', 'GOAT'] },
+      medium: { t: 'Ocean life',       w: ['DOLPHIN', 'OCTOPUS', 'SHRIMP', 'WALRUS'] },
+      hard: { t: 'Famous detectives',  w: ['SHERLOCK', 'POIROT', 'COLUMBO', 'MARLOWE', 'MARPLE'] } },
+    { easy: { t: 'At school',          w: ['PENCIL', 'TEACHER', 'RULER'] },
+      medium: { t: 'Outer space',      w: ['ROCKET', 'COMET', 'GALAXY', 'ORBIT'] },
+      hard: { t: 'Shakespeare characters', w: ['HAMLET', 'MACBETH', 'OTHELLO', 'JULIET', 'PUCK'] } },
+    { easy: { t: 'In the bathroom',    w: ['TOWEL', 'SHOWER', 'SOAP'] },
+      medium: { t: 'Sports',           w: ['TENNIS', 'HOCKEY', 'SOCCER', 'RUGBY'] },
+      hard: { t: 'Groups of animals',  w: ['FLOCK', 'MURDER', 'PRIDE', 'GAGGLE', 'SWARM'] } },
+    { easy: { t: 'Vegetables',         w: ['CARROT', 'ONION', 'PEPPER'] },
+      medium: { t: 'Winter clothing',  w: ['SWEATER', 'JACKET', 'SCARF', 'MITTENS'] },
+      hard: { t: 'Dances',             w: ['TANGO', 'WALTZ', 'SALSA', 'FLAMENCO', 'FOXTROT'] } },
+    { easy: { t: 'Beach day',          w: ['SHELL', 'WAVES', 'SANDAL'] },
+      medium: { t: 'Birds',            w: ['PARROT', 'EAGLE', 'PIGEON', 'FLAMINGO'] },
+      hard: { t: 'Kinds of poems',     w: ['SONNET', 'HAIKU', 'LIMERICK', 'BALLAD', 'ELEGY'] } },
+    { easy: { t: 'Camping',            w: ['TENT', 'CANOE', 'LANTERN'] },
+      medium: { t: 'Desserts',         w: ['BROWNIE', 'PUDDING', 'SORBET', 'ECLAIR'] },
+      hard: { t: 'Bones of the body',  w: ['FEMUR', 'TIBIA', 'SKULL', 'PELVIS', 'STERNUM'] } },
+    { easy: { t: 'At the zoo',         w: ['ZEBRA', 'MONKEY', 'GIRAFFE'] },
+      medium: { t: 'Hobbies',          w: ['CHESS', 'BAKING', 'FISHING', 'POTTERY'] },
+      hard: { t: 'Programming languages', w: ['PYTHON', 'KOTLIN', 'SWIFT', 'HASKELL', 'FORTRAN'] } },
+    { easy: { t: 'Winter',             w: ['SNOWMAN', 'ICICLE', 'SKATES'] },
+      medium: { t: 'Vehicles',         w: ['TRACTOR', 'SCOOTER', 'SUBWAY', 'YACHT'] },
+      hard: { t: 'Currencies',         w: ['PESO', 'RUPEE', 'KRONA', 'DINAR', 'SHILLING'] } },
+    { easy: { t: 'Halloween',          w: ['GHOST', 'WITCH', 'PUMPKIN'] },
+      medium: { t: 'Jobs',             w: ['PLUMBER', 'FARMER', 'DENTIST', 'PILOT'] },
+      hard: { t: 'Gemstones',          w: ['EMERALD', 'SAPPHIRE', 'TOPAZ', 'GARNET', 'AMETHYST'] } },
+    { easy: { t: 'Under the sea',      w: ['WHALE', 'CORAL', 'SHARK'] },
+      medium: { t: 'Pasta',            w: ['RAVIOLI', 'PENNE', 'LASAGNA', 'FUSILLI'] },
+      hard: { t: 'Philosophers',       w: ['PLATO', 'KANT', 'NIETZSCHE', 'HUME', 'SOCRATES'] } },
+    { easy: { t: 'On a pizza',         w: ['CHEESE', 'OLIVE', 'SALAMI'] },
+      medium: { t: 'Rooms in a house', w: ['KITCHEN', 'GARAGE', 'ATTIC', 'PANTRY'] },
+      hard: { t: 'Constellations',     w: ['ORION', 'DRACO', 'PEGASUS', 'ANDROMEDA', 'GEMINI'] } },
+    { easy: { t: 'Insects',            w: ['BEETLE', 'CRICKET', 'MOTH'] },
+      medium: { t: 'Herbs and spices', w: ['BASIL', 'GINGER', 'CUMIN', 'PAPRIKA'] },
+      hard: { t: 'Cocktails',          w: ['MOJITO', 'MARTINI', 'NEGRONI', 'DAIQUIRI', 'MARGARITA'] } },
+    { easy: { t: 'Birthday party',     w: ['BALLOON', 'CANDLE', 'PRESENT'] },
+      medium: { t: 'Shapes',           w: ['CIRCLE', 'SQUARE', 'HEXAGON', 'SPIRAL'] },
+      hard: { t: 'Chemical elements',  w: ['SODIUM', 'CARBON', 'XENON', 'COBALT', 'IRIDIUM'] } },
+    { easy: { t: 'Getting around',     w: ['TRAIN', 'PLANE', 'BICYCLE'] },
+      medium: { t: 'Parts of the body', w: ['ELBOW', 'ANKLE', 'THUMB', 'KIDNEY'] },
+      hard: { t: 'Cheeses',            w: ['GOUDA', 'BRIE', 'CHEDDAR', 'RICOTTA', 'HALLOUMI'] } },
+    { easy: { t: 'Baby things',        w: ['RATTLE', 'CRADLE', 'DIAPER'] },
+      medium: { t: 'Mythical creatures', w: ['DRAGON', 'UNICORN', 'PHOENIX', 'GRIFFIN'] },
+      hard: { t: 'Famous painters',    w: ['MONET', 'PICASSO', 'VERMEER', 'KAHLO', 'ROTHKO'] } },
+    { easy: { t: 'Tools',              w: ['HAMMER', 'WRENCH', 'PLIERS'] },
+      medium: { t: 'Trees',            w: ['MAPLE', 'WILLOW', 'BIRCH', 'SEQUOIA'] },
+      hard: { t: 'Olympic events',     w: ['JAVELIN', 'HURDLES', 'DISCUS', 'FENCING', 'ROWING'] } },
+    { easy: { t: 'At the café',        w: ['LATTE', 'MUFFIN', 'BAGEL'] },
+      medium: { t: 'Board games',      w: ['CHECKERS', 'MONOPOLY', 'SCRABBLE', 'DOMINOES'] },
+      hard: { t: 'Mountain ranges',    w: ['ANDES', 'ALPS', 'ROCKIES', 'HIMALAYAS', 'URALS'] } },
+    { easy: { t: 'Fairy tales',        w: ['PRINCE', 'CASTLE', 'FROG'] },
+      medium: { t: 'In a wallet',      w: ['COINS', 'RECEIPT', 'PHOTO', 'TICKET'] },
+      hard: { t: 'Rivers',             w: ['DANUBE', 'THAMES', 'AMAZON', 'GANGES', 'YANGTZE'] } },
+    { easy: { t: 'Snacks',             w: ['PRETZEL', 'POPCORN', 'COOKIE'] },
+      medium: { t: 'Dog breeds',       w: ['POODLE', 'BEAGLE', 'HUSKY', 'BOXER'] },
+      hard: { t: 'Composers',          w: ['MOZART', 'CHOPIN', 'VIVALDI', 'BRAHMS', 'HANDEL'] } },
+    { easy: { t: 'Bedtime',            w: ['PILLOW', 'BLANKET', 'PAJAMAS'] },
+      medium: { t: 'Flowers',          w: ['DAISY', 'ORCHID', 'LILAC', 'POPPY'] },
+      hard: { t: 'Capital cities',     w: ['LISBON', 'NAIROBI', 'OTTAWA', 'HAVANA', 'CANBERRA'] } },
+    { easy: { t: 'Picnic',             w: ['BASKET', 'NAPKIN', 'LEMONADE'] },
+      medium: { t: 'Baking',           w: ['FLOUR', 'YEAST', 'SUGAR', 'BUTTER'] },
+      hard: { t: 'Fabrics',            w: ['DENIM', 'VELVET', 'SATIN', 'LINEN', 'CASHMERE'] } },
+    { easy: { t: 'Circus',             w: ['CLOWN', 'JUGGLER', 'TRAPEZE'] },
+      medium: { t: 'At the office',    w: ['STAPLER', 'PRINTER', 'FOLDER', 'MEETING'] },
+      hard: { t: 'Martial arts',       w: ['KARATE', 'JUDO', 'AIKIDO', 'CAPOEIRA', 'TAEKWONDO'] } },
+    { easy: { t: 'Ice cream',          w: ['VANILLA', 'CONE', 'SCOOP'] },
+      medium: { t: 'Reptiles',         w: ['LIZARD', 'TURTLE', 'GECKO', 'IGUANA'] },
+      hard: { t: 'Famous scientists',  w: ['DARWIN', 'CURIE', 'NEWTON', 'TESLA', 'HAWKING'] } },
+    { easy: { t: 'Making music',       w: ['GUITAR', 'DRUMS', 'SINGER'] },
+      medium: { t: 'Fast food',        w: ['BURGER', 'FRIES', 'NUGGETS', 'PIZZA'] },
+      hard: { t: 'Architecture styles', w: ['GOTHIC', 'BAROQUE', 'ROCOCO', 'TUDOR', 'BRUTALIST'] } },
+    { easy: { t: 'Travel',             w: ['PASSPORT', 'SUITCASE', 'HOTEL'] },
+      medium: { t: 'Candy',            w: ['TOFFEE', 'LOLLIPOP', 'FUDGE', 'CARAMEL'] },
+      hard: { t: 'Famous explorers',   w: ['MAGELLAN', 'COLUMBUS', 'POLO', 'DRAKE', 'AMUNDSEN'] } },
+    { easy: { t: 'Superhero kit',      w: ['CAPE', 'MASK', 'POWERS'] },
+      medium: { t: 'Sewing',           w: ['NEEDLE', 'THREAD', 'BUTTON', 'ZIPPER'] },
+      hard: { t: 'Wine grapes',        w: ['MERLOT', 'RIESLING', 'MALBEC', 'SHIRAZ', 'PINOT'] } },
+    { easy: { t: 'Autumn',             w: ['LEAVES', 'ACORN', 'HARVEST'] },
+      medium: { t: 'Magic show',       w: ['RABBIT', 'WAND', 'CARDS', 'VANISH'] },
+      hard: { t: 'Volcanoes',          w: ['VESUVIUS', 'ETNA', 'KRAKATOA', 'FUJI', 'STROMBOLI'] } },
+    { easy: { t: 'Library',            w: ['BOOKS', 'SHELF', 'SILENCE'] },
+      medium: { t: 'Pirates',          w: ['TREASURE', 'CUTLASS', 'PLANK', 'COMPASS'] },
+      hard: { t: 'Ancient civilizations', w: ['AZTEC', 'MAYA', 'INCA', 'SUMER', 'CARTHAGE'] } },
+    { easy: { t: 'Soup',               w: ['NOODLE', 'BROTH', 'LADLE'] },
+      medium: { t: 'Hairstyles',       w: ['BRAID', 'PONYTAIL', 'MOHAWK', 'BANGS'] },
+      hard: { t: 'Ballet',             w: ['PLIE', 'ARABESQUE', 'PIROUETTE', 'TUTU', 'JETE'] } },
+    { easy: { t: 'Barbecue',           w: ['GRILL', 'SKEWER', 'SAUCE'] },
+      medium: { t: 'Shoes',            w: ['SNEAKER', 'LOAFER', 'BOOT', 'HEELS'] },
+      hard: { t: 'Parts of a castle',  w: ['MOAT', 'TURRET', 'DRAWBRIDGE', 'DUNGEON', 'RAMPART'] } },
+    { easy: { t: 'Pancakes',           w: ['SYRUP', 'BATTER', 'GRIDDLE'] },
+      medium: { t: 'Zodiac signs',     w: ['TAURUS', 'SCORPIO', 'PISCES', 'ARIES'] },
+      hard: { t: 'Moons',              w: ['TITAN', 'EUROPA', 'GANYMEDE', 'CALLISTO', 'PHOBOS'] } },
+    { easy: { t: 'Sandwich',           w: ['BREAD', 'LETTUCE', 'TOMATO'] },
+      medium: { t: 'Things that float', w: ['KAYAK', 'RAFT', 'BUOY', 'FERRY'] },
+      hard: { t: 'Coffee orders',      w: ['MOCHA', 'CORTADO', 'RISTRETTO', 'AFFOGATO', 'MACCHIATO'] } },
+    { easy: { t: 'Laundry',            w: ['SOCKS', 'DRYER', 'HANGER'] },
+      medium: { t: 'Cars',             w: ['SEDAN', 'PICKUP', 'COUPE', 'WAGON'] },
+      hard: { t: 'Economics',          w: ['INFLATION', 'TARIFF', 'SUBSIDY', 'DEFICIT', 'RECESSION'] } },
+    { easy: { t: 'Playground',         w: ['SWING', 'SLIDE', 'SEESAW'] },
+      medium: { t: 'At the gym',       w: ['DUMBBELL', 'SQUAT', 'LUNGE', 'BURPEE'] },
+      hard: { t: 'Greek gods',         w: ['ZEUS', 'ATHENA', 'APOLLO', 'HERMES', 'POSEIDON'] } },
+    { easy: { t: 'Fishing',            w: ['HOOK', 'BAIT', 'TACKLE'] },
+      medium: { t: 'Nuts',             w: ['ALMOND', 'CASHEW', 'PECAN', 'WALNUT'] },
+      hard: { t: 'Typefaces',          w: ['HELVETICA', 'GARAMOND', 'FUTURA', 'BODONI', 'VERDANA'] } },
+    { easy: { t: 'Rainy day',          w: ['PUDDLE', 'BOOTS', 'UMBRELLA'] },
+      medium: { t: 'Tea time',         w: ['TEAPOT', 'SCONE', 'SAUCER', 'STEEP'] },
+      hard: { t: 'Famous ships',       w: ['TITANIC', 'MAYFLOWER', 'BISMARCK', 'ENDURANCE', 'LUSITANIA'] } },
+    { easy: { t: 'Art class',          w: ['PAINT', 'EASEL', 'CRAYON'] },
+      medium: { t: 'Soccer',           w: ['GOALIE', 'PENALTY', 'CORNER', 'WHISTLE'] },
+      hard: { t: 'Anniversary gifts',  w: ['PAPER', 'COTTON', 'SILVER', 'PEARL', 'RUBY'] } },
+    { easy: { t: 'Jungle',             w: ['TIGER', 'VINES', 'JAGUAR'] },
+      medium: { t: 'Hotel',            w: ['LOBBY', 'SUITE', 'BELLHOP', 'CHECKOUT'] },
+      hard: { t: 'Types of rock',      w: ['GRANITE', 'BASALT', 'MARBLE', 'SLATE', 'PUMICE'] } },
+    { easy: { t: 'Bees',               w: ['HONEY', 'HIVE', 'NECTAR'] },
+      medium: { t: 'Feelings',         w: ['ANGER', 'GRIEF', 'DELIGHT', 'ENVY'] },
+      hard: { t: 'Coding terms',       w: ['ARRAY', 'BOOLEAN', 'RECURSION', 'POINTER', 'COMPILER'] } },
+    { easy: { t: 'Sushi',              w: ['RICE', 'SALMON', 'WASABI'] },
+      medium: { t: 'Theatre',          w: ['CURTAIN', 'ACTOR', 'SCRIPT', 'APPLAUSE'] },
+      hard: { t: 'Deserts',            w: ['SAHARA', 'GOBI', 'MOJAVE', 'KALAHARI', 'ATACAMA'] } },
+    { easy: { t: 'At the dentist',     w: ['TOOTH', 'FLOSS', 'BRACES'] },
+      medium: { t: 'Sauces',           w: ['KETCHUP', 'MUSTARD', 'PESTO', 'GRAVY'] },
+      hard: { t: 'Famous architects',  w: ['GAUDI', 'WRIGHT', 'GEHRY', 'HADID', 'CORBUSIER'] } },
+    { easy: { t: 'Pond',               w: ['LILY', 'DUCK', 'REEDS'] },
+      medium: { t: 'Orchard',          w: ['APPLE', 'PEACH', 'CHERRY', 'PLUM'] },
+      hard: { t: 'Units of measure',   w: ['FATHOM', 'HECTARE', 'KELVIN', 'FURLONG', 'CARAT'] } },
+    { easy: { t: 'Nursery',            w: ['CRIB', 'BOTTLE', 'LULLABY'] },
+      medium: { t: 'Golf',             w: ['BIRDIE', 'BUNKER', 'CADDIE', 'PUTTER'] },
+      hard: { t: 'Classic novels',     w: ['DRACULA', 'ULYSSES', 'EMMA', 'DUNE', 'BELOVED'] } },
+    { easy: { t: 'Pool party',         w: ['FLOAT', 'SPLASH', 'GOGGLES'] },
+      medium: { t: 'Spa day',          w: ['SAUNA', 'MASSAGE', 'FACIAL', 'ROBE'] },
+      hard: { t: 'Languages',          w: ['SWAHILI', 'TAGALOG', 'FINNISH', 'URDU', 'BASQUE'] } },
+    { easy: { t: 'Baseball',           w: ['GLOVE', 'PITCHER', 'INNING'] },
+      medium: { t: 'Spring',           w: ['BLOSSOM', 'ROBIN', 'THAW', 'SPROUT'] },
+      hard: { t: 'Islands',            w: ['ICELAND', 'BORNEO', 'MALTA', 'TAHITI', 'SICILY'] } },
+    { easy: { t: 'At the cinema',      w: ['TRAILER', 'SEQUEL', 'SCREEN'] },
+      medium: { t: 'Amusement park',   w: ['COASTER', 'CAROUSEL', 'ARCADE', 'MASCOT'] },
+      hard: { t: 'Famous queens',      w: ['CLEOPATRA', 'VICTORIA', 'ELIZABETH', 'NEFERTITI', 'ISABELLA'] } }
+,
+    { easy: { t: 'Dinner table',  w: ['PLATE', 'FORK', 'SPOON'] }, medium: { t: 'Things that buzz', w: ['WASP', 'HORNET', 'DRAGONFLY', 'MOSQUITO'] }, hard: { t: 'Chess openings', w: ['SICILIAN', 'ENGLISH', 'ITALIAN', 'SLAV', 'LONDON'] } },
+    { easy: { t: 'Morning',       w: ['ALARM', 'COFFEE', 'SUNRISE'] }, medium: { t: 'Garden tools', w: ['RAKE', 'HOSE', 'TROWEL', 'SHEARS'] }, hard: { t: 'Jazz greats', w: ['ELLINGTON', 'MONK', 'COLTRANE', 'PARKER', 'BASIE'] } },
+    { easy: { t: 'Snow day',      w: ['SLED', 'MITTEN', 'IGLOO'] }, medium: { t: 'Wild weather', w: ['HUMID', 'MONSOON', 'BLIZZARD', 'HAIL'] }, hard: { t: 'Clouds', w: ['CIRRUS', 'CUMULUS', 'STRATUS', 'NIMBUS', 'ALTOCUMULUS'] } },
+    { easy: { t: 'Toy box',       w: ['BLOCKS', 'YOYO', 'PUZZLE'] }, medium: { t: 'Appliances', w: ['TOASTER', 'OVEN', 'MIXER', 'FREEZER'] }, hard: { t: 'Parts of a story', w: ['PLOT', 'SETTING', 'CLIMAX', 'CONFLICT', 'PROLOGUE'] } },
+    { easy: { t: 'Backyard',      w: ['FLOWER', 'SEEDS', 'FENCE'] }, medium: { t: 'Citrus', w: ['LIME', 'GRAPEFRUIT', 'TANGERINE', 'KUMQUAT'] }, hard: { t: 'Spice rack', w: ['SAFFRON', 'CARDAMOM', 'TURMERIC', 'NUTMEG', 'SUMAC'] } },
+    { easy: { t: 'Harbor',        w: ['TIDE', 'ANCHOR', 'SEAGULL'] }, medium: { t: 'Ways to cook', w: ['ROAST', 'POACH', 'BRAISE', 'SAUTE'] }, hard: { t: 'More Shakespeare', w: ['TEMPEST', 'LEAR', 'CORIOLANUS', 'PERICLES', 'CYMBELINE'] } },
+    { easy: { t: 'On a desk',     w: ['LAMP', 'LAPTOP', 'NOTEBOOK'] }, medium: { t: 'Big cats', w: ['LION', 'LEOPARD', 'CHEETAH', 'PUMA'] }, hard: { t: 'Norse myth', w: ['ODIN', 'THOR', 'LOKI', 'VALHALLA', 'ASGARD'] } },
+    { easy: { t: 'Train trip',    w: ['RAILS', 'CONDUCTOR', 'STATION'] }, medium: { t: 'Eggs', w: ['OMELET', 'SCRAMBLED', 'POACHED', 'BENEDICT'] }, hard: { t: 'Sharks', w: ['MAKO', 'HAMMERHEAD', 'NURSE', 'BASKING', 'THRESHER'] } },
+    { easy: { t: 'Rainforest',    w: ['SLOTH', 'TOUCAN', 'CANOPY'] }, medium: { t: 'Teas', w: ['OOLONG', 'MATCHA', 'CHAI', 'ROOIBOS'] }, hard: { t: 'Typography', w: ['SERIF', 'KERNING', 'LEADING', 'LIGATURE', 'GLYPH'] } },
+    { easy: { t: 'Movie night',   w: ['SOFA', 'REMOTE', 'POPCORN'] }, medium: { t: 'Knitting', w: ['YARN', 'PURL', 'STITCH', 'NEEDLES'] }, hard: { t: 'Fencing', w: ['PARRY', 'RIPOSTE', 'LUNGE', 'FOIL', 'SABRE'] } },
+    { easy: { t: 'Airport',       w: ['GATE', 'PILOT', 'RUNWAY'] }, medium: { t: 'Ice cream flavors', w: ['MINT', 'PISTACHIO', 'COFFEE', 'MANGO'] }, hard: { t: 'Poets', w: ['KEATS', 'BYRON', 'SHELLEY', 'DICKINSON', 'WHITMAN'] } },
+    { easy: { t: 'Mail',          w: ['STAMP', 'LETTER', 'PARCEL'] }, medium: { t: 'Boats', w: ['CANOE', 'SAILBOAT', 'TUGBOAT', 'GONDOLA'] }, hard: { t: 'Navigation', w: ['SEXTANT', 'ASTROLABE', 'COMPASS', 'CHRONOMETER', 'LODESTONE'] } },
+    { easy: { t: 'Fruit salad',   w: ['MELON', 'KIWI', 'BANANA'] }, medium: { t: 'Desert animals', w: ['CAMEL', 'SCORPION', 'COYOTE', 'VULTURE'] }, hard: { t: 'Operas', w: ['CARMEN', 'TOSCA', 'AIDA', 'OTELLO', 'FIDELIO'] } },
+    { easy: { t: 'Sleepover',     w: ['GAMES', 'SNACKS', 'STORIES'] }, medium: { t: 'Music words', w: ['TEMPO', 'CHORD', 'RHYTHM', 'MELODY'] }, hard: { t: 'Geometry', w: ['VERTEX', 'TANGENT', 'RADIUS', 'POLYGON', 'HYPOTENUSE'] } },
+    { easy: { t: 'Bakery',        w: ['CAKE', 'CROISSANT', 'DONUT'] }, medium: { t: 'Wild dogs', w: ['WOLF', 'DINGO', 'JACKAL', 'DHOLE'] }, hard: { t: 'Mathematicians', w: ['EULER', 'GAUSS', 'EUCLID', 'TURING', 'NOETHER'] } },
+    { easy: { t: 'Weekend',       w: ['BRUNCH', 'HIKE', 'MOVIE'] }, medium: { t: 'Gymnastics', w: ['VAULT', 'BEAM', 'TUMBLE', 'RINGS'] }, hard: { t: 'Planets and dwarfs', w: ['MERCURY', 'NEPTUNE', 'URANUS', 'PLUTO', 'CERES'] } },
+    { easy: { t: 'Kitchen',       w: ['FRIDGE', 'STOVE', 'SINK'] }, medium: { t: 'Woodwinds', w: ['FLUTE', 'CLARINET', 'OBOE', 'BASSOON'] }, hard: { t: 'American rivers', w: ['MISSISSIPPI', 'HUDSON', 'COLORADO', 'OHIO', 'SNAKE'] } },
+    { easy: { t: 'Thanksgiving',  w: ['TURKEY', 'STUFFING', 'CRANBERRY'] }, medium: { t: 'Bodies of water', w: ['LAKE', 'LAGOON', 'FJORD', 'ESTUARY'] }, hard: { t: 'Renaissance artists', w: ['RAPHAEL', 'DONATELLO', 'BOTTICELLI', 'TITIAN', 'GIOTTO'] } },
+    { easy: { t: 'Bike ride',     w: ['HELMET', 'PEDAL', 'CHAIN'] }, medium: { t: 'Dumplings', w: ['GYOZA', 'PIEROGI', 'WONTON', 'MOMO'] }, hard: { t: 'Inventors', w: ['EDISON', 'BELL', 'MORSE', 'WATT', 'MARCONI'] } },
+    { easy: { t: 'Cowboy',        w: ['SADDLE', 'LASSO', 'BOOTS'] }, medium: { t: 'Hats', w: ['BERET', 'FEDORA', 'BEANIE', 'TURBAN'] }, hard: { t: 'Inside a cell', w: ['NUCLEUS', 'RIBOSOME', 'MEMBRANE', 'ENZYME', 'MITOCHONDRIA'] } },
+    { easy: { t: 'Dog walk',      w: ['LEASH', 'COLLAR', 'TREATS'] }, medium: { t: 'Salad bowl', w: ['ARUGULA', 'CROUTON', 'DRESSING', 'CUCUMBER'] }, hard: { t: 'Ancient wonders', w: ['PYRAMID', 'LIGHTHOUSE', 'COLOSSUS', 'MAUSOLEUM', 'GARDENS'] } },
+    { easy: { t: 'Kids party',    w: ['CLOWN', 'PINATA', 'GAMES'] }, medium: { t: 'Night sky', w: ['COMET', 'METEOR', 'NEBULA', 'ECLIPSE'] }, hard: { t: 'Grammar', w: ['ADVERB', 'GERUND', 'CLAUSE', 'PRONOUN', 'PARTICIPLE'] } },
+    { easy: { t: 'Dog park',      w: ['FETCH', 'BONE', 'WALK'] }, medium: { t: 'Apples', w: ['GALA', 'FUJI', 'HONEYCRISP', 'GRANNY'] }, hard: { t: 'Brass section', w: ['TUBA', 'TROMBONE', 'BUGLE', 'CORNET', 'EUPHONIUM'] } },
+    { easy: { t: 'Drinks',        w: ['JUICE', 'MILK', 'COCOA'] }, medium: { t: 'Garden pests', w: ['APHID', 'SNAIL', 'SLUG', 'LADYBUG'] }, hard: { t: 'Logic', w: ['PREMISE', 'AXIOM', 'FALLACY', 'SYLLOGISM', 'PARADOX'] } },
+    { easy: { t: 'Seafood',       w: ['CRAB', 'OYSTER', 'SQUID'] }, medium: { t: 'Sandwiches', w: ['REUBEN', 'PANINI', 'GYRO', 'HOAGIE'] }, hard: { t: 'Poker', w: ['FLUSH', 'RIVER', 'BLUFF', 'STRAIGHT', 'ANTE'] } },
+    { easy: { t: 'Closet',        w: ['SHIRT', 'JEANS', 'HOODIE'] }, medium: { t: 'Fresh herbs', w: ['PARSLEY', 'THYME', 'CHIVES', 'DILL'] }, hard: { t: 'Government', w: ['SENATE', 'CABINET', 'PARLIAMENT', 'CONGRESS', 'COUNCIL'] } },
+    { easy: { t: 'Brunch',        w: ['WAFFLE', 'OATMEAL', 'YOGURT'] }, medium: { t: 'Minerals', w: ['QUARTZ', 'MICA', 'FELDSPAR', 'GYPSUM'] }, hard: { t: 'Sailing', w: ['STARBOARD', 'KEEL', 'RUDDER', 'MAINSAIL', 'JIBE'] } },
+    { easy: { t: 'Campfire food', w: ['SMORES', 'HOTDOG', 'BEANS'] }, medium: { t: 'Fish', w: ['TROUT', 'HALIBUT', 'TUNA', 'MACKEREL'] }, hard: { t: 'Storms', w: ['TORNADO', 'TYPHOON', 'DERECHO', 'SIROCCO', 'CYCLONE'] } },
+    { easy: { t: 'Toolbox',       w: ['SCREW', 'NAIL', 'DRILL'] }, medium: { t: 'Mushrooms', w: ['PORTOBELLO', 'SHIITAKE', 'CHANTERELLE', 'MOREL'] }, hard: { t: 'The brain', w: ['CORTEX', 'CEREBELLUM', 'THALAMUS', 'AMYGDALA', 'HIPPOCAMPUS'] } },
+    { easy: { t: 'Hiking',        w: ['TRAIL', 'BACKPACK', 'SUMMIT'] }, medium: { t: 'Pie fillings', w: ['PECAN', 'PUMPKIN', 'CHERRY', 'RHUBARB'] }, hard: { t: 'Art movements', w: ['CUBISM', 'DADA', 'IMPRESSIONISM', 'SURREALISM', 'BAUHAUS'] } },
+    { easy: { t: 'Sports gear',   w: ['BALL', 'RACKET', 'HELMET'] }, medium: { t: 'Noodles', w: ['RAMEN', 'UDON', 'SOBA', 'VERMICELLI'] }, hard: { t: 'Deep space', w: ['QUASAR', 'PULSAR', 'BLACKHOLE', 'GALAXY', 'REDSHIFT'] } },
+    { easy: { t: 'Water fun',     w: ['SURF', 'SNORKEL', 'RAFT'] }, medium: { t: 'Whodunit', w: ['MAGNIFIER', 'CLUE', 'ALIBI', 'SUSPECT'] }, hard: { t: 'Philosophy', w: ['ETHICS', 'LOGOS', 'STOICISM', 'NIHILISM', 'EMPIRICISM'] } },
+    { easy: { t: 'Bouquet',       w: ['ROSE', 'TULIP', 'DAISY'] }, medium: { t: 'Sweets abroad', w: ['BAKLAVA', 'MOCHI', 'CHURRO', 'GELATO'] }, hard: { t: 'Film terms', w: ['MONTAGE', 'CLOSEUP', 'DOLLY', 'STORYBOARD', 'VOICEOVER'] } },
+    { easy: { t: 'Fall weather',  w: ['WINDY', 'FOGGY', 'CHILLY'] }, medium: { t: 'Rodents', w: ['BEAVER', 'SQUIRREL', 'CHIPMUNK', 'GERBIL'] }, hard: { t: 'Legendary places', w: ['ATLANTIS', 'AVALON', 'ELDORADO', 'SHANGRILA', 'OLYMPUS'] } },
+    { easy: { t: 'Garage',        w: ['TOOLS', 'LADDER', 'BICYCLE'] }, medium: { t: 'Cured meats', w: ['SAUSAGE', 'BACON', 'CHORIZO', 'PROSCIUTTO'] }, hard: { t: 'Knots', w: ['BOWLINE', 'HITCH', 'SHEEPSHANK', 'GRANNY', 'REEF'] } },
+    { easy: { t: 'Art supplies',  w: ['BRUSH', 'CANVAS', 'CHALK'] }, medium: { t: 'Antarctica', w: ['PENGUIN', 'SEAL', 'ORCA', 'KRILL'] }, hard: { t: 'Literary devices', w: ['IRONY', 'METAPHOR', 'SIMILE', 'HYPERBOLE', 'ALLITERATION'] } },
+    { easy: { t: 'Barnyard',      w: ['HAYSTACK', 'ROOSTER', 'PIGLET'] }, medium: { t: 'Pastries', w: ['DANISH', 'STRUDEL', 'BEIGNET', 'CRULLER'] }, hard: { t: 'Dinosaurs', w: ['RAPTOR', 'TRICERATOPS', 'IGUANODON', 'DIPLODOCUS', 'ALLOSAURUS'] } },
+    { easy: { t: 'Winter sports', w: ['SKIING', 'SKATING', 'CURLING'] }, medium: { t: 'Metals', w: ['COPPER', 'NICKEL', 'TITANIUM', 'PLATINUM'] }, hard: { t: 'French sauces', w: ['BECHAMEL', 'HOLLANDAISE', 'VELOUTE', 'ESPAGNOLE', 'BEARNAISE'] } },
+    { easy: { t: 'Playroom',      w: ['KITE', 'DOLLHOUSE', 'MARBLES'] }, medium: { t: 'Shellfish', w: ['LOBSTER', 'CLAM', 'MUSSEL', 'SCALLOP'] }, hard: { t: 'Data structures', w: ['STACK', 'QUEUE', 'HEAP', 'GRAPH', 'LINKEDLIST'] } },
+    { easy: { t: 'Moving day',    w: ['BOXES', 'TAPE', 'TRUCK'] }, medium: { t: 'Tropical fruit', w: ['PAPAYA', 'GUAVA', 'PINEAPPLE', 'LYCHEE'] }, hard: { t: 'Musical forms', w: ['SONATA', 'FUGUE', 'CONCERTO', 'SYMPHONY', 'RONDO'] } },
+    { easy: { t: 'Cleaning',      w: ['BROOM', 'SPONGE', 'VACUUM'] }, medium: { t: 'Big birds', w: ['OSTRICH', 'CONDOR', 'PELICAN', 'ALBATROSS'] }, hard: { t: 'Japanese food', w: ['TEMPURA', 'TERIYAKI', 'EDAMAME', 'ONIGIRI', 'YAKITORI'] } },
+    { easy: { t: 'Treehouse',     w: ['ROPE', 'PLANKS', 'HAMMOCK'] }, medium: { t: 'Spanish food', w: ['PAELLA', 'TAPAS', 'GAZPACHO', 'CHURROS'] }, hard: { t: 'Spans of time', w: ['EPOCH', 'DECADE', 'MILLENNIUM', 'FORTNIGHT', 'CENTURY'] } },
+    { easy: { t: 'Forecast',      w: ['SUNNY', 'CLOUDY', 'STORMY'] }, medium: { t: 'Mexican food', w: ['TACO', 'BURRITO', 'TAMALE', 'ENCHILADA'] }, hard: { t: 'Monsters', w: ['GOLEM', 'KRAKEN', 'WEREWOLF', 'BANSHEE', 'CHIMERA'] } },
+    { easy: { t: 'Space trip',    w: ['ASTRONAUT', 'ROCKET', 'MOON'] }, medium: { t: 'Indian food', w: ['CURRY', 'SAMOSA', 'NAAN', 'BIRYANI'] }, hard: { t: 'Architecture', w: ['ARCH', 'DOME', 'COLUMN', 'BUTTRESS', 'CUPOLA'] } },
+    { easy: { t: 'Lunchbox',      w: ['APPLE', 'SANDWICH', 'JUICE'] }, medium: { t: 'Italian desserts', w: ['TIRAMISU', 'CANNOLI', 'PANNACOTTA', 'GELATO'] }, hard: { t: 'Rhetoric', w: ['ETHOS', 'PATHOS', 'KAIROS', 'LOGOS', 'CHIASMUS'] } },
+    { easy: { t: 'Recess',        w: ['HOPSCOTCH', 'SWINGS', 'JUMPROPE'] }, medium: { t: 'Hot drinks', w: ['COCOA', 'ESPRESSO', 'TODDY', 'CHAI'] }, hard: { t: 'Grasslands', w: ['SAVANNA', 'PRAIRIE', 'STEPPE', 'PAMPAS', 'VELD'] } },
+    { easy: { t: 'Smoothie',      w: ['BERRIES', 'SPINACH', 'HONEY'] }, medium: { t: 'Horse tack', w: ['BRIDLE', 'STIRRUP', 'REINS', 'HORSESHOE'] }, hard: { t: 'Noble gases', w: ['HELIUM', 'NEON', 'ARGON', 'KRYPTON', 'RADON'] } },
+    { easy: { t: 'Holidays',      w: ['SNOWFLAKE', 'STOCKING', 'CANDLES'] }, medium: { t: 'Rain gear', w: ['RAINCOAT', 'GALOSHES', 'PONCHO', 'UMBRELLA'] }, hard: { t: 'Sculptors', w: ['RODIN', 'BERNINI', 'CALDER', 'BRANCUSI', 'CELLINI'] } },
+    { easy: { t: 'Party food',    w: ['CHIPS', 'SALSA', 'PIZZA'] }, medium: { t: 'Seabirds', w: ['PUFFIN', 'GULL', 'TERN', 'CORMORANT'] }, hard: { t: 'Roman emperors', w: ['NERO', 'AUGUSTUS', 'TRAJAN', 'HADRIAN', 'CALIGULA'] } },
+    { easy: { t: 'New Year',      w: ['CONFETTI', 'MIDNIGHT', 'FIREWORKS'] }, medium: { t: 'Happy words', w: ['JOYFUL', 'ELATED', 'CHEERFUL', 'GLEEFUL'] }, hard: { t: 'Mountains', w: ['EVEREST', 'KILIMANJARO', 'DENALI', 'MATTERHORN', 'ACONCAGUA'] } }
+  ];
+
+  function todayNumber(now) {
+    now = now || new Date();
+    const local = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.floor((local - EPOCH_UTC) / 86400000) + 1;
+  }
+  function puzzleIndex(day) { const n = PUZZLES.length; return (((day - 1) % n) + n) % n; }
+  function previewDay(str) { const m = /day[-=](-?\d+)/.exec(str || ''); return m ? parseInt(m[1], 10) : null; }
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function pickSize(weights, rnd, max) {
+    let total = 0;
+    for (let s = 1; s <= max; s++) total += weights[s] || 0;
+    if (total <= 0) return max;
+    let r = rnd() * total;
+    for (let s = 1; s <= max; s++) { r -= weights[s] || 0; if (r <= 0) return s; }
+    return max;
+  }
+
+  // Cut a word into 1–3 letter chunks; letters keep their order inside each chunk.
+  function splitWord(word, weights, rnd) {
+    const parts = [];
+    let pos = 0;
+    while (pos < word.length) {
+      const rem = word.length - pos;
+      let size = pickSize(weights, rnd, Math.min(3, rem));
+      if (parts.length === 0 && size >= word.length) size = Math.max(1, word.length - 1); // never a one-bubble word
+      if (size === 1 && rem > 1 && parts.length && parts[parts.length - 1].length === 1) size = 2; // no runs of single letters
+      parts.push(word.substr(pos, size));
+      pos += size;
+    }
+    return parts;
+  }
+
+  // Every distinct multiset of pool chunks that concatenates to `target`.
+  function decompositions(target, pool) {
+    const counts = Object.create(null);
+    pool.forEach(t => { counts[t] = (counts[t] || 0) + 1; });
+    const used = Object.create(null), list = [], results = new Set();
+    (function rec(pos) {
+      if (results.size > 1) return;
+      if (pos === target.length) { results.add(list.slice().sort().join('|')); return; }
+      for (let len = 1; len <= 3 && pos + len <= target.length; len++) {
+        const s = target.substr(pos, len);
+        if ((counts[s] || 0) - (used[s] || 0) > 0) {
+          used[s] = (used[s] || 0) + 1; list.push(s);
+          rec(pos + len);
+          list.pop(); used[s]--;
+        }
+      }
+    })(0);
+    return results;
+  }
+
+  function noAdjacentPairs(list) {
+    for (let i = 0; i < list.length - 1; i++) {
+      const a = list[i], b = list[i + 1];
+      if (a.wi === b.wi && b.ci === a.ci + 1) return false;
+    }
+    return true;
+  }
+
+  function shuffleBubbles(bubbles, rnd) {
+    let list = bubbles.slice(), strict = false;
+    for (let t = 0; t < 80 && !strict; t++) {
+      list = bubbles.slice();
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(rnd() * (i + 1));
+        const tmp = list[i]; list[i] = list[j]; list[j] = tmp;
+      }
+      strict = noAdjacentPairs(list);
+    }
+    list.forEach(b => { b.nudge = Math.round((rnd() - 0.5) * 10); });
+    return { list: list, strict: strict };
+  }
+
+  // A board is accepted only when every hidden word can be spelled from the pool in exactly one way,
+  // so any spelling of a hidden word is the intended one, and no bubble of a word sits next to the next bubble of that word.
+  function buildPuzzle(level, day, data) {
+    const meta = META[level];
+    const seedBase = ((day * 1000003) + (LEVELS.indexOf(level) + 1) * 7919) >>> 0;
+    let best = null;
+    for (let attempt = 0; attempt < 150; attempt++) {
+      const rnd = mulberry32(seedBase + attempt * 101);
+      const chunksByWord = data.w.map(w => splitWord(w, meta.weights, rnd));
+      const texts = [].concat.apply([], chunksByWord);
+      const unique = data.w.every(w => decompositions(w, texts).size === 1);
+      const bubbles = [];
+      chunksByWord.forEach((parts, wi) => parts.forEach((t, ci) => bubbles.push({ id: wi + '-' + ci, text: t, wi: wi, ci: ci, nudge: 0 })));
+      const sh = shuffleBubbles(bubbles, rnd);
+      const score = (unique ? 2 : 0) + (sh.strict ? 1 : 0);
+      if (!best || score > best.score) {
+        best = { score: score, pz: { level: level, theme: data.t, words: data.w, chunksByWord: chunksByWord, bubbles: sh.list, unique: unique, strict: sh.strict, attempts: attempt + 1 } };
+      }
+      if (score === 3) break;
+    }
+    return best.pz;
+  }
+
+  function buildTutorial() {
+    const bubbles = TUTORIAL.chunks[0].map((t, ci) => ({ id: '0-' + ci, text: t, wi: 0, ci: ci, nudge: 0 }));
+    const list = TUTORIAL.order.map(t => bubbles.find(b => b.text === t));
+    list[0].nudge = 4; list[1].nudge = -4; list[2].nudge = 2;
+    return { level: 'tutorial', theme: TUTORIAL.t, words: TUTORIAL.w, chunksByWord: TUTORIAL.chunks, bubbles: list, unique: true, strict: true };
+  }
+
+  return { EPOCH_UTC, LEVELS, META, PUZZLES, TUTORIAL, todayNumber, puzzleIndex, previewDay, buildPuzzle, buildTutorial, decompositions, splitWord };
+})();
+</script>
+<script src="bonus.js"></script>
+<script id="ui">
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const LEVELS = WB.LEVELS, META = WB.META;
+  const HINT_COST = 2;
+  const KEEP_DAYS = 400;         // how far back the archive goes
+
+  /* ---------- sound: tiny synthesized bloops, chimes and thuds (no files) ---------- */
+  const Sound = (function () {
+    let ctx = null, on = true;
+    try { on = localStorage.getItem('wordbubbles-sound') !== 'off'; } catch (e) { /* default on */ }
+    function ac() {
+      if (!on) return null;
+      try {
+        if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; ctx = new C(); }
+        if (ctx.state === 'suspended') ctx.resume();
+      } catch (e) { return null; }
+      return ctx;
+    }
+    function tone(freq, delay, dur, type, vol, glideTo) {
+      const c = ac(); if (!c) return;
+      try {
+        const o = c.createOscillator(), g = c.createGain(), t = c.currentTime + (delay || 0);
+        o.type = type || 'sine';
+        o.frequency.setValueAtTime(freq, t);
+        if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur * 0.8);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(vol || 0.2, t + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.connect(g); g.connect(c.destination);
+        o.start(t); o.stop(t + dur + 0.03);
+      } catch (e) { /* ignore */ }
+    }
+    // pentatonic, so any run of picks sounds musical
+    const SCALE = [392, 440, 523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66];
+    return {
+      isOn: () => on,
+      toggle() { on = !on; try { localStorage.setItem('wordbubbles-sound', on ? 'on' : 'off'); } catch (e) { /* ignore */ } if (on) this.pick(2); return on; },
+      unlock: () => { ac(); },
+      pick(i, lift) { const f = SCALE[Math.min(i, SCALE.length - 1)] * Math.pow(2, Math.min(lift || 0, 6) * 2 / 12); tone(f * 0.6, 0, 0.14, 'sine', 0.22, f * 1.25); tone(f * 2.5, 0.01, 0.05, 'sine', 0.03); },
+      unpick() { tone(500, 0, 0.13, 'sine', 0.15, 280); },
+      lock(c) { const k = Math.pow(2, Math.min(Math.max((c || 1) - 1, 0), 6) * 2 / 12); [783.99, 987.77, 1174.66, 1567.98].concat((c || 1) >= 3 ? [1975.5] : []).forEach((f, i) => tone(f * k, i * 0.055, 0.32, 'triangle', 0.1)); },
+      bonus() { tone(1046.5, 0, 0.22, 'sine', 0.1, 1318.5); tone(1567.98, 0.08, 0.3, 'sine', 0.08); tone(2093, 0.16, 0.35, 'sine', 0.05); },
+      earn() { [1046.5, 1318.5, 1567.98, 2093].forEach((f, i) => tone(f, i * 0.06, 0.4, 'sine', 0.08)); },
+      crack() { tone(330, 0, 0.12, 'sine', 0.08, 220); },
+      wrong() { tone(196, 0, 0.2, 'sine', 0.2, 120); },
+      near() { tone(659.25, 0, 0.12, 'sine', 0.12); tone(622.25, 0.1, 0.18, 'sine', 0.12); },
+      hint() { tone(1318.5, 0, 0.45, 'sine', 0.09); tone(1975.5, 0.07, 0.45, 'sine', 0.05); },
+      shuffle() { [660, 880, 740, 990, 830].forEach((f, i) => tone(f, i * 0.03, 0.08, 'sine', 0.07, f * 1.2)); },
+      win() { [523.25, 659.25, 783.99, 1046.5, 1318.5, 1567.98].forEach((f, i) => tone(f, i * 0.085, 0.55, 'triangle', 0.11)); }
+    };
+  })();
+
+  /* ---------- days & saved progress (one record per day, so earlier days can be played) ---------- */
+  const TODAY = WB.todayNumber();
+  const previewDayNum = WB.previewDay((location.hash || '') + ' ' + (location.search || ''));
+  let viewDay = previewDayNum != null ? previewDayNum : TODAY;
+  const KEY = 'wordbubbles-daily-v4';
+
+  function freshProgress() { return { found: [], consumed: [], moves: 0, hints: {}, done: false }; }
+  function loadStore() {
+    let s = null;
+    try { s = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { s = null; }
+    return (s && typeof s === 'object') ? s : {};
+  }
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* storage unavailable */ } }
+
+  const store = loadStore();
+  store.days = (store.days && typeof store.days === 'object') ? store.days : {};
+  Object.keys(store.days).forEach(k => { if (parseInt(k, 10) < TODAY - KEEP_DAYS) delete store.days[k]; });
+  store.stats = Object.assign({ days: 0, streak: 0, best: 0, perfect: 0, lastDay: null }, store.stats || {});
+
+  const temp = {};               // records for days after today (previews) live only in memory
+  function recFor(day) {
+    const home = day > TODAY ? temp : store.days;
+    if (!home[day] || typeof home[day] !== 'object') home[day] = {};
+    LEVELS.forEach(l => { if (!home[day][l] || !Array.isArray(home[day][l].found)) home[day][l] = freshProgress(); });
+    return home[day];
+  }
+  function isDone(day, level) { const r = (day > TODAY ? temp : store.days)[day]; return !!(r && r[level] && r[level].done); }
+  function firstOpenLevel(day) { return LEVELS.find(l => !isDone(day, l)) || 'hard'; }
+  function unfinishedDay(except) {
+    for (let d = TODAY; d >= Math.max(1, TODAY - KEEP_DAYS); d--) if (d !== except && LEVELS.some(l => !isDone(d, l))) return d;
+    return null;
+  }
+  const dayWord = d => d === TODAY ? 'Today' : fmtDate(d);
+  // most recent day (other than this one) where this difficulty isn't done
+  function unfinishedAt(level, except) {
+    for (let d = TODAY; d >= Math.max(1, TODAY - KEEP_DAYS); d--) if (d !== except && !isDone(d, level)) return d;
+    return null;
+  }
+  function fmtDate(day, opts) {
+    try { return new Date(WB.EPOCH_UTC + (day - 1) * 86400000).toLocaleDateString(undefined, Object.assign({ month: 'short', day: 'numeric', timeZone: 'UTC' }, opts || {})); }
+    catch (e) { return '#' + day; }
+  }
+  const fullDate = day => fmtDate(day, { year: 'numeric' });
+  const weekday = day => fmtDate(day, { weekday: 'short', month: undefined, day: undefined });
+  const relDay = day => day === TODAY ? 'Today' : day === TODAY - 1 ? 'Yesterday' : weekday(day);
+  const ICONS = {
+    next: '<path d="M5 12h13M13 6l6 6-6 6"/>',
+    replay: '<path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4.5h4.5"/>',
+    earlier: '<rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3.5v3M16 3.5v3M14 13.5l-3 2.5 3 2.5"/>',
+    share: '<path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"/><path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>',
+    play: '<path d="M8 5.5v13l10.5-6.5z"/>'
+  };
+  const icon = name => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + '</svg>';
+
+  /* ---------- boards ---------- */
+  const cache = {};
+  function boards(day) {
+    if (!cache[day]) {
+      const data = WB.PUZZLES[WB.puzzleIndex(day)];
+      cache[day] = {};
+      LEVELS.forEach(l => { cache[day][l] = WB.buildPuzzle(l, day, data[l]); });
+    }
+    return cache[day];
+  }
+  const tutorialBoard = WB.buildTutorial();
+
+  let tutorialProgress = freshProgress();
+  let current = (!store.tutorialDone && viewDay === TODAY) ? 'tutorial' : firstOpenLevel(viewDay);
+  let chain = [];               // picked bubble ids, in the order they were picked
+  let order = [];               // bubble ids in honeycomb order (changes only when you press Shuffle)
+  let gesture = null;           // the swipe in progress: { pointerId, added, last }
+  let busy = false;             // true while a word is clicking into place
+  let boardEls = {};            // bubble id -> element (current board)
+  let pos = {};                 // bubble id -> { x, y, r } on the board
+  let D = 60;                   // current bubble diameter
+  let msgTimer = null;
+
+  const pz = () => current === 'tutorial' ? tutorialBoard : boards(viewDay)[current];
+  const pg = () => current === 'tutorial' ? tutorialProgress : recFor(viewDay)[current];
+  /* ---------- scoring: points only ever go up ----------
+     hidden word = 10 per letter × combo (×1…×4) · bonus word = 5 per letter · a word finished by hints = 5 per letter
+     Ranks are a share of the board's possible points, like Spelling Bee's ladder. */
+  // Stars are measured against the board's base score (10 points per letter of the hidden words), not a perfect run:
+  // 1★ at half of it, 2★ at all of it (any clean finish), 3★ at 1.5× (keep a combo going, or add bonus words).
+  const STAR_AT = [0.5, 1.0, 1.5];
+  const mult = c => Math.min(Math.max(c, 1), 4);
+  function allBonus(day, level) {
+    const raw = (typeof WB_BONUS !== 'undefined' && WB_BONUS[day] && WB_BONUS[day][level[0]]) || '';
+    return raw ? raw.split(';').map(e => { const i = e.indexOf('='); return { key: e.slice(0, i), word: e.slice(i + 1) }; }) : [];
+  }
+  function maxPoints(day, level) { return boards(day)[level].words.reduce((t, w) => t + w.length * 10, 0); }
+  function rankFor(points, day, level, finished) {
+    const f = points / Math.max(1, maxPoints(day, level));
+    let n = STAR_AT.filter(t => f >= t).length;
+    if (finished) n = Math.max(1, n);
+    const lo = n ? STAR_AT[n - 1] : 0, hi = STAR_AT[n];
+    return { stars: n, frac: f, toNext: hi != null ? Math.max(0, Math.min(1, (f - lo) / (hi - lo))) : 1 };
+  }
+  const starText = n => '★'.repeat(n) + '☆'.repeat(3 - n);
+  // time medals, scaled to the board's size: gold 3s, silver 5s, bronze 8s per bubble
+  const MEDALS = [['gold', 'Gold', 3000, '🥇'], ['silver', 'Silver', 5000, '🥈'], ['bronze', 'Bronze', 8000, '🥉']];
+  function medalTimes(day, level, withRecord = true) {
+    const n = boards(day)[level].bubbles.length;
+    const list = MEDALS.map(m => ({ key: m[0], name: m[1], ms: n * m[2], emoji: m[3] }));
+    // world and regional records, when they exist and beat the gold target, sit above gold (end screen only)
+    if (withRecord) {
+      const gold = list[0].ms, top = [];
+      let faster = 0;   // a narrower record only shows when it's slower than the broader one above it
+      [['world', 'record', 'World record', '👑'],
+       ['country', 'country', PLACE.country ? PLACE.country.name + ' record' : '', PLACE.country ? PLACE.country.flag : ''],
+       ['local', 'local', PLACE.local ? PLACE.local.name + ' record' : '', '📍']
+      ].forEach(([tier, key, name, icon]) => {
+        const ms = tierRecord(day, level, tier);
+        if (ms && ms < gold && ms > faster) { top.push({ key: key, name: name, ms: ms, emoji: icon, icon: icon }); faster = ms; }
+      });
+      list.unshift(...top);
+    }
+    return list;
+  }
+
+  /* ---------- world records: the fastest finish anyone has posted for each board (shared database) ---------- */
+  let dbApi = null, wrKey = null, wrUnsub = [];
+  const records = {};                       // record doc id -> ms
+  const boardKey = (day, level) => 'd' + day + '-' + level;
+  // where the player is, from the device's time zone only (the page never sees a location):
+  // the country via the time-zone database, and the continent from the zone's area
+  const WB_TZ_COUNTRY = {"CI":"Africa/Abidjan","GH":"Africa/Accra","ET":"Africa/Addis_Ababa","DZ":"Africa/Algiers","ER":"Africa/Asmara Africa/Asmera","ML":"Africa/Bamako Africa/Timbuktu","CF":"Africa/Bangui","GM":"Africa/Banjul","GW":"Africa/Bissau","MW":"Africa/Blantyre","CG":"Africa/Brazzaville","BI":"Africa/Bujumbura","EG":"Africa/Cairo","MA":"Africa/Casablanca","ES":"Africa/Ceuta Atlantic/Canary Europe/Madrid","GN":"Africa/Conakry","SN":"Africa/Dakar","TZ":"Africa/Dar_es_Salaam","DJ":"Africa/Djibouti","CM":"Africa/Douala","EH":"Africa/El_Aaiun","SL":"Africa/Freetown","BW":"Africa/Gaborone","ZW":"Africa/Harare","ZA":"Africa/Johannesburg","SS":"Africa/Juba","UG":"Africa/Kampala","SD":"Africa/Khartoum","RW":"Africa/Kigali","CD":"Africa/Kinshasa Africa/Lubumbashi","NG":"Africa/Lagos","GA":"Africa/Libreville","TG":"Africa/Lome","AO":"Africa/Luanda","ZM":"Africa/Lusaka","GQ":"Africa/Malabo","MZ":"Africa/Maputo","LS":"Africa/Maseru","SZ":"Africa/Mbabane","SO":"Africa/Mogadishu","LR":"Africa/Monrovia","KE":"Africa/Nairobi","TD":"Africa/Ndjamena","NE":"Africa/Niamey","MR":"Africa/Nouakchott","BF":"Africa/Ouagadougou","BJ":"Africa/Porto-Novo","ST":"Africa/Sao_Tome","LY":"Africa/Tripoli","TN":"Africa/Tunis","NA":"Africa/Windhoek","US":"America/Adak America/Anchorage America/Atka America/Boise America/Chicago America/Denver America/Detroit America/Fort_Wayne America/Indiana/Indianapolis America/Indiana/Knox America/Indiana/Marengo America/Indiana/Petersburg America/Indiana/Tell_City America/Indiana/Vevay America/Indiana/Vincennes America/Indiana/Winamac America/Indianapolis America/Juneau America/Kentucky/Louisville America/Kentucky/Monticello America/Knox_IN America/Los_Angeles America/Louisville America/Menominee America/Metlakatla America/New_York America/Nome America/North_Dakota/Beulah America/North_Dakota/Center America/North_Dakota/New_Salem America/Phoenix America/Shiprock America/Sitka America/Yakutat Pacific/Honolulu Pacific/Johnston US/Alaska US/Aleutian US/Arizona US/Central US/East-Indiana US/Eastern US/Hawaii US/Indiana-Starke US/Michigan US/Mountain US/Pacific","AI":"America/Anguilla","AG":"America/Antigua","BR":"America/Araguaina America/Bahia America/Belem America/Boa_Vista America/Campo_Grande America/Cuiaba America/Eirunepe America/Fortaleza America/Maceio America/Manaus America/Noronha America/Porto_Acre America/Porto_Velho America/Recife America/Rio_Branco America/Santarem America/Sao_Paulo Brazil/Acre Brazil/DeNoronha Brazil/East Brazil/West","AR":"America/Argentina/Buenos_Aires America/Argentina/Catamarca America/Argentina/ComodRivadavia America/Argentina/Cordoba America/Argentina/Jujuy America/Argentina/La_Rioja America/Argentina/Mendoza America/Argentina/Rio_Gallegos America/Argentina/Salta America/Argentina/San_Juan America/Argentina/San_Luis America/Argentina/Tucuman America/Argentina/Ushuaia America/Buenos_Aires America/Catamarca America/Cordoba America/Jujuy America/Mendoza America/Rosario","AW":"America/Aruba","PY":"America/Asuncion","CA":"America/Atikokan America/Blanc-Sablon America/Cambridge_Bay America/Coral_Harbour America/Creston America/Dawson America/Dawson_Creek America/Edmonton America/Fort_Nelson America/Glace_Bay America/Goose_Bay America/Halifax America/Inuvik America/Iqaluit America/Moncton America/Montreal America/Nipigon America/Pangnirtung America/Rainy_River America/Rankin_Inlet America/Regina America/Resolute America/St_Johns America/Swift_Current America/Thunder_Bay America/Toronto America/Vancouver America/Whitehorse America/Winnipeg America/Yellowknife Canada/Atlantic Canada/Central Canada/Eastern Canada/Mountain Canada/Newfoundland Canada/Pacific Canada/Saskatchewan Canada/Yukon","MX":"America/Bahia_Banderas America/Cancun America/Chihuahua America/Ciudad_Juarez America/Ensenada America/Hermosillo America/Matamoros America/Mazatlan America/Merida America/Mexico_City America/Monterrey America/Ojinaga America/Santa_Isabel America/Tijuana Mexico/BajaNorte Mexico/BajaSur Mexico/General","BB":"America/Barbados","BZ":"America/Belize","CO":"America/Bogota","VE":"America/Caracas","GF":"America/Cayenne","KY":"America/Cayman","CR":"America/Costa_Rica","CL":"America/Coyhaique America/Punta_Arenas America/Santiago Chile/Continental Chile/EasterIsland Pacific/Easter","CW":"America/Curacao","GL":"America/Danmarkshavn America/Godthab America/Nuuk America/Scoresbysund America/Thule","DM":"America/Dominica","SV":"America/El_Salvador","TC":"America/Grand_Turk","GD":"America/Grenada","GP":"America/Guadeloupe","GT":"America/Guatemala","EC":"America/Guayaquil Pacific/Galapagos","GY":"America/Guyana","CU":"America/Havana","JM":"America/Jamaica","BQ":"America/Kralendijk","BO":"America/La_Paz","PE":"America/Lima","SX":"America/Lower_Princes","NI":"America/Managua","MF":"America/Marigot","MQ":"America/Martinique","PM":"America/Miquelon","UY":"America/Montevideo","MS":"America/Montserrat","BS":"America/Nassau","PA":"America/Panama","SR":"America/Paramaribo","HT":"America/Port-au-Prince","TT":"America/Port_of_Spain","PR":"America/Puerto_Rico","DO":"America/Santo_Domingo","BL":"America/St_Barthelemy","KN":"America/St_Kitts","LC":"America/St_Lucia","VI":"America/St_Thomas America/Virgin","VC":"America/St_Vincent","HN":"America/Tegucigalpa","VG":"America/Tortola","AQ":"Antarctica/Casey Antarctica/Davis Antarctica/DumontDUrville Antarctica/Mawson Antarctica/McMurdo Antarctica/Palmer Antarctica/Rothera Antarctica/South_Pole Antarctica/Syowa Antarctica/Troll Antarctica/Vostok","AU":"Antarctica/Macquarie Australia/ACT Australia/Adelaide Australia/Brisbane Australia/Broken_Hill Australia/Canberra Australia/Currie Australia/Darwin Australia/Eucla Australia/Hobart Australia/LHI Australia/Lindeman Australia/Lord_Howe Australia/Melbourne Australia/NSW Australia/North Australia/Perth Australia/Queensland Australia/South Australia/Sydney Australia/Tasmania Australia/Victoria Australia/West Australia/Yancowinna","SJ":"Arctic/Longyearbyen","YE":"Asia/Aden","KZ":"Asia/Almaty Asia/Aqtau Asia/Aqtobe Asia/Atyrau Asia/Oral Asia/Qostanay Asia/Qyzylorda","JO":"Asia/Amman","RU":"Asia/Anadyr Asia/Barnaul Asia/Chita Asia/Irkutsk Asia/Kamchatka Asia/Khandyga Asia/Krasnoyarsk Asia/Magadan Asia/Novokuznetsk Asia/Novosibirsk Asia/Omsk Asia/Sakhalin Asia/Srednekolymsk Asia/Tomsk Asia/Ust-Nera Asia/Vladivostok Asia/Yakutsk Asia/Yekaterinburg Europe/Astrakhan Europe/Kaliningrad Europe/Kirov Europe/Moscow Europe/Samara Europe/Saratov Europe/Ulyanovsk Europe/Volgograd","TM":"Asia/Ashgabat Asia/Ashkhabad","IQ":"Asia/Baghdad","BH":"Asia/Bahrain","AZ":"Asia/Baku","TH":"Asia/Bangkok","LB":"Asia/Beirut","KG":"Asia/Bishkek","BN":"Asia/Brunei","IN":"Asia/Calcutta Asia/Kolkata","MN":"Asia/Choibalsan Asia/Hovd Asia/Ulaanbaatar Asia/Ulan_Bator","CN":"Asia/Chongqing Asia/Chungking Asia/Harbin Asia/Kashgar Asia/Shanghai Asia/Urumqi","LK":"Asia/Colombo","BD":"Asia/Dacca Asia/Dhaka","SY":"Asia/Damascus","TL":"Asia/Dili","AE":"Asia/Dubai","TJ":"Asia/Dushanbe","CY":"Asia/Famagusta Asia/Nicosia Europe/Nicosia","PS":"Asia/Gaza Asia/Hebron","VN":"Asia/Ho_Chi_Minh Asia/Saigon","HK":"Asia/Hong_Kong","TR":"Asia/Istanbul Europe/Istanbul","ID":"Asia/Jakarta Asia/Jayapura Asia/Makassar Asia/Pontianak Asia/Ujung_Pandang","IL":"Asia/Jerusalem Asia/Tel_Aviv","AF":"Asia/Kabul","PK":"Asia/Karachi","NP":"Asia/Kathmandu Asia/Katmandu","MY":"Asia/Kuala_Lumpur Asia/Kuching","KW":"Asia/Kuwait","MO":"Asia/Macao Asia/Macau","PH":"Asia/Manila","OM":"Asia/Muscat","KH":"Asia/Phnom_Penh","KP":"Asia/Pyongyang","QA":"Asia/Qatar","MM":"Asia/Rangoon Asia/Yangon","SA":"Asia/Riyadh","UZ":"Asia/Samarkand Asia/Tashkent","KR":"Asia/Seoul","SG":"Asia/Singapore","TW":"Asia/Taipei","GE":"Asia/Tbilisi","IR":"Asia/Tehran","BT":"Asia/Thimbu Asia/Thimphu","JP":"Asia/Tokyo","LA":"Asia/Vientiane","AM":"Asia/Yerevan","PT":"Atlantic/Azores Atlantic/Madeira Europe/Lisbon","BM":"Atlantic/Bermuda","CV":"Atlantic/Cape_Verde","FO":"Atlantic/Faeroe Atlantic/Faroe","NO":"Atlantic/Jan_Mayen Europe/Oslo","IS":"Atlantic/Reykjavik","GS":"Atlantic/South_Georgia","SH":"Atlantic/St_Helena","FK":"Atlantic/Stanley","NL":"Europe/Amsterdam","AD":"Europe/Andorra","GR":"Europe/Athens","GB":"Europe/Belfast Europe/London","RS":"Europe/Belgrade","DE":"Europe/Berlin Europe/Busingen","SK":"Europe/Bratislava","BE":"Europe/Brussels","RO":"Europe/Bucharest","HU":"Europe/Budapest","MD":"Europe/Chisinau Europe/Tiraspol","DK":"Europe/Copenhagen","IE":"Europe/Dublin","GI":"Europe/Gibraltar","GG":"Europe/Guernsey","FI":"Europe/Helsinki","IM":"Europe/Isle_of_Man","JE":"Europe/Jersey","UA":"Europe/Kiev Europe/Kyiv Europe/Simferopol Europe/Uzhgorod Europe/Zaporozhye","SI":"Europe/Ljubljana","LU":"Europe/Luxembourg","MT":"Europe/Malta","AX":"Europe/Mariehamn","BY":"Europe/Minsk","MC":"Europe/Monaco","FR":"Europe/Paris","ME":"Europe/Podgorica","CZ":"Europe/Prague","LV":"Europe/Riga","IT":"Europe/Rome","SM":"Europe/San_Marino","BA":"Europe/Sarajevo","MK":"Europe/Skopje","BG":"Europe/Sofia","SE":"Europe/Stockholm","EE":"Europe/Tallinn","AL":"Europe/Tirane","LI":"Europe/Vaduz","VA":"Europe/Vatican","AT":"Europe/Vienna","LT":"Europe/Vilnius","PL":"Europe/Warsaw","HR":"Europe/Zagreb","CH":"Europe/Zurich","MG":"Indian/Antananarivo","IO":"Indian/Chagos","CX":"Indian/Christmas","CC":"Indian/Cocos","KM":"Indian/Comoro","TF":"Indian/Kerguelen","SC":"Indian/Mahe","MV":"Indian/Maldives","MU":"Indian/Mauritius","YT":"Indian/Mayotte","RE":"Indian/Reunion","WS":"Pacific/Apia","NZ":"Pacific/Auckland Pacific/Chatham","PG":"Pacific/Bougainville Pacific/Port_Moresby","FM":"Pacific/Chuuk Pacific/Kosrae Pacific/Pohnpei Pacific/Ponape Pacific/Truk Pacific/Yap","VU":"Pacific/Efate","KI":"Pacific/Enderbury Pacific/Kanton Pacific/Kiritimati Pacific/Tarawa","TK":"Pacific/Fakaofo","FJ":"Pacific/Fiji","TV":"Pacific/Funafuti","PF":"Pacific/Gambier Pacific/Marquesas Pacific/Tahiti","SB":"Pacific/Guadalcanal","GU":"Pacific/Guam","MH":"Pacific/Kwajalein Pacific/Majuro","UM":"Pacific/Midway Pacific/Wake","NR":"Pacific/Nauru","NU":"Pacific/Niue","NF":"Pacific/Norfolk","NC":"Pacific/Noumea","AS":"Pacific/Pago_Pago Pacific/Samoa US/Samoa","PW":"Pacific/Palau","PN":"Pacific/Pitcairn","CK":"Pacific/Rarotonga","MP":"Pacific/Saipan","TO":"Pacific/Tongatapu","WF":"Pacific/Wallis"};
+  const WB_TZ_LOCAL = {"Antarctica/McMurdo":["Antarctica~McMurdo","McMurdo area"],"Antarctica/Casey":["Antarctica~Casey","Casey"],"Antarctica/Davis":["Antarctica~Davis","Davis"],"Antarctica/DumontDUrville":["Antarctica~DumontDUrville","Dumont-d'Urville"],"Antarctica/Mawson":["Antarctica~Mawson","Mawson"],"Antarctica/Palmer":["Antarctica~Palmer","Palmer"],"Antarctica/Rothera":["Antarctica~Rothera","Rothera"],"Antarctica/Syowa":["Antarctica~Syowa","Syowa"],"Antarctica/Troll":["Antarctica~Troll","Troll"],"Antarctica/Vostok":["Antarctica~Vostok","Vostok"],"America/Argentina/Buenos_Aires":["America~Argentina~Buenos_Aires","Buenos Aires"],"America/Argentina/Cordoba":["America~Argentina~Cordoba","Argentina"],"America/Argentina/Salta":["America~Argentina~Salta","Salta"],"America/Argentina/Jujuy":["America~Argentina~Jujuy","Jujuy"],"America/Argentina/Tucuman":["America~Argentina~Tucuman","Tucuman"],"America/Argentina/Catamarca":["America~Argentina~Catamarca","Catamarca area"],"America/Argentina/La_Rioja":["America~Argentina~La_Rioja","La Rioja"],"America/Argentina/San_Juan":["America~Argentina~San_Juan","San Juan"],"America/Argentina/Mendoza":["America~Argentina~Mendoza","Mendoza"],"America/Argentina/San_Luis":["America~Argentina~San_Luis","San Luis"],"America/Argentina/Rio_Gallegos":["America~Argentina~Rio_Gallegos","Santa Cruz"],"America/Argentina/Ushuaia":["America~Argentina~Ushuaia","Tierra del Fuego"],"Australia/Lord_Howe":["Australia~Lord_Howe","Lord Howe Island"],"Antarctica/Macquarie":["Antarctica~Macquarie","Macquarie Island"],"Australia/Hobart":["Australia~Hobart","Tasmania"],"Australia/Melbourne":["Australia~Melbourne","Victoria"],"Australia/Sydney":["Australia~Sydney","New South Wales"],"Australia/Broken_Hill":["Australia~Broken_Hill","New South Wales"],"Australia/Brisbane":["Australia~Brisbane","Queensland"],"Australia/Lindeman":["Australia~Lindeman","Queensland"],"Australia/Adelaide":["Australia~Adelaide","South Australia"],"Australia/Darwin":["Australia~Darwin","Darwin area"],"Australia/Perth":["Australia~Perth","Perth area"],"Australia/Eucla":["Australia~Eucla","Eucla area"],"America/Noronha":["America~Noronha","Atlantic islands"],"America/Belem":["America~Belem","Para, Amapa"],"America/Fortaleza":["America~Fortaleza","Brazil"],"America/Recife":["America~Recife","Pernambuco"],"America/Araguaina":["America~Araguaina","Tocantins"],"America/Maceio":["America~Maceio","Alagoas, Sergipe"],"America/Bahia":["America~Bahia","Bahia"],"America/Sao_Paulo":["America~Sao_Paulo","Brazil"],"America/Campo_Grande":["America~Campo_Grande","Campo Grande area"],"America/Cuiaba":["America~Cuiaba","Mato Grosso"],"America/Santarem":["America~Santarem","Para"],"America/Porto_Velho":["America~Porto_Velho","Rondonia"],"America/Boa_Vista":["America~Boa_Vista","Roraima"],"America/Manaus":["America~Manaus","Amazonas"],"America/Eirunepe":["America~Eirunepe","Amazonas"],"America/Rio_Branco":["America~Rio_Branco","Acre"],"America/St_Johns":["America~St_Johns","St Johns area"],"America/Halifax":["America~Halifax","NS, PE"],"America/Glace_Bay":["America~Glace_Bay","NS"],"America/Moncton":["America~Moncton","New Brunswick"],"America/Goose_Bay":["America~Goose_Bay","Labrador"],"America/Blanc-Sablon":["America~Blanc-Sablon","QC"],"America/Toronto":["America~Toronto","ON & QC"],"America/Iqaluit":["America~Iqaluit","NU"],"America/Atikokan":["America~Atikokan","ON, NU"],"America/Winnipeg":["America~Winnipeg","Manitoba, ON"],"America/Resolute":["America~Resolute","NU"],"America/Rankin_Inlet":["America~Rankin_Inlet","NU"],"America/Regina":["America~Regina","SK"],"America/Swift_Current":["America~Swift_Current","SK"],"America/Edmonton":["America~Edmonton","AB, BC, NT, SK"],"America/Cambridge_Bay":["America~Cambridge_Bay","NU"],"America/Inuvik":["America~Inuvik","NT"],"America/Vancouver":["America~Vancouver","BC"],"America/Creston":["America~Creston","BC"],"America/Dawson_Creek":["America~Dawson_Creek","BC"],"America/Fort_Nelson":["America~Fort_Nelson","BC"],"America/Whitehorse":["America~Whitehorse","Yukon"],"America/Dawson":["America~Dawson","Yukon"],"Africa/Kinshasa":["Africa~Kinshasa","Kinshasa area"],"Africa/Lubumbashi":["Africa~Lubumbashi","Lubumbashi area"],"America/Santiago":["America~Santiago","most of Chile"],"America/Coyhaique":["America~Coyhaique","Aysen Region"],"America/Punta_Arenas":["America~Punta_Arenas","Punta Arenas area"],"Pacific/Easter":["Pacific~Easter","Easter Island"],"Asia/Shanghai":["Asia~Shanghai","Beijing Time"],"Asia/Urumqi":["Asia~Urumqi","Xinjiang Time"],"Asia/Nicosia":["Asia~Nicosia","most of Cyprus"],"Asia/Famagusta":["Asia~Famagusta","Northern Cyprus"],"Europe/Berlin":["Europe~Berlin","most of Germany"],"Europe/Busingen":["Europe~Busingen","Busingen"],"America/Guayaquil":["America~Guayaquil","Ecuador"],"Pacific/Galapagos":["Pacific~Galapagos","Galapagos area"],"Europe/Madrid":["Europe~Madrid","Spain"],"Africa/Ceuta":["Africa~Ceuta","Ceuta, Melilla"],"Atlantic/Canary":["Atlantic~Canary","Canary Islands"],"Pacific/Chuuk":["Pacific~Chuuk","Chuuk/Truk, Yap"],"Pacific/Pohnpei":["Pacific~Pohnpei","Pohnpei/Ponape"],"Pacific/Kosrae":["Pacific~Kosrae","Kosrae"],"America/Nuuk":["America~Nuuk","Nuuk area"],"America/Danmarkshavn":["America~Danmarkshavn","National Park"],"America/Scoresbysund":["America~Scoresbysund","Scoresbysund area"],"America/Thule":["America~Thule","Thule/Pituffik"],"Asia/Jakarta":["Asia~Jakarta","Java, Sumatra"],"Asia/Pontianak":["Asia~Pontianak","Borneo"],"Asia/Makassar":["Asia~Makassar","Makassar area"],"Asia/Jayapura":["Asia~Jayapura","Jayapura area"],"Pacific/Tarawa":["Pacific~Tarawa","Gilbert Islands"],"Pacific/Kanton":["Pacific~Kanton","Phoenix Islands"],"Pacific/Kiritimati":["Pacific~Kiritimati","Line Islands"],"Asia/Almaty":["Asia~Almaty","Almaty area"],"Asia/Qyzylorda":["Asia~Qyzylorda","Qyzylorda area"],"Asia/Qostanay":["Asia~Qostanay","Qostanay area"],"Asia/Aqtobe":["Asia~Aqtobe","Aqtobe/Aktobe"],"Asia/Aqtau":["Asia~Aqtau","Aqtau area"],"Asia/Atyrau":["Asia~Atyrau","Atyrau area"],"Asia/Oral":["Asia~Oral","West Kazakhstan"],"Pacific/Majuro":["Pacific~Majuro","Majuro area"],"Pacific/Kwajalein":["Pacific~Kwajalein","Kwajalein"],"Asia/Ulaanbaatar":["Asia~Ulaanbaatar","most of Mongolia"],"Asia/Hovd":["Asia~Hovd","Hovd area"],"America/Mexico_City":["America~Mexico_City","Central Mexico"],"America/Cancun":["America~Cancun","Quintana Roo"],"America/Merida":["America~Merida","Merida area"],"America/Monterrey":["America~Monterrey","Monterrey area"],"America/Matamoros":["America~Matamoros","Matamoros area"],"America/Chihuahua":["America~Chihuahua","Chihuahua"],"America/Ciudad_Juarez":["America~Ciudad_Juarez","Chihuahua"],"America/Ojinaga":["America~Ojinaga","Chihuahua"],"America/Mazatlan":["America~Mazatlan","Mazatlan area"],"America/Bahia_Banderas":["America~Bahia_Banderas","Bahia Banderas area"],"America/Hermosillo":["America~Hermosillo","Sonora"],"America/Tijuana":["America~Tijuana","Baja California"],"Asia/Kuala_Lumpur":["Asia~Kuala_Lumpur","Malaysia"],"Asia/Kuching":["Asia~Kuching","Sabah, Sarawak"],"Pacific/Auckland":["Pacific~Auckland","Auckland area"],"Pacific/Chatham":["Pacific~Chatham","Chatham Islands"],"Pacific/Tahiti":["Pacific~Tahiti","Society Islands"],"Pacific/Marquesas":["Pacific~Marquesas","Marquesas area"],"Pacific/Gambier":["Pacific~Gambier","Gambier Islands"],"Pacific/Port_Moresby":["Pacific~Port_Moresby","Port Moresby area"],"Pacific/Bougainville":["Pacific~Bougainville","Bougainville"],"Asia/Gaza":["Asia~Gaza","Gaza Strip"],"Asia/Hebron":["Asia~Hebron","West Bank"],"Europe/Lisbon":["Europe~Lisbon","Portugal"],"Atlantic/Madeira":["Atlantic~Madeira","Madeira Islands"],"Atlantic/Azores":["Atlantic~Azores","Azores"],"Europe/Kaliningrad":["Europe~Kaliningrad","Kaliningrad"],"Europe/Moscow":["Europe~Moscow","Moscow area"],"Europe/Simferopol":["Europe~Simferopol","Crimea"],"Europe/Kirov":["Europe~Kirov","Kirov"],"Europe/Volgograd":["Europe~Volgograd","Volgograd"],"Europe/Astrakhan":["Europe~Astrakhan","Astrakhan"],"Europe/Saratov":["Europe~Saratov","Saratov"],"Europe/Ulyanovsk":["Europe~Ulyanovsk","Ulyanovsk"],"Europe/Samara":["Europe~Samara","Samara, Udmurtia"],"Asia/Yekaterinburg":["Asia~Yekaterinburg","Urals"],"Asia/Omsk":["Asia~Omsk","Omsk"],"Asia/Novosibirsk":["Asia~Novosibirsk","Novosibirsk"],"Asia/Barnaul":["Asia~Barnaul","Altai"],"Asia/Tomsk":["Asia~Tomsk","Tomsk"],"Asia/Novokuznetsk":["Asia~Novokuznetsk","Kemerovo"],"Asia/Krasnoyarsk":["Asia~Krasnoyarsk","Krasnoyarsk area"],"Asia/Irkutsk":["Asia~Irkutsk","Irkutsk area"],"Asia/Chita":["Asia~Chita","Zabaykalsky"],"Asia/Yakutsk":["Asia~Yakutsk","Lena River"],"Asia/Khandyga":["Asia~Khandyga","Khandyga area"],"Asia/Vladivostok":["Asia~Vladivostok","Amur River"],"Asia/Ust-Nera":["Asia~Ust-Nera","Oymyakonsky"],"Asia/Magadan":["Asia~Magadan","Magadan"],"Asia/Sakhalin":["Asia~Sakhalin","Sakhalin Island"],"Asia/Srednekolymsk":["Asia~Srednekolymsk","Srednekolymsk area"],"Asia/Kamchatka":["Asia~Kamchatka","Kamchatka"],"Asia/Anadyr":["Asia~Anadyr","Bering Sea"],"Europe/Kyiv":["Europe~Kyiv","most of Ukraine"],"Pacific/Midway":["Pacific~Midway","Midway Islands"],"Pacific/Wake":["Pacific~Wake","Wake Island"],"America/New_York":["America~New_York","Eastern"],"America/Detroit":["America~Detroit","MI"],"America/Kentucky/Louisville":["America~Kentucky~Louisville","KY"],"America/Kentucky/Monticello":["America~Kentucky~Monticello","KY"],"America/Indiana/Indianapolis":["America~Indiana~Indianapolis","IN"],"America/Indiana/Vincennes":["America~Indiana~Vincennes","IN"],"America/Indiana/Winamac":["America~Indiana~Winamac","IN"],"America/Indiana/Marengo":["America~Indiana~Marengo","IN"],"America/Indiana/Petersburg":["America~Indiana~Petersburg","IN"],"America/Indiana/Vevay":["America~Indiana~Vevay","IN"],"America/Chicago":["America~Chicago","Central"],"America/Indiana/Tell_City":["America~Indiana~Tell_City","IN"],"America/Indiana/Knox":["America~Indiana~Knox","IN"],"America/Menominee":["America~Menominee","MI"],"America/North_Dakota/Center":["America~North_Dakota~Center","ND"],"America/North_Dakota/New_Salem":["America~North_Dakota~New_Salem","ND"],"America/North_Dakota/Beulah":["America~North_Dakota~Beulah","ND"],"America/Denver":["America~Denver","Mountain"],"America/Boise":["America~Boise","ID, OR"],"America/Phoenix":["America~Phoenix","AZ"],"America/Los_Angeles":["America~Los_Angeles","Pacific"],"America/Anchorage":["America~Anchorage","Alaska"],"America/Juneau":["America~Juneau","Juneau area"],"America/Sitka":["America~Sitka","Sitka area"],"America/Metlakatla":["America~Metlakatla","Annette Island"],"America/Yakutat":["America~Yakutat","Yakutat"],"America/Nome":["America~Nome","Alaska"],"America/Adak":["America~Adak","Adak area"],"Pacific/Honolulu":["Pacific~Honolulu","Hawaii"],"Asia/Samarkand":["Asia~Samarkand","Uzbekistan"],"Asia/Tashkent":["Asia~Tashkent","Uzbekistan"],"Australia/ACT":["Australia~Sydney","New South Wales"],"Australia/LHI":["Australia~Lord_Howe","Lord Howe Island"],"Australia/NSW":["Australia~Sydney","New South Wales"],"Australia/North":["Australia~Darwin","Darwin area"],"Australia/Queensland":["Australia~Brisbane","Queensland"],"Australia/South":["Australia~Adelaide","South Australia"],"Australia/Tasmania":["Australia~Hobart","Tasmania"],"Australia/Victoria":["Australia~Melbourne","Victoria"],"Australia/West":["Australia~Perth","Perth area"],"Australia/Yancowinna":["Australia~Broken_Hill","New South Wales"],"Brazil/Acre":["America~Rio_Branco","Acre"],"Brazil/DeNoronha":["America~Noronha","Atlantic islands"],"Brazil/East":["America~Sao_Paulo","Brazil"],"Brazil/West":["America~Manaus","Amazonas"],"Canada/Atlantic":["America~Halifax","NS, PE"],"Canada/Central":["America~Winnipeg","Manitoba, ON"],"Canada/Eastern":["America~Toronto","ON & QC"],"Canada/Mountain":["America~Edmonton","AB, BC, NT, SK"],"Canada/Newfoundland":["America~St_Johns","St Johns area"],"Canada/Pacific":["America~Vancouver","BC"],"Canada/Saskatchewan":["America~Regina","SK"],"Canada/Yukon":["America~Whitehorse","Yukon"],"Chile/Continental":["America~Santiago","most of Chile"],"Chile/EasterIsland":["Pacific~Easter","Easter Island"],"Mexico/BajaNorte":["America~Tijuana","Baja California"],"Mexico/BajaSur":["America~Mazatlan","Mazatlan area"],"Mexico/General":["America~Mexico_City","Central Mexico"],"US/Alaska":["America~Anchorage","Alaska"],"US/Aleutian":["America~Adak","Adak area"],"US/Arizona":["America~Phoenix","AZ"],"US/Central":["America~Chicago","Central"],"US/East-Indiana":["America~Indiana~Indianapolis","IN"],"US/Eastern":["America~New_York","Eastern"],"US/Hawaii":["Pacific~Honolulu","Hawaii"],"US/Indiana-Starke":["America~Indiana~Knox","IN"],"US/Michigan":["America~Detroit","MI"],"US/Mountain":["America~Denver","Mountain"],"US/Pacific":["America~Los_Angeles","Pacific"],"America/Buenos_Aires":["America~Argentina~Buenos_Aires","Buenos Aires"],"America/Catamarca":["America~Argentina~Catamarca","Catamarca area"],"America/Cordoba":["America~Argentina~Cordoba","Argentina"],"America/Indianapolis":["America~Indiana~Indianapolis","IN"],"America/Jujuy":["America~Argentina~Jujuy","Jujuy"],"America/Knox_IN":["America~Indiana~Knox","IN"],"America/Louisville":["America~Kentucky~Louisville","KY"],"America/Mendoza":["America~Argentina~Mendoza","Mendoza"],"America/Argentina/ComodRivadavia":["America~Argentina~Catamarca","Catamarca area"],"America/Atka":["America~Adak","Adak area"],"America/Ensenada":["America~Tijuana","Baja California"],"America/Fort_Wayne":["America~Indiana~Indianapolis","IN"],"America/Montreal":["America~Toronto","ON & QC"],"America/Nipigon":["America~Toronto","ON & QC"],"America/Pangnirtung":["America~Iqaluit","NU"],"America/Porto_Acre":["America~Rio_Branco","Acre"],"America/Rainy_River":["America~Winnipeg","Manitoba, ON"],"America/Rosario":["America~Argentina~Cordoba","Argentina"],"America/Santa_Isabel":["America~Tijuana","Baja California"],"America/Shiprock":["America~Denver","Mountain"],"America/Thunder_Bay":["America~Toronto","ON & QC"],"America/Yellowknife":["America~Edmonton","AB, BC, NT, SK"],"Asia/Choibalsan":["Asia~Ulaanbaatar","most of Mongolia"],"Asia/Chongqing":["Asia~Shanghai","Beijing Time"],"Asia/Harbin":["Asia~Shanghai","Beijing Time"],"Asia/Kashgar":["Asia~Urumqi","Xinjiang Time"],"Australia/Canberra":["Australia~Sydney","New South Wales"],"Australia/Currie":["Australia~Hobart","Tasmania"],"Europe/Uzhgorod":["Europe~Kyiv","most of Ukraine"],"Europe/Zaporozhye":["Europe~Kyiv","most of Ukraine"],"Pacific/Enderbury":["Pacific~Kanton","Phoenix Islands"],"Pacific/Johnston":["Pacific~Honolulu","Hawaii"],"America/Godthab":["America~Nuuk","Nuuk area"],"Asia/Chungking":["Asia~Shanghai","Beijing Time"],"Asia/Ujung_Pandang":["Asia~Makassar","Makassar area"],"Asia/Ulan_Bator":["Asia~Ulaanbaatar","most of Mongolia"],"Europe/Kiev":["Europe~Kyiv","most of Ukraine"],"Europe/Nicosia":["Asia~Nicosia","most of Cyprus"],"America/Coral_Harbour":["America~Atikokan","ON, NU"],"Antarctica/South_Pole":["Antarctica~McMurdo","McMurdo area"],"Pacific/Truk":["Pacific~Chuuk","Chuuk/Truk, Yap"],"Pacific/Yap":["Pacific~Chuuk","Chuuk/Truk, Yap"],"Pacific/Ponape":["Pacific~Pohnpei","Pohnpei/Ponape"]};
+  const PLACE = (function () {
+    let tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { tz = ''; }
+    let cc = null;
+    Object.keys(WB_TZ_COUNTRY).some(k => { if ((' ' + WB_TZ_COUNTRY[k] + ' ').indexOf(' ' + tz + ' ') >= 0) { cc = k; return true; } return false; });
+    const area = tz.split('/')[0];
+    const south = /^America\/(Argentina|Sao_Paulo|Buenos_Aires|Lima|Bogota|Santiago|Caracas|La_Paz|Montevideo|Asuncion|Guayaquil|Cayenne|Paramaribo|Guyana|Fortaleza|Recife|Manaus|Belem|Bahia|Maceio|Araguaina|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Eirunepe|Santarem|Noronha|Punta_Arenas)/;
+    const C = (code, name) => ({ code: code, name: name });
+    const continent = area === 'America' ? (south.test(tz) ? C('SA', 'South America') : C('NA', 'North America'))
+      : area === 'Europe' || area === 'Atlantic' ? C('EU', 'Europe')
+      : area === 'Africa' ? C('AF', 'Africa')
+      : area === 'Asia' || area === 'Indian' ? C('AS', 'Asia')
+      : area === 'Australia' || area === 'Pacific' ? C('OC', 'Oceania') : null;
+    let country = null;
+    if (cc) {
+      let name = cc;
+      try { name = new Intl.DisplayNames(['en'], { type: 'region' }).of(cc) || cc; } catch (e) { /* keep the code */ }
+      const flag = String.fromCodePoint(...[...cc].map(ch => 0x1F1E6 + ch.charCodeAt(0) - 65));
+      country = { code: cc, name: name, flag: flag };
+    }
+    // the local area: the part of the country this time zone covers (e.g. "ON & QC"); none for one-zone countries
+    let local = null;
+    const L = WB_TZ_LOCAL[tz];
+    if (L && country) {
+      let name = L[1];
+      if (name.toLowerCase() === country.name.toLowerCase()) name = tz.split('/').pop().replace(/_/g, ' ') + ' area';
+      local = { code: L[0], name: name };
+    }
+    return { continent: continent, country: country, local: local };
+  })();
+  const recordKeys = (day, level) => {
+    const b = boardKey(day, level), out = [{ tier: 'world', id: b }];
+    if (PLACE.country) out.push({ tier: 'country', id: b + '-c-' + PLACE.country.code });
+    if (PLACE.local) out.push({ tier: 'local', id: b + '-z-' + PLACE.local.code });
+    return out;
+  };
+  // a record is { ms, pts }: faster time wins, compared to the second; a tie on time goes to the higher score
+  const secs = ms => Math.floor(ms / 1000);
+  const beats = (a, b) => !b || secs(a.ms) < secs(b.ms) || (secs(a.ms) === secs(b.ms) && (a.pts || 0) > (b.pts || 0));
+  const holds = (a, b) => !!b && (secs(a.ms) < secs(b.ms) || (secs(a.ms) === secs(b.ms) && (a.pts || 0) >= (b.pts || 0)));
+  const tierEntry = (day, level, tier) => { const k = recordKeys(day, level).find(x => x.tier === tier); return k ? records[k.id] || null : null; };
+  const tierRecord = (day, level, tier) => { const e = tierEntry(day, level, tier); return e ? e.ms : null; };
+  const recordFor = (day, level) => tierRecord(day, level, 'world');
+  // every record that exists for this board, broadest first, for the end-screen pills
+  const GLOBE = { NA: '🌎', SA: '🌎', EU: '🌍', AF: '🌍', AS: '🌏', OC: '🌏' };
+  function recordPills(day, level) {
+    // always the same slots: world, the player's continent, the player's country ("—" until someone sets one)
+    if (!dbApi) return [];   // no shared database (e.g. hosted as a static page): records can never fill, so show none
+    const e = t => tierEntry(day, level, t) || {};
+    const out = [{ key: 'record', label: 'World', name: 'World record', ms: e('world').ms || null, pts: e('world').pts, icon: '👑' }];
+    if (PLACE.country) out.push({ key: 'country', label: PLACE.country.name, name: PLACE.country.name + ' record', ms: e('country').ms || null, pts: e('country').pts, icon: PLACE.country.flag });
+    if (PLACE.local) out.push({ key: 'local', label: PLACE.local.name, name: PLACE.local.name + ' record', ms: e('local').ms || null, pts: e('local').pts, icon: '📍' });
+    return out;
+  }
+  const plausible = (day, level, ms) => ms >= boards(day)[level].bubbles.length * 400;   // ignore impossible times
+  function watchRecord() {
+    if (!dbApi || current === 'tutorial') return;
+    const key = boardKey(viewDay, current);
+    if (key === wrKey) return;
+    wrUnsub.forEach(u => { try { u(); } catch (e) { /* ignore */ } });
+    wrUnsub = [];
+    wrKey = key;
+    const day = viewDay, level = current;
+    recordKeys(day, level).map(k => k.id).forEach(docId => {
+      try {
+        wrUnsub.push(dbApi.doc('records/' + docId).onSnapshot(snap => {
+          const d = snap.exists ? snap.data() : null;
+          const ok = d && typeof d.ms === 'number' && plausible(day, level, d.ms);
+          const prev = records[docId];
+          if (ok && prev && prev.ms === d.ms && prev.pts === (d.pts || 0)) return;
+          if (!ok && !prev) return;
+          if (ok) records[docId] = { ms: d.ms, pts: typeof d.pts === 'number' ? d.pts : 0 }; else delete records[docId];
+          if (key !== boardKey(viewDay, current)) return;
+          if (!$('result').hidden) renderResult();
+        }, () => { wrKey = null; }));
+      } catch (e) { wrKey = null; }
+    });
+  }
+  async function submitRecord(day, level, ms, pts, docId) {
+    if (!dbApi || !ms || !docId || !plausible(day, level, ms)) return false;
+    const ref = dbApi.doc('records/' + docId);
+    const mine = { ms: Math.round(ms), pts: pts || 0 };
+    const entry = snap => snap.exists && typeof snap.data().ms === 'number' ? { ms: snap.data().ms, pts: snap.data().pts || 0 } : null;
+    try {
+      const cur = await ref.get();
+      if (!beats(mine, entry(cur))) return false;
+      // a short lease so two people finishing at once can't overwrite each other
+      const lease = await ref.acquire({ holder: 'finish-' + Math.random().toString(36).slice(2), ttlMs: 4000 });
+      if (!lease.acquired) return false;
+      const again = await ref.get();
+      if (!beats(mine, entry(again))) return false;
+      await ref.set({ ms: mine.ms, pts: mine.pts, at: new Date().toISOString() });
+      records[docId] = mine;
+      return true;
+    } catch (e) { return false; }
+  }
+  // hosted outside claude.ai: the same records, kept by records.php (SQLite) next to this page
+  function phpRecords(url) {
+    const json = r => { if (!r.ok) throw new Error('records ' + r.status); return r.json(); };
+    const read = id => fetch(url + '?id=' + encodeURIComponent(id), { cache: 'no-store' }).then(json);
+    const snap = d => ({ exists: !!d, data: () => d });
+    return {
+      doc(path) {
+        const id = path.replace(/^records\//, '');
+        return {
+          get: () => read(id).then(j => snap(j.record)),
+          acquire: () => Promise.resolve({ acquired: true }),   // records.php compares and writes in one locked step
+          set: d => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: id, ms: d.ms, pts: d.pts }) }).then(json),
+          onSnapshot(cb, fail) {
+            let live = true;
+            const tick = () => read(id).then(j => { if (live) cb(snap(j.record)); }, e => { if (live && fail) fail(e); });
+            tick();
+            const t = setInterval(tick, 30000);
+            return () => { live = false; clearInterval(t); };
+          }
+        };
+      }
+    };
+  }
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('db').then(api => { dbApi = api; if (dbApi) { watchRecord(); } }).catch(() => { dbApi = null; });
+  } else if (/^https?:$/.test(location.protocol)) {
+    const api = phpRecords('records.php');
+    api.doc('records/ping').get().then(() => { dbApi = api; watchRecord(); }, () => { dbApi = null; });
+  }
+  function medalFor(day, level, ms) { if (!ms) return null; return medalTimes(day, level).find(m => ms <= m.ms) || null; }
+  function starsEl(n, cls) {
+    const el = document.createElement('span'); el.className = 'stars' + (cls ? ' ' + cls : '');
+    el.setAttribute('aria-label', n + ' of 3 stars');
+    for (let i = 0; i < 3; i++) { const st = document.createElement('i'); st.className = i < n ? 'on' : ''; st.textContent = '★'; el.appendChild(st); }
+    return el;
+  }
+  const bubbleById = id => pz().bubbles.find(b => b.id === id);
+  const live = () => pz().bubbles.filter(b => pg().consumed.indexOf(b.id) < 0);
+
+  /* ---------- rendering ---------- */
+  function render() {
+    $('dayLabel').textContent = fullDate(viewDay);
+    $('dayName').textContent = viewDay > TODAY ? 'Preview' : relDay(viewDay);
+    $('daynav').hidden = (current === 'tutorial');
+    $('prevDay').disabled = viewDay <= 1;
+    $('nextDay').disabled = viewDay >= TODAY;
+    $('todayBtn').hidden = (viewDay === TODAY);
+    renderTabs();
+    if (pg().done) renderResult(); else renderPlay();
+  }
+
+  function renderTabs() {
+    const tabs = $('tabs');
+    tabs.hidden = (current === 'tutorial');
+    const idx = Math.max(0, LEVELS.indexOf(current));
+    tabs.querySelector('.thumb').style.transform = 'translateX(' + (idx * 100) + '%)';
+    const rec = (viewDay > TODAY ? temp : store.days)[viewDay] || {};
+    tabs.querySelectorAll('.tab').forEach(t => {
+      const l = t.dataset.level;
+      t.classList.toggle('active', l === current);
+      t.setAttribute('aria-selected', l === current ? 'true' : 'false');
+      const p = rec[l];
+      t.querySelector('.check').textContent = isDone(viewDay, l) ? '✓' : (p && p.found && p.found.length) ? p.found.length + '/' + boards(viewDay)[l].words.length : '';
+    });
+  }
+
+  function renderPlay() {
+    $('result').hidden = true;
+    $('play').hidden = false;
+    resetCombo();
+    watchRecord();
+    $('themeText').textContent = pz().theme;
+    $('score').hidden = (current === 'tutorial');
+    $('board').classList.add('boot');
+    order = pz().bubbles.map(b => b.id);
+    lastRank = null;
+    lastMedalKey = null;
+    tStart = Date.now();
+    buildBoard();
+    renderPill();
+    renderSlots();
+    renderScore();
+    applyHints();
+    fitBoardHeight();
+    layoutBoard();
+    requestAnimationFrame(() => { fitBoardHeight(); layoutBoard(); });
+  }
+
+  function buildBoard() {
+    const wrap = $('bubbles');
+    wrap.innerHTML = '';
+    boardEls = {}; pos = {};
+    const p = pg();
+    pz().bubbles.forEach((b, i) => {
+      const e = document.createElement('div');
+      e.className = 'bub enter';
+      e.dataset.id = b.id;
+      const body = document.createElement('div');
+      body.className = 'bub-body';
+      body.setAttribute('role', 'button');
+      body.tabIndex = 0;
+      body.setAttribute('aria-label', 'Bubble ' + b.text.split('').join(' '));
+      body.style.animationDelay = (i * 30) + 'ms';
+      body.textContent = b.text;
+      e.appendChild(body);
+      if (p.consumed.indexOf(b.id) >= 0) e.classList.add('consumed');
+      if (chain.indexOf(b.id) >= 0) e.classList.add('selected');
+      wrap.appendChild(e);
+      boardEls[b.id] = e;
+    });
+    setTimeout(() => { Object.keys(boardEls).forEach(id => boardEls[id].classList.remove('enter')); }, 1300);
+  }
+
+  // Cap the board at the height a full-size honeycomb needs, so the whole game sits together in the middle of the screen.
+  function fitBoardHeight() {
+    const board = $('board');
+    const W = board.getBoundingClientRect().width;
+    const n = order.length;
+    if (!n || W < 40) return;
+    let best = null;
+    for (let cols = 1; cols <= 8; cols++) {
+      const rows = Math.ceil(n / cols);
+      const cell = Math.min(W / (cols + (rows > 1 ? 0.5 : 0)), 100);
+      const needH = (rows > 1 ? (rows - 1) * 0.9 * cell : 0) + cell;
+      if (!best || cell > best.cell + 0.5 || (Math.abs(cell - best.cell) <= 0.5 && needH < best.needH)) best = { cell: cell, needH: needH };
+    }
+    board.style.maxHeight = Math.ceil(best.needH + 12) + 'px';
+  }
+
+  // A honeycomb sized to the board. Every bubble keeps its spot for the whole game, so nothing moves under your finger.
+  function layoutBoard() {
+    const board = $('board');
+    const rect = board.getBoundingClientRect();
+    const W = rect.width, H = rect.height;
+    const items = order.map(id => bubbleById(id)).filter(Boolean), n = items.length;
+    if (!n || W < 40 || H < 40) return;
+    let best = null;
+    for (let cols = 1; cols <= 8; cols++) {
+      const rows = Math.ceil(n / cols);
+      const cell = Math.min(W / (cols + (rows > 1 ? 0.5 : 0)), H / (rows > 1 ? 1 + (rows - 1) * 0.9 : 1));
+      if (!best || cell > best.cell + 0.5) best = { cols: cols, rows: rows, cell: cell };
+    }
+    const cell = Math.min(best.cell, 100);
+    const d = Math.round(cell * 0.86);
+    D = d;
+    const rows = best.rows;
+    const counts = [];
+    for (let r = 0; r < rows; r++) counts.push(Math.floor(n / rows));
+    const rowRank = [];
+    for (let r = 0; r < rows; r++) rowRank.push(r);
+    rowRank.sort((a, b) => Math.abs(a - (rows - 1) / 2) - Math.abs(b - (rows - 1) / 2));
+    for (let i = 0; i < n % rows; i++) counts[rowRank[i]]++;
+    const pitchY = rows > 1 ? cell * 0.9 : cell;
+    const y0 = (H - ((rows - 1) * pitchY + cell)) / 2;
+    let idx = 0;
+    pos = {};
+    for (let r = 0; r < rows; r++) {
+      const c = counts[r];
+      const shift = rows > 1 ? (r % 2 === 1 ? cell / 4 : -cell / 4) : 0;
+      const x0 = (W - c * cell) / 2 + shift;
+      for (let i = 0; i < c; i++) {
+        const b = items[idx++];
+        pos[b.id] = { x: x0 + i * cell + cell / 2, y: y0 + r * pitchY + cell / 2, r: d / 2 };
+      }
+    }
+    const fontSize = Math.min(24, Math.round(d * 0.32));
+    items.forEach(b => {
+      const e = boardEls[b.id];
+      if (!e) return;
+      const q = pos[b.id];
+      e.style.setProperty('--x', (q.x - d / 2).toFixed(1) + 'px');
+      e.style.setProperty('--y', (q.y - d / 2).toFixed(1) + 'px');
+      e.style.setProperty('--d', d + 'px');
+      e.style.fontSize = fontSize + 'px';
+    });
+    if (board.classList.contains('boot')) { void board.offsetWidth; board.classList.remove('boot'); }
+  }
+
+  function letterCount() { return chain.reduce((n, id) => { const b = bubbleById(id); return n + (b ? b.text.length : 0); }, 0); }
+
+  // The tray keeps its tiles between renders: new ones are created, missing ones removed, and anything that moved slides.
+  function renderPill() {
+    const word = $('pillWord'), prompt = $('pillPrompt'), count = $('pillCount'), clr = $('clearBtn');
+    const empty = chain.length === 0;
+    document.body.classList.toggle('focus', !empty);
+    prompt.hidden = !empty; word.hidden = empty; count.hidden = empty; clr.hidden = empty;
+    $('pill').classList.toggle('is-empty', empty);
+    prompt.textContent = current === 'tutorial' ? 'Tap RA → IN → BOW' : 'Tap bubbles in order';
+    word.classList.remove('locked');
+    const existing = {};
+    Array.prototype.forEach.call(word.children, el => { existing[el.dataset.id] = el; });
+    const before = {};
+    Object.keys(existing).forEach(id => { before[id] = existing[id].getBoundingClientRect().left; });
+    Object.keys(existing).forEach(id => { if (chain.indexOf(id) < 0) word.removeChild(existing[id]); });
+    const created = [];
+    chain.forEach(id => {
+      let el = existing[id];
+      if (!el) {
+        const b = bubbleById(id);
+        el = document.createElement('button');
+        el.type = 'button'; el.className = 'chunk'; el.dataset.id = id; el.textContent = b ? b.text : '';
+        el.setAttribute('aria-label', 'Put ' + (b ? b.text : '') + ' back');
+        created.push(el);
+      }
+      word.appendChild(el);
+    });
+    const n = letterCount();
+    count.textContent = n + (n === 1 ? ' letter' : ' letters');
+    count.classList.toggle('nomatch', chain.length >= 2 && matchWord() < 0 && !bonusMatch() && remainingLengths().indexOf(n) >= 0);
+    updateBonusBtn();
+    Object.keys(before).forEach(id => {
+      const el = existing[id];
+      if (!el.parentNode) return;
+      const dx = before[id] - el.getBoundingClientRect().left;
+      if (dx) { el.style.transition = 'none'; el.style.transform = 'translateX(' + dx.toFixed(1) + 'px)'; void el.offsetWidth; el.style.transition = ''; el.style.transform = ''; }
+    });
+    return created;
+  }
+
+  function renderSlots() {
+    const box = $('found');
+    box.innerHTML = '';
+    const z = pz(), p = pg();
+    z.words.forEach((w, wi) => {
+      const s = document.createElement('div');
+      const isFound = p.found.indexOf(wi) >= 0;
+      s.className = 'slot' + (isFound ? ' solved' : '');
+      if (isFound) {
+        s.textContent = w;
+      } else {
+        const lvl = p.hints[wi] || 0;
+        if (lvl > 0) { s.classList.add('hinted'); s.textContent = z.chunksByWord[wi].slice(0, lvl).join('·') + '·…'; }
+        else { for (let i = 0; i < w.length; i++) s.appendChild(document.createElement('i')); s.setAttribute('aria-label', w.length + ' letters'); }
+      }
+      box.appendChild(s);
+    });
+  }
+
+  let lastRank = null;
+
+  /* ---------- solve time: counted quietly, shown only at the end ---------- */
+  let tStart = null;
+  function tickTime() {
+    if (tStart == null || current === 'tutorial') return;
+    const p = pg(), now = Date.now();
+    p.elapsed = (p.elapsed || 0) + Math.min(now - tStart, 10 * 60 * 1000);
+    tStart = now;
+  }
+  const fmtTime = ms => { const t = Math.round((ms || 0) / 1000), m = Math.floor(t / 60), s2 = t % 60; return m + ':' + (s2 < 10 ? '0' : '') + s2; };
+  function liveElapsed() { const p = pg(); return (p.elapsed || 0) + (tStart != null ? Math.min(Date.now() - tStart, 10 * 60 * 1000) : 0); }
+  // the medal bar drains through the current medal's window, then turns to the next medal and refills
+  let lastMedalKey = null;
+  function renderClock() {
+    if (current === 'tutorial' || $('play').hidden) return;
+    const ms = liveElapsed(), times = medalTimes(viewDay, current, false);   // the record only shows after the board
+    const idx = times.findIndex(m => ms <= m.ms), medal = idx >= 0 ? times[idx] : null;
+    const start = idx > 0 ? times[idx - 1].ms : 0;
+    const left = medal ? (medal.ms - ms) / (medal.ms - start) : 0;
+    $('clockTime').textContent = fmtTime(ms);
+    $('clock').className = 'clock' + (medal ? ' ' + medal.key : '');
+    $('clock').setAttribute('aria-label', (medal ? medal.name + ', ' + fmtTime(medal.ms - ms) + ' left' : 'No medal') + ', ' + fmtTime(ms));
+    const bar = $('timebar'), key = medal ? medal.key : 'none';
+    if (key !== lastMedalKey) { bar.className = 'timebar refill ' + key; void bar.offsetWidth; lastMedalKey = key; }
+    else bar.className = 'timebar ' + key;
+    $('tfill').style.width = Math.max(0, Math.min(1, left)) * 100 + '%';
+  }
+  setInterval(renderClock, 500);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { tickTime(); tStart = null; persist(); }
+    else if (!$('play').hidden && !pg().done) tStart = Date.now();
+  });
+
+  /* ---------- combo: words in a row with no put-backs and no hints ---------- */
+  let combo = 0, clean = true;
+  function heat(c) { return c >= 5 ? 3 : c >= 3 ? 2 : c >= 2 ? 1 : 0; }
+  function renderCombo(bump) {
+    const el = $('combo'), pill = $('pill');
+    pill.dataset.heat = heat(combo);
+    if (combo >= 2) {
+      el.hidden = false;
+      el.textContent = '×' + combo;
+      el.setAttribute('aria-label', 'Combo ' + combo);
+      if (bump) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+    } else el.hidden = true;
+  }
+  function resetCombo() { combo = 0; clean = true; renderCombo(); }
+  function breakCombo() {
+    if (current === 'tutorial') return;
+    if (combo >= 2) Sound.crack();
+    clean = false;
+    if (combo) { combo = 0; renderCombo(); }
+  }
+  function renderScore() {
+    if (current === 'tutorial') return;
+    const p = pg(), pts = p.points || 0, r = rankFor(pts, viewDay, current);
+    $('liveStars').querySelectorAll('i').forEach((m, i) => {
+      const on = i < r.stars, was = m.classList.contains('on');
+      m.classList.toggle('on', on);
+      if (on && !was && lastRank != null) { m.classList.remove('pop'); void m.offsetWidth; m.classList.add('pop'); }
+    });
+    $('points').textContent = pts;
+    renderClock();
+    $('rank').setAttribute('aria-label', r.stars + ' of 3 stars, ' + pts + ' points');
+    if (lastRank != null && r.stars > lastRank) { Sound.earn(); flash(r.stars === 1 ? 'You earned a star!' : r.stars + ' stars!', 'good'); const el = $('rank'); el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+    lastRank = r.stars;
+    renderBonusBar();
+  }
+  // the bonus words you've found, and how many can still be made from the bubbles that are left
+  function bonusStillPossible() {
+    const p = pg(), have = new Set(p.bonus || []), pool = {};
+    live().forEach(b => { pool[b.text] = (pool[b.text] || 0) + 1; });
+    const words = new Set();
+    allBonus(viewDay, current).forEach(b => {
+      if (have.has(b.word) || words.has(b.word)) return;
+      const need = {};
+      if (b.key.split('|').every(t => { need[t] = (need[t] || 0) + 1; return need[t] <= (pool[t] || 0); })) words.add(b.word);
+    });
+    return words.size;
+  }
+  function renderBonusBar() {
+    const bar = $('bonusBar');
+    if (current === 'tutorial' || !allBonus(viewDay, current).length) { bar.hidden = true; return; }
+    const found = pg().bonus || [];
+    bar.hidden = !found.length;   // appears with the first bonus word
+    const list = $('bonusList');
+    list.innerHTML = '';
+    found.slice().reverse().forEach((w, i) => { const c = document.createElement('span'); c.className = 'bchip' + (i === 0 ? ' new' : ''); c.textContent = w; list.appendChild(c); });
+    $('bonusLeft').hidden = true;   // players never see how many exist
+  }
+
+  /* ---------- flights between the board, the tray and the slots ---------- */
+  const flights = [];
+  function fly(text, from, to, startCls, endCls, done) {
+    const f = document.createElement('div');
+    f.className = 'fly' + (startCls ? ' ' + startCls : '');
+    f.textContent = text;
+    f.style.left = from.left + 'px'; f.style.top = from.top + 'px'; f.style.width = from.width + 'px'; f.style.height = from.height + 'px';
+    document.body.appendChild(f);
+    void f.offsetWidth;
+    f.className = 'fly' + (endCls ? ' ' + endCls : '');
+    f.style.left = to.left + 'px'; f.style.top = to.top + 'px'; f.style.width = to.width + 'px'; f.style.height = to.height + 'px';
+    let finished = false;
+    const end = () => {
+      if (finished) return;
+      finished = true;
+      const i = flights.indexOf(end); if (i >= 0) flights.splice(i, 1);
+      if (f.parentNode) f.parentNode.removeChild(f);
+      if (done) done();
+    };
+    flights.push(end);
+    f.addEventListener('transitionend', end);
+    setTimeout(end, 380);
+  }
+  function endFlights() { flights.slice().forEach(end => end()); }
+  function flyToTray(id, tile) {
+    const bub = boardEls[id], b = bubbleById(id);
+    if (!bub || !tile || !b) return;
+    const from = bub.firstChild.getBoundingClientRect(), to = tile.getBoundingClientRect();
+    if (!from.width || !to.width) return;
+    tile.classList.add('landing');
+    fly(b.text, from, to, '', 'tile', () => tile.classList.remove('landing'));
+  }
+  function flyToBoard(id, from) {
+    const bub = boardEls[id], b = bubbleById(id);
+    if (!bub) return;
+    const to = bub.firstChild.getBoundingClientRect();
+    if (!b || !from || !from.width || !to.width) { bub.classList.remove('selected'); return; }
+    fly(b.text, from, to, 'tile', '', () => bub.classList.remove('selected'));
+  }
+
+  /* ---------- hints ---------- */
+  function findBubble(wi, ci, used) {
+    const p = pg(), z = pz();
+    const text = z.chunksByWord[wi][ci];
+    const own = z.bubbles.find(b => b.id === wi + '-' + ci);
+    const ok = b => p.consumed.indexOf(b.id) < 0 && !used.has(b.id);
+    if (own && ok(own)) return own.id;
+    const alt = z.bubbles.find(b => b.text === text && ok(b));
+    return alt ? alt.id : null;
+  }
+  function pickIdsForWord(wi) {
+    const used = new Set(), ids = [];
+    pz().chunksByWord[wi].forEach((t, ci) => { const id = findBubble(wi, ci, used); if (id) { used.add(id); ids.push(id); } });
+    return ids;
+  }
+  function applyHints() {
+    const p = pg(), z = pz(), targets = {};
+    z.words.forEach((w, wi) => {
+      if (p.found.indexOf(wi) >= 0) return;
+      const lvl = p.hints[wi] || 0;
+      const used = new Set();
+      for (let ci = 0; ci < lvl && ci < z.chunksByWord[wi].length; ci++) {
+        const id = findBubble(wi, ci, used);
+        if (id) { used.add(id); targets[id] = ci + 1; }
+      }
+    });
+    Object.keys(boardEls).forEach(id => {
+      const e = boardEls[id], body = e.firstChild;
+      if (targets[id]) { e.classList.add('hinted'); body.dataset.hint = targets[id]; }
+      else { e.classList.remove('hinted'); delete body.dataset.hint; }
+    });
+  }
+
+  /* ---------- the pick ---------- */
+  /* ---------- bonus words: real words that aren't hidden ones ---------- */
+  const BONUS_PER_HINT = 3;
+  const bonusCache = {};
+  function bonusMap() {
+    if (current === 'tutorial') return {};
+    const k = viewDay + current;
+    if (!bonusCache[k]) {
+      const map = {};
+      const raw = (typeof WB_BONUS !== 'undefined' && WB_BONUS[viewDay] && WB_BONUS[viewDay][current[0]]) || '';
+      raw.split(';').forEach(e => { const i = e.indexOf('='); if (i > 0) map[e.slice(0, i)] = e.slice(i + 1); });
+      bonusCache[k] = map;
+    }
+    return bonusCache[k];
+  }
+  function chainKey() { return chain.map(id => bubbleById(id).text).sort().join('|'); }
+  const bonusWordSets = {};
+  function bonusWords() {
+    const k = viewDay + current;
+    if (!bonusWordSets[k]) { const set = new Set(); Object.keys(bonusMap()).forEach(key => set.add(bonusMap()[key])); bonusWordSets[k] = set; }
+    return bonusWordSets[k];
+  }
+  const spelledNow = () => chain.map(id => bubbleById(id).text).join('');
+  function bonusMatch() { if (chain.length < 2) return null; const w = spelledNow(); return bonusWords().has(w) ? w : null; }
+  // could the picked bubbles still be part of a hidden word? then don't grab a bonus out from under the player
+  function couldBeHidden() {
+    const z = pz(), p = pg(), w0 = spelledNow();
+    return z.words.some((w, wi) => p.found.indexOf(wi) < 0 && w.length > w0.length && w.indexOf(w0) === 0);
+  }
+  function updateBonusBtn() {
+    const b = $('bonusBtn'), w = !busy && chain.length >= 2 ? bonusMatch() : null, p = pg();
+    const show = !!w && (p.bonus || []).indexOf(w) < 0;
+    b.hidden = !show;
+    $('pillCount').style.visibility = show ? 'hidden' : '';
+    if (show) b.dataset.word = w;
+  }
+  function returnTiles() {
+    const tiles = {};
+    Array.prototype.forEach.call($('pillWord').children, el => { tiles[el.dataset.id] = el.getBoundingClientRect(); });
+    const ids = chain.slice();
+    chain = [];
+    renderPill();
+    ids.forEach(id => { if (tiles[id] && tiles[id].width) flyToBoard(id, tiles[id]); else if (boardEls[id]) boardEls[id].classList.remove('selected'); });
+    return ids;
+  }
+  // order picked bubble ids so their text spells `word`
+  function orderFor(word, ids) {
+    const out = [], stack = [];
+    (function rec(pos, left) {
+      if (out.length) return;
+      if (pos === word.length) { if (!left.length) out.push(...stack); return; }
+      left.forEach((id, i) => {
+        if (out.length) return;
+        const t = bubbleById(id).text;
+        if (word.startsWith(t, pos)) { stack.push(id); rec(pos + t.length, left.slice(0, i).concat(left.slice(i + 1))); stack.pop(); }
+      });
+    })(0, ids);
+    return out.length ? out : ids;
+  }
+  function collectBonus(word) {
+    const p = pg();
+    p.bonus = p.bonus || [];
+    if (p.bonus.indexOf(word) >= 0) return;
+    p.bonus.push(word);
+    const pts = word.length * 5;
+    p.points = (p.points || 0) + pts;
+    persist();
+    busy = true;
+    gesture = null;
+    const ids = chain.slice();
+    stackReset();
+    const ordered = ids;
+    const wordEl = $('pillWord');
+    const tiles = Array.prototype.slice.call(wordEl.children);
+    // same choreography as a hidden word: slide into order, fuse, drop into place
+    setTimeout(() => {
+      endFlights();
+      tiles.forEach(el => el.classList.remove('landing'));
+      const before = new Map();
+      tiles.forEach(el => before.set(el, el.getBoundingClientRect().left));
+      ordered.forEach(id => { const el = tiles.find(x => x.dataset.id === id); if (el) wordEl.appendChild(el); });
+      tiles.forEach(el => {
+        const dx = before.get(el) - el.getBoundingClientRect().left;
+        if (dx) { el.style.transition = 'none'; el.style.transform = 'translateX(' + dx.toFixed(1) + 'px)'; void el.offsetWidth; el.style.transition = ''; el.style.transform = ''; }
+      });
+      $('pillCount').hidden = true; $('clearBtn').hidden = true; $('bonusBtn').hidden = true;
+      setTimeout(() => {
+        wordEl.classList.add('locked', 'gold');
+        setTimeout(() => {
+          const from = wordEl.getBoundingClientRect();
+          chain = [];
+          wordEl.classList.remove('gold');
+          renderPill();
+          ids.forEach(id => { if (boardEls[id]) boardEls[id].classList.remove('selected'); });   // the bubbles stay in play
+          Sound.bonus();
+          renderScore();
+          busy = false;
+          const chip = $('bonusList').querySelector('.bchip');
+          const to = chip ? chip.getBoundingClientRect() : null;
+          const land = () => { if (chip) chip.classList.remove('arriving'); flash(word + ' ✦ bonus +' + pts, 'hint'); };
+          if (chip && from.width && to && to.width) { chip.classList.add('arriving'); fly(word, from, to, 'word gold', 'word gold', land); }
+          else land();
+        }, 200);
+      }, 200);
+    }, 200);
+  }
+  function stackReset() {}
+
+  // Which unfound word do the picked bubbles make, in order? (Boards are built so this is never ambiguous.)
+  function matchWord() {
+    const z = pz(), p = pg();
+    const spelled = chain.map(id => bubbleById(id).text).join('');
+    for (let wi = 0; wi < z.words.length; wi++) {
+      if (p.found.indexOf(wi) >= 0) continue;
+      if (z.words[wi] === spelled) return wi;
+    }
+    return -1;
+  }
+
+  function addToChain(id) {
+    if (busy || chain.indexOf(id) >= 0 || pg().consumed.indexOf(id) >= 0 || !bubbleById(id)) return false;
+    chain.push(id);
+    if (boardEls[id]) boardEls[id].classList.add('selected');
+    Sound.pick(chain.length - 1, combo);
+    try { if (navigator.vibrate) navigator.vibrate(6); } catch (e) { /* no haptics */ }
+    const p = pg();
+    if (current !== 'tutorial') { p.moves++; persist(); renderScore(); }
+    renderPill().forEach(tile => flyToTray(tile.dataset.id, tile));
+    const wi = matchWord();
+    if (wi >= 0) { lockWord(wi, chain.slice()); return true; }
+    const bw = bonusMatch();
+    if (bw && (p.bonus || []).indexOf(bw) < 0) {
+      if (!couldBeHidden()) { gesture = null; collectBonus(bw); return true; }
+      updateBonusBtn();                         // might be on its way to a hidden word: offer it, don't take it
+      return true;
+    }
+    if (bw) flash(bw + ' · bonus already found', 'hint'); else lengthCue();
+    updateBonusBtn();
+    return true;
+  }
+  function removeFromChain(id, animate) {
+    const i = chain.indexOf(id);
+    if (i < 0) return;
+    const tile = $('pillWord').querySelector('.chunk[data-id="' + id + '"]');
+    const from = (animate && tile) ? tile.getBoundingClientRect() : null;
+    chain.splice(i, 1);
+    if (animate) { Sound.unpick(); breakCombo(); }
+    renderPill();
+    renderScore();
+    if (from && from.width) flyToBoard(id, from); else if (boardEls[id]) boardEls[id].classList.remove('selected');
+  }
+  function clearChain() {
+    if (!chain.length) return;
+    Sound.unpick();
+    breakCombo();
+    returnTiles();          // every tile flies home together
+    renderScore();
+  }
+
+  /* ---------- shuffle (free): re-deal the bubbles that are left into a fresh, tight honeycomb ---------- */
+  function shuffle() {
+    if (busy || pg().done) return;
+    const ids = live().map(b => b.id);
+    for (let i = ids.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = ids[i]; ids[i] = ids[j]; ids[j] = t; }
+    order = ids;
+    Sound.shuffle();
+    layoutBoard();
+  }
+
+  function remainingLengths() { const z = pz(), p = pg(); return z.words.filter((w, i) => p.found.indexOf(i) < 0).map(w => w.length); }
+
+  // Nudge only when the pick can't be a word any more; a shorter pick may still be on its way to a longer word,
+  // so that case is left to the red letter count on the tray.
+  // Like Connections' "One away": the pick has a word's length and all but one of its bubbles.
+  function oneAway() {
+    const z = pz(), p = pg(), picked = chain.map(id => bubbleById(id).text), letters = letterCount();
+    if (picked.length < 2) return false;
+    return z.words.some((w, wi) => {
+      if (p.found.indexOf(wi) >= 0 || w.length !== letters) return false;
+      const need = z.chunksByWord[wi].slice();
+      if (need.length !== picked.length) return false;
+      let common = 0;
+      picked.forEach(t => { const i = need.indexOf(t); if (i >= 0) { need.splice(i, 1); common++; } });
+      return common === picked.length - 1;
+    });
+  }
+  function rightPiecesWrongOrder() {
+    const z = pz(), p = pg(), key = chain.map(id => bubbleById(id).text).sort().join('|');
+    return chain.length >= 2 && z.words.some((w, wi) => p.found.indexOf(wi) < 0 && z.chunksByWord[wi].slice().sort().join('|') === key);
+  }
+  function lengthCue() {
+    const lens = remainingLengths();
+    if (!lens.length) return;
+    if (rightPiecesWrongOrder()) { shakePill(); Sound.near(); flash(current === 'tutorial' ? 'Right bubbles. Now tap them in order: RA → IN → BOW' : 'Right bubbles, wrong order. Tap a tile to put it back', 'hint'); return; }
+    const letters = letterCount(), longest = Math.max.apply(null, lens);
+    if (letters > longest) { shakePill(); Sound.wrong(); flash('Too many letters', 'bad'); }
+    else if (current !== 'tutorial' && oneAway()) { Sound.near(); flash('One bubble away!', 'hint'); }
+    else if (letters === longest && chain.length >= 2) { shakePill(); Sound.wrong(); flash(current === 'tutorial' ? 'Not quite. Tap RA → IN → BOW' : 'Not quite. Tap a tile to swap it out', 'bad'); }
+  }
+  function shakePill() { const pill = $('pill'); pill.classList.remove('shake'); void pill.offsetWidth; pill.classList.add('shake'); }
+
+  const board = $('board');
+  function hitTest(e) {
+    const rect = board.getBoundingClientRect();
+    const x = e.clientX - rect.left, y = e.clientY - rect.top;
+    let bestB = null, bestD = Infinity;
+    live().forEach(b => {
+      const q = pos[b.id]; if (!q) return;
+      const dx = x - q.x, dy = y - q.y, dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < bestD) { bestD = dist; bestB = b; }
+    });
+    return (bestB && bestD <= pos[bestB.id].r * 1.15) ? bestB : null;
+  }
+  board.addEventListener('pointerdown', e => {
+    if (busy || pg().done) return;
+    const el = e.target && e.target.closest ? e.target.closest('.bub') : null;
+    const b = el ? bubbleById(el.dataset.id) : hitTest(e);
+    if (!b || pg().consumed.indexOf(b.id) >= 0) return;
+    e.preventDefault();
+    if (chain.indexOf(b.id) >= 0) { removeFromChain(b.id, true); gesture = null; return; }
+    if (!addToChain(b.id)) return;
+    if (busy) return;                                  // that pick completed a word
+    gesture = { pointerId: e.pointerId, added: [b.id], last: b.id };
+    try { board.setPointerCapture(e.pointerId); } catch (err) { /* capture unsupported */ }
+  });
+  board.addEventListener('pointermove', e => {
+    if (!gesture || e.pointerId !== gesture.pointerId || busy) return;
+    const b = hitTest(e);
+    if (!b || b.id === gesture.last) return;
+    const gi = gesture.added.indexOf(b.id);
+    if (gi >= 0) {
+      // sliding back onto the previous bubble undoes the last one
+      if (gi === gesture.added.length - 2) { removeFromChain(gesture.added.pop(), true); gesture.last = b.id; }
+      return;
+    }
+    if (chain.indexOf(b.id) >= 0) return;
+    if (addToChain(b.id) && gesture) { gesture.added.push(b.id); gesture.last = b.id; }   // the gesture ends if that pick locked a word
+  });
+  ['pointerup', 'pointercancel'].forEach(ev => board.addEventListener(ev, () => { gesture = null; }));
+  board.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const el = e.target && e.target.closest ? e.target.closest('.bub') : null;
+    if (!el) return;
+    e.preventDefault();
+    const id = el.dataset.id;
+    if (chain.indexOf(id) >= 0) removeFromChain(id, true); else addToChain(id);
+  });
+  $('pillWord').addEventListener('click', e => {
+    const tile = e.target && e.target.closest ? e.target.closest('.chunk') : null;
+    if (tile && !busy) removeFromChain(tile.dataset.id, true);
+  });
+  $('clearBtn').addEventListener('click', () => { if (!busy) clearChain(); });
+
+  /* ---------- a word clicks into place ---------- */
+  function flash(text, cls) {
+    const m = $('msg');
+    m.textContent = text;
+    m.className = 'msg' + (cls ? ' ' + cls : '');
+    clearTimeout(msgTimer);
+    msgTimer = setTimeout(() => { m.textContent = ''; m.className = 'msg'; }, 1900);
+  }
+
+  function lockWord(wi, ids) {
+    const z = pz(), p = pg();
+    busy = true;
+    gesture = null;
+    p.found.push(wi);
+    ids.forEach(id => p.consumed.push(id));
+    delete p.hints[wi];
+    persist();
+    const left = ids.slice();
+    const ordered = left;   // spelled in order already; nothing to rearrange
+    const word = $('pillWord');
+    const tiles = Array.prototype.slice.call(word.children);
+    setTimeout(() => {
+      // 1. the tiles slide into the word's own order
+      endFlights();
+      tiles.forEach(el => el.classList.remove('landing'));
+      const before = new Map();
+      tiles.forEach(el => before.set(el, el.getBoundingClientRect().left));
+      ordered.forEach(id => { const el = tiles.find(x => x.dataset.id === id); if (el) word.appendChild(el); });
+      tiles.forEach(el => {
+        const dx = before.get(el) - el.getBoundingClientRect().left;
+        if (dx) { el.style.transition = 'none'; el.style.transform = 'translateX(' + dx.toFixed(1) + 'px)'; void el.offsetWidth; el.style.transition = ''; el.style.transform = ''; }
+      });
+      $('pillCount').hidden = true; $('clearBtn').hidden = true;
+      ids.forEach(id => { const e = boardEls[id]; if (e) { e.classList.remove('selected'); e.classList.add('popping'); } });
+      setTimeout(() => {
+        // 2. the ordered tiles fuse into one word that drops into its slot; the tray is free again right away
+        const from = word.getBoundingClientRect();
+        chain = [];
+        combo = clean ? combo + 1 : 1;
+        clean = true;
+        const gained = z.words[wi].length * 10 * mult(combo);
+        if (current !== 'tutorial') { p.bestCombo = Math.max(p.bestCombo || 0, combo); p.points = (p.points || 0) + gained; }
+        persist();
+        Sound.lock(combo);
+        renderCombo(true);
+        renderPill();
+        renderSlots();
+        renderScore();
+        ids.forEach(id => { const e = boardEls[id]; if (e) { e.classList.remove('popping'); e.classList.add('consumed'); } });
+        applyHints();
+        busy = false;
+        try { if (navigator.vibrate) navigator.vibrate(10); } catch (e) { /* no haptics */ }
+        const slot = $('found').children[wi];
+        const land = () => {
+          if (slot) slot.classList.remove('arriving');
+          if (p.found.length === z.words.length) finish();
+          else if (current === 'tutorial') flash(z.words[wi] + ' ✓', 'good');
+          else flash(z.words[wi] + ' +' + gained + (combo >= 2 ? ' · combo ×' + mult(combo) + '!' : ''), 'good');
+        };
+        const to = slot ? slot.getBoundingClientRect() : null;
+        if (slot && from.width && to && to.width) { slot.classList.add('arriving'); fly(z.words[wi], from, to, 'word', 'word', land); }
+        else land();
+      }, 260);
+    }, 200);
+  }
+
+  function celebrate() {
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const r = $('pill').getBoundingClientRect();
+      if (!r.width) return;
+      for (let i = 0; i < 12; i++) {
+        const b = document.createElement('div');
+        b.className = 'celebrate';
+        const s = 10 + Math.round(Math.random() * 14);
+        b.style.setProperty('--s', s + 'px');
+        b.style.setProperty('--dx', Math.round((Math.random() - 0.5) * r.width * 0.9) + 'px');
+        b.style.setProperty('--dy', -(80 + Math.round(Math.random() * 160)) + 'px');
+        b.style.setProperty('--t', (700 + Math.round(Math.random() * 500)) + 'ms');
+        b.style.left = (r.left + r.width / 2 - s / 2 + (Math.random() - 0.5) * 40) + 'px';
+        b.style.top = (r.top + r.height / 2 - s / 2) + 'px';
+        document.body.appendChild(b);
+        setTimeout(() => { if (b.parentNode) b.parentNode.removeChild(b); }, 1300);
+      }
+    } catch (e) { /* purely decorative */ }
+  }
+
+  function hint() {
+    if (busy || pg().done || current === 'tutorial') return;
+    const z = pz(), p = pg();
+    const unfound = z.words.map((w, i) => i).filter(i => p.found.indexOf(i) < 0);
+    if (!unfound.length) return;
+    let wi = unfound.find(i => (p.hints[i] || 0) > 0);
+    if (wi == null) wi = unfound[0];
+    const chunks = z.chunksByWord[wi];
+    const lvl = p.hints[wi] || 0;
+    p.hints[wi] = lvl + 1;
+    Sound.hint();
+    breakCombo();
+    if (p.hints[wi] >= chunks.length) {
+      // every bubble of the word revealed: it locks in on its own
+      const ids = pickIdsForWord(wi);
+      ids.forEach(id => removeFromChain(id, false));
+      busy = true;
+      p.found.push(wi);
+      ids.forEach(id => p.consumed.push(id));
+      delete p.hints[wi];
+      p.points = (p.points || 0) + z.words[wi].length * 5;
+      persist(); renderScore();
+      ids.forEach(id => { const e = boardEls[id]; if (e) e.classList.add('popping'); });
+      flash('Revealed: ' + z.words[wi] + ' +' + z.words[wi].length * 5, 'hint');
+      setTimeout(() => {
+        ids.forEach(id => { const e = boardEls[id]; if (e) { e.classList.remove('popping', 'hinted'); e.classList.add('consumed'); } });
+        busy = false;
+        renderSlots(); applyHints();
+        if (p.found.length === z.words.length) finish();
+      }, 420);
+    } else {
+      persist(); renderScore(); renderSlots(); applyHints();
+      flash('Starts with ' + chunks.slice(0, lvl + 1).join(' · ') + ' …', 'hint');
+    }
+  }
+
+  function finish() {
+    tickTime(); tStart = null;
+    const p = pg();
+    p.done = true;
+    if (current === 'tutorial') { store.tutorialDone = true; persist(); Sound.win(); celebrate(); render(); return; }
+    if (viewDay === TODAY && LEVELS.every(l => isDone(TODAY, l))) updateStats();
+    persist();
+    Sound.win();
+    celebrate();
+    render();
+    const day = viewDay, level = current, ms = p.elapsed;
+    (async () => {
+      const won = {};
+      for (const k of recordKeys(day, level)) won[k.tier] = await submitRecord(day, level, ms, p.points || 0, k.id);
+      if (!won.world && !won.country && !won.local) return;
+      if (won.world) p.newRecord = true;
+      else if (won.country) p.newRegional = 'country';
+      else if (won.local) p.newRegional = 'local';
+      persist();
+      if (viewDay === day && current === level && !$('result').hidden) { renderResult(); Sound.earn(); }
+    })();
+  }
+
+  function updateStats() {
+    const st = store.stats;
+    if (st.lastDay === TODAY) return;
+    st.days += 1;
+    st.streak = (st.lastDay === TODAY - 1) ? st.streak + 1 : 1;
+    st.best = Math.max(st.best, st.streak);
+    st.lastDay = TODAY;
+    if (LEVELS.every(l => rankFor(recFor(TODAY)[l].points || 0, TODAY, l, true).stars === 3)) st.perfect += 1;
+  }
+
+  /* ---------- time until the next boards ---------- */
+  function untilMidnight() {
+    const now = new Date();
+    const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+    const ms = Math.max(0, next - now), h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000);
+    return h > 0 ? h + 'h ' + (m < 10 ? '0' : '') + m + 'm' : m + 'm';
+  }
+  let countdownTimer = null;
+  function startCountdown(el) {
+    clearInterval(countdownTimer);
+    const tick = () => { if (!el.isConnected) { clearInterval(countdownTimer); return; } el.textContent = 'New boards in ' + untilMidnight(); };
+    tick();
+    countdownTimer = setInterval(tick, 30000);
+  }
+
+  /* ---------- navigation, replay, reset ---------- */
+  function switchTo(level) {
+    if (busy || (level !== 'tutorial' && LEVELS.indexOf(level) < 0)) return;
+    document.body.classList.remove('focus');
+    tickTime(); tStart = null; persist();
+    current = level;
+    chain = []; gesture = null;
+    $('pillWord').innerHTML = '';
+    render();
+  }
+  function goToDay(day, level) {
+    if (busy || day < 1) return;
+    const dir = day < viewDay ? 'slide-right' : day > viewDay ? 'slide-left' : '';
+    viewDay = day;
+    switchTo(level || firstOpenLevel(day));
+    if (dir) ['play', 'result'].forEach(id => { const el = $(id); el.classList.remove('slide-left', 'slide-right'); void el.offsetWidth; el.classList.add(dir); });
+  }
+  function replay() {
+    if (busy) return;
+    if (current === 'tutorial') tutorialProgress = freshProgress();
+    else { recFor(viewDay)[current] = freshProgress(); persist(); }
+    switchTo(current);
+  }
+  function resetDay(day) {
+    LEVELS.forEach(l => { recFor(day)[l] = freshProgress(); });
+    persist();
+  }
+
+  /* ---------- result card ---------- */
+  function btn(label, cls, onClick, ic) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn ' + cls;
+    if (ic) { b.innerHTML = icon(ic); b.appendChild(document.createTextNode(label)); } else b.textContent = label;
+    b.addEventListener('click', onClick);
+    return b;
+  }
+  function summaryBox() {
+    const box = document.createElement('div');
+    box.className = 'summary';
+    LEVELS.forEach(l => {
+      const pts = recFor(viewDay)[l].points || 0;
+      const row = document.createElement('div');
+      const a = document.createElement('span'); a.textContent = META[l].label;
+      const b = document.createElement('span'); b.textContent = starText(rankFor(pts, viewDay, l, true).stars) + ' · ' + pts;
+      row.append(a, b); box.appendChild(row);
+    });
+    if (viewDay === TODAY) {
+      const st = store.stats;
+      const row = document.createElement('div');
+      const a = document.createElement('span'); a.textContent = 'Streak';
+      const b = document.createElement('span'); b.textContent = st.streak + (st.streak === 1 ? ' day' : ' days');
+      row.append(a, b); box.appendChild(row);
+    }
+    return box;
+  }
+
+  let shownResult = null;
+  function renderResult() {
+    $('play').hidden = true;
+    const r = $('result');
+    r.hidden = false;
+    r.innerHTML = '';
+    const z = pz(), p = pg();
+    const card = document.createElement('div');
+    card.className = 'result';
+    const acts = document.createElement('div');
+    acts.className = 'actions';
+
+    if (current === 'tutorial') {
+      const h = document.createElement('h2'); h.textContent = "You've got it";
+      const sub = document.createElement('p'); sub.textContent = "Bubbles click into place when they make a word. Today's boards hide 3, 4 and 5 words. Every word scores, nothing is ever taken away, and words in a row build a combo.";
+      card.append(h, sub);
+      acts.appendChild(btn("Play today's Easy", 'primary', () => goToDay(TODAY, 'easy'), 'play'));
+      card.appendChild(acts);
+    } else {
+      const pts = p.points || 0, r = rankFor(pts, viewDay, current, true);
+      const tag = document.createElement('div'); tag.className = 'result-tag'; tag.textContent = fullDate(viewDay) + ' · ' + META[current].label;
+      card.appendChild(tag);
+      // the stars land one by one the first time this card shows; later refreshes (a record arriving) stay still
+      const firstShow = shownResult !== boardKey(viewDay, current);
+      shownResult = boardKey(viewDay, current);
+      const h = document.createElement('h2'); h.className = 'star-row'; h.appendChild(starsEl(r.stars, 'big' + (firstShow ? '' : ' static')));
+      if (firstShow) for (let i = 0; i < r.stars; i++) setTimeout(() => Sound.pick(4 + i * 2), 380 + i * 150);
+      // the best thing this time earned: a record you hold (world > country > local), else a medal
+      const mineMs = p.elapsed ? Math.round(p.elapsed) : 0;
+      const pills = recordPills(viewDay, current);
+      const held = pills.filter(m => mineMs && m.ms && holds({ ms: mineMs, pts: p.points || 0 }, { ms: m.ms, pts: m.pts }));
+      const medalOnly = (medalTimes(viewDay, current, false).find(m => mineMs && mineMs <= m.ms)) || null;
+      const medal = held.length ? held[0] : medalOnly;
+      const tnote = document.createElement('div'); tnote.className = 'medals';
+      const mine = document.createElement('div'); mine.className = 'medal-mine' + (medal ? ' ' + medal.key : '');
+      if (medal && medal.icon) { const ic = document.createElement('span'); ic.className = 'mine-icon'; ic.textContent = medal.icon; mine.appendChild(ic); }
+      else mine.innerHTML = '<span class="medal-dot"></span>';
+      mine.appendChild(document.createTextNode(p.elapsed ? (medal ? medal.name + ' · ' : 'No medal · ') + fmtTime(p.elapsed) : 'Time not recorded'));
+      const ladder = document.createElement('div'); ladder.className = 'medal-ladder';
+      // one row of pills: records first (world, country, local), then the medals; only your best is outlined
+      // a narrower record that is the same as a broader one (world = Canada, Canada = ON & QC) isn't repeated
+      const shownPills = pills.filter((m, i) => !pills.slice(0, i).some(b => b.ms === m.ms && (b.pts || 0) === (m.pts || 0)));
+      shownPills.concat(medalTimes(viewDay, current, false)).forEach(m => {
+        const it = document.createElement('span'); it.className = 'medal-step ' + m.key + (medal === m ? ' hit' : '') + (m.ms ? '' : ' empty');
+        if (m.icon) { const ic = document.createElement('span'); ic.className = 'pill-icon'; ic.textContent = m.icon; it.appendChild(ic); }
+        else it.innerHTML = '<span class="medal-dot"></span>';
+        it.appendChild(document.createTextNode(m.ms ? fmtTime(m.ms) : '—'));
+        it.setAttribute('aria-label', m.name + (m.ms ? ' ' + fmtTime(m.ms) : ', none yet') + (medal === m ? ', yours' : ''));
+        ladder.appendChild(it);
+      });
+      tnote.append(mine, ladder);
+      const sub = document.createElement('p'); sub.textContent = pts + ' points' + ((p.bestCombo || 0) >= 2 ? ' · best combo ×' + mult(p.bestCombo) : '');
+      const words = document.createElement('div'); words.className = 'words';
+      z.words.forEach((w, wi) => { const s = document.createElement('span'); s.className = 'slot solved'; s.textContent = z.chunksByWord[wi].join('·'); words.appendChild(s); });
+      card.append(h, tnote, sub, words);
+      if ((p.bonus || []).length) {
+        // bonus words found, shown just like the hidden words but in gold
+        const bw = document.createElement('div'); bw.className = 'words';
+        p.bonus.forEach(wd => { const c = document.createElement('span'); c.className = 'slot bonus-solved'; c.textContent = wd; bw.appendChild(c); });
+        card.appendChild(bw);
+      }
+      const all = allBonus(viewDay, current);
+      if (all.length) {
+        // longest first; skip the ones the player already found
+        const have = new Set(p.bonus || []);
+        const byLength = [...new Set(all.map(b => b.word))].sort((a, b) => b.length - a.length || a.localeCompare(b));
+        const missed = byLength.find(wd => !have.has(wd));
+        const tip = document.createElement('p'); tip.className = 'tip';
+        const gotTop = have.has(byLength[0]);
+        if (!missed) tip.textContent = 'You found every bonus word!';
+        else {
+          tip.appendChild(document.createTextNode((gotTop ? 'You found the longest bonus word, ' + byLength[0] + '! ' : '') + 'Longest bonus word you missed: '));
+          const b = document.createElement('b'); b.textContent = missed; tip.appendChild(b);
+        }
+        card.appendChild(tip);
+      }
+      const next = LEVELS.find(l => !isDone(viewDay, l));
+      if (!next) card.appendChild(summaryBox());
+      if (!next && viewDay === TODAY) { const cd = document.createElement('p'); cd.className = 'countdown'; card.appendChild(cd); startCountdown(cd); }
+      const other = unfinishedDay(viewDay), otherLevel = other ? firstOpenLevel(other) : null;
+      const otherLabel = other ? dayWord(other) + ' ' + META[otherLevel].label : '';
+      if (next) acts.appendChild(btn('Play ' + META[next].label, 'primary', () => switchTo(next), 'next'));
+      else if (other) acts.appendChild(btn('Play ' + otherLabel, 'primary', () => goToDay(other, otherLevel), 'earlier'));
+      card.appendChild(acts);
+      // a row of compact actions: icon over a short label, like a phone's share sheet
+      const row = document.createElement('div'); row.className = 'actions-row';
+      if (next && other) row.appendChild(btn(otherLabel, 'mini', () => goToDay(other, otherLevel), 'earlier'));
+      const same = unfinishedAt(current, viewDay);
+      const primaryIsSame = !next && other === same && otherLevel === current;
+      if (same && !(other === same && otherLevel === current && next) && !primaryIsSame)
+        row.appendChild(btn(dayWord(same) + ' ' + META[current].label, 'mini', () => goToDay(same, current), 'next'));
+      row.appendChild(btn('Share', 'mini', () => share(card), 'share'));
+      card.appendChild(row);
+    }
+    r.appendChild(card);
+  }
+
+  function shareText() {
+    const lines = ['Word Bubbles · ' + fullDate(viewDay)];
+    LEVELS.forEach(l => {
+      const p = recFor(viewDay)[l];
+      if (!p.done) { lines.push(META[l].icon + ' ' + META[l].label + ' —'); return; }
+      const pts = p.points || 0;
+      lines.push(META[l].icon + ' ' + META[l].label + ' ' + starText(rankFor(pts, viewDay, l, true).stars) + (p.newRecord ? ' 👑' : p.newRegional === 'country' && PLACE.country ? ' ' + PLACE.country.flag : p.newRegional === 'local' ? ' 📍' : medalFor(viewDay, l, p.elapsed) ? ' ' + medalFor(viewDay, l, p.elapsed).emoji : '') + ' ' + pts + (p.elapsed ? ' ' + fmtTime(p.elapsed) : '') + ((p.bestCombo || 0) >= 2 ? ' · ×' + mult(p.bestCombo) + ' combo' : '') + ((p.bonus || []).length ? ' · ✦' + p.bonus.length : ''));
+    });
+    return lines.join('\n');
+  }
+  function share(card) {
+    const text = shareText();
+    const done = () => {
+      let t = card.querySelector('.toast');
+      if (!t) { t = document.createElement('p'); t.className = 'toast'; card.appendChild(t); }
+      t.textContent = 'Copied to clipboard';
+      setTimeout(() => { if (t.parentNode) t.parentNode.removeChild(t); }, 1800);
+    };
+    const fallback = () => {
+      let box = card.querySelector('.sharebox');
+      if (!box) { box = document.createElement('pre'); box.className = 'sharebox'; card.appendChild(box); }
+      box.textContent = text;
+      try { const range = document.createRange(); range.selectNodeContents(box); const s = window.getSelection(); s.removeAllRanges(); s.addRange(range); } catch (e) { /* ignore */ }
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  $('tabs').addEventListener('click', e => {
+    const t = e.target.closest ? e.target.closest('.tab') : null;
+    if (t) switchTo(t.dataset.level);
+  });
+  $('todayBtn').addEventListener('click', () => goToDay(TODAY));
+  $('prevDay').addEventListener('click', () => goToDay(viewDay - 1));
+  $('nextDay').addEventListener('click', () => { if (viewDay < TODAY) goToDay(viewDay + 1); });
+  $('hintBtn').addEventListener('click', hint);
+  $('shuffleBtn').addEventListener('click', shuffle);
+  $('bonusBtn').addEventListener('click', () => { const w = $('bonusBtn').dataset.word; if (w && !busy) collectBonus(w); });
+  function renderSoundBtn() {
+    const b = $('soundBtn'), on = Sound.isOn();
+    b.setAttribute('aria-label', on ? 'Sound on' : 'Sound off');
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/>' +
+      (on ? '<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>' : '<path d="M16 9.5l5 5M21 9.5l-5 5"/>') + '</svg>';
+  }
+  $('soundBtn').addEventListener('click', () => { Sound.toggle(); renderSoundBtn(); });
+  renderSoundBtn();
+  // browsers only allow audio after a touch, so wake it on the first one
+  document.addEventListener('pointerdown', function wake() { Sound.unlock(); document.removeEventListener('pointerdown', wake, true); }, true);
+  document.addEventListener('keydown', e => {
+    if (e.defaultPrevented) return;
+    if (!$('overlay').hidden) { if (e.key === 'Escape') closeOverlay(); return; }
+    if (e.target && e.target.tagName === 'BUTTON') return;
+    if (current !== 'tutorial' && e.key === 'ArrowLeft' && viewDay > 1) { goToDay(viewDay - 1); return; }
+    if (current !== 'tutorial' && e.key === 'ArrowRight' && viewDay < TODAY) { goToDay(viewDay + 1); return; }
+    if (pg().done) return;
+    if (e.key === 'Backspace') { if (chain.length) { e.preventDefault(); removeFromChain(chain[chain.length - 1], true); } }
+    else if (e.key === 'Escape') clearChain();
+  });
+
+  /* ---------- overlay cards ---------- */
+  function openOverlay() { $('overlay').hidden = false; }
+  function closeOverlay() { $('overlay').hidden = true; }
+  $('overlay').addEventListener('click', e => { if (e.target === $('overlay')) closeOverlay(); });
+
+  function openHelp() {
+    const c = $('card');
+    c.innerHTML =
+      '<button class="card-x" id="cardX" type="button" aria-label="Close">×</button>' +
+      '<h2>How to play</h2>' +
+      '<ol>' +
+      '<li>Today\'s hidden words are cut into bubbles of 1 to 3 letters and scrambled.</li>' +
+      '<li>Tap or swipe the bubbles that belong together, in order. They fly into the tray, and when they make a word they click into place.</li>' +
+      '<li>Every word scores and nothing is ever taken away, so tap freely. More points earn more stars, up to 3, and a quick finish wins a bronze, silver or gold time medal. Hidden words in a row build a combo (up to ×4); putting a bubble back or using a hint starts it over.</li>' +
+      '<li>Spelled a real word that isn\'t hidden? It\'s a <b>bonus word</b> and scores too. Find them early: once a hidden word uses its bubbles, they\'re gone.</li>' +
+      '<li>Stuck? <b>Shuffle</b> re-deals the bubbles for free. "One bubble away" means you\'re a single swap from a word.</li>' +
+      '</ol>' +
+      '<div class="demo" aria-hidden="true"><span class="ball">RA</span><span class="arrow">→</span><span class="ball">IN</span><span class="arrow">→</span><span class="ball">BOW</span><span class="arrow">=</span><span class="slot solved">RAINBOW</span></div>' +
+      '<p class="sub">Three boards a day: Easy, Medium and Hard. New words at midnight. Earlier days stay open from the calendar.</p>' +
+      '<div class="actions"><button class="btn secondary" id="tutBtn" type="button">Replay tutorial</button><button class="btn primary" id="closeBtn" type="button">Got it</button></div>';
+    $('tutBtn').addEventListener('click', () => { tutorialProgress = freshProgress(); closeOverlay(); switchTo('tutorial'); });
+    $('closeBtn').addEventListener('click', closeOverlay);
+    openOverlay();
+  }
+
+  function openDays() {
+    const c = $('card');
+    const st = store.stats;
+    const stat = (n, label) => '<div class="stat"><b>' + n + '</b><span>' + label + '</span></div>';
+    c.innerHTML =
+      '<button class="card-x" id="cardX" type="button" aria-label="Close">×</button>' +
+      '<h2>Your days</h2>' +
+      '<div class="stats">' + stat(st.days, 'Days') + stat(st.streak, 'Streak') + stat(st.best, 'Best') + stat(st.perfect, '3★ days') + '</div>' +
+      '<p class="countdown" id="cardCountdown"></p>' +
+      '<div class="days" id="dayList"></div>' +
+      '<div class="days-foot"><span class="sub">Only today counts toward your streak.</span></div>';
+    startCountdown($('cardCountdown'));
+    const list = $('dayList');
+    for (let d = TODAY; d >= Math.max(1, TODAY - KEEP_DAYS); d--) {
+      const row = document.createElement('div');
+      row.className = 'dayrow' + (d === viewDay ? ' current' : '');
+      const dn = document.createElement('span'); dn.className = 'dn'; dn.textContent = fmtDate(d);
+      const dd = document.createElement('span'); dd.className = 'dd'; dd.textContent = relDay(d);
+      const lv = document.createElement('span'); lv.className = 'lv';
+      let open = 0;
+      LEVELS.forEach(l => { const i = document.createElement('i'); const done = isDone(d, l); if (done) i.className = 'done ' + l; else open++; i.setAttribute('aria-label', META[l].label + (done ? ' done' : ' open')); lv.appendChild(i); });
+      const b = btn(open ? 'Play' : 'Open', open ? 'primary' : 'secondary', () => { closeOverlay(); goToDay(d); });
+      row.append(dn, dd, lv, b);
+      list.appendChild(row);
+    }
+    openOverlay();
+  }
+  $('card').addEventListener('click', e => { if (e.target && e.target.id === 'cardX') closeOverlay(); });
+  $('helpBtn').addEventListener('click', openHelp);
+  $('daysBtn').addEventListener('click', openDays);
+
+  /* ---------- keep the honeycomb fitted to the screen ---------- */
+  const relayout = () => { if (!$('play').hidden) { fitBoardHeight(); layoutBoard(); } };
+  if (window.ResizeObserver) { try { new ResizeObserver(relayout).observe(board); } catch (e) { /* ignore */ } }
+  window.addEventListener('resize', relayout);
+  window.addEventListener('orientationchange', () => setTimeout(relayout, 60));
+
+  /* ---------- new day while open ---------- */
+  setInterval(() => { if (previewDayNum == null && WB.todayNumber() !== TODAY) location.reload(); }, 60000);
+
+  /* ---------- boot (keeps state across live updates of the page) ---------- */
+  function start(hot) {
+    if (hot && typeof hot.viewDay === 'number' && hot.viewDay >= 1) viewDay = hot.viewDay;
+    if (hot && typeof hot.current === 'string' && (hot.current === 'tutorial' || LEVELS.indexOf(hot.current) >= 0)) current = hot.current;
+    if (hot && Array.isArray(hot.chain)) chain = hot.chain.filter(id => bubbleById(id) && pg().consumed.indexOf(id) < 0);
+    render();
+  }
+  const hot = (window.claude && window.claude.hot) || null;
+  try { if (hot && typeof hot.snapshot === 'function') hot.snapshot(() => ({ viewDay: viewDay, current: current, chain: chain })); } catch (e) { /* ignore */ }
+  if (hot && typeof hot.ready === 'function') hot.ready(start); else start((hot && hot.data) || {});
+})();
+</script>
+
+</body></html>
