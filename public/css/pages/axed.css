@@ -1,0 +1,40 @@
+/* axed.css: AXED page-local layout only.
+   Scoped under .page-axed, tokens only (white and shadow on the filled mark excepted), no shared component selector redefined. */
+
+/* Header, as the app's entity page: a big mark beside the bold title and its subtitle. */
+.page-axed .ax-head{display:flex;align-items:center;gap:16px}
+/* The mark is filled like an app icon (as the CentrOS page's): orange gradient, white glyph, continuous corners. */
+.page-axed .ax-mark{flex:none;display:grid;place-items:center;inline-size:4rem;block-size:4rem;border-radius:28%;
+  background:var(--orange);background:linear-gradient(180deg,color-mix(in srgb,var(--orange) 72%,#fff) 0%,var(--orange) 70%);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 20px rgba(0,0,0,.25)}
+.page-axed .ax-mark > .i{inline-size:1.875rem;block-size:1.875rem;stroke-width:2.25}
+@media (max-width:359px){.page-axed .ax-mark{inline-size:3.25rem;block-size:3.25rem}.page-axed .ax-head{gap:12px}}
+@media (forced-colors:active){.page-axed .ax-mark{border:1px solid CanvasText}}
+.page-axed .ax-head__text{flex:1 1 auto;min-width:0}
+.page-axed .ax-head .lt__sub{margin-top:2px}
+
+/* Hero, as the CentrOS case study's: claim, then the two actions, then the intro in a glass text card. */
+.page-axed .hero > .actions > .btn{flex:1 1 auto;white-space:nowrap}
+@media (max-width:429px){.page-axed .hero > .actions > .btn{padding-inline:20px}.page-axed .hero > .actions > .btn > .i{display:none}}
+@media (min-width:768px){.page-axed .hero > .actions > .btn{flex:0 1 auto}}
+.page-axed .hero > .hero__intro{margin-top:16px}
+.page-axed .ax-lede p{text-wrap:pretty}
+.page-axed .ax-lede strong{color:var(--label)}
+
+/* The teal sky's glow runs bright behind the right half of the column: the header details take the secondary label,
+   and in dark the halo under text set straight on the sky is deepened so it stays AA wherever the glow drifts. */
+.page-axed .sec__detail{color:var(--label-2-sky)}
+@media not (prefers-reduced-transparency:reduce){
+  html:not(.sky-solid):not([data-theme="light"]) body.page-axed{--halo:0 0 2px rgba(0,0,0,.6),0 0 6px rgba(0,0,0,.6),0 0 16px rgba(0,0,0,.7)}
+  html:not(.sky-solid):not([data-theme="light"]) body.page-axed .sec__detail{color:rgba(235,235,245,.9)}   /* footnote size, so a step brighter than the title */
+}
+/* Links inside the text cards use the brighter action ink, AA on the glass over the teal glow. */
+.page-axed .card--text a:not([class]){color:var(--fg-action-on-wash)}
+.page-axed .hero > .sec__head{margin-top:var(--sec-gap)}
+
+/* Proof rows: a title over bullets, so the bullets get a little room below the title. */
+.page-axed #proves .row__text > .bullets{margin-top:6px}
+.page-axed #proves .row{padding-block:14px}
+
+/* Inline links in the proof rows and the closing card: a 44 px tall target with no layout change. */
+.page-axed :is(.bullets,.card--text) a:not([class]){padding-block:13px;margin-block:-13px}

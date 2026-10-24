@@ -1,0 +1,14 @@
+/* References page (teal sky). Page-local layout only: tokens only, no literal colours, never redefines a shared component.
+   Everything on this page is built from the shared system in style.css (large title, mail card, glass list, card--text, chips). */
+
+/* The note stands off the large title the way the app's first card does, rather than touching the subtitle. */
+.page-references #top > .mail{margin-top:20px}
+
+/* Phones: every row ends in the same "On request" chip. Beside the text it squeezed the title column at 320 px
+   ("Engineering / peers") and stacked the longest subtitle six lines deep. Under 480 px the text takes the full
+   row and the chip drops beneath it, aligned to the text column (glyph 28 px + 12 px gap). */
+@media (max-width:479px){
+  .page-references #list .row--top{flex-wrap:wrap;row-gap:8px}
+  .page-references #list .row--top > .row__text{flex-basis:calc(100% - 1.75rem - 12px)}
+  .page-references #list .row--top > .chip{margin-inline-start:calc(1.75rem + 12px)}
+}

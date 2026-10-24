@@ -1,0 +1,146 @@
+/* Style guide (ash sky). Page-local layout only: scoped to .page-styleguide, .sg-* classes only, tokens only.
+   The only literal colours are the two .sg-theme token blocks (copies of the dark and light token blocks at the
+   top of style.css, so each preview resolves its own appearance) and the two app sky keys that have no token. */
+
+.page-styleguide{
+  --sg-sky-violet:#7659EB;   /* Sky.swift violet: hsb(.70,.62,.92), "indigo: the night sky, not a purple" */
+  --sg-sky-rose:#F28124;     /* Sky.swift rose: hsb(.075,.85,.95), "amber: sitting at the fire" */
+}
+
+/* ---------- Layout helpers ---------- */
+.page-styleguide header#top > .card{margin-top:20px}
+.page-styleguide header#top > .card + .card{margin-top:10px}
+.page-styleguide .sg-gap{margin-top:10px}
+.page-styleguide .sg-pad{padding:0 16px 14px}
+.page-styleguide .sg-flex{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.page-styleguide .sg-mono{font-family:var(--font-mono);font-size:.8125rem;overflow-wrap:anywhere}
+.page-styleguide .sg-classes{line-height:1.9}
+.page-styleguide .sg-classes > code{white-space:nowrap}
+/* Long paths and token names break anywhere rather than push the page sideways at large text sizes. */
+.page-styleguide code{overflow-wrap:anywhere}
+.page-styleguide .card--text{min-width:0}
+.page-styleguide .sg-cap{font:var(--t-footnote);color:var(--label-2)}
+.page-styleguide .sg-specimen > .actions{padding:0}
+.page-styleguide .sg-pills{gap:0;padding:10px}       /* pills carry their own 6 px hit border */
+
+/* ---------- Colour ---------- */
+.page-styleguide .sg-swatch{flex:none;display:inline-block;inline-size:1.75rem;block-size:1.75rem;border-radius:8px;
+  background:var(--sw);box-shadow:inset 0 0 0 1px var(--separator)}
+.page-styleguide .sg-swatch--sm{inline-size:1rem;block-size:1rem;border-radius:5px}
+.page-styleguide .row > .sg-swatch{align-self:flex-start;margin-top:2px}
+.page-styleguide .sg-chips{display:flex;flex-wrap:wrap;gap:6px}
+.page-styleguide .sg-chips > .chip{margin:0}
+
+.page-styleguide .sg-themes{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+@media (min-width:768px){.page-styleguide .sg-themes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.page-styleguide .sg-theme{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:12px;padding:16px 12px;border-radius:var(--r-card);color:var(--label);
+  box-shadow:inset 0 0 0 1px var(--separator)}
+.page-styleguide .sg-theme__name{min-width:0;padding:0 4px;font:var(--t-headline)}
+.page-styleguide .sg-theme .list--avatar .row{padding-inline:12px;flex-wrap:wrap}
+.page-styleguide .sg-theme .list--avatar .row__text{flex-basis:5em}   /* at large text sizes the pill drops under the words instead of squeezing them */
+.page-styleguide .sg-tokens{display:grid;gap:6px;padding:0 4px}
+.page-styleguide .sg-tokens > li{display:grid;grid-template-columns:1rem minmax(0,auto) minmax(0,1fr);align-items:center;gap:8px;font:var(--t-footnote)}
+.page-styleguide .sg-tokens code{white-space:nowrap}
+.page-styleguide .sg-tokens .sg-value{color:var(--label-2);text-align:end}
+
+/* The two previews re-declare the token block for their appearance (copied from style.css). */
+.page-styleguide .sg-theme[data-theme="dark"]{
+  color-scheme:dark;
+  --label:#fff;--label-2:rgba(235,235,245,.8);--label-3:rgba(235,235,245,.3);--label-4:rgba(235,235,245,.16);--label-2-sky:var(--label-2);
+  --fill-1:rgba(120,120,128,.36);--fill-2:rgba(120,120,128,.32);--fill-3:rgba(118,118,128,.24);--fill-4:rgba(118,118,128,.18);--fill-quiet:rgba(235,235,245,.16);
+  --bg:#000;--bg-grouped-2:#1C1C1E;--bg-elevated:#1C1C1E;--bg-elevated-2:#2C2C2E;--separator:rgba(84,84,88,.5);
+  --blue:#0091FF;--green:#30D158;--yellow:#FFD600;--orange:#FF9230;--red:#FF4245;--purple:#DB34F2;
+  --cyan:#3CD3FE;--teal:#00D2E0;--mint:#00DAC3;--indigo:#6D7CFF;--pink:#FF375F;--brown:#B78A66;--gray:#8E8E93;
+  --fg-action:#4DA8FF;--fg-waiting:#FFD600;--fg-settled:#30D158;--fg-caution:#FF9230;--fg-stop:#FF6961;
+  --fg-action-on-wash:#6CB8FF;--fg-waiting-on-wash:#FFD600;--fg-settled-on-wash:#3DDC67;--fg-caution-on-wash:#FFB066;--fg-stop-on-wash:#FF8A84;--label-3-sky:rgba(235,235,245,.64);
+  --wash-action:rgba(0,145,255,.16);--wash-waiting:rgba(255,214,0,.16);--wash-settled:rgba(48,209,88,.16);--wash-caution:rgba(255,146,48,.16);--wash-stop:rgba(255,66,69,.16);
+  --wash-indigo:rgba(109,124,255,.18);--link:var(--fg-action);
+  --glass-card-bg:rgba(255,255,255,.075);--glass-card-filter:blur(10px) saturate(120%) brightness(.74);
+  --glass-card-inner:inset 0 0 0 1px rgba(255,255,255,.04),inset 0 0 14px rgba(255,255,255,.035);
+  --glass-rim:linear-gradient(155deg,rgb(var(--sky-rim) / .62) 0%,rgb(var(--sky-rim) / .3) 28%,rgb(var(--sky-rim) / .24) 62%,rgb(var(--sky-rim) / .52) 100%);
+  --halo:none;
+  background:radial-gradient(circle at 18% 12%,rgb(var(--sky-rim) / .28),rgba(0,0,0,0) 55%),radial-gradient(circle at 88% 92%,rgb(var(--sky-rim) / .16),rgba(0,0,0,0) 50%),var(--skyD-ground);
+}
+.page-styleguide .sg-theme[data-theme="light"]{
+  color-scheme:light;
+  --label:#000;--label-2:rgba(60,60,67,.78);--label-3:rgba(60,60,67,.3);--label-4:rgba(60,60,67,.18);--label-2-sky:#3C3C43;
+  --fill-1:rgba(120,120,128,.2);--fill-2:rgba(120,120,128,.16);--fill-3:rgba(118,118,128,.12);--fill-4:rgba(116,116,128,.08);--fill-quiet:rgba(60,60,67,.10);
+  --bg:#fff;--bg-grouped-2:#fff;--bg-elevated:#F2F2F7;--bg-elevated-2:#fff;--separator:rgba(60,60,67,.12);
+  --blue:#0088FF;--green:#34C759;--yellow:#FFCC00;--orange:#FF8D28;--red:#FF383C;--purple:#CB30E0;
+  --cyan:#00C0E8;--teal:#00C3D0;--mint:#00C8B3;--indigo:#6155F5;--pink:#FF2D55;--brown:#AC7F5E;--gray:#8E8E93;
+  --fg-action:#0060C0;--fg-waiting:#8A5A00;--fg-settled:#18702F;--fg-caution:#A85A00;--fg-stop:#D70015;
+  --fg-action-on-wash:#0052A8;--fg-waiting-on-wash:#6E4700;--fg-settled-on-wash:#135E27;--fg-caution-on-wash:#8A4700;--fg-stop-on-wash:#B0000F;--label-3-sky:rgba(60,60,67,.88);
+  --wash-action:rgba(0,136,255,.16);--wash-waiting:rgba(255,204,0,.16);--wash-settled:rgba(52,199,89,.16);--wash-caution:rgba(255,141,40,.16);--wash-stop:rgba(255,56,60,.16);
+  --wash-indigo:rgba(97,85,245,.14);--link:var(--fg-action);
+  --glass-card-bg:rgba(255,255,255,.74);--glass-card-filter:blur(14px) saturate(180%) brightness(1.04);
+  --glass-card-inner:inset 0 -10px 18px -12px rgba(110,110,150,.14);
+  --glass-rim:linear-gradient(155deg,#fff,rgba(255,255,255,.75) 40%,rgba(255,255,255,.9));
+  --halo:none;
+  background:radial-gradient(circle at 18% 12%,rgba(var(--skyL-1)),rgba(0,0,0,0) 60%),radial-gradient(circle at 88% 92%,rgba(var(--skyL-3)),rgba(0,0,0,0) 55%),var(--skyL-base);
+}
+
+/* ---------- Type ---------- */
+.page-styleguide .sg-t{color:var(--label);overflow-wrap:break-word}
+.page-styleguide .sg-t--large{font:var(--t-large)}
+.page-styleguide .sg-t--title1{font:var(--t-title1)}
+.page-styleguide .sg-t--title2{font:var(--t-title2)}
+.page-styleguide .sg-t--title3{font:var(--t-title3)}
+.page-styleguide .sg-t--headline{font:var(--t-headline)}
+.page-styleguide .sg-t--body{font:var(--t-body)}
+.page-styleguide .sg-t--callout{font:var(--t-callout)}
+.page-styleguide .sg-t--subhead{font:var(--t-subhead)}
+.page-styleguide .sg-t--footnote{font:var(--t-footnote)}
+.page-styleguide .sg-t--caption1{font:var(--t-caption1)}
+.page-styleguide .sg-t--caption2{font:var(--t-caption2)}
+.page-styleguide .sg-t--tab{font:var(--t-tab)}
+.page-styleguide .sg-t--mono{font:var(--t-footnote);font-family:var(--font-mono)}
+.page-styleguide .sg-t--mail{font:400 1.0625rem/1.5 var(--font-mail)}
+
+/* ---------- Space ---------- */
+.page-styleguide .sg-bars{--sep-l:68px}
+.page-styleguide .sg-bar{position:relative;flex:none;display:block;inline-size:40px;block-size:12px;border-radius:3px;background:var(--fill-4);overflow:clip}   /* clip: the hidden probe can be wider than the page */
+.page-styleguide .sg-bar__fill{display:block;inline-size:min(var(--w),100%);block-size:100%;border-radius:inherit;background:var(--blue)}
+.page-styleguide .sg-probe{position:absolute;left:0;top:0;inline-size:var(--w);block-size:0;visibility:hidden;pointer-events:none}
+
+/* ---------- Geometry ---------- */
+.page-styleguide .sg-geo{display:grid;gap:12px}
+.page-styleguide .sg-geo__label{font:var(--t-title3)}
+.page-styleguide .sg-geo__sheet{padding:16px;border-radius:var(--r-sheet);background:var(--fill-3)}
+.page-styleguide .sg-geo__group{block-size:56px;border-radius:var(--r-group);background:var(--fill-2)}
+.page-styleguide .sg-geo__bar{display:flex;block-size:62px;padding:6px;border-radius:var(--r-cap);background:var(--fill-3)}
+.page-styleguide .sg-geo__cap{inline-size:40%;border-radius:var(--r-cap);background:var(--tab-selected)}
+.page-styleguide .sg-hit{outline:1px dashed var(--label-2);outline-offset:0}
+.page-styleguide .sg-geo p:has(> .sg-hit){margin:-6px}
+
+/* ---------- Glass ---------- */
+.page-styleguide .sg-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:0 16px}
+.page-styleguide .sg-account{margin-left:0}
+.page-styleguide .sg-back-i{inline-size:22px;block-size:22px;stroke-width:2.25}
+/* The tab bar specimen sits in the flow, never fixed. */
+.page-styleguide .sg-static{position:static;inset:auto;transform:none;margin-inline:auto}
+@media (max-width:767px){.page-styleguide .sg-static{inline-size:auto}}
+.page-styleguide .sg-sheet{position:relative;padding:0 0 18px;border-radius:var(--r-sheet);overflow:hidden;color:var(--label);
+  background:var(--glass-sheet-bg);-webkit-backdrop-filter:var(--glass-sheet-filter);backdrop-filter:var(--glass-sheet-filter);
+  box-shadow:inset 0 0 0 1px var(--sheet-rim)}
+.page-styleguide .sg-sheet .sheet__bar{touch-action:auto;min-block-size:56px}
+
+.page-styleguide .sg-recipes .claim > dd{font:var(--t-subhead)}
+
+/* ---------- Icons ---------- */
+.page-styleguide .sg-icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(5.5rem,1fr));gap:2px;padding:10px}
+.page-styleguide .sg-icons > figure{display:grid;justify-items:center;align-content:start;gap:8px;padding:12px 4px;text-align:center}
+.page-styleguide .sg-icons .i{inline-size:24px;block-size:24px}
+.page-styleguide .sg-icons figcaption{font:var(--t-caption1);color:var(--label-2);overflow-wrap:anywhere}
+
+/* ---------- Preferences ---------- */
+@media (prefers-reduced-transparency:reduce){
+  .page-styleguide .sg-sheet{background:var(--bg-elevated);-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (forced-colors:active){
+  .page-styleguide .sg-theme,.page-styleguide .sg-sheet,.page-styleguide .sg-geo__sheet,.page-styleguide .sg-geo__group,
+  .page-styleguide .sg-geo__bar,.page-styleguide .sg-geo__cap{border:1px solid CanvasText}
+  .page-styleguide .sg-swatch,.page-styleguide .sg-bar{border:1px solid CanvasText;forced-color-adjust:none}   /* a swatch shows its colour */
+}
+@media print{
+  .page-styleguide .sg-static,.page-styleguide [data-sg-hue],.page-styleguide .sg-theme[data-theme="dark"]{display:none}   /* white-on-dark specimens would print as white text on paper */
+}

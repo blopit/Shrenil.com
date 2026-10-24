@@ -1,0 +1,109 @@
+/* The sky: CentrOS's cosmic aurora (public/js/sky.js draws it in WebGL).
+
+   This file is the ground under it. html::before is a fixed gradient that approximates
+   each page's sky — the light of its three masses on a near-black (dark) or near-white
+   (light) ground — and shows before the first WebGL frame, without JS, without WebGL,
+   while a lost context comes back, and as the whole sky when sky.js is not loaded.
+   html.sky-solid (the app's Background: Solid) is one flat colour instead.
+
+   Reads <body data-sky="accent|violet|teal|rose|ash|stop"> (or html[data-sky]) and
+   html[data-theme="dark|light"], else dark. The page's own background
+   must stay transparent for the sky to show (body, and any full-page wrapper). */
+
+/* Each page: where its light gathers (x y, and how far it spreads, per
+   SkyArrangement.make) and its colours by night (D) and by day (L): the ground, the
+   glows' colour and strength, the far glow, the sky's average colour (base, what an
+   overscroll shows) and the solid colour. Fitted to the WebGL sky averaged over its
+   60-second loop, so the canvas fades in over it without a jump in brightness. */
+:root{
+  --sky-p1:78% 40%;--sky-r1:67vh;--sky-p2:16% 14%;--sky-r2:43vh;--sky-p3:22% 88%;--sky-r3:59vh;
+  --skyD-ground:#0a0015;--skyD-base:#0a0f29;--skyD-solid:#00111e;--skyD-far:0,153,146;
+  --skyD-1:0,90,158,.15;--skyD-2:0,148,96,.17;--skyD-3:42,0,153,.11;
+  --skyL-ground:#f4f3fc;--skyL-base:#dbe2ee;--skyL-solid:#e5edf5;--skyL-far:93,175,179;
+  --skyL-1:101,145,184,.18;--skyL-2:101,184,158,.2;--skyL-3:150,129,199,.13;
+}
+:root[data-sky="violet"],:root:has(> body[data-sky="violet"]){
+  --sky-p1:15% 18%;--sky-r1:51vh;--sky-p2:50% 50%;--sky-r2:59vh;--sky-p3:86% 82%;--sky-r3:55vh;
+  --skyD-ground:#100713;--skyD-base:#1d112b;--skyD-solid:#0e0a1e;--skyD-far:53,81,153;
+  --skyD-1:76,55,158,.17;--skyD-2:121,46,133,.13;--skyD-3:53,81,153,.17;
+  --skyL-ground:#f7f3fa;--skyL-base:#e4deed;--skyL-solid:#edebf5;--skyL-far:125,137,179;
+  --skyL-1:143,133,184,.2;--skyL-2:188,155,199,.15;--skyL-3:125,137,179,.2;
+}
+:root[data-sky="teal"],:root:has(> body[data-sky="teal"]){
+  --sky-p1:70% 22%;--sky-r1:52vh;--sky-p2:18% 78%;--sky-r2:50vh;--sky-p3:88% 52%;--sky-r3:34vh;
+  --skyD-ground:#010409;--skyD-base:#08181d;--skyD-solid:#07191e;--skyD-far:30,153,121;
+  --skyD-1:31,140,158,.3;--skyD-2:30,153,121,.24;--skyD-3:52,72,168,.2;
+  --skyL-ground:#f1f7fc;--skyL-base:#d5e9ec;--skyL-solid:#e5f2f5;--skyL-far:93,179,157;
+  --skyL-1:101,169,184,.15;--skyL-2:93,179,157,.15;--skyL-3:181,217,224,.13;
+}
+:root[data-sky="rose"],:root:has(> body[data-sky="rose"]){
+  --sky-p1:50% 102%;--sky-r1:78vh;--sky-p2:18% 106%;--sky-r2:47vh;--sky-p3:82% 106%;--sky-r3:47vh;
+  --skyD-ground:#0a0901;--skyD-base:#170f02;--skyD-solid:#1e1003;--skyD-far:153,16,21;
+  --skyD-1:158,80,17,.17;--skyD-2:153,16,21,.13;--skyD-3:120,133,14,.13;
+  --skyL-ground:#f7f5ee;--skyL-base:#f0eae0;--skyL-solid:#f5ede7;--skyL-far:179,108,106;
+  --skyL-1:184,145,114,.2;--skyL-2:179,108,106,.15;--skyL-3:199,198,139,.15;
+}
+:root[data-sky="ash"],:root:has(> body[data-sky="ash"]){
+  --sky-p1:50% 50%;--sky-r1:98vh;--sky-p2:20% 20%;--sky-r2:47vh;--sky-p3:80% 80%;--sky-r3:47vh;
+  --skyD-ground:#040405;--skyD-base:#0d0d0d;--skyD-solid:#1d1d1e;--skyD-far:148,150,153;
+  --skyD-1:152,152,158,.035;--skyD-2:148,150,153,.03;--skyD-3:131,128,133,.03;
+  --skyL-ground:#ffffff;--skyL-base:#f3f3f3;--skyL-solid:#f4f4f5;--skyL-far:176,177,179;
+  --skyL-1:181,181,184,.13;--skyL-2:176,177,179,.11;--skyL-3:198,197,199,.11;
+}
+:root[data-sky="stop"],:root:has(> body[data-sky="stop"]){
+  --sky-p1:50% 22%;--sky-r1:82vh;--sky-p2:12% 60%;--sky-r2:39vh;--sky-p3:88% 62%;--sky-r3:39vh;
+  --skyD-ground:#020300;--skyD-base:#130805;--skyD-solid:#1e0707;--skyD-far:153,34,93;
+  --skyD-1:158,35,37,.12;--skyD-2:133,96,29,.055;--skyD-3:153,34,93,.055;
+  --skyL-ground:#fffdfb;--skyL-base:#f3e7e6;--skyL-solid:#f5e9e9;--skyL-far:179,112,141;
+  --skyL-1:184,119,121,.2;--skyL-2:199,173,144,.09;--skyL-3:179,112,141,.09;
+}
+
+/* By night (the default; the app was designed in dark) and by day. */
+:root{
+  --sky-ground:var(--skyD-ground);--sky-base:var(--skyD-base);--sky-solid:var(--skyD-solid);--sky-far:var(--skyD-far);
+  --sky-1:var(--skyD-1);--sky-2:var(--skyD-2);--sky-3:var(--skyD-3);
+  --sky-band:#000;--sky-veil:1;
+}
+:root[data-theme="light"]{
+  --sky-ground:var(--skyL-ground);--sky-base:var(--skyL-base);--sky-solid:var(--skyL-solid);--sky-far:var(--skyL-far);
+  --sky-1:var(--skyL-1);--sky-2:var(--skyL-2);--sky-3:var(--skyL-3);
+  --sky-band:rgba(0,0,0,0);--sky-veil:0;
+}
+
+/* The ground. html's own colour is what an overscroll shows. */
+html:root{background-color:var(--sky-base)}
+html::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    /* True black at night: a thin band under the status bar and the tab bar, never the sides. */
+    linear-gradient(var(--sky-band),rgba(0,0,0,0) 7%,rgba(0,0,0,0) 93%,var(--sky-band)),
+    radial-gradient(circle var(--sky-r1) at var(--sky-p1),rgba(var(--sky-1)),rgba(0,0,0,0)),
+    radial-gradient(circle var(--sky-r2) at var(--sky-p2),rgba(var(--sky-2)),rgba(0,0,0,0)),
+    radial-gradient(circle var(--sky-r3) at var(--sky-p3),rgba(var(--sky-3)),rgba(0,0,0,0)),
+    /* The far glow: the faintest light over everything, a little stronger towards the top. */
+    radial-gradient(120% 75% at 50% 0%,rgba(var(--sky-far),.06),rgba(0,0,0,0)),
+    var(--sky-ground)}
+
+/* Background: Solid. One flat colour, the page's deep, and no canvas (sky.js stands down). */
+html.sky-solid:root{background-color:var(--sky-solid)}
+html.sky-solid::before{background:var(--sky-solid)}
+
+/* The drawn sky: 1.35 screens tall so it can slide with the scroll (sky.js), shown once
+   its first frame is in. */
+.sky{position:fixed;top:0;left:0;right:0;width:100%;height:135vh;height:135lvh;max-width:none;
+  display:block;margin:0;border:0;padding:0;z-index:-2;pointer-events:none;
+  opacity:0;transition:opacity .6s ease;transform:translate3d(0,0,0);will-change:transform}
+.sky.is-drawn{opacity:1}
+.sky-veil{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(#000,rgba(0,0,0,0) 7%,rgba(0,0,0,0) 93%,#000);
+  opacity:var(--sky-veil);transition:opacity 3.5s ease}
+html.sky-solid .sky,html.sky-solid .sky-veil{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  .sky,.sky-veil{transition:none}
+}
+@media (forced-colors:active){
+  html::before,.sky,.sky-veil{display:none}
+}
+@media print{
+  html::before,.sky,.sky-veil{display:none!important}
+}

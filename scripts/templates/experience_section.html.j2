@@ -1,0 +1,105 @@
+{#-
+  Experience rows, rendered by scripts/render_site.py from resume-generator/data/experience.yaml and
+  spliced into index.html between the EXPERIENCE sentinels, inside <ul class="card list list--avatar">.
+  Run `make site` after editing the YAML; a second run prints "no change".
+  Fields used: id, role, company, location, dates, stack, bullets[].text (bullets[].id only to pick the
+  lead three of the current role). Never output bullet.id, bullet.keywords or bullet.affinities: some ids
+  contain words the site tests forbid in page bodies, and affinities name target employers.
+  No-break spaces (U+00A0) keep each "·", "—", "→" and "/" with the text before it; a number keeps its unit
+  ("23-unit" is wrapped in span.nobr, so it never splits at the hyphen and its text stays plain ASCII).
+  Marks: a company is a rounded-square avatar with initials on an identity colour (av-1…av-9, style.css);
+  CentrOS uses its own single-hue mark (an indigo layers tile; the gradient Everything tile is reserved, as in the app); the earlier roles share a history tile.
+-#}
+{%- set lead_ids = ['centros-platform', 'centros-hitl', 'centros-dogfood'] -%}
+{%- set earlier_ids = ['d2l', 'springboard', 'minted', 'transgaming'] -%}
+{%- set marks = {
+  'conscious-creations': ['CC', 'av-3'],
+  'property-ops': ['PM', 'av-4'],
+  'independent-builder': ['IB', 'av-6'],
+  'faire': ['FA', 'av-2'],
+  'webtoon': ['WT', 'av-8'],
+  'coursera': ['CO', 'av-1']
+} -%}
+{%- macro icon(name, cls) -%}
+<svg class="{{ cls or 'i' }}" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#{{ name }}"/></svg>
+{%- endmacro -%}
+{%- macro prose(text) -%}
+{%- for w in (text | replace(' — ', ' — ') | replace(' → ', ' → ') | replace(' / ', ' / ')).split(' ') -%}
+{%- set head = w.split('-')[0] -%}
+{{- ' ' if not loop.first else '' -}}
+{%- if '-' in w and head and head[-1] in '0123456789' -%}<span class="nobr">{{ w }}</span>{%- else -%}{{ w }}{%- endif -%}
+{%- endfor -%}
+{%- endmacro -%}
+{%- macro bullet_list(items) %}
+                <ul class="bullets">
+{%- for b in items %}
+                  <li>{{ prose(b.text) }}</li>
+{%- endfor %}
+                </ul>
+{%- endmacro -%}
+{%- macro stack_line(entry) %}
+{%- if entry.stack %}
+                <p class="disc__stack"><b>Stack</b> {{ entry.stack | replace(' · ', ' · ') }}</p>
+{%- endif %}
+{%- endmacro -%}
+{%- for entry in entries if entry.id not in earlier_ids %}
+{%- set m = marks.get(entry.id) %}
+          <li>
+            <details class="disc" id="role-{{ entry.id }}"{% if loop.first %} open{% endif %}>
+              <summary class="row row--avatar">
+{%- if entry.id == 'centros-founder' %}
+                <span class="tile tile--indigo" aria-hidden="true">{{ icon('layers') }}</span>
+{%- else %}
+                <span class="avatar avatar--co {{ m[1] if m else 'av-1' }}" aria-hidden="true">{{ m[0] if m else (entry.company[:2] | upper) }}</span>
+{%- endif %}
+                <span class="row__text">
+                  <span class="row__title">{{ entry.role | replace(' — ', ' — ') | replace(' / ', ' / ') }}</span>
+                  <span class="row__sub">{{ entry.company }}</span>
+                  <span class="row__meta"><span class="nums">{{ entry.dates }}{% if entry.location %}&nbsp;· {{ entry.location | replace(' · ', ' · ') }}{% endif %}</span>{% if 'Present' in entry.dates %}<span class="chip chip--settled">Now</span>{% endif %}</span>
+                </span>
+                {{ icon('chevron-right', 'i row__chev') }}
+              </summary>
+              <div class="disc__body">
+{%- if loop.first %}
+{%- set lead = entry.bullets | selectattr('id', 'in', lead_ids) | list %}
+{%- if lead | length == 0 %}{% set lead = entry.bullets[:3] %}{% endif %}
+{%- set shown = lead | map(attribute='id') | list %}
+{%- set rest = entry.bullets | rejectattr('id', 'in', shown) | list %}
+{{- bullet_list(lead) }}
+{%- if rest %}
+                <details class="more">
+                  <summary>{{ rest | length }} more highlights{{ icon('chevron-down') }}</summary>
+{{- bullet_list(rest) }}
+                </details>
+{%- endif %}
+{%- else %}
+{{- bullet_list(entry.bullets) }}
+{%- endif %}
+{{- stack_line(entry) }}
+              </div>
+            </details>
+          </li>
+{%- endfor %}
+{%- set earlier = entries | selectattr('id', 'in', earlier_ids) | list %}
+{%- if earlier %}
+          <li>
+            <details class="disc" id="role-earlier">
+              <summary class="row row--avatar">
+                <span class="tile tile--gray" aria-hidden="true">{{ icon('history') }}</span>
+                <span class="row__text">
+                  <span class="row__title">Earlier engineering roles</span>
+                  <span class="row__sub">{{ earlier | map(attribute='company') | join(' · ') }}</span>
+                  <span class="row__meta"><span class="nums">{{ earlier[-1].dates.split(' ')[1] }} – {{ earlier[0].dates.split(' ')[-1] }}</span></span>
+                </span>
+                {{ icon('chevron-right', 'i row__chev') }}
+              </summary>
+              <div class="disc__body">
+{%- for entry in earlier %}
+                <p class="disc__role"><b>{{ entry.role | replace(' / ', ' / ') }}</b>, {{ entry.company }}<span class="disc__when">{{ entry.dates }}{% if entry.location %} · {{ entry.location }}{% endif %}</span></p>
+{{- bullet_list(entry.bullets) }}
+{{- stack_line(entry) }}
+{%- endfor %}
+              </div>
+            </details>
+          </li>
+{%- endif %}

@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Style guide — Shrenil.com design system</title>
+    <meta name="description" content="Living reference for the Shrenil.com design system: the CentrOS iOS app’s sky, clear Liquid Glass sections, iOS system colours and text styles, Lucide icons, every component, motion and accessibility rules.">
+    <meta name="robots" content="noindex">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#000000">
+    <script>
+    /* Appearance before first paint. Dark unless this visitor chose Light or Match device in the
+       contact sheet; the choice lives in this browser only (localStorage), never on a server.
+       ?appearance=dark|light|system and ?background=sky|solid override it for one visit (QA). */
+    (function (d, w) {
+      var r = d.documentElement, a = null, b = null, q, t, m;
+      try { a = w.localStorage.getItem('centros.appearance'); b = w.localStorage.getItem('centros.background'); } catch (e) {}
+      try { q = new URLSearchParams(w.location.search); if (q.has('appearance')) a = q.get('appearance'); if (q.has('background')) b = q.get('background'); } catch (e) {}
+      if (a !== 'light' && a !== 'system') a = 'dark';
+      t = (a === 'light' || (a === 'system' && w.matchMedia && w.matchMedia('(prefers-color-scheme: light)').matches)) ? 'light' : 'dark';
+      r.setAttribute('data-appearance', a);
+      r.setAttribute('data-theme', t);
+      r.className += (r.className ? ' ' : '') + 'js' + (b === 'solid' ? ' sky-solid' : '');
+      m = d.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', t === 'light' ? '#F2F2F7' : '#000000');
+    })(document, window);
+    </script>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/sky.css">
+    <link rel="stylesheet" href="../public/css/pages/styleguide.css">
+    <link rel="icon" href="../public/images/favicon.svg" type="image/svg+xml">
+    <script src="../public/js/sky.js" defer></script>
+    <script src="../public/js/portfolio.js" defer></script>
+  </head>
+  <body class="page-styleguide" data-sky="ash">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar" data-topbar>
+      <a class="glass glass-btn glass-btn--circle topbar__back" href="../" aria-label="Back to Home"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-left"/></svg></a>
+      <p class="topbar__title" aria-hidden="true">Style guide</p>
+      <a class="glass glass-btn topbar__account" href="#contact" data-sheet aria-label="Contact and settings"><span class="avatar avatar--30 av-6" aria-hidden="true">SP</span></a>
+    </header>
+    <main id="main" class="wrap" tabindex="-1">
+
+    <header id="top">
+      <div class="lt"><h1 class="lt__title" data-large-title>Style guide</h1><p class="lt__sub">From the CentrOS iOS app</p></div>
+      <div class="card card--text sg-lead">
+        <p>This page documents the design system every page of this site is built from: the CentrOS iOS app’s sky, clear Liquid Glass sections, iOS system colours and text styles, and its floating control layer. Every page loads two shared stylesheets with no build step: <code>public/css/style.css</code>, and <code>public/css/sky.css</code> (the sky’s gradient ground, shown before the first WebGL frame); the case-study pages and this page add a small page-local file from <code>public/css/pages/</code>. Every token value below is read live from <code>public/css/style.css</code> with <code>getComputedStyle</code>, and every specimen is the real markup.</p>
+      </div>
+      <ul class="card list list--glyph" aria-label="On this page">
+        <li><a class="row" href="#intent">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#sparkles"/></svg></span>
+          <span class="row__text"><span class="row__title">Design intent</span><span class="row__sub">Five sentences every page follows</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#colors">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#palette"/></svg></span>
+          <span class="row__text"><span class="row__title">Colour</span><span class="row__sub">System colours, labels, Tone, the sky’s hues, both appearances</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#type">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#type"/></svg></span>
+          <span class="row__text"><span class="row__title">Type</span><span class="row__sub">iOS text styles in the system font</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#space">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#ruler"/></svg></span>
+          <span class="row__text"><span class="row__title">Space</span><span class="row__sub">The measured spacing scale, gutters and chrome sizes</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#radii">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#component"/></svg></span>
+          <span class="row__text"><span class="row__title">Geometry</span><span class="row__sub">28 px cards and concentric radii</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#glass">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span>
+          <span class="row__text"><span class="row__title">Glass</span><span class="row__sub">Clear cards, regular controls, the tab bar and the sheet</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#components">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layout-grid"/></svg></span>
+          <span class="row__text"><span class="row__title">Components</span><span class="row__sub">Every component, live, with its class names</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#icons">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#swatch-book"/></svg></span>
+          <span class="row__text"><span class="row__title">Icons</span><span class="row__sub">The Lucide sprite</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#motion">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#timer"/></svg></span>
+          <span class="row__text"><span class="row__title">Motion</span><span class="row__sub">Durations, easing and the sky’s motion rules</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#access">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#accessibility"/></svg></span>
+          <span class="row__text"><span class="row__title">Accessibility</span><span class="row__sub">Every preference the browser exposes</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li><a class="row" href="#contact">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></span>
+          <span class="row__text"><span class="row__title">Contact</span><span class="row__sub">Questions about the system</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+      </ul>
+    </header>
+
+    <section class="sec" id="intent" aria-labelledby="intent-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#sparkles"/></svg><h2 class="sec__title" id="intent-h">Design intent</h2><p class="sec__detail">5</p></div>
+      <p class="sec__intro">When a new component is in doubt, it has to serve one of these.</p>
+      <ol class="card list list--tile">
+        <li class="row row--top">
+          <span class="tile tile--blue" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#sparkles"/></svg></span>
+          <span class="row__text"><span class="row__title">Every page stands on the sky</span><span class="row__body">A slowly drifting cosmic aurora with its own hue per page, dark by default as the app was designed. Content sits in clear Liquid Glass inset-grouped sections that read exactly like the app’s cards.</span></span>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span>
+          <span class="row__text"><span class="row__title">Content first, controls float above it</span><span class="row__body">Content → glass control layer → person, never page → boxes → buttons. A large title opens each page; the only chrome is an account capsule, a floating tab bar with Contact set apart, and system-glass sheets. The chrome recedes while you read and returns when you reach for it.</span></span>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--green" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#palette"/></svg></span>
+          <span class="row__text"><span class="row__title">Colour means one thing everywhere</span><span class="row__body">Through the app’s Tone: blue for action, yellow for waiting, green for settled, orange for caution, red for stop. Chrome stays label-coloured. Type is the system font in iOS text styles, and serif is only for words a person wrote.</span></span>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#list"/></svg></span>
+          <span class="row__text"><span class="row__title">Simple is not minimal</span><span class="row__body">Every approved fact stays one tap away in native disclosure rows that work without JavaScript. Nothing looks pressable unless it does something; anything that cannot act is drawn as a chip.</span></span>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--cyan" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#maximize-2"/></svg></span>
+          <span class="row__text"><span class="row__title">Mobile first, flawless everywhere</span><span class="row__body">Built at 390 px and checked from 320 to 430 px, in 844 × 390 landscape and on desktop, where the iPad readable column sits centred on the sky. Reduced motion, reduced transparency, increased contrast, forced colours, print and no-JS are all handled.</span></span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="sec" id="colors" aria-labelledby="colors-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#palette"/></svg><h2 class="sec__title" id="colors-h">Colour</h2></div>
+      <p class="sec__intro">Every value prints from <code>getComputedStyle</code> and follows the appearance you chose in the contact sheet. Literal colours live only in the token block at the top of <code>style.css</code>.</p>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#palette"/></svg><h3 class="sec__title">System colours</h3><p class="sec__detail">13</p></div>
+        <p class="sec__intro">The iOS 26 system colours, exact. Dots, icons and tiles use them; text uses the AA-safe Tone colours below.</p>
+        <ul class="card list list--glyph" aria-label="System colours">
+          <li class="row"><span class="sg-swatch" style="--sw:var(--blue)"></span><span class="row__text"><span class="row__title"><code>--blue</code></span><span class="row__sub sg-value" data-token="--blue"></span><span class="row__meta">action, links, focus; Home’s sky key</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--green)"></span><span class="row__text"><span class="row__title"><code>--green</code></span><span class="row__sub sg-value" data-token="--green"></span><span class="row__meta">settled, verified, on</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--yellow)"></span><span class="row__text"><span class="row__title"><code>--yellow</code></span><span class="row__sub sg-value" data-token="--yellow"></span><span class="row__meta">waiting on someone</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--orange)"></span><span class="row__text"><span class="row__title"><code>--orange</code></span><span class="row__sub sg-value" data-token="--orange"></span><span class="row__meta">caution</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--red)"></span><span class="row__text"><span class="row__title"><code>--red</code></span><span class="row__sub sg-value" data-token="--red"></span><span class="row__meta">stop: a rule stopped it</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--purple)"></span><span class="row__text"><span class="row__title"><code>--purple</code></span><span class="row__sub sg-value" data-token="--purple"></span><span class="row__meta">a fact; identity tiles</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--cyan)"></span><span class="row__text"><span class="row__title"><code>--cyan</code></span><span class="row__sub sg-value" data-token="--cyan"></span><span class="row__meta">identity; the Activity sky key (AXED)</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--teal)"></span><span class="row__text"><span class="row__title"><code>--teal</code></span><span class="row__sub sg-value" data-token="--teal"></span><span class="row__meta">identity</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--mint)"></span><span class="row__text"><span class="row__title"><code>--mint</code></span><span class="row__sub sg-value" data-token="--mint"></span><span class="row__meta">identity</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--indigo)"></span><span class="row__text"><span class="row__title"><code>--indigo</code></span><span class="row__sub sg-value" data-token="--indigo"></span><span class="row__meta">identity; CentrOS tiles</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--pink)"></span><span class="row__text"><span class="row__title"><code>--pink</code></span><span class="row__sub sg-value" data-token="--pink"></span><span class="row__meta">identity</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--brown)"></span><span class="row__text"><span class="row__title"><code>--brown</code></span><span class="row__sub sg-value" data-token="--brown"></span><span class="row__meta">identity</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--gray)"></span><span class="row__text"><span class="row__title"><code>--gray</code></span><span class="row__sub sg-value" data-token="--gray"></span><span class="row__meta">neutral tiles; this page’s sky key</span></span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#type"/></svg><h3 class="sec__title">Labels, fills and backgrounds</h3><p class="sec__detail">16</p></div>
+        <ul class="card list list--glyph" aria-label="Labels, fills and backgrounds">
+          <li class="row"><span class="sg-swatch" style="--sw:var(--label)"></span><span class="row__text"><span class="row__title"><code>--label</code></span><span class="row__sub sg-value" data-token="--label"></span><span class="row__meta">primary text, icons, chrome</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--label-2)"></span><span class="row__text"><span class="row__title"><code>--label-2</code></span><span class="row__sub sg-value" data-token="--label-2"></span><span class="row__meta">secondary text on glass (AA-tuned)</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--label-2-sky)"></span><span class="row__text"><span class="row__title"><code>--label-2-sky</code></span><span class="row__sub sg-value" data-token="--label-2-sky"></span><span class="row__meta">secondary text set straight on the sky</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--label-3)"></span><span class="row__text"><span class="row__title"><code>--label-3</code></span><span class="row__sub sg-value" data-token="--label-3"></span><span class="row__meta">chevrons, decorative only</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--label-4)"></span><span class="row__text"><span class="row__title"><code>--label-4</code></span><span class="row__sub sg-value" data-token="--label-4"></span><span class="row__meta">quiet dots</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--fill-1)"></span><span class="row__text"><span class="row__title"><code>--fill-1</code></span><span class="row__sub sg-value" data-token="--fill-1"></span><span class="row__meta">row press, switch track</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--fill-2)"></span><span class="row__text"><span class="row__title"><code>--fill-2</code></span><span class="row__sub sg-value" data-token="--fill-2"></span><span class="row__meta">pressed chip</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--fill-3)"></span><span class="row__text"><span class="row__title"><code>--fill-3</code></span><span class="row__sub sg-value" data-token="--fill-3"></span><span class="row__meta">neutral chip, code, segmented track</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--fill-4)"></span><span class="row__text"><span class="row__title"><code>--fill-4</code></span><span class="row__sub sg-value" data-token="--fill-4"></span><span class="row__meta">wells inside a card, row hover</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--fill-quiet)"></span><span class="row__text"><span class="row__title"><code>--fill-quiet</code></span><span class="row__sub sg-value" data-token="--fill-quiet"></span><span class="row__meta">quiet pill</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--separator)"></span><span class="row__text"><span class="row__title"><code>--separator</code></span><span class="row__sub sg-value" data-token="--separator"></span><span class="row__meta">hairlines between rows</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--bg)"></span><span class="row__text"><span class="row__title"><code>--bg</code></span><span class="row__sub sg-value" data-token="--bg"></span><span class="row__meta">the inverse of the label: primary pill text</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--bg-grouped-2)"></span><span class="row__text"><span class="row__title"><code>--bg-grouped-2</code></span><span class="row__sub sg-value" data-token="--bg-grouped-2"></span><span class="row__meta">the reduce-transparency card</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--bg-elevated)"></span><span class="row__text"><span class="row__title"><code>--bg-elevated</code></span><span class="row__sub sg-value" data-token="--bg-elevated"></span><span class="row__meta">the opaque sheet</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--bg-elevated-2)"></span><span class="row__text"><span class="row__title"><code>--bg-elevated-2</code></span><span class="row__sub sg-value" data-token="--bg-elevated-2"></span><span class="row__meta">rows on an opaque sheet</span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--focus)"></span><span class="row__text"><span class="row__title"><code>--focus</code></span><span class="row__sub sg-value" data-token="--focus"></span><span class="row__meta">the focus ring</span></span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#target"/></svg><h3 class="sec__title">Tone</h3><p class="sec__detail">5</p></div>
+        <p class="sec__intro">One meaning each (Tone.swift). The system colour marks dots and icons, <code>--fg-*</code> is the text colour and <code>--wash-*</code> the 16&nbsp;% fill behind a chip.</p>
+        <ul class="card list list--glyph" aria-label="Tone">
+          <li class="row"><span class="sg-swatch" style="--sw:var(--blue)"></span><span class="row__text"><span class="row__title">Action <span class="chip chip--action">Send</span></span><span class="row__sub">the next step, links&nbsp;· text <code>--fg-action</code> <span class="sg-value sg-mono" data-token="--fg-action"></span></span><span class="row__meta">wash <code>--wash-action</code> <span class="sg-value sg-mono" data-token="--wash-action"></span></span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--yellow)"></span><span class="row__text"><span class="row__title">Waiting <span class="chip chip--waiting">Waiting</span></span><span class="row__sub">waiting on someone&nbsp;· text <code>--fg-waiting</code> <span class="sg-value sg-mono" data-token="--fg-waiting"></span></span><span class="row__meta">wash <code>--wash-waiting</code> <span class="sg-value sg-mono" data-token="--wash-waiting"></span></span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--green)"></span><span class="row__text"><span class="row__title">Settled <span class="chip chip--settled">Settled</span></span><span class="row__sub">done, verified&nbsp;· text <code>--fg-settled</code> <span class="sg-value sg-mono" data-token="--fg-settled"></span></span><span class="row__meta">wash <code>--wash-settled</code> <span class="sg-value sg-mono" data-token="--wash-settled"></span></span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--orange)"></span><span class="row__text"><span class="row__title">Caution <span class="chip chip--caution">Check</span></span><span class="row__sub">look before you act&nbsp;· text <code>--fg-caution</code> <span class="sg-value sg-mono" data-token="--fg-caution"></span></span><span class="row__meta">wash <code>--wash-caution</code> <span class="sg-value sg-mono" data-token="--wash-caution"></span></span></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--red)"></span><span class="row__text"><span class="row__title">Stop <span class="chip chip--stop">Stopped</span></span><span class="row__sub">a rule stopped it&nbsp;· text <code>--fg-stop</code> <span class="sg-value sg-mono" data-token="--fg-stop"></span></span><span class="row__meta">wash <code>--wash-stop</code> <span class="sg-value sg-mono" data-token="--wash-stop"></span></span></span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#globe"/></svg><h3 class="sec__title">Sky hues</h3><p class="sec__detail">6</p></div>
+        <p class="sec__intro">Each page lights the sky in its own hue with <code>&lt;body data-sky&gt;</code>. Show one here to watch this page’s sky, and the glass rims with it, cross-fade over 3.5&nbsp;s. Reload to return to ash.</p>
+        <ul class="card list list--glyph" aria-label="Sky hues">
+          <li class="row"><span class="sg-swatch" style="--sw:var(--blue)"></span><span class="row__text"><span class="row__title"><code>accent</code>&nbsp;· Home</span><span class="row__sub">App: Home. Blue, Tone.action</span></span><span class="row__trail"><button class="pill" type="button" data-sg-hue="accent" aria-pressed="false" hidden>Show<span class="vh"> the accent sky</span></button></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--sg-sky-violet)"></span><span class="row__text"><span class="row__title"><code>violet</code>&nbsp;· CentrOS</span><span class="row__sub">App: World. “Indigo: the night sky, not a purple”</span></span><span class="row__trail"><button class="pill" type="button" data-sg-hue="violet" aria-pressed="false" hidden>Show<span class="vh"> the violet sky</span></button></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--cyan)"></span><span class="row__text"><span class="row__title"><code>teal</code>&nbsp;· AXED</span><span class="row__sub">App: Activity. Cyan</span></span><span class="row__trail"><button class="pill" type="button" data-sg-hue="teal" aria-pressed="false" hidden>Show<span class="vh"> the teal sky</span></button></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--sg-sky-rose)"></span><span class="row__text"><span class="row__title"><code>rose</code>&nbsp;· Ask sheet only (never a page sky)</span><span class="row__sub">App: Ask. “Amber: sitting at the fire”</span></span><span class="row__trail"><button class="pill" type="button" data-sg-hue="rose" aria-pressed="false" hidden>Show<span class="vh"> the rose sky</span></button></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--gray)"></span><span class="row__text"><span class="row__title"><code>ash</code>&nbsp;· Style guide</span><span class="row__sub">App: Kept out. Gray</span></span><span class="row__trail"><button class="pill" type="button" data-sg-hue="ash" aria-pressed="true" hidden>Show<span class="vh"> the ash sky</span></button></span></li>
+          <li class="row"><span class="sg-swatch" style="--sw:var(--red)"></span><span class="row__text"><span class="row__title"><code>stop</code>&nbsp;· Not used as a page</span><span class="row__sub">App: a draft a check refused. Red</span></span><span class="row__trail"><button class="pill" type="button" data-sg-hue="stop" aria-pressed="false" hidden>Show<span class="vh"> the stop sky</span></button></span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#repeat"/></svg><h3 class="sec__title">Dark and light, side by side</h3></div>
+        <p class="sec__intro">Dark is the default; Light and Match device are in the contact sheet. Both previews re-declare the token block, so each value prints as that appearance resolves it.</p>
+        <div class="sg-themes">
+        <div class="sg-theme" data-theme="dark">
+          <p class="sg-theme__name">Dark</p>
+          <ul class="card list list--avatar">
+            <li class="row row--avatar"><span class="avatar av-3" aria-hidden="true">GW<span class="badge-dot badge-dot--waiting"></span></span><span class="row__text"><span class="row__title">Guest reply</span><span class="row__sub">Drafted, waiting for the owner</span></span><a class="pill pill--primary" href="#colors">Send</a></li>
+            <li class="row row--avatar"><span class="tile tile--40 tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span><span class="row__text"><span class="row__title">Chips</span><span class="row__meta sg-chips"><span class="chip chip--action">Action</span><span class="chip chip--waiting">Waiting</span><span class="chip chip--settled">Settled</span><span class="chip chip--stop">Stop</span><span class="chip">Neutral</span></span></span></li>
+          </ul>
+          <ul class="sg-tokens" aria-label="Dark tokens">
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--label)"></span><code>--label</code><span class="sg-value sg-mono" data-token="--label"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--label-2)"></span><code>--label-2</code><span class="sg-value sg-mono" data-token="--label-2"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--separator)"></span><code>--separator</code><span class="sg-value sg-mono" data-token="--separator"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--fill-3)"></span><code>--fill-3</code><span class="sg-value sg-mono" data-token="--fill-3"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--blue)"></span><code>--blue</code><span class="sg-value sg-mono" data-token="--blue"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--green)"></span><code>--green</code><span class="sg-value sg-mono" data-token="--green"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--yellow)"></span><code>--yellow</code><span class="sg-value sg-mono" data-token="--yellow"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--orange)"></span><code>--orange</code><span class="sg-value sg-mono" data-token="--orange"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--red)"></span><code>--red</code><span class="sg-value sg-mono" data-token="--red"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--fg-action)"></span><code>--fg-action</code><span class="sg-value sg-mono" data-token="--fg-action"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--glass-card-bg)"></span><code>--glass-card-bg</code><span class="sg-value sg-mono" data-token="--glass-card-bg"></span></li>
+          </ul>
+        </div>
+        <div class="sg-theme" data-theme="light">
+          <p class="sg-theme__name">Light</p>
+          <ul class="card list list--avatar">
+            <li class="row row--avatar"><span class="avatar av-3" aria-hidden="true">GW<span class="badge-dot badge-dot--waiting"></span></span><span class="row__text"><span class="row__title">Guest reply</span><span class="row__sub">Drafted, waiting for the owner</span></span><a class="pill pill--primary" href="#colors">Send</a></li>
+            <li class="row row--avatar"><span class="tile tile--40 tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span><span class="row__text"><span class="row__title">Chips</span><span class="row__meta sg-chips"><span class="chip chip--action">Action</span><span class="chip chip--waiting">Waiting</span><span class="chip chip--settled">Settled</span><span class="chip chip--stop">Stop</span><span class="chip">Neutral</span></span></span></li>
+          </ul>
+          <ul class="sg-tokens" aria-label="Light tokens">
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--label)"></span><code>--label</code><span class="sg-value sg-mono" data-token="--label"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--label-2)"></span><code>--label-2</code><span class="sg-value sg-mono" data-token="--label-2"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--separator)"></span><code>--separator</code><span class="sg-value sg-mono" data-token="--separator"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--fill-3)"></span><code>--fill-3</code><span class="sg-value sg-mono" data-token="--fill-3"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--blue)"></span><code>--blue</code><span class="sg-value sg-mono" data-token="--blue"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--green)"></span><code>--green</code><span class="sg-value sg-mono" data-token="--green"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--yellow)"></span><code>--yellow</code><span class="sg-value sg-mono" data-token="--yellow"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--orange)"></span><code>--orange</code><span class="sg-value sg-mono" data-token="--orange"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--red)"></span><code>--red</code><span class="sg-value sg-mono" data-token="--red"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--fg-action)"></span><code>--fg-action</code><span class="sg-value sg-mono" data-token="--fg-action"></span></li>
+            <li><span class="sg-swatch sg-swatch--sm" style="--sw:var(--glass-card-bg)"></span><code>--glass-card-bg</code><span class="sg-value sg-mono" data-token="--glass-card-bg"></span></li>
+          </ul>
+        </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="sec" id="type" aria-labelledby="type-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#type"/></svg><h2 class="sec__title" id="type-h">Type</h2><p class="sec__detail">14</p></div>
+      <p class="sec__intro">The system font (SF on Apple devices) in iOS text styles at the default Dynamic Type size, in rem so browser text size scales them. Sentence case, no uppercase, no italics: emphasis is weight. Sizes print as rendered here.</p>
+      <ul class="card list">
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--large">Large title</span><span class="row__sub"><code>--t-large</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· opens every page; grows to 52 px on wide screens</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--title1">Title 1</span><span class="row__sub"><code>--t-title1</code>&nbsp;· <span class="sg-px nums"></span></span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--title2">Title 2</span><span class="row__sub"><code>--t-title2</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· stat numbers</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--title3">Title 3</span><span class="row__sub"><code>--t-title3</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· card titles, intro claims</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--headline">Headline</span><span class="row__sub"><code>--t-headline</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· section headers, inline title, buttons</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--body">Body</span><span class="row__sub"><code>--t-body</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· prose; row titles at weight 500</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--callout">Callout</span><span class="row__sub"><code>--t-callout</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· bullets</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--subhead">Subheadline</span><span class="row__sub"><code>--t-subhead</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· row subtitles, pills at 600</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--footnote">Footnote</span><span class="row__sub"><code>--t-footnote</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· row meta, header details</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--caption1">Caption 1</span><span class="row__sub"><code>--t-caption1</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· chips at 500</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--caption2">Caption 2</span><span class="row__sub"><code>--t-caption2</code>&nbsp;· <span class="sg-px nums"></span></span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--tab">Tab label</span><span class="row__sub"><code>--t-tab</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· tab bar labels</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--mono">router → executor</span><span class="row__sub"><code>--font-mono</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· the machine voice: footnote in mono</span></span></li>
+        <li class="row"><span class="row__text"><span class="sg-t sg-t--mail">Words a person wrote.</span><span class="row__sub"><code>--font-mail</code>&nbsp;· <span class="sg-px nums"></span>&nbsp;· mail and quotes: 17/25.5 serif</span></span></li>
+      </ul>
+    </section>
+
+    <section class="sec" id="space" aria-labelledby="space-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#ruler"/></svg><h2 class="sec__title" id="space-h">Space</h2></div>
+      <p class="sec__intro">Measured from the app at 1 pt = 1 CSS px. Each bar is drawn from its value and measured live; bars longer than the box are cut.</p>
+      <ul class="card list sg-bars">
+        <li class="row"><span class="sg-bar" style="--w:2px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">2 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· title → subtitle in a row</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:4px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">4 px</span><span class="row__sub"><span class="sg-measure nums"></span></span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:6px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">6 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· tab bar capsule inset</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:8px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">8 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· tab bar → Contact; sheet inset on phones</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:10px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">10 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· sky between cards apart</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:12px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">12 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· row lead → text</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:16px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">16 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· row padding; header text inset</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:20px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">20 px</span><span class="row__sub"><span class="sg-measure nums"></span></span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:24px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">24 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· a group inside a section</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:32px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">32 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· section gap on phones</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:40px"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title">40 px</span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· avatar; section gap from 768 px</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:var(--gutter-l)"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title"><code>--gutter-l</code></span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· screen edge → card edge; never less than the safe area</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:var(--sec-gap)"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title"><code>--sec-gap</code></span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· card bottom → next section header</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:var(--measure)"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title"><code>--measure</code></span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· the readable column, centred on the sky</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:var(--bar-top)"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title"><code>--bar-top</code></span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· top of the toolbar row</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:var(--chrome-top)"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title"><code>--chrome-top</code></span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· bottom of the toolbar row</span></span></li>
+        <li class="row"><span class="sg-bar" style="--w:var(--tab-h)"><span class="sg-bar__fill"></span><span class="sg-probe"></span></span><span class="row__text"><span class="row__title"><code>--tab-h</code></span><span class="row__sub"><span class="sg-measure nums"></span>&nbsp;· tab bar and Contact circle</span></span></li>
+      </ul>
+    </section>
+
+    <section class="sec" id="radii" aria-labelledby="radii-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#component"/></svg><h2 class="sec__title" id="radii-h">Geometry</h2><p class="sec__detail">4</p></div>
+      <p class="sec__intro">Concentric: a rounded thing inside another echoes its curve, so the inner radius is the outer one minus the inset.</p>
+      <ul class="apart">
+        <li class="card card--pad sg-geo" id="sg-geo-card"><p class="sg-geo__label">Card</p><p class="sg-cap">Radius <span class="sg-m nums" data-sg-of="sg-geo-card" data-sg-what="radius"></span>, continuous in the app. A section is one card with hairlines, or cards apart with 10 px of sky between.</p></li>
+        <li class="card card--pad sg-geo"><div class="sg-geo__sheet" id="sg-geo-sheet"><div class="sg-geo__group" id="sg-geo-group"></div></div><p class="sg-cap">Sheet <span class="sg-m nums" data-sg-of="sg-geo-sheet" data-sg-what="radius"></span> → group <span class="sg-m nums" data-sg-of="sg-geo-group" data-sg-what="radius"></span>, inset <span class="sg-m nums" data-sg-of="sg-geo-sheet" data-sg-what="inset"></span>: 42 − 16 = 26.</p></li>
+        <li class="card card--pad sg-geo"><div class="sg-geo__bar" id="sg-geo-bar"><span class="sg-geo__cap" id="sg-geo-cap"></span></div><p class="sg-cap">Tab bar <span class="sg-m nums" data-sg-of="sg-geo-bar" data-sg-what="radius"></span> → selected capsule <span class="sg-m nums" data-sg-of="sg-geo-cap" data-sg-what="radius"></span>, inset <span class="sg-m nums" data-sg-of="sg-geo-bar" data-sg-what="inset"></span>: 31 − 6 = 25.</p></li>
+        <li class="card card--pad sg-geo"><p><a class="pill pill--primary sg-hit" id="sg-geo-pill" href="#radii">Pill</a></p><p class="sg-cap">Hit box <span class="sg-m nums" data-sg-of="sg-geo-pill" data-sg-what="height"></span> (dashed) → visible capsule 32 px, from a 6 px transparent border. Every target is at least 44 × 44.</p></li>
+      </ul>
+    </section>
+
+    <section class="sec" id="glass" aria-labelledby="glass-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg><h2 class="sec__title" id="glass-h">Glass</h2></div>
+      <p class="sec__intro">Content is the surface; controls float above it. No content sits inside a second pane of glass: wells inside cards use <code>--fill-4</code>.</p>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#list"/></svg><h3 class="sec__title">Recipes</h3><p class="sec__detail">5</p></div>
+        <p class="sec__intro">Glass is used sparingly so content stays dominant: one clear layer for content, one regular layer for the controls above it. Values print for the current appearance.</p>
+        <dl class="card claims sg-recipes">
+          <div class="claim"><dt>Clear card <code>.card</code></dt><dd><code>--glass-card-bg</code> <span class="sg-value sg-mono" data-token="--glass-card-bg"></span><br><code>--glass-card-filter</code> <span class="sg-value sg-mono" data-token="--glass-card-filter"></span><span class="claim__why">content sections; the rim takes the page’s sky hue in dark, white in light; no shadow</span></dd></div>
+          <div class="claim"><dt>Regular control <code>.glass</code></dt><dd><code>--glass-ctl-bg</code> <span class="sg-value sg-mono" data-token="--glass-ctl-bg"></span><br><code>--glass-ctl-filter</code> <span class="sg-value sg-mono" data-token="--glass-ctl-filter"></span><span class="claim__why">tab bar, Contact circle, account capsule, back circle, Done</span></dd></div>
+          <div class="claim"><dt>Sheet <code>.sheet</code></dt><dd><code>--glass-sheet-bg</code> <span class="sg-value sg-mono" data-token="--glass-sheet-bg"></span><br><code>--glass-sheet-filter</code> <span class="sg-value sg-mono" data-token="--glass-sheet-filter"></span><span class="claim__why">the system sheet: neutral grey, dense enough that nothing bleeds under text</span></dd></div>
+          <div class="claim"><dt>Selected tab <code>.tabbar__thumb</code></dt><dd><code>--tab-selected</code> <span class="sg-value sg-mono" data-token="--tab-selected"></span><span class="claim__why">the selection is the lighter capsule, never a tint</span></dd></div>
+          <div class="claim"><dt>Scroll edge <code>.topbar::before</code></dt><dd><code>--edge-dim</code> <span class="sg-value sg-mono" data-token="--edge-dim"></span><span class="claim__why">an 8 px blur plus a dim under the toolbar row, fading out 28 px below</span></dd></div>
+        </dl>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layout-grid"/></svg><h3 class="sec__title">Cards, one and apart</h3></div>
+        <div class="card card--text"><p>A clear card. The sky shows through, blurred, with its hue intact; the rim is 1 px, lighter than the inside.</p></div>
+        <ul class="apart">
+          <li class="card"><a class="row" href="#glass"><span class="row__text"><span class="row__title">Cards apart</span><span class="row__sub">10 px of sky between</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></a></li>
+          <li class="card"><a class="row" href="#glass"><span class="row__text"><span class="row__title">Each row its own card</span><span class="row__sub">as the app’s “Needs you”</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></a></li>
+        </ul>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#maximize-2"/></svg><h3 class="sec__title">Controls on the sky</h3></div>
+        <p class="sec__intro">The back circle, the account capsule and a capsule, all <code>.glass</code>. They brighten and grow a little when pressed.</p>
+        <div class="sg-controls">
+          <a class="glass glass-btn glass-btn--circle" href="../" aria-label="Back to Home"><svg class="i sg-back-i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-left"/></svg></a>
+          <a class="glass glass-btn topbar__account sg-account" href="#contact" data-sheet aria-label="Contact and settings"><span class="avatar avatar--30 av-6" aria-hidden="true">SP</span></a>
+          <a class="glass glass-btn" href="#glass">Capsule</a>
+        </div>
+        <div class="tabbar sg-static sg-gap" data-sel="0" role="group" aria-label="Tab bar specimen">
+          <div class="glass tabbar__tabs">
+            <span class="tabbar__thumb" aria-hidden="true"></span>
+            <a class="tab" href="#glass"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#house"/></svg><span class="tab__label">Home</span></a>
+            <a class="tab" href="#glass"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#globe"/></svg><span class="tab__label">CentrOS</span></a>
+            <a class="tab" href="#glass"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#book-open"/></svg><span class="tab__label">AXED</span></a>
+          </div>
+          <a class="glass tabbar__ask" href="mailto:patel.shrenil@gmail.com?subject=Shrenil.com%20style%20guide" aria-label="Email Shren"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></a>
+        </div>
+        <p class="sec__foot">The real tab bar floats at the bottom of every page (top centre from 1024 px). This one is static; its tabs link back here and its mail circle starts an email.</p>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#message-square"/></svg><h3 class="sec__title">Sheet</h3></div>
+        <p class="sec__intro">A static sheet group. The real one is a native <code>&lt;dialog&gt;</code>: a floating bottom sheet on phones, a centred 540 px form sheet from 768 px.</p>
+        <div class="sg-sheet sg-gap">
+          <div class="sheet__bar"><span class="sheet__grab" aria-hidden="true"></span><p class="sheet__title">Contact</p></div>
+          <ul class="sgroup list list--glyph" aria-label="Sheet group specimen">
+            <li class="row"><span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></span><span class="row__text"><span class="row__title">Email</span><span class="row__sub">a grouped row on the sheet</span></span></li>
+            <li class="row"><span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#settings-2"/></svg></span><span class="row__text"><span class="row__title">Appearance</span><span class="row__sub">groups inset 16, radius 26</span></span></li>
+          </ul>
+          <p class="sgroup__foot">A footer under a group, in footnote.</p>
+        </div>
+        <p class="sg-gap sg-pad"><a class="pill pill--primary" href="#contact" data-sheet>Open the real sheet</a></p>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#shield-check"/></svg><h3 class="sec__title">When glass steps aside</h3></div>
+        <div class="card card--text">
+          <ul class="bullets bullets--sm">
+            <li><strong>Reduced transparency:</strong> cards become the system’s own opaque card (<code>--bg-grouped-2</code>) with no rim; controls, the sheet and the scroll edge turn opaque. The sky still shows between cards.</li>
+            <li><strong>Increased contrast:</strong> a solid visible rim on cards and controls, stronger secondary labels and separators.</li>
+            <li><strong>Forced colours:</strong> the sky is hidden; cards, controls, the sheet and chips get <code>CanvasText</code> borders.</li>
+            <li><strong>No <code>backdrop-filter</code> support:</strong> glass falls back to near-opaque fills.</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="sec" id="components" aria-labelledby="components-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layout-grid"/></svg><h2 class="sec__title" id="components-h">Components</h2></div>
+      <p class="sec__intro">Every specimen is the real markup with the shared classes listed above it. Specimen ids are prefixed <code>sg-</code>, and links stay on this page unless they say otherwise.</p>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#list"/></svg><h3 class="sec__title">Section header</h3></div>
+        <p class="sec__intro sg-classes"><code>.sec__head</code> <code>.sec__icon</code> <code>.sec__title</code> <code>.sec__detail</code> <code>.sec__intro</code> <code>.sec__foot</code></p>
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#inbox"/></svg><p class="sec__title">Needs you</p><p class="sec__detail">3</p></div>
+        <p class="sec__intro">An intro on the sky, in subheadline.</p>
+        <p class="sec__foot">Symbol 20 px, title in headline, detail in footnote, all secondary label colour. On a page the title is an <code>h2</code>, or an <code>h3</code> in a group.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#type"/></svg><h3 class="sec__title">Large title and intro</h3></div>
+        <p class="sec__intro sg-classes"><code>.lt</code> <code>.lt__title</code> <code>.lt__sub</code> <code>.intro</code> <code>.intro__title</code> <code>.intro__text</code></p>
+        <div class="intro"><p class="intro__title">An intro title states a section’s claim</p><p class="intro__text">Its text follows in subheadline, on the sky.</p></div>
+        <p class="sec__foot">The large title is this page’s own heading above; once it scrolls under the toolbar row, the inline <code>.topbar__title</code> fades in.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#list"/></svg><h3 class="sec__title">Rows</h3></div>
+        <p class="sec__intro sg-classes"><code>.card</code> <code>.list</code> <code>.list--glyph</code> <code>.list--tile</code> <code>.list--avatar</code> <code>.row</code> <code>.row--top</code> <code>.row--avatar</code> <code>.row__text</code> <code>.row__title</code> <code>.row__sub</code> <code>.row__meta</code> <code>.row__trail</code> <code>.row__chev</code> <code>.row__ext</code> <code>.row__body</code> <code>.row__go</code> <code>.row__link</code></p>
+        <ul class="card list" aria-label="Text rows">
+          <li><a class="row" href="#components"><span class="row__text"><span class="row__title">Text row</span><span class="row__sub">Title, subtitle and a chevron</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></a></li>
+          <li class="row"><span class="row__text"><span class="row__title">With a trailing value</span></span><span class="row__trail">Value</span></li>
+        </ul>
+        <ul class="card list list--glyph" aria-label="Glyph rows">
+          <li class="row"><span class="glyph glyph--settled"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#badge-check"/></svg></span><span class="row__text"><span class="row__title">Glyph row</span><span class="row__sub">28 px glyph column, text at 56</span></span></li>
+          <li><a class="row" href="https://lucide.dev/" target="_blank" rel="noopener"><span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#globe"/></svg></span><span class="row__text"><span class="row__title">External link</span><span class="row__sub">lucide.dev</span></span><svg class="i row__ext" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span></a></li>
+        </ul>
+        <ul class="card list list--tile" aria-label="Tile rows">
+          <li class="row row--top"><span class="tile tile--green" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#hand"/></svg></span><span class="row__text"><span class="row__title">Tile row with a stretched link</span><span class="row__body">A body line in subheadline. The whole row is the link’s target; its name is only the link text.</span><a class="row__go" href="#components">Seen in the components</a></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></li>
+        </ul>
+        <ul class="card list list--avatar" aria-label="Avatar rows">
+          <li class="row row--avatar"><span class="avatar av-6" aria-hidden="true">SP<span class="badge-dot badge-dot--settled"></span></span><span class="row__text"><span class="row__title">Person</span><span class="row__sub">Round avatar with a status dot</span><span class="row__meta">Footnote meta</span></span><a class="pill pill--primary" href="#components">Send</a></li>
+          <li class="row row--avatar"><span class="avatar avatar--co av-2" aria-hidden="true">FA</span><span class="row__text"><span class="row__title">Company</span><span class="row__sub">Rounded-square avatar</span></span><a class="pill" href="#components">Later</a></li>
+        </ul>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#repeat"/></svg><h3 class="sec__title">Disclosure row</h3></div>
+        <p class="sec__intro sg-classes"><code>.disc</code> <code>.disc__body</code> <code>.disc__note</code> <code>.disc__stack</code> <code>.disc__role</code> <code>.disc__when</code> <code>.more</code></p>
+        <ul class="card list list--tile">
+          <li><details class="disc" id="sg-disc-closed">
+            <summary class="row"><span class="tile tile--blue" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#briefcase-business"/></svg></span><span class="row__text"><span class="row__title">A closed row</span><span class="row__sub">Its summary already states the key fact</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></summary>
+            <div class="disc__body"><p class="disc__note">The body is in the DOM all along, so it prints, searches and works without JavaScript. A deep link to an id inside opens it.</p><p class="disc__stack"><b>Stack</b> HTML · CSS · no build step</p></div>
+          </details></li>
+          <li><details class="disc" id="sg-disc-open" open>
+            <summary class="row"><span class="tile tile--purple" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#history"/></svg></span><span class="row__text"><span class="row__title">An open row</span><span class="row__sub">The chevron turns 90°</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></summary>
+            <div class="disc__body">
+              <p class="disc__role"><b>A role</b>, a company<span class="disc__when">Month 20XX – Month 20XX · Place</span></p>
+              <ul class="bullets"><li>A bullet inside the body.</li></ul>
+              <details class="more"><summary>2 more<svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-down"/></svg></summary><ul class="bullets"><li>A second bullet.</li><li>A third bullet.</li></ul></details>
+            </div>
+          </details></li>
+        </ul>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#target"/></svg><h3 class="sec__title">Chips</h3></div>
+        <p class="sec__intro sg-classes"><code>.chip</code> <code>.chip--action</code> <code>.chip--waiting</code> <code>.chip--settled</code> <code>.chip--caution</code> <code>.chip--stop</code></p>
+        <div class="card card--pad sg-flex"><span class="chip">On request</span><span class="chip chip--action">New</span><span class="chip chip--waiting">In progress</span><span class="chip chip--settled">In production</span><span class="chip chip--caution">Check</span><span class="chip chip--stop">Stopped</span></div>
+        <p class="sec__foot">A chip states something and never acts. 20 px tall, caption 1 at 500, on its tone’s 16&nbsp;% wash.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#hand"/></svg><h3 class="sec__title">Pills</h3></div>
+        <p class="sec__intro sg-classes"><code>.pill</code> <code>.pill--primary</code> <code>.pill--tinted</code> <code>.is-done</code> <code>.copy</code></p>
+        <div class="card card--pad sg-flex sg-pills"><a class="pill pill--primary" href="#components">Primary</a><a class="pill" href="#components">Quiet</a><a class="pill pill--tinted" href="#components">Tinted</a><a class="pill is-done" href="#components">Copied</a><a class="pill" href="#components">With icon<svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></a></div>
+        <p class="sec__foot">A pill always does something. The visible capsule is 32 px inside a 44 px hit box. The Copy pill appears only on https, where copying can work.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#zap"/></svg><h3 class="sec__title">Buttons</h3></div>
+        <p class="sec__intro sg-classes"><code>.btn</code> <code>.btn--inverse</code> <code>.btn.glass</code> <code>.btn--block</code> <code>.actions</code></p>
+        <div class="actions"><a class="btn btn--inverse" href="#components"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg>Primary</a><a class="btn glass" href="#components"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#linkedin"/></svg>On the sky</a></div>
+        <div class="card card--pad sg-gap"><a class="btn btn--block" href="#components">Filled, full width</a></div>
+        <p class="sec__foot">50 px capsules for the one or two main actions of a page; a secondary button set on the sky floats as glass.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#user-round"/></svg><h3 class="sec__title">Avatars, tiles, glyphs and dots</h3></div>
+        <p class="sec__intro sg-classes"><code>.avatar</code> <code>.avatar--co</code> <code>.avatar--30</code> <code>.avatar--56</code> <code>.av-1…9</code> <code>.badge-dot</code> <code>.tile</code> <code>.tile--40</code> <code>.tile--text</code> <code>.tile--everything</code> <code>.glyph</code> <code>.dot</code></p>
+        <div class="card card--pad sg-marks">
+          <div class="sg-flex"><span class="avatar avatar--30 av-1" aria-hidden="true">AB</span><span class="avatar av-2" aria-hidden="true">CD<span class="badge-dot badge-dot--action"></span></span><span class="avatar avatar--56 av-3" aria-hidden="true">EF<span class="badge-dot badge-dot--settled"></span></span><span class="avatar avatar--co av-4" aria-hidden="true">GH</span><span class="avatar av-5" aria-hidden="true">IJ</span><span class="avatar av-6" aria-hidden="true">SP</span><span class="avatar av-7" aria-hidden="true">UW</span><span class="avatar av-8" aria-hidden="true">WT</span><span class="avatar av-9" aria-hidden="true">KL<span class="badge-dot badge-dot--stop"></span></span></div>
+          <div class="sg-flex"><span class="tile tile--blue" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#briefcase-business"/></svg></span><span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span><span class="tile tile--purple" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#trending-up"/></svg></span><span class="tile tile--pink" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#rocket"/></svg></span><span class="tile tile--orange" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#book-open"/></svg></span><span class="tile tile--green" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#hand"/></svg></span><span class="tile tile--cyan" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#search"/></svg></span><span class="tile tile--red" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#shield-alert"/></svg></span><span class="tile tile--gray" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#wrench"/></svg></span><span class="tile tile--40 tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span><span class="tile tile--text tile--orange" aria-hidden="true">R2</span><span class="tile tile--everything" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#sparkles"/></svg></span></div>
+          <div class="sg-flex"><span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></span><span class="glyph glyph--action"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-down"/></svg></span><span class="glyph glyph--waiting"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#timer"/></svg></span><span class="glyph glyph--settled"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#badge-check"/></svg></span><span class="glyph glyph--caution"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#triangle-alert"/></svg></span><span class="glyph glyph--stop"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#shield-alert"/></svg></span><span class="dot"></span><span class="dot dot--action"></span><span class="dot dot--waiting"></span><span class="dot dot--settled"></span><span class="dot dot--stop"></span></div>
+        </div>
+        <p class="sec__foot">People are round, companies rounded squares, initials on a gradient lighter at the top. Tiles are 32 px (40 where one stands in for a company). The rainbow tile is the app’s one gradient, kept here and nowhere else.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#settings-2"/></svg><h3 class="sec__title">Settings controls</h3></div>
+        <p class="sec__intro sg-classes"><code>.row--pick</code> <code>.pick</code> <code>.seg</code> <code>.seg__opt</code> <code>.switch</code></p>
+        <ul class="card list" aria-label="Settings specimens">
+          <li class="row row--pick"><span class="row__text"><label class="row__title" for="sg-pick">Picker row</label></span><span class="pick"><span data-sg-pick-value aria-hidden="true">Dark</span><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevrons-up-down"/></svg><select id="sg-pick"><option value="dark">Dark</option><option value="light">Light</option><option value="system">Match device</option></select></span></li>
+          <li><label class="row"><span class="row__text"><span class="row__title">Switch</span></span><input class="switch" type="checkbox" role="switch" name="sg-switch" checked></label></li>
+          <li class="row"><fieldset class="seg" style="--seg-n:2" data-sg-seg><legend>Segmented control</legend><label class="seg__opt is-on"><input type="radio" name="sg-seg" value="log" checked><span>Log</span></label><label class="seg__opt"><input type="radio" name="sg-seg" value="automations"><span>Automations</span></label></fieldset></li>
+        </ul>
+        <p class="sec__foot">The picker row is the contact sheet’s own control: a native <code>&lt;select&gt;</code> under a blue trailing value. These specimens change nothing; Appearance and Background live in the sheet.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#file-text"/></svg><h3 class="sec__title">Claims and bullets</h3></div>
+        <p class="sec__intro sg-classes"><code>.claims</code> <code>.claim</code> <code>.claim__why</code> <code>.claims--terms</code> <code>.bullets</code> <code>.bullets--sm</code></p>
+        <dl class="card claims">
+          <div class="claim"><dt>Font</dt><dd>The system font: SF on Apple devices</dd></div>
+          <div class="claim"><dt>Serif</dt><dd>Only for words someone wrote<span class="claim__why"><b>Why:</b> the app sets mail in serif and everything else in SF.</span></dd></div>
+          <div class="claim"><dt>Icons</dt><dd><ul class="bullets bullets--sm"><li>Lucide on the web</li><li>SF Symbols in the app</li></ul></dd></div>
+        </dl>
+        <dl class="card claims claims--terms">
+          <div class="claim"><dt>Term</dt><dd>A term over its definition, in headline over subheadline.</dd></div>
+        </dl>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#gauge"/></svg><h3 class="sec__title">Stats and timeline</h3></div>
+        <p class="sec__intro sg-classes"><code>.stat</code> <code>.stat__n</code> <code>.stat__l</code> <code>.timeline</code> <code>.timeline__when</code></p>
+        <ul class="card list">
+          <li class="stat"><span class="stat__n">40M+</span><span class="stat__l">AXED reads</span></li>
+          <li class="stat"><span class="stat__n">3,980+</span><span class="stat__l">CentrOS tests on main</span></li>
+        </ul>
+        <div class="card card--pad"><ol class="timeline">
+          <li><span class="timeline__when">Nov 2022</span><span>LLMs deployed across dev &amp; business workflows</span></li>
+          <li><span class="timeline__when">Feb 2026</span><span>CentrOS in production</span></li>
+        </ol></div>
+        <p class="sec__foot">Numbers use tabular digits, as rows, never count-ups.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#route"/></svg><h3 class="sec__title">Trace and receipt</h3></div>
+        <p class="sec__intro sg-classes"><code>.trace</code> <code>.trace__head</code> <code>.trace__who</code> <code>.trace__what</code> <code>.trace__foot</code> <code>.receipt</code> <code>.receipt__arrow</code> <code>.proposal__label</code> <code>.proposal__claim</code> <code>.proposal__not</code></p>
+        <div class="card">
+          <p class="trace__head"><span class="chip">Specimen</span>who did what</p>
+          <ol class="trace list">
+            <li><span class="trace__who">router</span><span class="trace__what">classified the request and chose a lane</span></li>
+            <li><span class="trace__who">executor</span><span class="trace__what">drafted the action with its sources</span></li>
+            <li><span class="trace__who">verifier</span><span class="trace__what">checked the evidence</span></li>
+          </ol>
+          <p class="trace__foot"><span class="chip chip--waiting">Waiting</span>for the owner</p>
+        </div>
+        <div class="receipt sg-gap">
+          <div class="card card--pad"><p class="proposal__label">Proposed</p><p class="proposal__claim">A proposal’s claim</p><p class="proposal__not">Not done until someone approves it</p></div>
+          <svg class="i receipt__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-down"/></svg>
+          <div class="card card--pad"><p class="proposal__label">Result</p><p class="proposal__claim">What actually happened</p></div>
+        </div>
+        <p class="sec__foot">Labels in mono are the machine voice.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg><h3 class="sec__title">Mail and quote</h3></div>
+        <p class="sec__intro sg-classes"><code>.mail</code> <code>.mail__head</code> <code>.mail__from</code> <code>.mail__when</code> <code>.mail__body</code> <code>.quote</code></p>
+        <article class="card mail" aria-label="Mail specimen">
+          <div class="mail__head"><span class="avatar av-3" aria-hidden="true">AG</span><div><p class="mail__from">A guest</p><p class="mail__when">Specimen text</p></div></div>
+          <div class="mail__body"><p>Hi, we land late on Friday. Is self check-in still possible after midnight?</p><p>Thanks!</p></div>
+        </article>
+        <figure class="card quote"><blockquote><p>Words a person wrote are set in serif.</p></blockquote><figcaption>Specimen text</figcaption></figure>
+        <p class="sec__foot">Serif appears only here: words someone wrote.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#workflow"/></svg><h3 class="sec__title">Flow</h3></div>
+        <p class="sec__intro sg-classes"><code>.flow</code> <code>.flow__step</code> <code>.flow__arrow</code> <code>.flow__label</code> <code>.flow__detail</code></p>
+        <div class="card" data-sg-flow>
+          <div class="flow" role="group" aria-label="Contract lifecycle states"><span class="flow__step"><button class="pill" type="button" data-state="draft" aria-pressed="false" disabled>draft</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><span class="flow__step"><button class="pill" type="button" data-state="routed" aria-pressed="false" disabled>routed</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><span class="flow__step"><button class="pill" type="button" data-state="executing" aria-pressed="false" disabled>executing</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><span class="flow__step"><button class="pill" type="button" data-state="eval-pending" aria-pressed="false" disabled>eval-pending</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><span class="flow__step"><button class="pill" type="button" data-state="gate-pending" aria-pressed="false" disabled>gate-pending</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><span class="flow__step"><button class="pill" type="button" data-state="approved" aria-pressed="false" disabled>approved</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><span class="flow__step"><button class="pill" type="button" data-state="executed" aria-pressed="false" disabled>executed</button><svg class="i flow__arrow" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg></span><button class="pill" type="button" data-state="archived" aria-pressed="true" disabled>archived</button></div>
+          <div class="flow" role="group" aria-label="Failure paths"><span class="flow__label" aria-hidden="true">failure paths</span><button class="pill pill--caution" type="button" data-state="rolled-back" aria-pressed="false" disabled>rolled-back</button><button class="pill pill--caution" type="button" data-state="held" aria-pressed="false" disabled>held</button><button class="pill pill--stop" type="button" data-state="stop-ship" aria-pressed="false" disabled>stop-ship</button></div>
+          <div class="flow__detail" aria-live="polite"><strong>archived</strong><p>Contract closed and durable. Evidence, tool calls, gate decisions, and approver (if any) are retained for audit. Read-only from this point&nbsp;— the audit trail outlives the runtime.</p></div>
+        </div>
+        <ul class="card list">
+          <li><details class="disc" id="sg-flow-states">
+            <summary class="row"><span class="row__text"><span class="row__title">All 11 states, defined</span><span class="row__sub">8 on the main path&nbsp;· 3 failure paths</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></summary>
+            <div class="disc__body"><dl class="claims">
+              <div class="claim" data-state="draft"><dt>draft</dt><dd>Contract materialized but not yet routed. Risk tier and lane assigned by the router on the next tick.</dd></div>
+              <div class="claim" data-state="routed"><dt>routed</dt><dd>Contract has been classified and assigned a policy lane. Lane A proceeds to executor; lane B/C waits for owner confirmation first.</dd></div>
+              <div class="claim" data-state="executing"><dt>executing</dt><dd>Executor is calling tools, pulling RAG context, and writing checkpoints. Crash here resumes from the last checkpoint, not the beginning.</dd></div>
+              <div class="claim" data-state="eval-pending"><dt>eval-pending</dt><dd>Executor finished; adversary is critiquing the evidence trail. Low-confidence outcomes route to gate-pending or held.</dd></div>
+              <div class="claim" data-state="gate-pending"><dt>gate-pending</dt><dd>Required gates haven't all passed. Verifier holds the contract until evidence/adversary/verifier all return ✓ or the owner intervenes.</dd></div>
+              <div class="claim" data-state="approved"><dt>approved</dt><dd>Owner approved a lane B/C contract from the inbox. Executor proceeds to perform the action.</dd></div>
+              <div class="claim" data-state="executed"><dt>executed</dt><dd>Action complete. Final state written. Contract awaits archival.</dd></div>
+              <div class="claim" data-state="archived"><dt>archived</dt><dd>Contract closed and durable. Evidence, tool calls, gate decisions, and approver (if any) are retained for audit. Read-only from this point&nbsp;— the audit trail outlives the runtime.</dd></div>
+              <div class="claim" data-state="rolled-back"><dt>rolled-back</dt><dd>A gate detected an issue post-execution. Rollback gate reversed the action and the contract closed with a failure summary in the audit trail.</dd></div>
+              <div class="claim" data-state="held"><dt>held</dt><dd>Owner clicked Hold from the inbox. Contract paused until evidence is refreshed or owner re-decides.</dd></div>
+              <div class="claim" data-state="stop-ship"><dt>stop-ship</dt><dd>Critical gate (e.g., adversary flagged a hard violation) fired. Contract is hard-blocked and only an admin override can release it.</dd></div>
+            </dl></div>
+          </details></li>
+        </ul>
+        <p class="sec__foot">The CentrOS contract lifecycle. Nodes ship <code>disabled</code>, so without JavaScript they are static chips and the archived definition is already on the page. With JavaScript, one node at a time is <code>aria-pressed</code> and the detail is announced politely.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#list"/></svg><h3 class="sec__title">Table</h3></div>
+        <p class="sec__intro sg-classes"><code>.table</code></p>
+        <div class="card card--pad"><table class="table">
+          <thead><tr><th scope="col">Role</th><th scope="col">Token</th><th scope="col">Where</th></tr></thead>
+          <tbody>
+            <tr><td>Section header</td><td><code>--t-headline</code></td><td><code>.sec__title</code></td></tr>
+            <tr><td>Row subtitle</td><td><code>--t-subhead</code></td><td><code>.row__sub</code></td></tr>
+            <tr><td>Chip</td><td><code>--t-caption1</code></td><td><code>.chip</code></td></tr>
+          </tbody>
+        </table></div>
+        <p class="sec__foot">Below 560 px each row stacks, label over value.</p>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#package"/></svg><h3 class="sec__title">Work card, stub and frame</h3></div>
+        <p class="sec__intro sg-classes"><code>.work</code> <code>.work__head</code> <code>.work__title</code> <code>.work__status</code> <code>.work__why</code> <code>.work__flow</code> <code>.work__receipts</code> <code>.work__actions</code> <code>.stub</code> <code>.frame__bar</code></p>
+        <article class="card work" aria-label="Work card specimen">
+          <div class="work__head"><span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg></span><div class="row__text"><p class="work__title"><a href="../centros/">CentrOS</a></p><p class="work__status"><span class="chip chip--settled">In production</span><span class="nums">since Feb 2026</span></p></div></div>
+          <p class="work__why">An orchestration platform that turns messy business workflows into agent systems&nbsp;— agents draft guest replies, process refunds and vendor invoices, and an owner approves anything irreversible.</p>
+          <p class="work__flow">router&nbsp;→ executor&nbsp;→ adversary&nbsp;→ verifier&nbsp;→ owner inbox</p>
+          <p class="work__receipts"><span class="nobr">23-unit</span> hospitality operation&nbsp;· 3,980+&nbsp;tests on main</p>
+          <p class="stub"><span class="chip chip--waiting">In progress</span><span>Unbuilt things carry a stub like this one instead of a fake button. Until then, <a href="../centros/#demo">try the live demo</a>.</span></p>
+          <p class="work__actions"><a class="pill" href="../centros/">Read the case study<svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></a></p>
+        </article>
+        <div class="card"><div class="frame__bar"><span class="row__title">Frame bar</span><a class="pill" href="../centros/#demo">Open the demo</a></div><p class="sg-pad sg-cap">The CentrOS demo’s iframe sits below this bar from 768 px; on phones a poster shows instead.</p></div>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#maximize-2"/></svg><h3 class="sec__title">Chrome</h3></div>
+        <p class="sec__intro sg-classes"><code>.topbar</code> <code>.topbar__back</code> <code>.topbar__title</code> <code>.topbar__account</code> <code>.tabbar</code> <code>.tabbar__tabs</code> <code>.tabbar__thumb</code> <code>.tab</code> <code>.tab__label</code> <code>.tabbar__ask</code> <code>.sheet</code> <code>.sheet__bar</code> <code>.sheet__grab</code> <code>.sheet__title</code> <code>.sheet__done</code> <code>.sheet__scroll</code> <code>.sgroup</code> <code>.sgroup__foot</code> <code>.sheet__fine</code></p>
+        <ul class="card list">
+          <li class="row"><span class="row__text"><span class="row__title">Top bar</span><span class="row__sub">No bar background. A back circle on pushed pages (like this one), the inline title once the large title scrolls under, and the account capsule, which opens the contact sheet.</span></span></li>
+          <li class="row"><span class="row__text"><span class="row__title">Tab bar</span><span class="row__sub">Home, CentrOS, AXED in one glass capsule, the current one in a lighter inner capsule (none on this page). Contact is set apart as the app sets Ask apart. It minimises to two 48 px circles while you scroll down and returns when you scroll up, near the top, on a tap or on keyboard focus. From 1024 px it floats at the top and never minimises.</span></span></li>
+          <li class="row"><span class="row__text"><span class="row__title">Sheet</span><span class="row__sub">Contact details plus Appearance (Dark, Light, Match device), Background (Sky, Solid) and New sky. Done, Esc, the backdrop or a downward drag close it, and focus returns to the opener. The sky settles behind it. Without JavaScript the openers jump to the page’s own Contact section.</span></span></li>
+        </ul>
+      </div>
+      <div class="group sg-specimen">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#code-xml"/></svg><h3 class="sec__title">Page furniture</h3></div>
+        <p class="sec__intro sg-classes"><code>.skip</code> <code>.wrap</code> <code>.foot</code> <code>.vh</code> <code>.nobr</code> <code>.nums</code> <code>.js-only</code> <code>.kicker</code> <code>.card--text</code> <code>.card--pad</code> <code>.apart</code> <code>.group</code></p>
+        <div class="card card--text"><p><code>.skip</code> is the first Tab stop and moves focus to <code>main</code>. <code>.vh</code> hides text visually but keeps it for screen readers, such as “(opens in a new tab)” after every external link. <code>.wrap</code> is the one reading column.</p></div>
+      </div>
+
+    </section>
+
+    <section class="sec" id="icons" aria-labelledby="icons-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#swatch-book"/></svg><h2 class="sec__title" id="icons-h">Icons</h2><p class="sec__detail">66</p></div>
+      <div class="card sg-icons">
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#accessibility"/></svg><figcaption>accessibility</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#activity"/></svg><figcaption>activity</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-down"/></svg><figcaption>arrow-down</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-right"/></svg><figcaption>arrow-right</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-up-right"/></svg><figcaption>arrow-up-right</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#badge-check"/></svg><figcaption>badge-check</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#book-open"/></svg><figcaption>book-open</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#briefcase-business"/></svg><figcaption>briefcase-business</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#building-2"/></svg><figcaption>building-2</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-down"/></svg><figcaption>chevron-down</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-left"/></svg><figcaption>chevron-left</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg><figcaption>chevron-right</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevrons-up-down"/></svg><figcaption>chevrons-up-down</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#code-xml"/></svg><figcaption>code-xml</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#component"/></svg><figcaption>component</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#cpu"/></svg><figcaption>cpu</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#database"/></svg><figcaption>database</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#file-text"/></svg><figcaption>file-text</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#gauge"/></svg><figcaption>gauge</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#github"/></svg><figcaption>github</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#globe"/></svg><figcaption>globe</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#graduation-cap"/></svg><figcaption>graduation-cap</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#hammer"/></svg><figcaption>hammer</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#hand"/></svg><figcaption>hand</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#handshake"/></svg><figcaption>handshake</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#history"/></svg><figcaption>history</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#house"/></svg><figcaption>house</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#inbox"/></svg><figcaption>inbox</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layers"/></svg><figcaption>layers</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#layout-grid"/></svg><figcaption>layout-grid</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#linkedin"/></svg><figcaption>linkedin</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#list"/></svg><figcaption>list</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#lock"/></svg><figcaption>lock</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg><figcaption>mail</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#maximize-2"/></svg><figcaption>maximize-2</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#message-square"/></svg><figcaption>message-square</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#package"/></svg><figcaption>package</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#palette"/></svg><figcaption>palette</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#phone"/></svg><figcaption>phone</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#play"/></svg><figcaption>play</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#plug"/></svg><figcaption>plug</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#puzzle"/></svg><figcaption>puzzle</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#receipt"/></svg><figcaption>receipt</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#repeat"/></svg><figcaption>repeat</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#rocket"/></svg><figcaption>rocket</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#route"/></svg><figcaption>route</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#ruler"/></svg><figcaption>ruler</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#scale"/></svg><figcaption>scale</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#search"/></svg><figcaption>search</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#settings-2"/></svg><figcaption>settings-2</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#shield-alert"/></svg><figcaption>shield-alert</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#shield-check"/></svg><figcaption>shield-check</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#sparkles"/></svg><figcaption>sparkles</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#split"/></svg><figcaption>split</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#swatch-book"/></svg><figcaption>swatch-book</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#target"/></svg><figcaption>target</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#timer"/></svg><figcaption>timer</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#trending-up"/></svg><figcaption>trending-up</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#triangle-alert"/></svg><figcaption>triangle-alert</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#type"/></svg><figcaption>type</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#user-round"/></svg><figcaption>user-round</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#user-round-check"/></svg><figcaption>user-round-check</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#users"/></svg><figcaption>users</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#workflow"/></svg><figcaption>workflow</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#wrench"/></svg><figcaption>wrench</figcaption></figure>
+          <figure><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#zap"/></svg><figcaption>zap</figcaption></figure>
+      </div>
+      <p class="sec__foot">Lucide, ISC licence. One sprite, <code>public/images/icons.svg</code>; each icon is <code>&lt;svg class="i"&gt;&lt;use href="…#name"&gt;</code>, 2 px strokes in <code>currentColor</code>, the web twin of the app’s SF Symbols.</p>
+    </section>
+
+    <section class="sec" id="motion" aria-labelledby="motion-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#timer"/></svg><h2 class="sec__title" id="motion-h">Motion</h2></div>
+      <p class="sec__intro">Nothing moves unless you do something, except the sky.</p>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#timer"/></svg><h3 class="sec__title">What moves, and when</h3><p class="sec__detail">9</p></div>
+        <ul class="card list">
+        <li class="row"><span class="row__text"><span class="row__title">State changes</span><span class="row__sub">chevrons, the segmented thumb, the switch knob</span><span class="row__meta"><code>--ease-smooth</code>, the app’s .smooth spring, over <span class="sg-value" data-token="--dur-smooth"></span></span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Tab bar minimise and restore</span><span class="row__sub">width, height and padding</span><span class="row__meta"><code>--dur-min</code> <span class="sg-value" data-token="--dur-min"></span> on <code>--ease-smooth</code></span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Sheet on phones</span><span class="row__sub">up from below, back down</span><span class="row__meta"><code>--ease-sheet</code> over <span class="sg-value" data-token="--dur-sheet"></span></span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Sheet from 768 px</span><span class="row__sub">scale .97 → 1 plus a fade</span><span class="row__meta">0.35&nbsp;s and 0.25&nbsp;s</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">The sky settles behind a sheet</span><span class="row__sub">dims, inside sky.js</span><span class="row__meta">0.8&nbsp;s</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Sky hue and appearance</span><span class="row__sub">cross-fade to new colours</span><span class="row__meta"><code>--ease-sky</code> over <span class="sg-value" data-token="--dur-sky"></span></span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Press</span><span class="row__sub">rows fill instantly, out over 0.25&nbsp;s; pills and buttons dim to .65, back over 0.2&nbsp;s</span><span class="row__meta">glass controls grow to 1.06 and brighten over 0.15&nbsp;s</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Inline title and scroll edge</span><span class="row__sub">opacity</span><span class="row__meta"><code>--dur-fade</code> <span class="sg-value" data-token="--dur-fade"></span></span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">On load</span><span class="row__sub">nothing moves</span><span class="row__meta">every transition is off until load plus one frame</span></span></li>
+        </ul>
+        <p class="sec__foot">Never animated: no keyframes, load animations, count-ups, scroll-linked effects or parallax on content. Under reduced motion the sheet fades instead of sliding and the tab bar and chevrons change instantly.</p>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#globe"/></svg><h3 class="sec__title">The sky</h3></div>
+        <p class="sec__intro">The slowest thing on the screen.</p>
+        <ul class="card list">
+        <li class="row"><span class="row__text"><span class="row__title">Baked, then made to flow</span><span class="row__sub">Six keyframes are drawn once, then a light pass cross-fades them forward and back on a 60&nbsp;s loop and carries the picture along a slow current.</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Light on the device</span><span class="row__sub">Drawn at about half the screen’s pixels and about a dozen times a second at rest; never redrawn for a scroll.</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Parallax, the only one</span><span class="row__sub">The picture is 1.35 screens tall and slides at 0.15 of the scroll.</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Holds still</span><span class="row__sub">Under reduced motion it is one still frame; it pauses while the tab is hidden and its clock stops, so it never jumps.</span></span></li>
+        <li class="row"><span class="row__text"><span class="row__title">Fallbacks</span><span class="row__sub">A CSS gradient of each page’s sky shows before the first frame, without JavaScript, without WebGL and while a lost context comes back. Background: Solid draws one plain colour and no canvas. Forced colours and print hide it.</span></span></li>
+          <li class="row js-only" data-sg-sky hidden><span class="row__text"><span class="row__title">Right now</span><span class="row__sub sg-mono" data-sg-sky-info></span></span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#repeat"/></svg><h3 class="sec__title">Try it</h3></div>
+        <ul class="card list list--tile">
+          <li><details class="disc" id="sg-motion-disc">
+            <summary class="row"><span class="tile tile--blue" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#play"/></svg></span><span class="row__text"><span class="row__title">Open this row</span><span class="row__sub">The chevron turns on the smooth spring</span></span><svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg></summary>
+            <div class="disc__body"><p class="disc__note">The chevron turned 90° over 0.3&nbsp;s because you opened it. The body appears without a height tween. Under reduced motion the chevron turns instantly.</p></div>
+          </details></li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section class="sec" id="access" aria-labelledby="access-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#accessibility"/></svg><h2 class="sec__title" id="access-h">Accessibility</h2></div>
+      <p class="sec__intro">Every preference the browser exposes is handled in the last block of <code>style.css</code>, after every component, so it always wins.</p>
+      <div class="card card--text">
+        <ul class="bullets bullets--sm">
+          <li><strong>Focus.</strong> Every control shows a 3 px blue <code>:focus-visible</code> ring (Highlight under forced colours). “Skip to content” is the first Tab stop and moves focus to <code>main</code>; scroll padding keeps a focused element clear of the top bar and the tab bar.</li>
+          <li><strong>Targets.</strong> Every link, button and summary outside running prose is at least 44 × 44 px; pills draw a 32 px capsule inside a 44 px hit box.</li>
+          <li><strong>Contrast.</strong> Every text pair passes WCAG AA against the rendered sky, sampled at several sky moments. <code>--label-2</code> and the <code>--fg-*</code> tone colours are raised above the app’s values to get there, and a soft halo sits behind text set straight on the sky.</li>
+          <li><strong>Reduced motion.</strong> The sky is one still frame, the sheet fades, and the tab bar and chevrons change instantly.</li>
+          <li><strong>Reduced transparency.</strong> Cards become opaque system cards with no rim; controls, the sheet and the scroll edge turn opaque.</li>
+          <li><strong>Increased contrast.</strong> Solid rims, stronger labels and separators, and inline links underlined at 2 px.</li>
+          <li><strong>Forced colours.</strong> The sky is hidden; cards, controls, the sheet and chips get system borders, the current tab is outlined in Highlight, and the top bar turns opaque.</li>
+          <li><strong>Print.</strong> Every disclosure opens before printing and returns to how you left it afterwards. The chrome, the sky and the demo frame are hidden, and external links print their URL.</li>
+          <li><strong>No JavaScript.</strong> The site is dark with the CSS sky, every fact is reachable through native <code>&lt;details&gt;</code>, the tab bar stays expanded, the Contact buttons jump to the page’s Contact section, and lifecycle nodes stay static chips.</li>
+          <li><strong>Structure.</strong> One <code>h1</code> per page, an <code>h2</code> for every section, and no skipped levels. Landmarks: one <code>main</code>, one primary <code>nav</code>, one footer.</li>
+          <li><strong>Privacy.</strong> No cookies and no tracking. Local storage holds only an appearance or background you choose, in this browser.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="contact" aria-labelledby="contact-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg><h2 class="sec__title" id="contact-h">Contact</h2></div>
+      <ul class="card list list--glyph">
+        <li class="row">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></span>
+          <span class="row__text"><span class="row__title">Questions about the system?</span><a class="row__sub row__link" href="mailto:patel.shrenil@gmail.com?subject=Shrenil.com%20style%20guide">patel.shrenil@gmail.com</a></span>
+        </li>
+        <li><a class="row" href="../#contact">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#users"/></svg></span>
+          <span class="row__text"><span class="row__title">All contact details</span><span class="row__sub">Email, LinkedIn, GitHub and phone</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+      </ul>
+    </section>
+
+    </main>
+    <footer class="foot wrap">
+      <p>© <span data-year>2026</span> Shren Patel&nbsp;· built solo, plain HTML&nbsp;· no cookies, no tracking</p>
+      <p><a href="./" aria-current="page">Style guide</a></p>
+    </footer>
+    <nav class="tabbar" data-tabbar data-sel="none" aria-label="Primary">
+      <div class="glass tabbar__tabs">
+        <span class="tabbar__thumb" aria-hidden="true"></span>
+        <a class="tab" href="../"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#house"/></svg><span class="tab__label">Home</span></a>
+        <a class="tab" href="../centros/"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#globe"/></svg><span class="tab__label">CentrOS</span></a>
+        <a class="tab" href="../axed/"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#book-open"/></svg><span class="tab__label">AXED</span></a>
+      </div>
+      <a class="glass tabbar__ask" href="mailto:patel.shrenil@gmail.com?subject=Shrenil.com%20style%20guide" aria-label="Email Shren"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></a>
+    </nav>
+    <dialog class="sheet" id="sheet" aria-labelledby="sheet-h">
+      <header class="sheet__bar">
+        <span class="sheet__grab" aria-hidden="true"></span>
+        <h2 class="sheet__title" id="sheet-h">Contact</h2>
+        <button class="glass glass-btn sheet__done" type="button" data-sheet-close autofocus>Done</button>
+      </header>
+      <div class="sheet__scroll">
+        <div class="sgroup">
+          <div class="row row--avatar sheet__me">
+            <span class="avatar avatar--56 av-6" aria-hidden="true">SP</span>
+            <span class="row__text"><span class="sheet__name">Shren Patel</span><span class="row__sub">AI agent orchestration engineer</span></span>
+          </div>
+        </div>
+        <ul class="sgroup list list--glyph" aria-label="Ways to reach me">
+          <li class="row">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#mail"/></svg></span>
+            <span class="row__text"><span class="row__title">Email</span><a class="row__sub row__link" href="mailto:patel.shrenil@gmail.com?subject=Shrenil.com%20style%20guide">patel.shrenil@gmail.com</a></span>
+            <span class="row__trail"><button class="pill copy" type="button" data-copy="patel.shrenil@gmail.com" hidden>Copy</button><a class="pill pill--primary" href="mailto:patel.shrenil@gmail.com?subject=Shrenil.com%20style%20guide">Email</a><span class="vh" role="status"></span></span>
+          </li>
+          <li><a class="row" href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#linkedin"/></svg></span>
+            <span class="row__text"><span class="row__title">LinkedIn</span><span class="row__sub">linkedin.com/in/shrenp</span></span>
+            <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
+          </a></li>
+          <li><a class="row" href="https://github.com/blopit" target="_blank" rel="noopener">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#github"/></svg></span>
+            <span class="row__text"><span class="row__title">GitHub</span><span class="row__sub">github.com/blopit</span></span>
+            <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
+          </a></li>
+          <li><a class="row" href="tel:+16135519989">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#phone"/></svg></span>
+            <span class="row__text"><span class="row__title">Phone</span><span class="row__sub nums">+1 613-551-9989</span></span>
+            <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
+          </a></li>
+        </ul>
+        <p class="sgroup__foot">Canada, remote · EST/PST.</p>
+        <ul class="sgroup list" aria-label="Settings">
+          <li class="row row--pick">
+            <span class="row__text"><label class="row__title" for="pref-appearance">Appearance</label></span>
+            <span class="pick"><span data-pick-value aria-hidden="true">Dark</span><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevrons-up-down"/></svg>
+              <select id="pref-appearance" data-pref="appearance"><option value="dark">Dark</option><option value="light">Light</option><option value="system">Match device</option></select></span>
+          </li>
+          <li class="row row--pick">
+            <span class="row__text"><label class="row__title" for="pref-background">Background</label></span>
+            <span class="pick"><span data-pick-value aria-hidden="true">Sky</span><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevrons-up-down"/></svg>
+              <select id="pref-background" data-pref="background"><option value="sky">Sky</option><option value="solid">Solid</option></select></span>
+          </li>
+          <li data-new-sky><button class="row row--act" type="button" data-new-sky-btn>New sky</button><span class="vh" role="status" data-new-sky-status></span></li>
+        </ul>
+        <p class="sgroup__foot">Solid draws a plain colour instead of the sky, so your device does less. Both choices are saved in this browser only.</p>
+        <p class="sheet__fine">No cookies, no tracking.</p>
+      </div>
+    </dialog>
+    <script>
+    // Style guide (page-local). Prints every token's live value and every measured size, and runs the
+    // specimens that need a script: the flow, the segmented control, the picker row and the sky hue buttons.
+    (function () {
+      'use strict';
+      var doc = document, root = doc.documentElement;
+      var px = function (v) { return Math.round(parseFloat(v) * 10) / 10 + 'px'; };
+      function render() {
+        doc.querySelectorAll('.sg-value[data-token]').forEach(function (el) {
+          el.textContent = getComputedStyle(el).getPropertyValue(el.getAttribute('data-token')).trim();
+        });
+        doc.querySelectorAll('.sg-t').forEach(function (el) {
+          var cs = getComputedStyle(el), out = el.parentElement.querySelector('.sg-px');
+          if (out) out.textContent = px(cs.fontSize) + ' / ' + (cs.lineHeight === 'normal' ? 'normal' : px(cs.lineHeight)) + ' · ' + cs.fontWeight;
+        });
+        doc.querySelectorAll('.sg-bar').forEach(function (bar) {
+          var probe = bar.querySelector('.sg-probe'), out = bar.parentElement.querySelector('.sg-measure');
+          if (probe && out) out.textContent = Math.round(probe.getBoundingClientRect().width) + ' px here';
+        });
+        doc.querySelectorAll('[data-sg-of]').forEach(function (el) {
+          var t = doc.getElementById(el.getAttribute('data-sg-of'));
+          if (!t) return;
+          var cs = getComputedStyle(t), r = t.getBoundingClientRect(), what = el.getAttribute('data-sg-what'), v = 0;
+          if (what === 'radius') v = Math.min(parseFloat(cs.borderTopLeftRadius), r.height / 2, r.width / 2);
+          else if (what === 'inset') v = parseFloat(cs.paddingTop);
+          else v = r.height;
+          el.textContent = Math.round(v) + ' px';
+        });
+        var sky = window.CentrosSky, row = doc.querySelector('[data-sg-sky]');
+        if (row && sky && typeof sky.info === 'function') {
+          try {
+            var info = sky.info() || {};
+            row.hidden = false;
+            row.querySelector('[data-sg-sky-info]').textContent = [info.mode, info.hue, info.theme].filter(Boolean).join(' · ') || 'drawing';
+          } catch (_) { /* the sky is decoration */ }
+        }
+      }
+      var queued = false;
+      function later() {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () { queued = false; render(); });
+      }
+      render();
+      window.addEventListener('load', later);
+      window.addEventListener('resize', later, { passive: true });
+      setTimeout(later, 3000);
+      if ('MutationObserver' in window) new MutationObserver(later).observe(root, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+      ['(prefers-contrast: more)', '(prefers-reduced-transparency: reduce)'].forEach(function (q) {
+        var mq = window.matchMedia && window.matchMedia(q);
+        if (mq && mq.addEventListener) mq.addEventListener('change', later);
+      });
+
+      // Flow: the definitions live in the DOM below it.
+      var flow = doc.querySelector('[data-sg-flow]');
+      if (flow) {
+        var detail = flow.querySelector('.flow__detail'), nodes = flow.querySelectorAll('.pill[data-state]');
+        nodes.forEach(function (node) {
+          node.disabled = false;
+          node.addEventListener('click', function () {
+            var state = node.getAttribute('data-state');
+            var dd = doc.querySelector('#sg-flow-states [data-state="' + state + '"] dd');
+            nodes.forEach(function (n) { n.setAttribute('aria-pressed', String(n === node)); });
+            var title = doc.createElement('strong'); title.textContent = state;
+            var body = doc.createElement('p'); body.textContent = dd ? dd.textContent.trim() : '';
+            detail.replaceChildren(title, body);
+          });
+        });
+      }
+
+      // Segmented control: moves its thumb; changes nothing else.
+      doc.querySelectorAll('[data-sg-seg]').forEach(function (seg) {
+        var opts = seg.querySelectorAll('.seg__opt');
+        seg.addEventListener('change', function () {
+          opts.forEach(function (o, i) {
+            var on = o.querySelector('input').checked;
+            o.classList.toggle('is-on', on);
+            if (on) seg.style.setProperty('--seg-i', i);
+          });
+        });
+      });
+
+      // Picker row specimen: shows its choice; changes nothing else.
+      var pick = doc.getElementById('sg-pick'), shown = doc.querySelector('[data-sg-pick-value]');
+      if (pick && shown) pick.addEventListener('change', function () { shown.textContent = pick.options[pick.selectedIndex].textContent; });
+
+      // Sky hues: preview another page's sky on this one.
+      var hues = doc.querySelectorAll('[data-sg-hue]');
+      var canHue = function () { return window.CentrosSky && typeof window.CentrosSky.setHue === 'function'; };
+      function syncHues() { hues.forEach(function (b) { b.hidden = !canHue(); }); }
+      hues.forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (!canHue()) return;
+          try { window.CentrosSky.setHue(b.getAttribute('data-sg-hue')); } catch (_) { return; }
+          hues.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+          later();
+        });
+      });
+      syncHues();
+      window.addEventListener('load', syncHues);
+    })();
+    </script>
+  </body>
+</html>

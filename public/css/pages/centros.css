@@ -1,0 +1,109 @@
+/* centros.css: CentrOS page-local rules only (scoped to .page-centros), tokens only.
+   The page wears the app's entity look on the violet sky; every component is shared (style.css). */
+
+/* Header: the product's mark beside its name, as the app's entity page sets an avatar beside a person. */
+.page-centros .lt--mark{display:flex;align-items:center;gap:16px}
+.page-centros .lt__mark{flex:none;display:grid;place-items:center;inline-size:4rem;block-size:4rem;border-radius:28%;
+  background:var(--indigo);background:linear-gradient(180deg,color-mix(in srgb,var(--indigo) 72%,#fff) 0%,var(--indigo) 70%);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 20px rgba(0,0,0,.25)}
+.page-centros .lt__mark > .i{inline-size:1.875rem;block-size:1.875rem;stroke-width:2.25}
+.page-centros .lt__name{min-width:0}
+.page-centros .lt--mark .lt__sub{margin-top:2px}
+@media (max-width:359px){.page-centros .lt__mark{inline-size:3.25rem;block-size:3.25rem}.page-centros .lt--mark{gap:12px}}
+.page-centros .hero__status{display:block}
+.page-centros .hero__status > .chip{margin-inline-end:4px;vertical-align:1px}
+.page-centros .hero > .needs{margin-top:var(--sec-gap)}
+.page-centros .needs .sec__detail{max-inline-size:70%}
+/* Both hero actions keep their label on one line: side by side when they fit, else each takes the row. */
+.page-centros .hero > .actions > .btn{flex:1 1 auto;white-space:nowrap}
+@media (max-width:429px){.page-centros .hero > .actions > .btn{padding-inline:20px}.page-centros .hero > .actions > .btn > .i{display:none}}
+@media (min-width:768px){.page-centros .hero > .actions > .btn{flex:0 1 auto}}
+.page-centros .hero > .actions + .hero__meta{margin-top:16px}   /* the actions follow the claim, so they clear the tab bar on a phone held sideways */
+/* Body copy lives in glass, as in the app: only the title, claim, meta line, headers and footnotes touch the sky. */
+.page-centros .hero > .hero__intro{margin-top:16px}
+.page-centros .intro:has(+ .card--text){padding-bottom:12px}
+/* A link set straight on the marbled day sky: the action blue dips under AA where a glow sits behind it. */
+:root[data-theme="light"] .page-centros .sec__foot a{color:#00366F;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+
+/* Owner inbox: the app's Home "Needs you" cards. Nothing here acts, so the trailing state is a chip, not a pill.
+   On a narrow phone the chip moves under the text instead of squeezing it. */
+.page-centros .needs__row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:12px;row-gap:8px}
+.page-centros .needs__row > .chip{justify-self:end}
+/* A trailing capsule is one line, as in the app: in its own auto track the shared 50% cap would resolve against nothing
+   and squeeze it to its longest word. */
+@media (min-width:540px){.page-centros .needs__row > .chip{max-inline-size:none;white-space:nowrap}}
+@media (max-width:539px){
+  .page-centros .needs__row{grid-template-columns:auto minmax(0,1fr)}
+  .page-centros .needs__row > .chip{grid-column:2;justify-self:start;max-inline-size:100%}   /* the text column, so it wraps only at very large text */
+}
+.page-centros .row__sub--waiting{color:var(--fg-waiting)}
+.page-centros .row__sub--stop{color:var(--fg-stop)}
+.page-centros .tile--text{font-size:.8125rem}
+
+/* Rhythm: a group right under an intro sits close; a lone card after a group stands as a card does. */
+.page-centros .intro + .group{margin-top:8px}
+.page-centros .sec > .group + .card{margin-top:10px}
+.page-centros .disc__body > p:first-child{font:var(--t-callout);color:var(--label)}   /* a stage's opening paragraph */
+.page-centros .disc__body > .claims{margin-top:-4px}
+
+/* Inline links in bullets and claim values: a 44 px-tall hit area without moving the text. */
+.page-centros :is(.bullets,.claim dd) a{padding-block:13px}
+
+/* Lifecycle: keep each arrow with the node before it, so a wrapped line never starts with "→". */
+.page-centros .flow__step{white-space:nowrap}
+
+/* Demo: the embed needs JS and the desktop layout (not the site's phone condition: < 768 px wide, or ≤ 500 px tall as a
+   phone held sideways); otherwise the poster stands in with its own button. The frame reserves the trimmed demo's
+   measured height so nothing below it moves when it loads. */
+.page-centros .frame__poster,.page-centros .frame__nojs{display:none}
+.page-centros .frame__poster{padding:16px;font:var(--t-subhead);color:var(--label-2)}
+.page-centros .frame__go{margin-top:12px}
+html:not(.js) .page-centros .frame__poster,html:not(.js) .page-centros .frame__nojs{display:block}
+html:not(.js) .page-centros .frame__view{display:none}
+html.js .page-centros .frame__view{block-size:938px}
+html.js .page-centros .frame__view:not([data-ready]){visibility:hidden}   /* until the skin below applies: no navy flash */
+@media (max-width:767px),(max-height:500px){
+  .page-centros .frame__poster{display:block}
+  .page-centros .frame__view{display:none}
+}
+
+/* Forced colours: Chrome forces the pressed node's background to Canvas but keeps HighlightText; keep its Highlight fill. */
+@media (forced-colors:active){
+  .page-centros .lifecycle__node[aria-pressed="true"]{forced-color-adjust:none;background:Highlight;color:HighlightText;border-color:Highlight}
+  .page-centros .lt__mark{border:1px solid CanvasText}
+}
+@media print{
+  .page-centros .disc__body{break-inside:auto}
+  .page-centros .claims > .claim{break-inside:avoid}
+}
+
+/* Demo skin: the page script links style.css, sky.css and this file into the same-origin frame and marks its
+   root html.demo-embed[data-theme]. These rules match nothing on the page itself; the full-screen demo keeps its own look. */
+html.demo-embed:root{background:transparent}
+html.demo-embed::before{content:none}                    /* no sky inside the frame: the card's glass is behind it */
+html.demo-embed body{margin:0;padding:0 16px 16px;background:transparent;color:var(--label);font:var(--t-subhead)}
+html.demo-embed body::before{content:none}
+.demo-embed a{color:var(--link)}
+.demo-embed .header{padding:14px 0 8px;background:none;border:0}
+.demo-embed .header h1{font:var(--t-headline);color:var(--label)}
+.demo-embed .sub{opacity:1;font:var(--t-footnote);color:var(--label-2)}
+.demo-embed .layout{gap:10px}
+.demo-embed .panel{padding:14px;border:0;border-radius:var(--r-inner);background:var(--fill-4)}
+.demo-embed .panel h2{opacity:1;font:var(--t-headline);letter-spacing:0;text-transform:none;color:var(--label-2)}
+.demo-embed label{font-weight:600;color:var(--label)}
+.demo-embed textarea{border:0;border-radius:var(--r-inner);background:var(--fill-3);color:var(--label);font:var(--t-body)}
+.demo-embed textarea::placeholder{opacity:1;color:var(--label-2)}
+.demo-embed .samples span{opacity:1;color:var(--label-2)}
+.demo-embed .sample{min-height:32px;border:0;border-radius:var(--r-cap);background:var(--fill-quiet);color:var(--label);font-weight:600}
+.demo-embed .run{min-height:50px;border:0;border-radius:var(--r-cap);background:var(--label);color:var(--bg);font:var(--t-headline)}
+.demo-embed .run:disabled{opacity:.5}
+.demo-embed .status{opacity:1;color:var(--label-2)}
+.demo-embed .status.error{color:var(--fg-stop)}
+.demo-embed .pipeline li{border:0;border-radius:var(--r-inner);background:var(--fill-3);color:var(--label)}
+.demo-embed .pipeline li.pending{opacity:1;color:var(--label-2)}
+.demo-embed .pipeline li.running{background:var(--wash-waiting);color:var(--fg-waiting)}
+.demo-embed .pipeline li.done{background:var(--wash-settled);color:var(--fg-settled)}
+.demo-embed .step-num{background:var(--fill-2);color:var(--label);font-family:var(--font-mono)}
+.demo-embed .hitl,.demo-embed .flow-note,.demo-embed .footer{opacity:1;color:var(--label-2);font:var(--t-footnote);border-color:var(--separator)}
+.demo-embed .output{max-height:none;border:0;border-radius:var(--r-inner);background:var(--fill-4);color:var(--label);font:var(--t-footnote);font-family:var(--font-mono)}
+@media (max-width:768px){.demo-embed .layout > .panel{grid-column:auto;grid-row:auto}}   /* the demo's own one-column rule pins the pipeline to column 2 */

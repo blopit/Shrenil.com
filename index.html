@@ -2,770 +2,767 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Shren Patel — AI Agent Orchestration Engineer (LangGraph / Temporal / LangFuse · MCP · RAG · HITL)</title>
-    <meta name="description" content="Staff-level AI agent orchestration engineer. CentrOS: stateful multi-agent workflows, tool/function calling, RAG, MCP, LangGraph/Temporal-style runtime, LangFuse-style observability, human-in-the-loop approval gates. TypeScript/Node, Python. Canada remote. Also creator of AXED (WEBTOON Original, 40M+ reads) — IP sold to Wattpad WEBTOON Studios.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Shren Patel — AI Agent Orchestration Engineer</title>
+    <meta name="description" content="Shren Patel builds production multi-agent systems with human approval gates. Founder of CentrOS, running in a 23-unit hospitality operation, and creator of AXED (40M+ reads, IP rights deal with Wattpad WEBTOON Studios). Canada, remote.">
     <meta name="keywords" content="AI agent orchestration, multi-agent systems, stateful workflows, LangGraph, Temporal, LangFuse, Pydantic, LangChain, CrewAI, MCP, Anthropic MCP, tool calling, function calling, structured outputs, RAG, retrieval pipelines, context management, memory, human-in-the-loop, HITL, approval workflows, audit trails, governance, evaluation, evals, observability, prompt engineering, agent runtime, AI platform engineer, AI architect, forward deployed engineer, staff AI engineer, workflow automation, GTM automation, MCP servers, Kubernetes, serverless, AWS Lambda, Step Functions, OpenSearch, GCP, BigQuery, TypeScript, Hono, Drizzle, PostgreSQL, Python, Node.js, Canada remote">
     <meta name="author" content="Shren Patel">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Shren Patel — AI Agent Orchestration Engineer (CentrOS · LangGraph/Temporal-style runtime)">
-    <meta property="og:description" content="CentrOS: stateful multi-agent orchestration with tool calling, RAG, MCP, LangFuse-style observability, and human-in-the-loop approval gates. Canada remote. Also creator of AXED (WEBTOON Original, 40M+ reads) — IP sold to Wattpad WEBTOON Studios.">
-    <meta property="og:image" content="public/images/shrenp.jpg">
-    <meta property="og:url" content="https://shrenp.com">
-
-    <!-- Schema.org markup for Google -->
+    <meta property="og:title" content="Shren Patel — AI Agent Orchestration Engineer">
+    <meta property="og:description" content="Shren Patel builds production multi-agent systems with human approval gates. Founder of CentrOS, running in a 23-unit hospitality operation, and creator of AXED (40M+ reads, IP rights deal with Wattpad WEBTOON Studios). Canada, remote.">
+    <meta property="og:image" content="https://shrenp.com/public/images/shrenp.jpg">
+    <meta property="og:url" content="https://shrenp.com/">
+    <meta property="og:type" content="profile">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Shren Patel — AI Agent Orchestration Engineer">
+    <meta name="twitter:description" content="Shren Patel builds production multi-agent systems with human approval gates. Founder of CentrOS, running in a 23-unit hospitality operation, and creator of AXED (40M+ reads, IP rights deal with Wattpad WEBTOON Studios). Canada, remote.">
+    <meta name="twitter:image" content="https://shrenp.com/public/images/shrenp.jpg">
+    <link rel="canonical" href="https://shrenp.com/">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#000000">
+    <script>
+    /* Appearance before first paint. Dark unless this visitor chose Light or Match device in the
+       contact sheet; the choice lives in this browser only (localStorage), never on a server.
+       ?appearance=dark|light|system and ?background=sky|solid override it for one visit (QA). */
+    (function (d, w) {
+      var r = d.documentElement, a = null, b = null, q, t, m;
+      try { a = w.localStorage.getItem('centros.appearance'); b = w.localStorage.getItem('centros.background'); } catch (e) {}
+      try { q = new URLSearchParams(w.location.search); if (q.has('appearance')) a = q.get('appearance'); if (q.has('background')) b = q.get('background'); } catch (e) {}
+      if (a !== 'light' && a !== 'system') a = 'dark';
+      t = (a === 'light' || (a === 'system' && w.matchMedia && w.matchMedia('(prefers-color-scheme: light)').matches)) ? 'light' : 'dark';
+      r.setAttribute('data-appearance', a);
+      r.setAttribute('data-theme', t);
+      r.className += (r.className ? ' ' : '') + 'js' + (b === 'solid' ? ' sky-solid' : '');
+      m = d.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', t === 'light' ? '#F2F2F7' : '#000000');
+    })(document, window);
+    </script>
     <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
-      "@type": "Person",
-      "name": "Shren Patel",
-      "jobTitle": "AI Agent Orchestration Engineer",
-      "description": "Builds CentrOS: stateful multi-agent orchestration with tool/function calling, RAG, MCP, LangGraph/Temporal-style runtime, LangFuse-style observability, and human-in-the-loop approval gates. Open to Canada-remote staff AI engineer, AI platform engineer, AI architect, agent runtime, and forward-deployed roles.",
-      "url": "https://shrenp.com",
-      "image": "public/images/shrenp.jpg",
-      "knowsAbout": [
-        "AI agent orchestration",
-        "Multi-agent systems",
-        "Stateful workflow orchestration",
-        "LangGraph",
-        "Temporal",
-        "LangFuse",
-        "Pydantic",
-        "LangChain",
-        "CrewAI",
-        "MCP servers",
-        "Tool calling",
-        "Function calling",
-        "Structured outputs",
-        "RAG",
-        "Retrieval pipelines",
-        "Context and memory management",
-        "Human-in-the-loop approvals",
-        "Approval workflows and audit trails",
-        "Agent evaluation and observability",
-        "Prompt engineering",
-        "AI platform engineering",
-        "AI governance",
-        "Forward-deployed engineering",
-        "TypeScript",
-        "Python"
-      ],
-      "sameAs": [
-        "https://github.com/shrenilpatel/Centros",
-        "https://github.com/blopit",
-        "https://linkedin.com/in/shrenp"
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://shrenp.com/#person",
+          "name": "Shren Patel",
+          "givenName": "Shren",
+          "familyName": "Patel",
+          "jobTitle": "AI Agent Orchestration Engineer",
+          "description": "Builds CentrOS: stateful multi-agent orchestration with tool/function calling, RAG, MCP, LangGraph/Temporal-style runtime, LangFuse-style observability, and human-in-the-loop approval gates. Open to Canada-remote staff AI engineer, AI platform engineer, AI architect, agent runtime, and forward-deployed roles. Also creator of AXED — WEBTOON Original with 40M+ reads; IP rights deal with Wattpad WEBTOON Studios.",
+          "url": "https://shrenp.com/",
+          "image": "https://shrenp.com/public/images/shrenp.jpg",
+          "email": "mailto:patel.shrenil@gmail.com",
+          "telephone": "+1-613-551-9989",
+          "knowsLanguage": ["English"],
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of Waterloo",
+            "url": "https://uwaterloo.ca/"
+          },
+          "worksFor": { "@id": "https://shrenp.com/#centros" },
+          "hasOccupation": [
+            {
+              "@type": "Occupation",
+              "name": "AI Agent Orchestration Engineer",
+              "occupationLocation": { "@type": "Country", "name": "Canada" },
+              "skills": "Multi-agent orchestration, LangGraph, Temporal-style durable execution, LangFuse, MCP tool integrations, RAG, evaluation harnesses, human-in-the-loop approval surfaces"
+            }
+          ],
+          "knowsAbout": [
+            "AI agent orchestration",
+            "Multi-agent systems",
+            "Stateful workflow orchestration",
+            "LangGraph",
+            "Temporal",
+            "LangFuse",
+            "Pydantic",
+            "LangChain",
+            "CrewAI",
+            "MCP servers",
+            "Tool calling",
+            "Function calling",
+            "Structured outputs",
+            "RAG",
+            "Retrieval pipelines",
+            "Context and memory management",
+            "Human-in-the-loop approvals",
+            "Approval workflows and audit trails",
+            "Agent evaluation and observability",
+            "Prompt engineering",
+            "AI platform engineering",
+            "AI governance",
+            "Forward-deployed engineering",
+            "TypeScript",
+            "Python",
+            "PostgreSQL",
+            "pgvector",
+            "OpenSearch",
+            "Founder-operator commercial conversations",
+            "Creative IP licensing and brokered deals"
+          ],
+          "sameAs": [
+            "https://github.com/blopit",
+            "https://linkedin.com/in/shrenp"
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://shrenp.com/#centros",
+          "name": "CentrOS",
+          "description": "Agent orchestration platform — typed contracts, eval gates, policy lanes (A/B/C), risk tiers (R1–R3), and owner-inbox human-in-the-loop approvals. PostgreSQL-durable contract state.",
+          "url": "https://shrenp.com/centros/",
+          "founder": { "@id": "https://shrenp.com/#person" },
+          "foundingDate": "2026-02",
+          "foundingLocation": { "@type": "Country", "name": "Canada" }
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://shrenp.com/#axed",
+          "name": "AXED",
+          "creator": { "@id": "https://shrenp.com/#person" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Wattpad WEBTOON Studios",
+            "url": "https://www.wattpad.com/studios"
+          },
+          "description": "WEBTOON Original with 40M+ reads and 492K+ subscribers at peak. IP rights deal with Wattpad WEBTOON Studios for book publication and a 2-season animated TV adaptation.",
+          "genre": "Webtoon",
+          "datePublished": "2018",
+          "interactionStatistic": [
+            {
+              "@type": "InteractionCounter",
+              "interactionType": { "@type": "ReadAction" },
+              "userInteractionCount": 40000000
+            },
+            {
+              "@type": "InteractionCounter",
+              "interactionType": { "@type": "SubscribeAction" },
+              "userInteractionCount": 492000
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://shrenp.com/#site",
+          "url": "https://shrenp.com/",
+          "name": "Shren Patel — Portfolio",
+          "author": { "@id": "https://shrenp.com/#person" },
+          "inLanguage": "en"
+        }
       ]
     }
     </script>
-
     <link rel="stylesheet" href="public/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Righteous&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
+    <link rel="stylesheet" href="public/css/sky.css">
+    <link rel="icon" href="public/images/favicon.svg" type="image/svg+xml">
+    <script src="public/js/sky.js" defer></script>
+    <script src="public/js/portfolio.js" defer></script>
   </head>
+  <body class="page-index" data-sky="accent">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="topbar" data-topbar>
+      <p class="topbar__title" aria-hidden="true">Shren Patel</p>
+      <a class="glass glass-btn topbar__account" href="#contact" data-sheet aria-label="Contact and settings"><span class="avatar avatar--30 av-6" aria-hidden="true">SP</span></a>
+    </header>
+    <main id="main" class="wrap" tabindex="-1">
 
-  <body>
-
-    <!-- ============ Sticky top nav (hidden until hero scrolls past) ============ -->
-    <nav class="topnav" aria-label="Primary">
-      <div class="topnav__inner">
-        <a href="#top" class="topnav__brand">Shren Patel</a>
-        <ul class="topnav__links">
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="centros/">CentrOS</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+    <header class="hero" id="top">
+      <div class="lt"><h1 class="lt__title" data-large-title>Shren Patel</h1><p class="lt__sub">AI agent orchestration engineer&nbsp;· Canada, remote (EST/PST)</p></div>
+      <p class="hero__claim">I build multi-agent systems that do real work&nbsp;— and <em>stop for a human before anything irreversible</em>.</p>
+      <p class="hero__meta">Open to Staff AI, AI Platform, AI Architect and Forward-Deployed roles&nbsp;· <a href="mailto:patel.shrenil@gmail.com">patel.shrenil@gmail.com</a></p>
+      <div class="actions">
+        <a class="btn btn--inverse" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#mail"/></svg>Email me</a>
+        <a class="btn glass" href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#linkedin"/></svg>LinkedIn<span class="vh"> (opens in a new tab)</span></a>
       </div>
-    </nav>
-
-    <!-- ============ 1. Hero ============ -->
-    <header id="top" class="hero">
-      <div class="hero__inner">
-        <h1 class="hero__name">Shren Patel</h1>
-        <p class="hero__title"><strong>AI Agent Orchestration Engineer</strong></p>
-        <p class="hero__pitch">Building AI systems that actually ship — multi-agent workflows with human approval gates, real audit trails, and production guardrails.</p>
-        <ul class="hero__contact" aria-label="Contact">
-          <li><a href="mailto:patel.shrenil@gmail.com">patel.shrenil@gmail.com</a></li>
-          <li><a href="tel:613-551-9989">+1 613-551-9989</a></li>
-          <li><a href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener">linkedin.com/in/shrenp</a></li>
-          <li><a href="https://github.com/blopit" target="_blank" rel="noopener">github.com/blopit</a></li>
-        </ul>
-        <div class="hero__chips">
-          <span class="chip">LangGraph</span>
-          <span class="chip">Temporal</span>
-          <span class="chip">LangFuse</span>
-          <span class="chip">MCP</span>
-          <span class="chip">RAG</span>
-          <span class="chip">HITL</span>
-          <span class="chip">TypeScript · Python</span>
-        </div>
-        <span class="hero__location">Canada remote · NA-friendly · EST/PST · Sold IP to Wattpad WEBTOON Studios · 40M+ reads on AXED</span>
-      </div>
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#sparkles"/></svg><h2 class="sec__title" id="proof-h">Proof</h2><p class="sec__detail">3</p></div>
+      <ul class="apart" id="summary" aria-labelledby="proof-h">
+        <li class="card"><a class="row" href="centros/">
+          <span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#layers"/></svg></span>
+          <span class="row__text"><span class="row__title">CentrOS, in production</span><span class="row__sub"><span class="nobr">23-unit</span> hospitality operation&nbsp;· live since Feb&nbsp;2026&nbsp;· 3,980+ tests on main</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li class="card"><a class="row" href="axed/">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#book-open"/></svg></span>
+          <span class="row__text"><span class="row__title">AXED, 40M+ reads</span><span class="row__sub">WEBTOON Original&nbsp;· IP rights deal with Wattpad WEBTOON Studios</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li class="card"><a class="row" href="#experience">
+          <span class="tile tile--blue" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#briefcase-business"/></svg></span>
+          <span class="row__text"><span class="row__title">10+ years shipping software</span><span class="row__sub">Coursera&nbsp;· Faire&nbsp;· D2L&nbsp;· Minted&nbsp;· Waterloo Software Engineering</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+      </ul>
     </header>
 
-    <main>
-
-    <!-- ============ 2. Summary ============ -->
-    <section id="summary" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Summary</span>
-        <p class="summary-body">
-          AI engineer with 10+ years shipping software at Coursera, Faire, D2L, and as an
-          independent builder. Also creator of <strong>AXED</strong>, a WEBTOON Original that sold
-          to Wattpad WEBTOON Studios — 40M+ reads, book and animated TV adaptations releasing
-          in 2025.
-        </p>
-        <p class="summary-body">
-          I now build <strong>AI agent systems</strong> — software that uses LLMs to do real work
-          (draft replies, process invoices, triage requests) with human approval before anything
-          irreversible happens.
-        </p>
-        <p class="summary-body">
-          Currently building <a href="centros/"><strong>CentrOS</strong></a>, an AI orchestration
-          platform that turns messy business workflows into reliable, auditable agent systems.
-          Dogfooded on a real 23-unit motel operation. <a href="centros/">Read the deep-dive →</a>
-        </p>
-        <p class="summary-body">
-          Open to Canada-remote Staff AI Engineer, AI Platform, AI Architect, and
-          Forward-Deployed roles.
-        </p>
-
-        <div class="metrics-row">
-          <div class="metric"><div class="metric__value">3.5 yrs</div><div class="metric__label">LLMs across dev &amp; ops workflows</div></div>
-          <div class="metric"><div class="metric__value">2+ yrs</div><div class="metric__label">Tool-calling &amp; agent patterns</div></div>
-          <div class="metric"><div class="metric__value">10+ yrs</div><div class="metric__label">Shipping software since 2013</div></div>
-          <div class="metric"><div class="metric__value">40M+</div><div class="metric__label">WEBTOON reads · AXED IP sold to Wattpad WEBTOON Studios</div></div>
+    <section class="sec" id="work" aria-labelledby="work-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#package"/></svg><h2 class="sec__title" id="work-h">What I’ve shipped</h2></div>
+      <article class="card work" aria-labelledby="w-centros">
+        <div class="work__head">
+          <span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#layers"/></svg></span>
+          <div class="row__text">
+            <h3 class="work__title" id="w-centros"><a href="centros/">CentrOS</a></h3>
+            <p class="work__status"><span class="chip chip--settled">In production</span><span class="nums">since Feb 2026</span></p>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ 3. Experience ============ -->
-    <section id="experience" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Experience</span>
-        <h2 class="section__title">Experience</h2>
-
-        <div class="timeline">
-          <article class="timeline__entry timeline__entry--current">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Founder, <span>AI Agent Orchestration Platform — CentrOS</span></h3>
-              <div class="timeline__meta">Remote · Canada <span>·</span> Feb 2026 – Present</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Built CentrOS — a production agent orchestration platform with typed contracts, eval gates, and human-in-the-loop approvals. <a href="centros/">Read the deep-dive →</a></li>
-              <li>Dogfooded on a 23-unit motel operations vertical: guest comms, refunds, vendor invoices, compliance flows. CI-backed Vitest suite on main.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> TypeScript · Hono · PostgreSQL · Drizzle · Expo · Vitest · LLM tool-calling — <a href="https://github.com/shrenilpatel/Centros" target="_blank" rel="noopener">github.com/shrenilpatel/Centros</a></p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Vertical automation &amp; ops dogfood, <span>Conscious Creations</span></h3>
-              <div class="timeline__meta">Remote · Canada <span>·</span> Sep 2022 – Feb 2026</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Prototyped accommodations workflows on CentrOS patterns: guest triage, booking-adjacent tasks, approval before irreversible actions.</li>
-              <li>Python/FastAPI automations and the <a href="demo/public/index.html">guest-triage demo</a> pipeline (classify → plan → draft).</li>
-              <li>Grounded in real ops — not claiming domain licenses; pairing runtime with operator judgment.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Focus:</strong> Hospitality vertical · workflow modeling · Conscious Creations client work</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Operations &amp; Portfolio Manager, <span>Independent — Property Management</span></h3>
-              <div class="timeline__meta">Greater Toronto Area <span>·</span> Sep 2022 – Present</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Managed day-to-day operations for a <strong>20-unit</strong> residential portfolio and a separate <strong>3-unit</strong> property — leasing coordination, maintenance, vendor workflows, tenant communications.</li>
-              <li>Mapped recurring operational workflows (intake, scheduling, follow-ups, exceptions) that directly informed which processes to automate with agents and where humans must stay in the loop.</li>
-              <li>Ran both portfolios hands-on while designing software to reduce manual coordination overhead.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Focus:</strong> Multi-unit residential ops · workflow design · stakeholder communication</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Independent Engineer / Builder, <span>Software, AI automation &amp; creative IP</span></h3>
-              <div class="timeline__meta">GTA · Remote <span>·</span> Sep 2022 – Jan 2026</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>LLM workflow automation since ChatGPT launch (Nov 2022): coding, research, ops, and content pipelines across personal and freelance work.</li>
-              <li>Tool-calling and API-driven automations from mid-2023; graph-style multi-agent patterns from 2024 (LangGraph-era); MCP tool integrations from late 2024.</li>
-              <li>Continued development of AXED IP (book + animated TV adaptations releasing 2025) and adjacent creative tooling.</li>
-              <li>Full-time focus shifted to <strong>CentrOS</strong> in Feb 2026 — formalized the prior 3+ years of patterns into a production orchestration platform.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Focus:</strong> LLM tool-calling · multi-agent orchestration · workflow automation · RAG · Python / TypeScript / Node</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Senior Frontend Developer, <span>Faire</span></h3>
-              <div class="timeline__meta">Remote · Canada <span>·</span> Jun 2021 – Aug 2022</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Spearheaded initiatives that drove multi-million-dollar apparel pre-orders.</li>
-              <li>Led engineering on international, multi-month product workstreams.</li>
-              <li>Initiated site-wide performance improvements with A/B testing and measurable rollout guardrails.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> React · TypeScript · MobX · Jest · Storybook · A/B testing</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Creator, <span>WEBTOON Original — AXED</span></h3>
-              <div class="timeline__meta">Remote <span>·</span> Jun 2018 – Dec 2020</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Built automated image-processing and consistency-checking pipelines (Python, JavaScript) — 10% fewer re-uploads, hundreds of hours saved.</li>
-              <li>Designed operator workflows and automation for a twice-weekly content factory — precursor to how I now build agent + human production systems (queue → tooling → review → ship).</li>
-              <li>Managed small team and workflow pipelines to deliver content twice weekly at 492K+ subscriber scale.</li>
-              <li>Grew the series to <strong>40M+ total reads</strong>, 492K+ subscribers, and 2M+ monthly views at peak.</li>
-              <li>Sold IP rights to <strong>Wattpad WEBTOON Studios</strong> — book publication and animated TV adaptation both releasing in 2025.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> Python · OpenCV · image processing · Git</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">iOS Mobile &amp; Web Developer, <span>Coursera</span></h3>
-              <div class="timeline__meta">Mountain View, CA <span>·</span> Jan 2017 – Apr 2017</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Developed course downloading feature increasing course completion by over 20%.</li>
-              <li>Established company infrastructure for rapid GUI creation in React.</li>
-              <li>Built Python search tooling that improved course content discovery ~60% (pre-LLM NLP/search) — same retrieval problem agent stacks now solve with embeddings &amp; RAG.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> React · Python · iOS SDK · Swift · NLP/search</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Software Designer / Web Developer, <span>Desire2Learn (D2L)</span></h3>
-              <div class="timeline__meta">Toronto <span>·</span> May 2016 – Aug 2016</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Pioneered a flashcard project boosting student information retention by up to 7x.</li>
-              <li>Designed module to auto-generate study questions.</li>
-              <li>Implemented a variable-interval testing system to enhance student learning.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> JavaScript · Node.js · React · SQL</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Mobile Developer, <span>SpringBoard Data Management</span></h3>
-              <div class="timeline__meta">Mississauga <span>·</span> Sep 2015 – Dec 2015</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Re-hauled and shipped a mobile iOS application to client spec. Implemented secure authentication. Reduced app load times by 80%.</li>
-              <li>Built a deductions PDF parser automation that cut client manual processing by &gt;90%.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> iOS SDK · Objective-C · PDF processing · auth systems</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Software Developer, <span>Minted LLC</span></h3>
-              <div class="timeline__meta">San Francisco <span>·</span> Aug 2014 – Dec 2014</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Developed a feature that extracted metadata from uploaded images and converted them to a printer-safe colour space — 50% reduction in reprint requests.</li>
-              <li>Built conversion-loss trackers, increased supported image formats, made quick fixes to major bugs that deleted user data, fixed major site issues during Cyber Monday loads.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> Python · image processing · color space conversion · AWS</p>
-          </article>
-
-          <article class="timeline__entry">
-            <div class="timeline__head">
-              <h3 class="timeline__role">Graphics &amp; Portability Developer, <span>TransGaming Inc</span></h3>
-              <div class="timeline__meta">Toronto, ON <span>·</span> Jan 2014 – Apr 2014</div>
-            </div>
-            <ul class="timeline__bullets">
-              <li>Created dynamic libraries to emulate Windows functionality on Mac OSX, working with SDKs of both operating systems to improve the Cider wrapper engine.</li>
-              <li>Fixed type bugs and implemented QoL features in games millions play (Guild Wars 2, Eve Online, Metal Gear Rising: Revengeance, Train Simulator 2014).</li>
-              <li>Replaced deprecated code in the main Cider engine (Objective-C, C, C++) to compile on the Mac OSX Mavericks SDK.</li>
-            </ul>
-            <p class="timeline__tech"><strong>Stack:</strong> C++ · Objective-C · Mac OSX SDK · Windows SDK</p>
-          </article>
+        <p class="work__why">An orchestration platform that turns messy business workflows into agent systems&nbsp;— agents draft guest replies, process refunds and vendor invoices, and an owner approves anything irreversible.</p>
+        <p class="work__flow">router&nbsp;→ executor&nbsp;→ adversary&nbsp;→ verifier&nbsp;→ owner inbox</p>
+        <p class="work__receipts"><span class="nobr">23-unit</span> hospitality operation&nbsp;· 3,980+&nbsp;tests on main&nbsp;· 4&nbsp;vendor primitives&nbsp;→&nbsp;1&nbsp;governed layer</p>
+        <!-- DEMO:TODO — record a 60–90s Loom of CentrOS in action
+             (ticket arrives → R1/R2/R3 risk classification fires → owner
+             reviews → approval gate → downstream tool call → audit trail).
+             When the file lands at /public/demo/centros-demo.mp4 (or a YouTube
+             URL), replace the .stub paragraph below with the <video> or <iframe> embed. -->
+        <p class="stub"><span class="chip chip--waiting">In progress</span><span>A <span class="nobr">60–90s</span> walkthrough video: a ticket arrives, risk is classified, the owner reviews, and the tool fires with an audit trail. Until then, <a href="centros/#demo">try the live demo</a>.</span></p>
+        <p class="work__actions"><a class="pill" href="centros/">Read the case study<svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg></a></p>
+      </article>
+      <article class="card work" aria-labelledby="w-axed">
+        <div class="work__head">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#book-open"/></svg></span>
+          <div class="row__text">
+            <h3 class="work__title" id="w-axed"><a href="axed/">AXED</a></h3>
+            <p class="work__status"><span class="chip chip--settled">IP deal</span><span class="nums">2018&nbsp;– 2020</span></p>
+          </div>
         </div>
-
-        <div class="honest-timeline">
-          <h3>When the AI work actually started</h3>
-          <table class="honest-timeline__table">
-            <thead><tr><th>Period</th><th>What I was doing</th></tr></thead>
-            <tbody>
-              <tr><td><strong>2013 – 2022</strong></td><td>10 years shipping software — web, mobile, games, data tooling (Faire, Coursera, D2L, Minted, etc.)</td></tr>
-              <tr><td><strong>Nov 2022 →</strong></td><td>LLMs across dev &amp; business workflows (ChatGPT → GPT-4 API) · <strong>~3.5 years</strong></td></tr>
-              <tr><td><strong>Jun 2023 →</strong></td><td>Tool-calling pipelines, Zapier/Make + custom Python/JS automations · <strong>~3 years</strong></td></tr>
-              <tr><td><strong>2024 →</strong></td><td>Graph-style multi-agent orchestration, RAG, evaluations, HITL approvals (LangGraph era) · <strong>2+ years</strong></td></tr>
-              <tr><td><strong>Late 2024 →</strong></td><td>MCP tool integrations · <strong>~1.5 years</strong></td></tr>
-              <tr><td><strong>Feb 2026 →</strong></td><td><strong>CentrOS</strong> — production orchestration platform with contracts, gates, owner inbox, motel vertical · <strong>~4 months, dense</strong></td></tr>
-            </tbody>
-          </table>
-          <p class="honest-timeline__caption">
-            The platform is 4 months old, not 3 years — that's the honest answer. The practice
-            behind it is 3+ years. AI-assisted workflows across domains; pair with domain experts
-            (legal, accounting, ops) so regulated and high-stakes work always gets human sign-off
-            at the approval step.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 4. Skills ============ -->
-    <section id="skills" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Skills</span>
-        <h2 class="section__title">Skills</h2>
-        <p class="section__lede">
-          Click to expand. AI / agent skills first, then the rest of the stack.
-        </p>
-
-        <details class="skill-block" open>
-          <summary>AI agent orchestration</summary>
-          <div class="skill-block__body">
-            <ul>
-              <li>Multi-agent workflow design &amp; task decomposition</li>
-              <li>Tool/function calling, structured outputs, schema-validated arguments</li>
-              <li>Stateful workflow orchestration, checkpointing, crash recovery, replay</li>
-              <li>Human-in-the-loop approvals, escalation paths, audit trails, governance</li>
-              <li>RAG, retrieval pipelines, embeddings, context windows, prompt management</li>
-              <li>Agent evaluation, tracing, observability, latency &amp; token-cost monitoring</li>
-              <li>MCP servers, webhooks, OAuth-scoped tool access, third-party API integrations</li>
-              <li>Router · executor · adversary · verifier patterns; confidence-gated handoff</li>
-              <li>POCs, demos, eval-gated rollout &amp; production hardening for business workflows</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="skill-block">
-          <summary>Languages</summary>
-          <div class="skill-block__body">
-            <div class="skill-cols">
-              <div>
-                <h4>Proficient</h4>
-                <ul>
-                  <li>Python 3</li>
-                  <li>JavaScript · TypeScript</li>
-                  <li>C / C++</li>
-                  <li>HTML5 · CSS</li>
-                </ul>
-              </div>
-              <div>
-                <h4>Familiar</h4>
-                <ul>
-                  <li>Objective-C · C# · VB / VB.Net</li>
-                  <li>Arduino · Processing</li>
-                  <li>MIPS / ARM assembly · uC++</li>
-                  <li>GML</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <details class="skill-block">
-          <summary>Frameworks · libraries · SDKs</summary>
-          <div class="skill-block__body">
-            <div class="skill-cols">
-              <div>
-                <ul>
-                  <li>React + React Native</li>
-                  <li>MobX + Redux</li>
-                  <li>Jest + Storybook</li>
-                  <li>Node.js + Express</li>
-                  <li>FastAPI + Django + SQLAlchemy</li>
-                  <li>TensorFlow + OpenCV</li>
-                  <li>Hugging Face</li>
-                </ul>
-              </div>
-              <div>
-                <ul>
-                  <li>Socket.IO + WebGL</li>
-                  <li>Bootstrap + SASS / LESS</li>
-                  <li>Selenium + Cocos2d-x</li>
-                  <li>jQuery + Angular</li>
-                  <li>Android SDK · iOS SDK</li>
-                  <li>Windows SDK · Mac OSX SDK</li>
-                  <li>Cocoa Frameworks</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <details class="skill-block">
-          <summary>Databases &amp; cloud</summary>
-          <div class="skill-block__body">
-            <div class="skill-cols">
-              <div>
-                <h4>Databases</h4>
-                <ul>
-                  <li>PostgreSQL · MySQL · MongoDB · SQLite</li>
-                  <li>Vector DBs: pgvector · OpenSearch · FAISS</li>
-                </ul>
-              </div>
-              <div>
-                <h4>Cloud</h4>
-                <ul>
-                  <li><strong>GCP:</strong> BigQuery · Cloud Functions · Cloud Run · Vertex AI</li>
-                  <li><strong>AWS:</strong> Lambda · Step Functions · DynamoDB · S3 · SQS · EventBridge · API Gateway</li>
-                  <li>Kubernetes · Docker · infrastructure-as-code</li>
-                  <li>Serverless architectures · event-driven pipelines</li>
-                  <li>Heroku · CI/CD deployment</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <details class="skill-block">
-          <summary>Development tools</summary>
-          <div class="skill-block__body">
-            <div class="skill-cols">
-              <div>
-                <ul>
-                  <li>Git + Git-SVN</li>
-                  <li>GitHub + Bitbucket</li>
-                  <li>JIRA + Trello</li>
-                  <li>Unix Terminal</li>
-                  <li>Apache Server · MKS Integrity · RegEx</li>
-                </ul>
-              </div>
-              <div>
-                <ul>
-                  <li>VSCode · PyCharm · XCode</li>
-                  <li>Eclipse · Netbeans · Sublime Text</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <details class="skill-block">
-          <summary>Integrations &amp; ops</summary>
-          <div class="skill-block__body">
-            <ul>
-              <li>REST APIs · webhooks · OAuth</li>
-              <li>Slack · email · calendar · CRM-style workflows</li>
-              <li>Booking &amp; hospitality / accommodations systems</li>
-              <li>PDF / document parsing pipelines</li>
-              <li>Git · CI · Unix · AWS · Heroku</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="skill-block">
-          <summary>Other</summary>
-          <div class="skill-block__body">
-            <ul>
-              <li>Forward-deployed mindset: gather requirements, ship POCs, iterate with stakeholders</li>
-              <li>Strong written communication for runbooks, eval reports &amp; customer-facing demos</li>
-              <li>Background in high-scale web, mobile, and workflow automation since 2013</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- ============ 5. Education ============ -->
-    <section id="education" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Education</span>
-        <h2 class="section__title">Education</h2>
-
-        <div class="edu-entry">
-          <div class="edu-entry__head">
-            <h3 class="edu-entry__school">University of Waterloo</h3>
-            <div class="edu-entry__meta">Waterloo, ON <span>·</span> 2012 – 2018</div>
-          </div>
-          <p class="edu-entry__degree">Bachelor of Software Engineering (BSE) — Computer Software Engineering</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ 6. Selected work ============ -->
-    <section id="work" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Selected work</span>
-        <h2 class="section__title">Selected work</h2>
-
-        <ul class="proof-list">
-          <li><strong>CentrOS</strong> — <em>AI orchestration platform: turns business workflows into reliable agent systems with human approval gates</em> · <a href="centros/">Read the deep-dive →</a> · <a href="https://github.com/shrenilpatel/Centros" target="_blank" rel="noopener">source</a></li>
-          <li><strong>Core concepts</strong> — <a href="https://github.com/shrenilpatel/Centros/blob/main/docs/prd/01-core-concepts.md" target="_blank" rel="noopener">contracts, gates, lanes (PRD docs)</a></li>
-          <li><strong>Guest-triage demo</strong> — <a href="centros/#demo">3-stage pipeline (live)</a> · Infinite-Summoner <code>runPipeline</code> pattern, in-browser mock</li>
-          <li><strong>Infinite-Summoner</strong> — <a href="https://github.com/blopit/Infinite-Summoner" target="_blank" rel="noopener">github.com/blopit/Infinite-Summoner</a> · multi-stage LLM forge pipelines</li>
+        <p class="work__why">A WEBTOON Original I created solo and shipped twice weekly, then closed an IP rights deal with Wattpad WEBTOON Studios for a book and a <span class="nobr">2-season</span> animated television adaptation.</p>
+        <p class="work__receipts">40M+&nbsp;reads&nbsp;· 492K+&nbsp;subscribers&nbsp;· 2M+&nbsp;monthly views at peak</p>
+        <p class="work__actions"><a class="pill" href="axed/">Read the case study<svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg></a></p>
+      </article>
+      <div class="group">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#layout-grid"/></svg><h3 class="sec__title">Also</h3><p class="sec__detail">4</p></div>
+        <ul class="card list list--glyph">
+          <li><a class="row" href="centros/#demo">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#play"/></svg></span>
+            <span class="row__text"><span class="row__title">Guest-triage demo</span><span class="row__sub"><span class="nobr">3-stage</span> pipeline&nbsp;· runs in your browser&nbsp;· Infinite-Summoner <code>runPipeline</code> pattern</span></span>
+            <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+          </a></li>
+          <li class="row">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#file-text"/></svg></span>
+            <span class="row__text"><span class="row__title">Core concepts PRD</span><span class="row__sub">contracts, gates, lanes&nbsp;· <code>01-core-concepts.md</code>&nbsp;· private repo, on request</span></span>
+            <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#lock"/></svg>
+          </li>
+          <li class="row">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#workflow"/></svg></span>
+            <span class="row__text"><span class="row__title">Infinite-Summoner</span><span class="row__sub">multi-stage LLM forge pipelines&nbsp;· private repo, on request</span></span>
+            <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#lock"/></svg>
+          </li>
+          <li><a class="row" href="word-bubbles/">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#puzzle"/></svg></span>
+            <span class="row__text"><span class="row__title">Word Bubbles Daily</span><span class="row__sub">a daily word puzzle&nbsp;— swipe through scrambled letter bubbles to spell the hidden words</span></span>
+            <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+          </a></li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ 7. Role fit (interactive opt-in) ============ -->
-    <section id="roles" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Role fit · interactive</span>
-        <h2 class="section__title">Hiring for a specific role?</h2>
-        <p class="section__lede">
-          Pick the role you're hiring for. Each tab shows the tailored pitch and the
-          capabilities that matter most — with a link to the CentrOS deep-dive.
-        </p>
+    <section class="sec" id="experience" aria-labelledby="exp-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#briefcase-business"/></svg><h2 class="sec__title" id="exp-h">Experience</h2></div>
+      <p class="sec__intro">Ten-plus years&nbsp;— Coursera, Faire, D2L, WEBTOON, now CentrOS. Each row opens.</p>
+      <ul class="card list list--avatar" aria-label="Roles, newest first">
+          <!-- EXPERIENCE:START -->
 
-        <div class="role-tabs" role="tablist" aria-label="Target roles">
-          <button class="role-tab" role="tab" data-role="staff"        aria-selected="true"  tabindex="0">Staff AI Engineer</button>
-          <button class="role-tab" role="tab" data-role="runtime"      aria-selected="false" tabindex="-1">Agent Runtime</button>
-          <button class="role-tab" role="tab" data-role="platform"     aria-selected="false" tabindex="-1">AI Platform</button>
-          <button class="role-tab" role="tab" data-role="architect"    aria-selected="false" tabindex="-1">AI Architect</button>
-          <button class="role-tab" role="tab" data-role="workflow"     aria-selected="false" tabindex="-1">Workflow / GTM</button>
-          <button class="role-tab" role="tab" data-role="integrations" aria-selected="false" tabindex="-1">Integrations</button>
-          <button class="role-tab" role="tab" data-role="fde"          aria-selected="false" tabindex="-1">Forward-Deployed</button>
-          <button class="role-tab" role="tab" data-role="serverless"   aria-selected="false" tabindex="-1">Serverless</button>
-        </div>
-
-        <!-- Staff AI Engineer -->
-        <div class="role-panel is-active" data-role="staff" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>Staff AI Engineer</h3>
-            <p>Production agent code daily: <strong>LangGraph/Temporal-style stateful workflows</strong>,
-              LangFuse-style observability, RAG, tool-calling, persistent runtimes, HITL. CentrOS
-              is built around exactly these concerns — typed contracts, eval gates, owner inbox.</p>
-            <p>I'd bring orchestration-layer thinking into the team: durable multi-step execution,
-              runtime state, traceability, retrieval quality, and the patterns that make agent
-              behavior observable and trustworthy.</p>
-            <p class="role-panel__match">Strong match: <strong>Acquia Staff AI Engineer</strong>, <strong>Grafana Staff AI Engineer (RevOps)</strong></p>
+          <li>
+            <details class="disc" id="role-centros-founder" open>
+              <summary class="row row--avatar">
+                <span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#layers"/></svg></span>
+                <span class="row__text">
+                  <span class="row__title">Founder</span>
+                  <span class="row__sub">CentrOS — AI Agent Orchestration Platform</span>
+                  <span class="row__meta"><span class="nums">Feb 2026 – Present&nbsp;· Remote · Canada</span><span class="chip chip--settled">Now</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Built CentrOS production multi-agent orchestration runtime: typed tool contracts, eval gates, LangFuse traces, HITL approval interrupts — collapsed 4 vendor primitives into 1 governed layer.</li>
+                  <li>Designed HITL interrupt model: confidence-gated handoff, approval checkpoints before irreversible actions, reversible operations, audit trails, escalation policy — 100% of high-risk tool calls human-reviewed.</li>
+                  <li>Deployed CentrOS in production at a <span class="nobr">23-unit</span> hospitality operation (guest comms, refunds, vendor invoices, compliance) — 3,980+ Vitest tests passing on main, CI-backed live ops since Feb 2026.</li>
+                </ul>
+                <details class="more">
+                  <summary>5 more highlights<svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-down"/></svg></summary>
+                <ul class="bullets">
+                  <li>Designed agent runtime on LangGraph state graphs + Temporal-style durability: durable execution, checkpointing, crash recovery, retries, versioned rollouts — 0 silent run loss across 6 months.</li>
+                  <li>Built eval harness + LangFuse trace pipeline: golden datasets, task-level scorers, regression suites, prompt versioning, failure taxonomy — caught 22+ silent regressions before release.</li>
+                  <li>Implemented hybrid RAG pipelines on pgvector + OpenSearch: query rewriting, source ranking, chunk hygiene, freshness boundaries, selective context packing — cut prompt token use 40% with grounding intact.</li>
+                  <li>Built MCP-style tool registry with scoped OAuth permissions, JSON-schema validation, retry policy, side-effect logging — turned ad-hoc API calls into 100% audited typed agent tool invocations.</li>
+                  <li>Shipped 5+ reusable platform primitives (connectors, secrets, approval gates, eval hooks, deploy templates) — cut new-workflow setup from weeks to 2 days while preserving runtime + security standards.</li>
+                </ul>
+                </details>
+                <p class="disc__stack"><b>Stack</b> TypeScript · Hono · PostgreSQL · Drizzle · Vitest · LLM tool-calling</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-conscious-creations">
+              <summary class="row row--avatar">
+                <span class="avatar avatar--co av-3" aria-hidden="true">CC</span>
+                <span class="row__text">
+                  <span class="row__title">Vertical Automation &amp; Ops Lead</span>
+                  <span class="row__sub">Conscious Creations</span>
+                  <span class="row__meta"><span class="nums">Sep 2022 – Present&nbsp;· Remote · Canada</span><span class="chip chip--settled">Now</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Prototyped accommodations workflows on CentrOS: <span class="nobr">3-stage</span> guest-triage pipeline (classify → plan → draft) in Python/FastAPI with HITL approval gates before any irreversible action.</li>
+                  <li>Designed AI-to-human handoff: shared state contract, full conversation history, durable IDs, operator-readable summaries — 0 lost context across 100% of escalation events in live ops.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> Python · FastAPI · LLM tool-calling · workflow automation</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-property-ops">
+              <summary class="row row--avatar">
+                <span class="avatar avatar--co av-4" aria-hidden="true">PM</span>
+                <span class="row__text">
+                  <span class="row__title">Operations &amp; Portfolio Manager</span>
+                  <span class="row__sub">Independent — Property Management</span>
+                  <span class="row__meta"><span class="nums">Sep 2022 – Present&nbsp;· Greater Toronto Area</span><span class="chip chip--settled">Now</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Ran ops on <span class="nobr">20-unit</span> + <span class="nobr">3-unit</span> residential portfolio (intake, scheduling, follow-ups, exceptions) — mapped 12+ recurring workflows informing CentrOS agent-automation vs HITL boundaries.</li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-independent-builder">
+              <summary class="row row--avatar">
+                <span class="avatar avatar--co av-6" aria-hidden="true">IB</span>
+                <span class="row__text">
+                  <span class="row__title">Independent Engineer / Builder</span>
+                  <span class="row__sub">Software, AI automation &amp; creative IP</span>
+                  <span class="row__meta"><span class="nums">Sep 2022 – Jan 2026&nbsp;· GTA · Remote</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Built LLM workflow automation since ChatGPT launch (Nov 2022): tool-calling/API automations from 2023; LangGraph multi-agent patterns from 2024; MCP integrations from late 2024 — 3+ years compounding.</li>
+                  <li>Shipped AXED IP rights deal with Wattpad WEBTOON Studios — book + <span class="nobr">2-season</span> animated television adaptation (2025) — plus content automation tooling formalized into CentrOS platform Feb 2026.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> Python · TypeScript · Node · LLM tool-calling · MCP · multi-agent orchestration</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-faire">
+              <summary class="row row--avatar">
+                <span class="avatar avatar--co av-2" aria-hidden="true">FA</span>
+                <span class="row__text">
+                  <span class="row__title">Senior Frontend Developer</span>
+                  <span class="row__sub">Faire</span>
+                  <span class="row__meta"><span class="nums">Jun 2021 – Aug 2022&nbsp;· Remote · Canada</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Drove apparel pre-order initiatives at Faire: $5M+ GMV across 3+ international markets over <span class="nobr">6-month</span> staged workstreams; React/TypeScript/MobX shipped behind A/B guardrails.</li>
+                  <li>Drove site-wide perf gains via A/B testing + staged rollouts; same guardrail discipline now applied to agent versioning, shadow traffic, and canary releases at CentrOS — 5+ wins shipped.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> React · TypeScript · MobX · Jest · Storybook · A/B testing</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-webtoon">
+              <summary class="row row--avatar">
+                <span class="avatar avatar--co av-8" aria-hidden="true">WT</span>
+                <span class="row__text">
+                  <span class="row__title">Creator, WEBTOON Original — AXED</span>
+                  <span class="row__sub">WEBTOON</span>
+                  <span class="row__meta"><span class="nums">Jun 2018 – Dec 2020&nbsp;· Remote</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Built Python/JS image-processing + consistency-check pipelines for 445K+ subscriber WEBTOON Original at 2x/week ship cadence — 10% fewer re-uploads, hundreds of operator hours saved.</li>
+                  <li>Designed queue → tooling → review → ship operator workflow at 2M+ monthly views on WEBTOON Original — precursor to today&#39;s HITL agent + human production system at CentrOS.</li>
+                  <li>Brokered AXED IP rights deal with Wattpad WEBTOON Studios — book + <span class="nobr">2-season</span> animated television adaptation releasing 2025 — multi-year multi-format commercial agreement structured solo.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> Python · OpenCV · image processing</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-coursera">
+              <summary class="row row--avatar">
+                <span class="avatar avatar--co av-1" aria-hidden="true">CO</span>
+                <span class="row__text">
+                  <span class="row__title">iOS Mobile &amp; Web Developer</span>
+                  <span class="row__sub">Coursera</span>
+                  <span class="row__meta"><span class="nums">Jan 2017 – Apr 2017&nbsp;· Mountain View, CA</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <ul class="bullets">
+                  <li>Shipped iOS course-download feature in 4 months, lifting course completion 20%+ across Coursera&#39;s 24M+ learner base; Swift + offline-sync architecture.</li>
+                  <li>Built React GUI-creation infrastructure at Coursera; cut new-view setup from days to 1 hour and compounded across 5+ teams as the company standard.</li>
+                  <li>Built Python search tooling lifting course content discovery 60% (pre-LLM NLP era) — same retrieval problem CentrOS now solves with embeddings, hybrid RAG, and pgvector.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> React · Python · iOS SDK · Swift · NLP/search</p>
+              </div>
+            </details>
+          </li>
+          <li>
+            <details class="disc" id="role-earlier">
+              <summary class="row row--avatar">
+                <span class="tile tile--gray" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#history"/></svg></span>
+                <span class="row__text">
+                  <span class="row__title">Earlier engineering roles</span>
+                  <span class="row__sub">Desire2Learn (D2L) · SpringBoard Data Management · Minted LLC · TransGaming Inc</span>
+                  <span class="row__meta"><span class="nums">2014 – 2016</span></span>
+                </span>
+                <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+              </summary>
+              <div class="disc__body">
+                <p class="disc__role"><b>Software Designer / Web Developer</b>, Desire2Learn (D2L)<span class="disc__when">May 2016 – Aug 2016 · Toronto</span></p>
+                <ul class="bullets">
+                  <li>Built D2L flashcard module: auto-question-generation + variable-interval testing — boosted student information retention up to 7× vs baseline review across pilot cohort.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> JavaScript · Node.js · React · SQL</p>
+                <p class="disc__role"><b>Mobile Developer</b>, SpringBoard Data Management<span class="disc__when">Sep 2015 – Dec 2015 · Mississauga</span></p>
+                <ul class="bullets">
+                  <li>Shipped re-hauled iOS app with secure authentication + Objective-C overhaul; cut load times 80% on legacy codebase under a <span class="nobr">4-month</span> delivery window.</li>
+                  <li>Built deductions PDF parser automation cutting client manual processing 90%+ — early business-workflow automation pattern carried forward into the LLM tool-calling era.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> iOS SDK · Objective-C · PDF processing · auth systems</p>
+                <p class="disc__role"><b>Software Developer</b>, Minted LLC<span class="disc__when">Aug 2014 – Dec 2014 · San Francisco</span></p>
+                <ul class="bullets">
+                  <li>Built Python image-metadata extractor + printer-safe color-space converter on AWS pipeline — 50% reduction in reprint requests across Minted&#39;s print catalog.</li>
+                  <li>Built conversion-loss trackers + shipped 3+ hotfixes during Cyber Monday peak (10x+ traffic spike) — early production-incident response discipline.</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> Python · image processing · color space conversion · AWS</p>
+                <p class="disc__role"><b>Graphics &amp; Portability Developer</b>, TransGaming Inc<span class="disc__when">Jan 2014 – Apr 2014 · Toronto, ON</span></p>
+                <ul class="bullets">
+                  <li>Built C++ dynamic libraries emulating Windows on macOS for Cider wrapper engine; shipped 3+ QoL features into Guild Wars 2 + Eve Online (3M+ combined players).</li>
+                </ul>
+                <p class="disc__stack"><b>Stack</b> C++ · Objective-C · Mac OSX SDK · Windows SDK</p>
+              </div>
+            </details>
+          </li>
+          <!-- EXPERIENCE:END -->
+        <li><details class="disc" id="practice">
+          <summary class="row row--avatar">
+            <span class="tile tile--purple" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#trending-up"/></svg></span>
+            <span class="row__text"><span class="row__title">How the AI practice compounded</span><span class="row__sub">LLMs, tool-calling, multi-agent orchestration and MCP, formalized into CentrOS</span><span class="row__meta"><span class="nums">Nov 2022&nbsp;– today</span></span></span>
+            <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+          </summary>
+          <div class="disc__body">
+            <ol class="timeline">
+              <li><span class="timeline__when">2013&nbsp;– 2022</span><span>Shipping production software&nbsp;— web, mobile, games, data tooling (Faire, Coursera, D2L, Minted, WEBTOON)</span></li>
+              <li><span class="timeline__when">Nov 2022</span><span>LLMs deployed across dev &amp; business workflows (ChatGPT&nbsp;→ GPT-4 API)</span></li>
+              <li><span class="timeline__when">Jun 2023</span><span>Tool-calling pipelines + custom Python/JS automation runtimes</span></li>
+              <li><span class="timeline__when">2024</span><span>Graph-style multi-agent orchestration, RAG, evals, HITL approvals (LangGraph era)</span></li>
+              <li><span class="timeline__when">Late 2024</span><span>MCP tool integrations</span></li>
+              <li><span class="timeline__when">Feb 2026</span><span>CentrOS&nbsp;— production AI orchestration platform at a <span class="nobr">23-unit</span> hospitality operation&nbsp;· daily live ops, 3,980+ tests on main</span></li>
+            </ol>
+            <p class="disc__note">The compounding practice is in the runtime: 3+ years of LLM tool-calling, multi-agent workflows, RAG, evals, and HITL approval patterns, formalized into one governed production layer. Pairs with domain experts (legal, accounting, ops) on regulated work so high-stakes decisions always get human sign-off at the approval step.</p>
           </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
+        </details></li>
+      </ul>
+      <div class="group" id="education">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#graduation-cap"/></svg><h3 class="sec__title">Education</h3></div>
+        <ul class="card list list--avatar"><li class="row row--avatar">
+          <span class="avatar avatar--co av-7" aria-hidden="true">UW</span>
+          <span class="row__text"><span class="row__title">University of Waterloo</span><span class="row__sub">Bachelor of Software Engineering (BSE), Computer Software Engineering</span><span class="row__meta">Waterloo, ON&nbsp;· <span class="nums">2012&nbsp;– 2018</span></span></span>
+        </li></ul>
+      </div>
+    </section>
+
+    <section class="sec" id="skills" aria-labelledby="skills-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#cpu"/></svg><h2 class="sec__title" id="skills-h">Skills</h2></div>
+      <dl class="card claims">
+        <div class="claim"><dt>Agent systems</dt><dd><ul class="bullets bullets--sm">
+          <li>Multi-agent workflow design &amp; task decomposition</li>
+          <li>Tool/function calling, structured outputs, schema-validated arguments</li>
+          <li>Stateful workflow orchestration, checkpointing, crash recovery, replay</li>
+          <li>Human-in-the-loop approvals, escalation paths, audit trails, governance</li>
+          <li>RAG, retrieval pipelines, embeddings, context windows, prompt management</li>
+          <li>Agent evaluation, tracing, observability, latency &amp; token-cost monitoring</li>
+          <li>MCP servers, webhooks, OAuth-scoped tool access, third-party API integrations</li>
+          <li>Router&nbsp;· executor&nbsp;· adversary&nbsp;· verifier patterns; confidence-gated handoff</li>
+          <li>POCs, demos, eval-gated rollout &amp; production hardening for business workflows</li>
+        </ul></dd></div>
+        <div class="claim"><dt>LLM practice</dt><dd>LLMs since Nov&nbsp;2022&nbsp;· tool-calling since Jun&nbsp;2023&nbsp;· multi-agent, RAG and evals since 2024&nbsp;· MCP since late 2024</dd></div>
+        <div class="claim"><dt>Languages</dt><dd>Python 3&nbsp;· JavaScript&nbsp;· TypeScript&nbsp;· C&nbsp;/&nbsp;C++&nbsp;· HTML5&nbsp;· CSS</dd></div>
+        <div class="claim"><dt>Data &amp; cloud</dt><dd>PostgreSQL&nbsp;· pgvector&nbsp;· OpenSearch&nbsp;· GCP (BigQuery, Cloud Run, Vertex AI)&nbsp;· AWS (Lambda, Step Functions, DynamoDB, SQS, EventBridge)&nbsp;· Kubernetes&nbsp;· Docker</dd></div>
+      </dl>
+      <div class="card"><details class="disc" id="toolbox">
+        <summary class="row">
+          <span class="tile tile--gray" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#wrench"/></svg></span>
+          <span class="row__text"><span class="row__title">Full toolbox</span><span class="row__sub">languages, frameworks, databases, cloud, dev tools, integrations</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </summary>
+        <div class="disc__body"><dl class="claims">
+          <div class="claim"><dt>Languages, familiar</dt><dd>Objective-C&nbsp;· C#&nbsp;· VB&nbsp;/ VB.Net&nbsp;· Arduino&nbsp;· Processing&nbsp;· MIPS&nbsp;/ ARM assembly&nbsp;· uC++&nbsp;· GML</dd></div>
+          <div class="claim"><dt>Frameworks</dt><dd>React + React Native&nbsp;· MobX + Redux&nbsp;· Jest + Storybook&nbsp;· Node.js + Express&nbsp;· FastAPI + Django + SQLAlchemy&nbsp;· TensorFlow + OpenCV&nbsp;· Hugging Face&nbsp;· Socket.IO + WebGL&nbsp;· Bootstrap + SASS&nbsp;/ LESS&nbsp;· Selenium + Cocos2d-x&nbsp;· jQuery + Angular&nbsp;· Android SDK&nbsp;· iOS SDK&nbsp;· Windows SDK&nbsp;· Mac OSX SDK&nbsp;· Cocoa Frameworks</dd></div>
+          <div class="claim"><dt>Databases</dt><dd>PostgreSQL&nbsp;· MySQL&nbsp;· MongoDB&nbsp;· SQLite&nbsp;· Vector DBs: pgvector&nbsp;· OpenSearch&nbsp;· FAISS</dd></div>
+          <div class="claim"><dt>Cloud</dt><dd><ul class="bullets bullets--sm">
+            <li><strong>GCP:</strong> BigQuery&nbsp;· Cloud Functions&nbsp;· Cloud Run&nbsp;· Vertex AI</li>
+            <li><strong>AWS:</strong> Lambda&nbsp;· Step Functions&nbsp;· DynamoDB&nbsp;· S3&nbsp;· SQS&nbsp;· EventBridge&nbsp;· API Gateway</li>
+            <li>Kubernetes&nbsp;· Docker&nbsp;· infrastructure-as-code</li>
+            <li>Serverless architectures&nbsp;· event-driven pipelines</li>
+            <li>Heroku&nbsp;· CI/CD deployment</li>
+          </ul></dd></div>
+          <div class="claim"><dt>Dev tools</dt><dd>Git + Git-SVN&nbsp;· GitHub + Bitbucket&nbsp;· JIRA + Trello&nbsp;· Unix Terminal&nbsp;· Apache Server&nbsp;· MKS Integrity&nbsp;· RegEx&nbsp;· VSCode&nbsp;· PyCharm&nbsp;· XCode&nbsp;· Eclipse&nbsp;· Netbeans&nbsp;· Sublime Text</dd></div>
+          <div class="claim"><dt>Integrations &amp; ops</dt><dd>REST APIs&nbsp;· webhooks&nbsp;· OAuth&nbsp;· Slack&nbsp;· email&nbsp;· calendar&nbsp;· CRM-style workflows&nbsp;· Booking &amp; hospitality&nbsp;/ accommodations systems&nbsp;· PDF&nbsp;/ document parsing pipelines&nbsp;· Git&nbsp;· CI&nbsp;· Unix&nbsp;· AWS&nbsp;· Heroku</dd></div>
+          <div class="claim"><dt>Working style</dt><dd>Forward-deployed mindset: gather requirements, ship POCs, iterate with stakeholders&nbsp;· Strong written communication for runbooks, eval reports &amp; customer-facing demos&nbsp;· Background in high-scale web, mobile, and workflow automation since 2013</dd></div>
+        </dl></div>
+      </details></div>
+    </section>
+
+    <section class="sec" id="roles" aria-labelledby="roles-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#target"/></svg><h2 class="sec__title" id="roles-h">Roles I fit</h2><p class="sec__detail">8 roles</p></div>
+      <p class="sec__intro">Staff AI Engineer&nbsp;· Agent Runtime&nbsp;· AI Platform&nbsp;· AI Architect&nbsp;· Workflow and GTM automation&nbsp;· Agent integrations&nbsp;· Forward-Deployed&nbsp;· Serverless production AI. What I bring to all of them:</p>
+      <ol class="card list list--tile">
+        <li class="row row--top">
+          <span class="tile tile--blue" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#database"/></svg></span>
+          <span class="row__text"><span class="row__title">Durable runtimes</span><span class="row__body">Crash-resumable execution on PostgreSQL: checkpoints, retries, rollback and stop-ship, with an explicit failure taxonomy per stage.</span><a class="row__go" href="centros/#pipeline">Seen in CentrOS: the pipeline</a></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--green" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#hand"/></svg></span>
+          <span class="row__text"><span class="row__title">Human approval by design</span><span class="row__body">Risk tiers and policy lanes as access boundaries, approval before any side effect, and audit trails kept as state.</span><a class="row__go" href="centros/#inbox">Seen in CentrOS: the owner inbox</a></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#gauge"/></svg></span>
+          <span class="row__text"><span class="row__title">Evals and observability</span><span class="row__body">Regression-gated eval harnesses and traces over cost, latency and failure modes, tested in CI on every merge.</span><a class="row__go" href="centros/#agent-3">Seen in CentrOS: the adversary</a></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--cyan" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#search"/></svg></span>
+          <span class="row__text"><span class="row__title">Grounded retrieval</span><span class="row__body">RAG with ranking, freshness and source attribution, plus token-cost discipline: model routing, prompt design, caching.</span></span>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--indigo" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#plug"/></svg></span>
+          <span class="row__text"><span class="row__title">Tool and integration contracts</span><span class="row__body">Typed, scoped, idempotent tool calls with audit logs; router&nbsp;→ executor patterns; the same primitives across LangGraph, Temporal and MCP.</span><a class="row__go" href="centros/#vs">Seen in CentrOS: versus the parts</a></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </li>
+        <li class="row row--top">
+          <span class="tile tile--pink" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#rocket"/></svg></span>
+          <span class="row__text"><span class="row__title">Forward-deployed delivery</span><span class="row__body">Customer workflow&nbsp;→ production agent: process mapping, gated POC&nbsp;→ production, and domain experts at the approval step.</span><a class="row__go" href="centros/#traction">Seen in CentrOS: the 23-unit deployment</a></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </li>
+      </ol>
+      <div class="group" id="role-notes">
+        <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#users"/></svg><h3 class="sec__title">What I bring, role by role</h3><p class="sec__detail">8 roles</p></div>
+        <ul class="card list">
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">Staff AI Engineer</span><span class="row__sub">Orchestration-layer thinking for the team: durable multi-step execution, runtime state, traceability and retrieval quality.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
               <li>Stateful multi-agent workflows with typed state contracts</li>
               <li>Non-deterministic eval harnesses with regression gates</li>
               <li>RAG pipelines with retrieval ranking and freshness controls</li>
               <li>HITL approval surfaces with audit trails</li>
               <li>LangFuse-style observability over trace + cost + failure modes</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- Agent Runtime -->
-        <div class="role-panel" data-role="runtime" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>Agent Runtime Engineer</h3>
-            <p>The layer beneath agent behavior most teams underinvest in: <strong>state, execution,
-              recovery, and production ownership</strong>. I treat agents as systems that need
-              durable runtime semantics — not just clever prompts.</p>
-            <p>Session state, tool execution, retries, checkpointing, autoscaling, observability,
-              developer ergonomics. CentrOS's contract lifecycle, gate runner, and rollback model
-              translate directly to LLM streaming and crash recovery.</p>
-            <p class="role-panel__match">Strong match: <strong>Cresta Backend, AI Agent Runtime</strong></p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">Agent Runtime</span><span class="row__sub">The layer beneath agent behaviour most teams underinvest in&nbsp;— state, execution, recovery and production ownership.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
               <li>Crash-resumable execution with durable state on PostgreSQL</li>
               <li>Gate runners: retries, checkpoints, rollback, stop-ship</li>
               <li>Scoped tool-execution sandboxing with versioned deploys</li>
-              <li>Explicit failure taxonomy per stage — no silent corruption</li>
+              <li>Explicit failure taxonomy per stage&nbsp;— no silent corruption</li>
               <li>Streaming LLM responses with cancellation and timeout policies</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- AI Platform -->
-        <div class="role-panel" data-role="platform" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>AI Platform Engineer</h3>
-            <p>The capability layer that lets multiple teams deploy AI safely without bespoke setup:
-              <strong>connectors, execution patterns, governance, tooling</strong>. CentrOS is built
-              for repeatable platform leverage — golden paths over one-off demos.</p>
-            <p>Connector layer, execution environments, isolation boundaries, access controls,
-              self-service onboarding, regulated deployment standards. Particularly relevant in
-              fintech / public-sector settings where compliance rigor matters.</p>
-            <p class="role-panel__match">Strong match: <strong>Alpaca Senior AI Platform Engineer</strong></p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">AI Platform</span><span class="row__sub">The capability layer that lets multiple teams deploy AI safely without bespoke setup: connectors, execution patterns, governance, tooling.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
               <li>Tool registries with typed schemas and scoped permissions</li>
-              <li>Policy lanes (auto / confirm / careful) as an access-boundary model</li>
+              <li>Policy lanes (auto&nbsp;/ confirm&nbsp;/ careful) as an access-boundary model</li>
               <li>Audit trails as first-class state, not afterthought logging</li>
               <li>Self-service workflow templates with opinionated guardrails</li>
               <li>CI-backed gate tests validating platform changes per merge</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- AI Architect -->
-        <div class="role-panel" data-role="architect" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>AI Architect</h3>
-            <p>Translates ambiguous business processes into <strong>cloud-native AI systems</strong>
-              with tool calling, retrieval, state management, and approval flows. The hands-on plus
-              architecture-shaping zone where orchestration-layer thinking becomes most useful.</p>
-            <p>Reusable orchestration patterns for multi-turn, multi-agent workflows. Production
-              engineering standards: CI/CD, logging, monitoring, secrets, testing, rollback. Good
-              fit for consulting and product environments at once.</p>
-            <p class="role-panel__match">Strong match: <strong>AOT Technologies AI Architect</strong>, <strong>Acquia Enterprise AI Architect</strong></p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
-              <li>Reference architectures for agent workflows — blueprints, not one-offs</li>
-              <li>Framework-parity thinking: same primitives across LangGraph / Temporal / MCP</li>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">AI Architect</span><span class="row__sub">Ambiguous business processes translated into cloud-native AI systems with tool calling, retrieval, state management and approval flows.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
+              <li>Reference architectures for agent workflows&nbsp;— blueprints, not one-offs</li>
+              <li>Framework-parity thinking: same primitives across LangGraph&nbsp;/ Temporal&nbsp;/ MCP</li>
               <li>Risk-tiered governance language that stakeholders can use</li>
               <li>Multi-vertical domain experience (hospitality, accommodations, ops)</li>
-              <li>Production engineering standards: CI / logging / monitoring / rollback</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- Workflow / GTM -->
-        <div class="role-panel" data-role="workflow" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>Workflow / GTM Automation Engineer</h3>
-            <p>Treats agent systems as <strong>operational infrastructure</strong>, not side projects.
-              Connects models, tools, retrieval, and humans into workflows that actually move work
-              across Slack, CRMs, email, calendars, and internal APIs.</p>
-            <p>Modular tool access, orchestration patterns, runtime state, observability, escalation
-              logic. Direct fit for MCP servers, multi-agent routing, and self-service workflow
-              templates across Revenue Operations and similar GTM teams.</p>
-            <p class="role-panel__match">Strong match: <strong>Grafana Staff AI Engineer, Revenue Operations</strong></p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
-              <li>Router → executor patterns with specialized agents and fallbacks</li>
-              <li>MCP / tool-registry contracts with scoped permissions</li>
+              <li>Production engineering standards: CI&nbsp;/ logging&nbsp;/ monitoring&nbsp;/ rollback</li>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">Workflow&nbsp;/ GTM automation</span><span class="row__sub">Agent systems as operational infrastructure, moving work across Slack, CRMs, email, calendars and internal APIs.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
+              <li>Router&nbsp;→ executor patterns with specialized agents and fallbacks</li>
+              <li>MCP&nbsp;/ tool-registry contracts with scoped permissions</li>
               <li>RAG pipelines tuned for freshness and source attribution</li>
               <li>Self-service workflow templates with guardrailed config</li>
               <li>Narrow action scopes; approvals before any side effect</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- Integrations -->
-        <div class="role-panel" data-role="integrations" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>AI Agent Integrations Engineer</h3>
-            <p>Sits at the boundary where agent systems become real products: <strong>integrations,
-              context continuity, and reliable handoff</strong> between automation and humans.
-              CentrOS handles that boundary by design.</p>
-            <p>Context propagation, session lifecycle, retries, fallbacks, and observability around
-              the places where agents most often fail in production: API boundaries, action
-              side-effects, and escalation points.</p>
-            <p class="role-panel__match">Strong match: <strong>Cresta Backend, AI Agent Integrations</strong></p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
-              <li>Evidence timelines preserved across AI → human handoff</li>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">Agent integrations</span><span class="row__sub">The boundary where agent systems become real products: integrations, context continuity and reliable handoff between automation and humans.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
+              <li>Evidence timelines preserved across AI&nbsp;→ human handoff</li>
               <li>Context-rich session transfer with no lost history</li>
               <li>Audit-logged tool calls: idempotency, retries, rollback per integration</li>
               <li>Explicit session lifecycle phases with state ownership transitions</li>
               <li>Observability over handoff statistics and API failure patterns</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- Forward-Deployed -->
-        <div class="role-panel" data-role="fde" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>Forward-Deployed AI Engineer</h3>
-            <p>Customer workflow → production agent. <strong>POCs, integrations, dogfood</strong>.
-              Pair with domain experts; ship the runtime; never fake licensure. The platform was
-              built dogfooding accommodation ops — that's exactly the muscle.</p>
-            <p>Process mapping, action boundaries, approval nodes, target-state agent architecture.
-              Strong on stakeholder translation: turn messy requirements into reliable systems that
-              operate under business and compliance constraints.</p>
-            <p class="role-panel__match">Fit: any FDE/solutions role where the work is real customer workflows.</p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
-              <li>Active vertical dogfood: motel ops, 23 units under management</li>
-              <li>POC → prod path through gated expansion, not big-bang launches</li>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">Forward-Deployed</span><span class="row__sub">Customer workflow&nbsp;→ production agent: POCs, integrations and live deployments, paired with domain experts and built under compliance constraints.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
+              <li>Active production deployment: <span class="nobr">23-unit</span> hospitality vertical under direct management</li>
+              <li>POC&nbsp;→ prod path through gated expansion, not big-bang launches</li>
               <li>HITL demo surfaces tailored for stakeholder reviews</li>
-              <li>Domain-expert pairing (legal / accounting / ops) at confirmation gates</li>
+              <li>Domain-expert pairing (legal&nbsp;/ accounting&nbsp;/ ops) at confirmation gates</li>
               <li>Domain-specific controls layered onto a shared workflow shell</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
-
-        <!-- Serverless -->
-        <div class="role-panel" data-role="serverless" role="tabpanel">
-          <div class="role-panel__pitch">
-            <h3>Serverless Production AI Engineer</h3>
-            <p>Python/Node, function calling, multi-agent orchestration, vector RAG, serverless AWS
-              (Lambda · Step Functions · DynamoDB · SQS · EventBridge), Langfuse, synthetic testing.
-              The production-engineering discipline that makes integration-heavy AI platforms
-              reliable.</p>
-            <p>Event-driven systems, state machines, queues, contract tests, dependency mapping.
-              CentrOS's contract/gate model maps directly to Step-Function-style state machines
-              with explicit checkpoints.</p>
-            <p class="role-panel__match">Strong match: <strong>Robots &amp; Pencils Staff AI Engineer</strong></p>
-          </div>
-          <div class="role-panel__components">
-            <h4>What I bring</h4>
-            <ul>
-              <li>Contract / gate state machines (Step Functions–style)</li>
+            </ul></div>
+          </details></li>
+          <li><details class="disc">
+            <summary class="row">
+              <span class="row__text"><span class="row__title">Serverless production AI</span><span class="row__sub">Python/Node function calling, multi-agent orchestration and vector RAG on serverless AWS (Lambda&nbsp;· Step Functions&nbsp;· DynamoDB&nbsp;· SQS&nbsp;· EventBridge), with LangFuse traces and synthetic testing.</span></span>
+              <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+            </summary>
+            <div class="disc__body"><ul class="bullets bullets--sm">
+              <li>Contract&nbsp;/ gate state machines (Step Functions–style)</li>
               <li>Tool registries with typed schemas and idempotent activities</li>
               <li>Vector retrieval and streaming-response patterns</li>
               <li>CI-backed contract/gate test suites running on main</li>
               <li>Token-cost discipline: model routing, prompt design, caching</li>
-            </ul>
-            <p class="role-panel__deeplink"><a href="centros/">See how CentrOS implements these →</a></p>
-          </div>
-        </div>
+            </ul></div>
+          </details></li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ 8. Contact ============ -->
-    <section id="contact" class="section">
-      <div class="wrap">
-        <span class="section__eyebrow">Contact</span>
-        <h2 class="section__title">Contact</h2>
-        <p class="section__lede">
-          Canada remote · NA-friendly · EST/PST. Happy to walk through CentrOS architecture,
-          framework parity, or a tailored eval/observability slice for your domain.
-        </p>
-
-        <div class="contact-grid">
-          <div class="contact-card">
-            <div class="contact-card__label">Email</div>
-            <div class="contact-card__value"><a href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro">patel.shrenil@gmail.com</a></div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card__label">LinkedIn</div>
-            <div class="contact-card__value"><a href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener">linkedin.com/in/shrenp</a></div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card__label">GitHub</div>
-            <div class="contact-card__value"><a href="https://github.com/blopit" target="_blank" rel="noopener">github.com/blopit</a></div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card__label">Phone</div>
-            <div class="contact-card__value"><a href="tel:613-551-9989">+1 613-551-9989</a></div>
-          </div>
-        </div>
-      </div>
+    <section class="sec" id="contact" aria-labelledby="contact-h">
+      <div class="sec__head"><svg class="i sec__icon" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#mail"/></svg><h2 class="sec__title" id="contact-h">Contact</h2></div>
+      <p class="sec__intro">Canada remote&nbsp;· NA-friendly&nbsp;· EST/PST. Happy to walk through CentrOS architecture, framework parity, or a tailored eval and observability slice for your domain.</p>
+      <ul class="card list list--glyph">
+        <li class="row">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#mail"/></svg></span>
+          <span class="row__text"><span class="row__title">Email</span><a class="row__sub row__link" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro">patel.shrenil@gmail.com</a></span>
+          <span class="row__trail"><button class="pill copy" type="button" data-copy="patel.shrenil@gmail.com" hidden>Copy</button><a class="pill pill--primary" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro">Email</a><span class="vh" role="status"></span></span>
+        </li>
+        <li><a class="row" href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#linkedin"/></svg></span>
+          <span class="row__text"><span class="row__title">LinkedIn</span><span class="row__sub">linkedin.com/in/shrenp</span></span>
+          <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
+        </a></li>
+        <li><a class="row" href="https://github.com/blopit" target="_blank" rel="noopener">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#github"/></svg></span>
+          <span class="row__text"><span class="row__title">GitHub</span><span class="row__sub">github.com/blopit</span></span>
+          <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
+        </a></li>
+        <li><a class="row" href="tel:+16135519989">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#phone"/></svg></span>
+          <span class="row__text"><span class="row__title">Phone</span><span class="row__sub nums">+1 613-551-9989</span></span>
+          <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+        </a></li>
+        <li class="row row--top" id="references">
+          <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#users"/></svg></span>
+          <span class="row__text"><span class="row__title">References <span class="chip">On request</span></span><span class="row__sub">Engineering (a past senior IC or lead at Faire, Coursera, WEBTOON or D2L), operating (a partner from the <span class="nobr">23-unit</span> hospitality operation or Conscious Creations) and commercial (the Wattpad WEBTOON Studios counterparty or a Faire cross-functional partner)&nbsp;— available on request, usually after a first call.</span></span>
+        </li>
+      </ul>
+      <!-- REFERENCES:TODO — once at least 2 quotes are gathered (outreach
+           templates live in scripts/outreach/), add <figure class="card quote"> blocks
+           here and replace the "available on request" line above. -->
     </section>
 
     </main>
-
-    <footer class="footer">
-      <div class="wrap">
-        © <span data-year>2026</span> Shren Patel · Built solo · <a href="https://github.com/shrenilpatel/Centros" target="_blank" rel="noopener">source on GitHub</a>
-      </div>
+    <footer class="foot wrap">
+      <p>© <span data-year>2026</span> Shren Patel&nbsp;· built solo, plain HTML&nbsp;· no cookies, no tracking</p>
+      <p><a href="styleguide/">Style guide</a></p>
     </footer>
-
-    <script src="public/js/portfolio.js" defer></script>
+    <nav class="tabbar" data-tabbar data-sel="0" aria-label="Primary">
+      <div class="glass tabbar__tabs">
+        <span class="tabbar__thumb" aria-hidden="true"></span>
+        <a class="tab" href="#top" aria-current="page"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#house"/></svg><span class="tab__label">Home</span></a>
+        <a class="tab" href="centros/"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#globe"/></svg><span class="tab__label">CentrOS</span></a>
+        <a class="tab" href="axed/"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#book-open"/></svg><span class="tab__label">AXED</span></a>
+      </div>
+      <a class="glass tabbar__ask" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro" aria-label="Email Shren"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#mail"/></svg></a>
+    </nav>
+    <dialog class="sheet" id="sheet" aria-labelledby="sheet-h">
+      <header class="sheet__bar">
+        <span class="sheet__grab" aria-hidden="true"></span>
+        <h2 class="sheet__title" id="sheet-h">Contact</h2>
+        <button class="glass glass-btn sheet__done" type="button" data-sheet-close autofocus>Done</button>
+      </header>
+      <div class="sheet__scroll">
+        <div class="sgroup">
+          <div class="row row--avatar sheet__me">
+            <span class="avatar avatar--56 av-6" aria-hidden="true">SP</span>
+            <span class="row__text"><span class="sheet__name">Shren Patel</span><span class="row__sub">AI agent orchestration engineer</span></span>
+          </div>
+        </div>
+        <ul class="sgroup list list--glyph" aria-label="Ways to reach me">
+          <li class="row">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#mail"/></svg></span>
+            <span class="row__text"><span class="row__title">Email</span><a class="row__sub row__link" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro">patel.shrenil@gmail.com</a></span>
+            <span class="row__trail"><button class="pill copy" type="button" data-copy="patel.shrenil@gmail.com" hidden>Copy</button><a class="pill pill--primary" href="mailto:patel.shrenil@gmail.com?subject=CentrOS%20%E2%80%94%20Agent%20Orchestration%20Intro">Email</a><span class="vh" role="status"></span></span>
+          </li>
+          <li><a class="row" href="https://linkedin.com/in/shrenp" target="_blank" rel="noopener">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#linkedin"/></svg></span>
+            <span class="row__text"><span class="row__title">LinkedIn</span><span class="row__sub">linkedin.com/in/shrenp</span></span>
+            <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
+          </a></li>
+          <li><a class="row" href="https://github.com/blopit" target="_blank" rel="noopener">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#github"/></svg></span>
+            <span class="row__text"><span class="row__title">GitHub</span><span class="row__sub">github.com/blopit</span></span>
+            <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
+          </a></li>
+          <li><a class="row" href="tel:+16135519989">
+            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#phone"/></svg></span>
+            <span class="row__text"><span class="row__title">Phone</span><span class="row__sub nums">+1 613-551-9989</span></span>
+            <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevron-right"/></svg>
+          </a></li>
+        </ul>
+        <p class="sgroup__foot">Canada, remote · EST/PST.</p>
+        <ul class="sgroup list" aria-label="Settings">
+          <li class="row row--pick">
+            <span class="row__text"><label class="row__title" for="pref-appearance">Appearance</label></span>
+            <span class="pick"><span data-pick-value aria-hidden="true">Dark</span><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevrons-up-down"/></svg>
+              <select id="pref-appearance" data-pref="appearance"><option value="dark">Dark</option><option value="light">Light</option><option value="system">Match device</option></select></span>
+          </li>
+          <li class="row row--pick">
+            <span class="row__text"><label class="row__title" for="pref-background">Background</label></span>
+            <span class="pick"><span data-pick-value aria-hidden="true">Sky</span><svg class="i" aria-hidden="true" focusable="false"><use href="public/images/icons.svg#chevrons-up-down"/></svg>
+              <select id="pref-background" data-pref="background"><option value="sky">Sky</option><option value="solid">Solid</option></select></span>
+          </li>
+          <li data-new-sky><button class="row row--act" type="button" data-new-sky-btn>New sky</button><span class="vh" role="status" data-new-sky-status></span></li>
+        </ul>
+        <p class="sgroup__foot">Solid draws a plain colour instead of the sky, so your device does less. Both choices are saved in this browser only.</p>
+        <p class="sheet__fine">No cookies, no tracking.</p>
+      </div>
+    </dialog>
   </body>
 </html>
