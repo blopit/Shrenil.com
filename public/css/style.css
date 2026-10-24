@@ -657,6 +657,15 @@ html[data-theme="light"].is-sheet::before{filter:brightness(.95)}
 .foot a{display:inline-block;padding-block:13px;margin-block:-13px;color:var(--label-2-sky);text-decoration:underline;text-underline-offset:.18em}
 
 /* ---------- 11. Preferences ---------- */
+/* Touch devices: content cards are a tinted pane with no backdrop blur. A blur per card,
+   repainted on every scroll over a fixed sky, stalls mobile browsers; the floating bars and
+   the sheet keep real glass, so the control layer still reads as glass. */
+@media (pointer:coarse){
+  .card{background:rgba(30,30,40,.58);-webkit-backdrop-filter:none;backdrop-filter:none}
+  :root[data-theme="light"] .card{background:rgba(255,255,255,.84)}
+  .glass:not(.topbar .glass):not(.tabbar .glass){-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(60,60,72,.62)}
+  :root[data-theme="light"] .glass:not(.topbar .glass):not(.tabbar .glass){background:rgba(255,255,255,.88)}
+}
 @supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
   .card{background:rgba(28,28,30,.86)} :root[data-theme="light"] .card{background:rgba(255,255,255,.92)}
   .glass,.topbar .glass,.tabbar .glass{background:rgba(44,44,46,.92)} :root[data-theme="light"] :is(.glass,.topbar .glass,.tabbar .glass){background:rgba(255,255,255,.94)}

@@ -927,8 +927,15 @@
   // ---------------------------------------------------------------------------------
   // Building and taking down.
 
+  // Phones and tablets keep the CSS gradient sky: baking the shader's keyframes can stall a
+  // mobile browser for seconds while the page first paints. ?skyfull still forces it on.
+  function isHandheld() {
+    var coarse = win.matchMedia && win.matchMedia('(pointer: coarse)').matches;
+    return (coarse || Math.min(win.screen.width, win.screen.height) < 768) && !flag('skyfull');
+  }
+
   function build() {
-    if (built || failed || isSolid() || isForced() || flag('nosky') || !doc.body) return;
+    if (built || failed || isSolid() || isForced() || isHandheld() || flag('nosky') || !doc.body) return;
     canvas = doc.querySelector('canvas.sky');
     if (!canvas) {
       canvas = doc.createElement('canvas');
