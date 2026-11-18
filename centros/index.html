@@ -3,19 +3,22 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>CentrOS — reliable executor of digital tasks · by Shren Patel</title>
+    <title>CentrOS — AI Agent Orchestration Platform with Human Approval Gates</title>
     <meta name="description" content="CentrOS is the agent orchestration platform Shren Patel built: typed contracts, eval gates, policy lanes, and a human-in-the-loop owner inbox. Durable runtime under every agent demo that actually has to ship.">
     <meta name="keywords" content="CentrOS, agent orchestration runtime, durable agent execution, multi-agent orchestration, typed contracts, policy lanes, risk tiers, eval gates, owner inbox, HITL, human-in-the-loop, approval workflows, audit trails, governance, LangGraph alternative, Temporal-style runtime, LangFuse observability, MCP tool registry, RAG, structured outputs, workflow automation, Shren Patel">
     <meta name="author" content="Shren Patel">
-    <meta property="og:title" content="CentrOS — reliable executor of digital tasks">
+    <meta property="og:title" content="CentrOS — AI Agent Orchestration Platform with Human Approval Gates">
     <meta property="og:description" content="The agent orchestration platform Shren Patel built. Durable runtime, typed contracts, eval gates, policy lanes, owner-inbox HITL.">
-    <meta property="og:image" content="https://shrenp.com/public/images/shrenp.jpg">
+    <meta property="og:image" content="https://shrenp.com/public/images/og-centros.png">
     <meta property="og:url" content="https://shrenp.com/centros/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shren Patel">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CentrOS — reliable executor of digital tasks">
+    <meta name="twitter:title" content="CentrOS — AI Agent Orchestration Platform with Human Approval Gates">
     <meta name="twitter:description" content="The agent orchestration platform Shren Patel built. Durable runtime, typed contracts, eval gates, policy lanes, owner-inbox HITL.">
-    <meta name="twitter:image" content="https://shrenp.com/public/images/shrenp.jpg">
+    <meta name="twitter:image" content="https://shrenp.com/public/images/og-centros.png">
     <link rel="canonical" href="https://shrenp.com/centros/">
     <meta name="color-scheme" content="dark light">
     <meta name="theme-color" content="#000000">
@@ -39,6 +42,16 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Shren Patel", "item": "https://shrenp.com/" },
+        { "@type": "ListItem", "position": 2, "name": "CentrOS", "item": "https://shrenp.com/centros/" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "CentrOS",
       "description": "Agent orchestration platform with typed contracts, eval gates, policy lanes, and a human-in-the-loop owner inbox. Deployed in production at a 23-unit hospitality operation by founder Shren Patel.",
@@ -48,15 +61,9 @@
       "url": "https://shrenp.com/centros/",
       "author": {
         "@type": "Person",
+        "@id": "https://shrenp.com/#person",
         "name": "Shren Patel",
         "url": "https://shrenp.com/"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/LimitedAvailability",
-        "description": "Closed-source showcase — reach out for collaboration."
       },
       "featureList": [
         "Typed contracts with risk tiers (R1–R3)",
@@ -373,7 +380,7 @@
         <p class="sec__intro">accommodations consulting&nbsp;· lighter-weight automations</p>
         <div class="card card--pad"><ul class="bullets">
           <li>Triggers: client guest enquiries, ops workflow asks</li>
-          <li>Built the <a href="../demo/public/index.html">public guest-triage demo</a> here&nbsp;— Infinite-Summoner <code>runPipeline</code> pattern</li>
+          <li>Built the <a href="../demo/public/">public guest-triage demo</a> here&nbsp;— Infinite-Summoner <code>runPipeline</code> pattern</li>
           <li>Python/FastAPI automations alongside CentrOS contracts for shared workflows</li>
           <li>Pairs with operator judgment&nbsp;— never fakes domain licensure</li>
         </ul></div>
@@ -403,13 +410,13 @@
         <p>Classification&nbsp;→ plan&nbsp;→ draft, with escalation to a human surfaced in the output. Mock mode runs in your browser on sample data and sends nothing.</p>
       </div>
       <figure class="card frame">
-        <div class="frame__bar"><span class="chip">Sample data</span><a class="pill" href="../demo/public/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#maximize-2"/></svg>Open full screen</a></div>
+        <div class="frame__bar"><span class="chip">Sample data</span><a class="pill" href="../demo/public/"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#maximize-2"/></svg>Open full screen</a></div>
         <div class="frame__poster">
           <p class="js-only">On a phone the demo opens full screen: the same three stages, on the same sample data.</p>
-          <p class="js-only frame__go"><a class="btn btn--inverse btn--block" href="../demo/public/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#play"/></svg>Open the demo</a></p>
+          <p class="js-only frame__go"><a class="btn btn--inverse btn--block" href="../demo/public/"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#play"/></svg>Open the demo</a></p>
           <p class="frame__nojs">The demo runs in your browser, so it needs JavaScript.</p>
         </div>
-        <iframe class="frame__view" data-src="../demo/public/index.html" title="CentrOS guest-triage orchestration demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+        <iframe class="frame__view" data-src="../demo/public/" title="CentrOS guest-triage orchestration demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
       </figure>
     </section>
 
@@ -493,11 +500,6 @@
             <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#github"/></svg></span>
             <span class="row__text"><span class="row__title">GitHub</span><span class="row__sub">github.com/blopit</span></span>
             <svg class="i row__ext" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#arrow-up-right"/></svg><span class="vh"> (opens in a new tab)</span>
-          </a></li>
-          <li><a class="row" href="tel:+16135519989">
-            <span class="glyph"><svg class="i" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#phone"/></svg></span>
-            <span class="row__text"><span class="row__title">Phone</span><span class="row__sub nums">+1 613-551-9989</span></span>
-            <svg class="i row__chev" aria-hidden="true" focusable="false"><use href="../public/images/icons.svg#chevron-right"/></svg>
           </a></li>
         </ul>
         <p class="sgroup__foot">Canada, remote · EST/PST.</p>

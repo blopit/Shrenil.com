@@ -9,3 +9,5 @@ resume-generator/**/__pycache__/
 resume-generator/**/*.pyc
 resume-generator/build/
 resume-generator/.tectonic-cache/
+
+__pycache__/

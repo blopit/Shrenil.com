@@ -7,7 +7,17 @@
 - [Portfolio home](https://shrenp.com/): hero, selected work, experience, skills, roles I fit, contact
 - [CentrOS deep-dive](https://shrenp.com/centros/): product page covering durable runtime, policy lanes (A/B/C), risk tiers (R1/R2/R3), eval gates, owner-inbox HITL, and concrete traction signals (3,980+ tests, 23-unit production deployment)
 - [AXED case study](https://shrenp.com/axed/): WEBTOON Original with 40M+ reads and a multi-format IP rights deal closed with Wattpad WEBTOON Studios — the single clearest builder-operator-closer proof point
-- [Guest-triage demo](https://shrenp.com/demo/public/index.html): 3-stage LLM pipeline (classify → plan → draft); mock mode runs in the browser on sample data
+- [Guest-triage demo](https://shrenp.com/demo/public/): 3-stage LLM pipeline (classify → plan → draft); mock mode runs in the browser on sample data
+
+## Hiring Shren
+
+- Full-time: Staff AI Engineer, AI Platform, AI Architect, Agent Runtime and Forward-Deployed Engineer roles (Canada, remote, EST/PST overlap)
+- Contract and consulting: AI agent development for companies — workflow automation with multi-agent systems, RAG pipelines, MCP and tool integrations, from proof of concept to production
+- Reviews: architecture, eval and observability reviews of agent systems already in production
+- [Forward-Deployed Engineer](https://shrenp.com/forward-deployed-engineer/): what Shren does in a forward-deployed role and how an engagement runs
+- [Contract AI agent development](https://shrenp.com/ai-agent-development/): what a contract build includes and how it runs, from scoping to handover
+- [Architecture and eval reviews](https://shrenp.com/agent-architecture-review/): what a review of an existing agent system covers and what the team gets
+- [Work with me](https://shrenp.com/#hire): how to start a conversation about a role or a project
 
 ## What Shren builds
 
