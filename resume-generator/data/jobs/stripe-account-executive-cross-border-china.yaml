@@ -1,0 +1,53 @@
+slug: stripe-account-executive-cross-border-china
+company: Stripe
+role: "Account Executive, Cross Border, Greater China"
+headline: "Builder-Operator with International Revenue Track Record — Cross-Border Commercial Depth"
+summary: >
+  Founder-engineer with an international revenue track record and complex cross-border
+  deal structuring experience. Drove $5M+ in apparel pre-order GMV at Faire across
+  three international markets — owned the full commercial lifecycle from technical
+  discovery through staged international rollout. Brokered AXED's IP rights deal
+  with Wattpad WEBTOON Studios for a multi-year, multi-format adaptation (book +
+  2-season animated television releasing 2025). Now building CentrOS, a production
+  AI agent orchestration platform whose first deployment handles cross-border vendor
+  invoices and compliance workflows. Brings deep technical fluency to cross-border
+  conversations with API-first technology buyers — the credibility most cross-border
+  AEs lack.
+must_have_keywords:
+  - software sales
+  - Account Executive
+  - Greater China
+  - Mandarin
+  - cross border
+  - enterprise sales
+  - full sales cycle
+  - Stripe API
+nice_to_have_keywords:
+  - technical customer relationships
+  - product workshops
+  - financial modeling
+  - partner strategy
+experience_selection:
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: centros-founder, bullets: [centros-platform, centros-platform-leverage, centros-dogfood] }
+  - { job_id: independent-builder, bullets: [ind-llm-history, ind-axed] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production AI agent platform: owned technical vision, product roadmap, and live deployment. Consolidated 4 vendor primitives into 1 governed commercial layer."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives — cut new customer onboarding from weeks to 2 days while preserving security and compliance. Direct expansion-motion architecture for cross-border accounts."
+  faire-apparel: "Owned apparel pre-order revenue at Faire: $5M+ GMV across 3+ international markets over 6-month staged workstreams — full cross-functional execution with product, ops, finance, and merchant stakeholders."
+skills_emphasis:
+  - title: "International Revenue & Cross-Border Commercial"
+    items:
+      - "$5M+ GMV across 3+ international markets (Faire apparel pre-order)"
+      - "Multi-year, multi-format IP rights deal closed with Wattpad WEBTOON Studios"
+      - "Cross-border vendor + compliance workflows running on CentrOS in production"
+  - title: "Technical Depth (CTO/VP Engineering credibility)"
+    items:
+      - "AI agent orchestration · LLM tool-calling · MCP · LangGraph"
+      - "APIs · TypeScript · Python · React"
+      - "10+ years shipping production software (Faire, Coursera, WEBTOON, D2L, Minted)"
+  - title: "Operating Style"
+    items:
+      - "Founder-mode in ambiguous, fast-paced environments"
+      - "Strong written + verbal communication across executive audiences"

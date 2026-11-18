@@ -1,0 +1,63 @@
+slug: openai-forward-deployed-engineer-fde-sf
+company: OpenAI
+role: Forward Deployed Engineer
+posting_url: https://openai.com/careers/forward-deployed-engineer
+headline: "Forward Deployed Engineer — LLM Production Delivery & Full-Stack Systems"
+summary: >
+  Forward-deployed builder with 8+ years shipping production systems and 3+ years
+  deploying LLM-powered agents end-to-end — discovery, scoping, full-stack build, and
+  production rollout — for customer teams in fast-moving, ambiguous environments.
+  Fluent in Python and TypeScript/JavaScript across frontend and backend, with an
+  eval-driven feedback loop that turns field signal into model and product improvements.
+must_have_keywords:
+  - Forward Deployed Engineer
+  - LLM
+  - production
+  - Python
+  - TypeScript
+  - JavaScript
+  - full-stack
+  - eval-driven
+  - customer
+  - end-to-end
+  - deployment
+  - generative
+dropped_keywords:
+  - San Francisco
+  - hybrid
+  - 50% travel
+nice_to_have_keywords:
+  - prototyping
+  - playbooks
+  - tool-calling
+  - RAG
+  - observability
+  - trade-offs
+  - rollout
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-eval, centros-dogfood] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-react] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production LLM multi-agent runtime end-to-end: typed tool contracts, eval gates, LangFuse traces, HITL approval interrupts — collapsed 4 vendor primitives into 1 governed layer."
+  centros-eval: "Built eval-driven harness + LangFuse trace pipeline: golden datasets, task-level scorers, regression suites, prompt versioning, failure taxonomy — caught 22+ silent generative-model regressions before production release."
+  centros-dogfood: "Deployed CentrOS end-to-end at a 23-unit hospitality customer (guest comms, refunds, vendor invoices, compliance): full-stack Python + TypeScript, 3,980+ Vitest tests, CI-backed live ops since Feb 2026."
+  cc-fastapi: "Prototyped customer accommodations workflows on CentrOS: 3-stage guest-triage pipeline (classify → plan → draft) in Python/FastAPI with HITL approval gates before any irreversible action."
+skills_emphasis:
+  - title: "LLM & Agent Systems"
+    items:
+      - "LLM tool-calling, multi-agent orchestration, LangGraph, MCP, generative model deployment"
+      - "Eval-driven development: golden datasets, regression suites, LangFuse tracing"
+      - "HITL approvals, prompt versioning, hybrid RAG (pgvector, OpenSearch)"
+  - title: "Full-Stack Engineering"
+    items:
+      - "Python · FastAPI · TypeScript · JavaScript · React · Node · Hono"
+      - "PostgreSQL · Drizzle · Vitest · CI/CD · production incident response"
+  - title: "Forward-Deployed Delivery"
+    items:
+      - "End-to-end customer delivery: discovery → scope → build → production rollout"
+      - "Ambiguous, fast-moving environments; scope/speed/quality trade-offs"
+      - "Codifying playbooks and reusable platform primitives from field learnings"

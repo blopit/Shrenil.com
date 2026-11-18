@@ -1,0 +1,88 @@
+slug: openai-full-stack-software-engineer-chatgpt-finances
+company: OpenAI
+role: Full-Stack Software Engineer, ChatGPT Finances
+posting_url: ''
+headline: Full-Stack Product Engineer · AI-Native Consumer Experiences · Grounded LLM Systems
+summary: 'Full-stack product engineer who ships polished React/TypeScript frontends on top of Python/Node
+  APIs, with 3+ years building grounded LLM experiences on hybrid RAG, tool-calling, and HITL safeguards.
+  Founded CentrOS to make AI-native workflows reliable, transparent, and safe with sensitive data — exactly
+  the trust bar ChatGPT Finances requires for account connectivity, dashboards, and conversational insights.
+
+  '
+must_have_keywords:
+- full-stack
+- React
+- TypeScript
+- Python
+- Node
+- APIs
+- data models
+- RAG
+- tool-calling
+- HITL
+- grounded
+- observability
+- dashboards
+dropped_keywords:
+- Go
+- Swift
+- Kotlin
+- fintech
+- banking
+- payments
+- accessibility
+- consumer products
+nice_to_have_keywords:
+- conversational interfaces
+- experimentation
+- A/B testing
+- permissions
+- audit trail
+- product metrics
+experience_selection:
+- job_id: centros-founder
+  bullets:
+  - centros-platform
+  - centros-rag
+  - centros-hitl
+- job_id: conscious-creations
+  bullets:
+  - cc-fastapi
+- job_id: independent-builder
+  bullets:
+  - ind-llm-history
+- job_id: faire
+  bullets:
+  - faire-apparel
+  - faire-perf
+- job_id: coursera
+  bullets:
+  - coursera-download
+bullet_overrides:
+  centros-platform: 'Built CentrOS full-stack multi-agent runtime: typed APIs, tool-calling contracts,
+    LangFuse observability, HITL approval interrupts — collapsed 4 vendor primitives into 1 grounded,
+    audited layer.'
+  centros-rag: Implemented hybrid RAG on pgvector + OpenSearch with query rewriting, source ranking, freshness
+    boundaries — cut prompt tokens 40% while keeping answers grounded in cited data.
+  centros-hitl: 'Designed HITL model for sensitive actions: confidence-gated handoff, approval checkpoints
+    before irreversible ops, audit trails, permissions — 100% of high-risk tool calls human-reviewed.'
+  cc-fastapi: Shipped 3-stage guest-triage full-stack workflow (classify → plan → draft) in Python/FastAPI
+    + TypeScript UI with HITL approvals before any irreversible customer-facing action.
+skills_emphasis:
+- title: Full-Stack Product
+  items:
+  - 'Frontend: React, TypeScript, MobX, Storybook, A/B testing, performance'
+  - 'Backend: Python, FastAPI, Node, Hono, PostgreSQL, Drizzle, REST APIs, data models'
+- title: AI-Native Systems
+  items:
+  - LLM tool-calling, MCP, function calling, structured outputs
+  - Hybrid RAG, pgvector, OpenSearch, grounded generation, prompt versioning
+  - LangGraph multi-agent orchestration, durable execution, checkpointing
+- title: Trust, Safety & Observability
+  items:
+  - HITL approval gates, audit trails, scoped OAuth permissions, consent flows
+  - LangFuse tracing, eval harnesses, regression suites, product metrics
+- title: Consumer Product Delivery
+  items:
+  - Shipped features at Coursera (24M+ learners), WEBTOON (445K+ subs), Faire ($5M+ GMV)
+  - Staged rollouts, A/B guardrails, incident response, CI-backed deploys

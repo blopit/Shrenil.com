@@ -1,0 +1,69 @@
+slug: openai-software-engineer-codex-user-activation
+company: OpenAI
+role: "Software Engineer — Codex, User Activation"
+headline: "Full-Stack Engineer · Agent Product Surfaces · Onboarding & Activation"
+summary: >
+  Full-stack engineer who ships polished onboarding, integrations, and discovery surfaces
+  on top of production agent runtimes — TypeScript/React frontends over Python/Go backends,
+  guided by experimentation and activation funnels. Built CentrOS end-to-end (typed tool
+  registry, HITL approvals, eval gates) and cut new-workflow setup from weeks to 2 days,
+  the same 0→1 product judgment Codex User Activation needs to turn developer curiosity
+  into sustained team adoption.
+must_have_keywords:
+  - full-stack
+  - TypeScript
+  - React
+  - Python
+  - onboarding
+  - integrations
+  - activation
+  - discovery
+  - experimentation
+  - production
+  - agent
+  - collaboration
+dropped_keywords:
+  - Go
+  - IDEs
+  - CLI
+  - GTM
+nice_to_have_keywords:
+  - tool-calling
+  - workflow
+  - templates
+  - analytics
+  - developer experience
+  - A/B testing
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-tools, centros-platform-leverage]
+  - job_id: conscious-creations
+    bullets: [cc-fastapi]
+  - job_id: faire
+    bullets: [faire-apparel, faire-perf]
+  - job_id: coursera
+    bullets: [coursera-react]
+  - job_id: webtoon
+    bullets: [webtoon-workflow]
+bullet_overrides:
+  centros-platform: "Built CentrOS multi-agent runtime end-to-end: typed tool contracts, eval gates, LangFuse traces, HITL approvals — collapsed 4 vendor primitives into 1 governed production agent layer."
+  centros-tools: "Built MCP tool registry with scoped OAuth, JSON-schema validation, retry policy, side-effect logging — turned ad-hoc integrations into 100% audited typed agent tool invocations."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives (connectors, secrets, approval gates, eval hooks, deploy templates) enabling self-serve onboarding — cut new-workflow setup from weeks to 2 days."
+  faire-perf: "Drove site-wide perf via A/B testing, experimentation, and staged rollouts on React/TypeScript surfaces — 5+ activation and discovery wins shipped behind guardrails."
+  coursera-react: "Built React full-stack GUI infrastructure at Coursera; cut new-view setup from days to 1 hour and compounded across 5+ teams as the company-wide developer collaboration standard."
+skills_emphasis:
+  - title: "Full-Stack & Product Surfaces"
+    items:
+      - "TypeScript, React, Python — polished frontends over production backends"
+      - "Onboarding, activation funnels, discovery flows, workspace setup"
+      - "Integrations, templates, plugins, tool registries (MCP, OAuth-scoped)"
+  - title: "Agent Systems & Runtime"
+    items:
+      - "Multi-agent orchestration (LangGraph, Temporal-style durability)"
+      - "HITL approval gates, eval harnesses, LangFuse tracing"
+      - "RAG pipelines (pgvector, OpenSearch), typed tool-calling"
+  - title: "Experimentation & Iteration"
+    items:
+      - "A/B testing, staged rollouts, canary releases, shadow traffic"
+      - "0→1 product judgment, ambiguity, customer-driven iteration"
+      - "Production ops: CI, observability, incident response"

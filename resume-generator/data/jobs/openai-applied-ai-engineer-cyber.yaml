@@ -1,0 +1,72 @@
+slug: openai-applied-ai-engineer-cyber
+company: OpenAI
+role: "Cybersecurity Applied AI Engineer"
+headline: "Applied AI Engineer — Agentic Workflows, Guardrails & Human-in-the-Loop Deployment"
+summary: >
+  Applied AI engineer who ships production agentic workflows on OpenAI APIs, tool/function calling,
+  structured outputs, retrieval, evals, and human-in-the-loop approval gates — the same safe-deployment
+  patterns security teams need across SOC, AppSec, vulnerability triage, and detection engineering.
+  Comfortable moving between executive strategy, hands-on Python/TypeScript prototyping, and reference
+  architectures with auditability, telemetry, and approval-gated side effects.
+must_have_keywords:
+  - OpenAI APIs
+  - tool
+  - function calling
+  - structured outputs
+  - retrieval
+  - agentic workflows
+  - evals
+  - guardrails
+  - human-in-the-loop
+  - telemetry
+  - Python
+  - TypeScript
+dropped_keywords:
+  - Codex
+  - CISO
+  - SOC
+  - detection engineering
+  - vulnerability management
+  - GRC
+  - red team
+  - cloud security
+  - secure SDLC
+  - incident response
+  - GitHub workflows
+  - CI/CD
+  - sandboxing
+nice_to_have_keywords:
+  - reference architectures
+  - pilots
+  - approval gates
+  - auditability
+  - prototypes
+  - solutions engineering
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-hitl, centros-tools] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: coursera, bullets: [coursera-search] }
+bullet_overrides:
+  centros-platform: "Built CentrOS multi-agent runtime on OpenAI APIs: typed tool/function calling, structured outputs, eval gates, telemetry traces, human-in-the-loop approval interrupts — 1 governed layer replacing 4 vendor primitives."
+  centros-tools: "Built MCP-style tool registry with scoped OAuth, JSON-schema structured outputs, retry policy, side-effect audit logs — turned ad-hoc API calls into 100% audited agentic workflows with approval gates."
+  centros-hitl: "Designed human-in-the-loop model: confidence-gated handoff, approval checkpoints before irreversible side effects, reversible operations, audit trails, escalation policy — 100% of high-risk tool calls human-reviewed."
+skills_emphasis:
+  - title: "Applied AI & Agentic Workflows"
+    items:
+      - "OpenAI APIs · tool / function calling · structured outputs · agentic workflows"
+      - "Retrieval (hybrid RAG, pgvector, OpenSearch) · prompt versioning · evals & regression suites"
+      - "Human-in-the-loop approval gates · guardrails · telemetry · audit trails"
+  - title: "Languages & Prototyping"
+    items:
+      - "Python · TypeScript · Node · FastAPI · Hono"
+      - "CLIs · scripts · GitHub workflows · CI-backed pilots"
+  - title: "Deployment Patterns"
+    items:
+      - "Reference architectures · reusable platform primitives · pilot scoping with success criteria"
+      - "Durable execution · checkpointing · shadow traffic · canary rollouts"
+  - title: "Customer-Facing"
+    items:
+      - "Technical advisory across executive + practitioner audiences"
+      - "Discovery → prototype → durable deployment · playbooks & field assets"

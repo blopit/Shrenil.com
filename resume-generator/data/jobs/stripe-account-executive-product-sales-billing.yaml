@@ -1,0 +1,69 @@
+slug: stripe-account-executive-product-sales-billing
+company: Stripe
+role: Account Executive, Product Sales — Billing
+headline: "Technical Founder & Commercial Operator — Billing, Payments & Enterprise Solutions"
+summary: >
+  Technical founder and operator who has closed bespoke commercial agreements (multi-year IP rights deal with Wattpad WEBTOON Studios covering book + 2-season TV adaptation), built billing- and payments-adjacent automation for a live 23-unit hospitality operation (guest comms, refunds, vendor invoices), and led deep technical product conversations with CEO/CFO/CTO-level stakeholders. Comfortable translating complex product capabilities into business outcomes across billing, revenue, and financial workflows in fast-moving, ambiguous environments.
+must_have_keywords:
+  - sales
+  - billing
+  - revenue
+  - quota
+  - new business
+  - upsell
+  - complex negotiations
+  - commercial agreements
+  - technical requirements
+  - stakeholders
+  - go-to-market
+  - product expertise
+nice_to_have_keywords:
+  - financial services
+  - billing solutions
+  - payments
+  - fast paced
+  - self-starter
+  - customer feedback
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-dogfood, centros-tools, centros-platform-leverage]
+  - job_id: independent-builder
+    bullets: [ind-axed, ind-llm-history]
+  - job_id: conscious-creations
+    bullets: [cc-fastapi]
+  - job_id: property-ops
+    bullets: [pm-mapping]
+  - job_id: faire
+    bullets: [faire-apparel]
+  - job_id: webtoon
+    bullets: [webtoon-ip, webtoon-workflow]
+  - job_id: coursera
+    bullets: [coursera-download]
+bullet_overrides:
+  centros-dogfood: "Deployed CentrOS at a 23-unit hospitality operation running live billing workflows — guest payments, refunds, vendor invoice reconciliation, compliance — CI-backed production ops since Feb 2026 with 3,980+ tests green."
+  centros-tools: "Built billing- and payments-adjacent tool integrations (scoped OAuth, schema validation, retry policy, side-effect logging) — converted ad-hoc API calls into 100% audited, revenue-impacting transaction flows."
+  ind-axed: "Led complex multi-year commercial negotiation solo — closed AXED IP rights deal with Wattpad WEBTOON Studios covering book + 2-season animated TV adaptation (2025) — bespoke agreement across 3+ stakeholder groups."
+  webtoon-ip: "Structured and closed bespoke multi-year, multi-format commercial agreement with Wattpad WEBTOON Studios (book + 2-season TV) — sole negotiator across legal, creative, and business terms."
+  faire-apparel: "Drove $5M+ GMV apparel pre-order initiative at Faire across 3+ international markets over 6-month workstreams — quantified revenue impact via A/B guardrails and staged rollouts."
+skills_emphasis:
+  - title: "Commercial & Sales-Adjacent"
+    items:
+      - "Bespoke commercial agreements — closed multi-year, multi-format IP rights deal solo (Wattpad WEBTOON Studios)"
+      - "Revenue-driving initiatives — $5M+ GMV across 3+ international markets at Faire"
+      - "CEO/CFO/CTO-level technical + business conversations across enterprise and startup stakeholders"
+      - "Customer feedback synthesis → product roadmap (live at CentrOS, 23-unit hospitality operation)"
+  - title: "Billing, Payments & Financial Workflows"
+    items:
+      - "Live production billing workflows: guest payments, refunds, vendor invoice reconciliation, compliance"
+      - "Payments-adjacent tool integrations with scoped OAuth, audit trails, retry policy"
+      - "Revenue-tracking and conversion-loss monitoring (Minted Cyber Monday, 10x traffic)"
+  - title: "Product & Technical Depth"
+    items:
+      - "Founder-level product expertise: architected, sold, and deployed CentrOS end-to-end"
+      - "Deep technical fluency — TypeScript, Python, APIs, integrations, LLM/agent platforms"
+      - "Translate complex technical requirements into stakeholder-ready solutions"
+  - title: "Operating Style"
+    items:
+      - "Self-starter — founded and scaled CentrOS with zero supervision in ambiguous environment"
+      - "Roll-up-your-sleeves operator — runs 23-unit portfolio while shipping platform code"
+      - "Strong written + verbal communication across technical and business audiences"

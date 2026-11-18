@@ -1,0 +1,68 @@
+slug: stripe-account-executive-ai-sales-grower
+company: Stripe
+role: Account Executive, AI (Sales / Grower)
+headline: "AI Engineering Founder · Technical Counterpart to AI-Native Customers"
+summary: >
+  Founder-engineer who has shipped AI-native LLM agent infrastructure used by the
+  same builders Stripe's AI team sells to — OpenAI/Anthropic-style tool-calling,
+  LangGraph runtimes, RAG, HITL governance. Brings deep technical product fluency
+  to enterprise AI customer conversations across executive stakeholders, account
+  plans, and bespoke GTM motions: credible across infra, foundation models,
+  agents, and applications, and fluent in the revenue mechanics of monetization
+  at scale.
+must_have_keywords:
+  - AI
+  - AI-native
+  - foundation models
+  - agents
+  - LLM
+  - monetization
+  - revenue
+  - enterprise
+  - technical product
+  - account plans
+  - GTM
+  - executive stakeholders
+nice_to_have_keywords:
+  - OpenAI
+  - Anthropic
+  - tool-calling
+  - infrastructure
+  - platform
+  - product strategy
+  - business case
+  - negotiation
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-runtime, centros-tools, centros-hitl, centros-dogfood]
+  - job_id: independent-builder
+    bullets: [ind-llm-history, ind-axed]
+  - job_id: faire
+    bullets: [faire-apparel]
+  - job_id: webtoon
+    bullets: [webtoon-ip]
+  - job_id: coursera
+    bullets: [coursera-download]
+bullet_overrides:
+  centros-platform: "Founded and shipped CentrOS, a production multi-agent orchestration platform monetizing AI workflows — typed tool contracts, eval gates, HITL governance — consolidating 4 vendor primitives into 1 commercial layer."
+  centros-tools: "Built MCP-style tool registry with 5+ schema validators, scoped OAuth, retry, and audit logging — OpenAI/Anthropic tool-calling compatible; same integration surface AI-native customers monetize on Stripe."
+  ind-llm-history: "Built on the AI frontier since ChatGPT launch: tool-calling 2023, LangGraph multi-agent 2024, MCP late 2024 — 3+ years tracking the OpenAI/Anthropic/NVIDIA ecosystem Stripe AI sells into."
+  faire-apparel: "Drove $5M+ GMV expansion across 3+ international markets over 6-month workstreams at Faire — owned business case, staged rollout, and cross-functional execution with product, eng, and ops."
+  webtoon-ip: "Negotiated and closed IP licensing deal — book publisher + animated TV studio for 2-season adaptation (2025 release) — bespoke multi-party commercial agreement from sourcing to close."
+  coursera-download: "Shipped iOS course-download feature driving 20%+ completion lift across Coursera's 24M+ learner base — translated technical capability into measurable customer revenue/retention outcome."
+skills_emphasis:
+  - title: "AI Domain Fluency (customer-facing)"
+    items:
+      - "Foundation models · agents · LLM tool-calling · MCP · RAG"
+      - "OpenAI / Anthropic API ecosystems · LangGraph · multi-agent runtimes"
+      - "AI monetization patterns: usage-based, agent workflows, platform fees"
+  - title: "Enterprise & Commercial"
+    items:
+      - "Complex deal structuring · bespoke licensing negotiations · multi-stakeholder close"
+      - "Executive stakeholder management · account expansion · cross-sell strategy"
+      - "Business case development · $5M+ GMV expansion · international rollout"
+  - title: "Technical Credibility"
+    items:
+      - "Production AI infrastructure (founder of CentrOS) · 3,980+ tests in CI"
+      - "Payments-adjacent: tool-calling, OAuth, audit trails, durable execution"
+      - "BSE, University of Waterloo · 10+ years shipping technical products"

@@ -1,0 +1,65 @@
+slug: openai-backend-software-engineer-gtm-innovation
+company: OpenAI
+role: "Backend Software Engineer, GTM Innovation"
+headline: "Backend Engineer — Durable Agent Runtimes, Evals & Context Systems for Persistent AI Coworkers"
+summary: >
+  Founder-engineer building the backend infrastructure behind persistent AI coworkers:
+  durable agent runtimes, long-running agent loops, context and memory systems, and
+  rigorous evaluation and observability that make agent quality measurable. 3+ years
+  shipping applied AI in production, partnering directly with end users to turn
+  ambiguous real-world workflows into dependable 0→1 systems.
+must_have_keywords:
+  - backend
+  - durable
+  - agent runtimes
+  - long-running agent loops
+  - workflow orchestration
+  - context
+  - memory
+  - tools
+  - permissions
+  - evaluation
+  - observability
+  - feedback
+  - applied AI
+  - 0→1
+dropped_keywords:
+  - Codex harness
+  - 6+ years
+  - sales technology
+  - Revenue Operations
+nice_to_have_keywords:
+  - founder
+  - production feedback loops
+  - data pipelines
+  - integrations
+  - prototype through production
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-runtime, centros-eval, centros-hitl] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: coursera, bullets: [coursera-search] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+bullet_overrides:
+  centros-runtime: "Designed backend agent runtimes on LangGraph state graphs with Temporal-style durability: long-running agent loops, checkpointing, crash recovery, retries, workflow orchestration — 0 silent run loss across 6 months."
+  centros-eval: "Built evaluation framework + LangFuse observability and feedback pipeline: golden datasets, task-level scorers, regression suites, prompt versioning, failure taxonomy — caught 22+ silent regressions before release."
+  centros-hitl: "Designed context, memory, tools, and permissions model for agent actions: confidence-gated handoff, approval checkpoints before irreversible actions, audit trails — 100% of high-risk tool calls human-reviewed."
+  cc-fastapi: "Prototyped 0→1 accommodations agent workflows on CentrOS partnering directly with end users: 3-stage guest-triage pipeline (classify → plan → draft) in Python/FastAPI with HITL approval gates before any irreversible action."
+  ind-llm-history: "Shipped applied AI since ChatGPT launch (Nov 2022): tool-calling/API automations from 2023; LangGraph multi-agent patterns from 2024; MCP integrations from late 2024 — 3+ years compounding backend agent infra."
+skills_emphasis:
+  - title: "Agent Infrastructure"
+    items:
+      - "Durable agent runtimes · long-running agent loops · workflow orchestration"
+      - "Context · memory · tools · permissions (MCP-style registries, scoped OAuth)"
+      - "LangGraph state graphs · Temporal-style durability · checkpointing · retries"
+  - title: "Evaluation & Observability"
+    items:
+      - "Evaluation harnesses · golden datasets · regression suites · prompt versioning"
+      - "LangFuse tracing · production feedback loops · failure taxonomies"
+      - "HITL approval gates · audit trails · confidence-gated handoff"
+  - title: "Backend & Applied AI"
+    items:
+      - "Python · FastAPI · TypeScript · Hono · PostgreSQL · pgvector · OpenSearch"
+      - "Data pipelines · integrations · reliable backend services"
+      - "0→1 product engineering · founder-led shipping · direct end-user partnership"

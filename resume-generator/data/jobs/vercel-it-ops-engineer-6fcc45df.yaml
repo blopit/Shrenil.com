@@ -1,0 +1,67 @@
+slug: vercel-it-ops-engineer-6fcc45df
+company: Vercel
+role: IT Operations Engineer
+headline: "AI-Native IT Operations Engineer · Automation · macOS · Scripting"
+summary: >
+  Builder who uses AI tools as a core part of how I work — writing scripts, drafting
+  documentation, and automating repetitive tasks to move faster. 8+ years shipping
+  software plus 3+ years running real operations (20+ unit portfolio, live guest ops)
+  with the detail-oriented, service-oriented, proactive discipline Vercel's IT team runs on.
+must_have_keywords:
+  - AI tools
+  - automate
+  - scripts
+  - documentation
+  - macOS
+  - IT
+  - troubleshooting
+  - onboarding
+  - access controls
+  - proactive
+dropped_keywords:
+  - AV
+  - conference room
+  - ticketing systems
+  - networking
+  - cybersecurity
+  - New York City
+  - helpdesk
+nice_to_have_keywords:
+  - startup
+  - endpoint management
+  - documentation
+  - process improvements
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-tools, centros-dogfood]
+  - job_id: conscious-creations
+    bullets: [cc-fastapi]
+  - job_id: property-ops
+    bullets: [pm-mapping]
+  - job_id: independent-builder
+    bullets: [ind-llm-history]
+  - job_id: springboard
+    bullets: [sb-pdf]
+  - job_id: minted
+    bullets: [minted-cyber]
+bullet_overrides:
+  centros-platform: "Built CentrOS multi-agent runtime using AI tools daily to write scripts, automate repetitive tasks, and draft documentation — collapsed 4 vendor primitives into 1 governed layer."
+  centros-tools: "Built MCP-style tool registry with scoped OAuth access controls, JSON-schema validation, retry policy, side-effect logging — turned ad-hoc API calls into 100% audited typed tool invocations."
+  cc-fastapi: "Prototyped operational workflows on CentrOS: 3-stage triage pipeline (classify → plan → draft) in Python/FastAPI with proactive HITL approval gates before any irreversible action on macOS."
+skills_emphasis:
+  - title: "AI-Native Workflow"
+    items:
+      - "AI tools for scripting, documentation drafting, triage, research — daily driver since 2022"
+      - "LLM tool-calling, MCP integrations, prompt automation for repetitive IT tasks"
+  - title: "IT & Operations"
+    items:
+      - "macOS environments · troubleshooting · onboarding workflows · access controls"
+      - "Ops across 20+ unit portfolio: intake, scheduling, exceptions, stakeholder comms"
+  - title: "Scripting & Automation"
+    items:
+      - "Python · TypeScript · Node.js · Bash · FastAPI"
+      - "PDF parsing, workflow automation, incident response, production hotfixes"
+  - title: "Communication & Documentation"
+    items:
+      - "Clear async writeups, runbooks, operator-readable summaries"
+      - "Cross-functional partnership (People, Workplace Services, Engineering)"

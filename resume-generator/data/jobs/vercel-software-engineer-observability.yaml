@@ -1,0 +1,83 @@
+slug: vercel-software-engineer-observability
+company: Vercel
+role: Software Engineer, Observability
+headline: Observability Engineer · TypeScript · Tracing · Large-Scale Data Pipelines
+summary: 'Software engineer with 10+ years shipping TypeScript/JavaScript and Python across frontend platforms
+  and large-scale data pipelines, now building agent observability at CentrOS: LangFuse tracing, eval
+  harnesses, and visualization of distributed system behavior. Deep experience with performance profiling,
+  A/B rollouts, and developer-experience tooling — the same instincts Vercel''s Observability team applies
+  to help developers understand application health at scale.
+
+  '
+must_have_keywords:
+- TypeScript
+- JavaScript
+- Python
+- observability
+- tracing
+- large-scale data
+- visualization
+- performance profiling
+- frontend
+- testing
+- developer experience
+dropped_keywords:
+- ClickHouse
+- Tinybird
+- Go
+- streaming systems
+- Kafka
+- open source contributions
+- distributed systems
+nice_to_have_keywords:
+- ClickHouse
+- Tinybird
+- streaming
+- open source
+- React
+- Next.js
+experience_selection:
+- job_id: centros-founder
+  bullets:
+  - centros-eval
+  - centros-platform
+  - centros-runtime
+- job_id: independent-builder
+  bullets:
+  - ind-llm-history
+- job_id: faire
+  bullets:
+  - faire-perf
+  - faire-apparel
+- job_id: webtoon
+  bullets:
+  - webtoon-pipeline
+- job_id: coursera
+  bullets:
+  - coursera-react
+bullet_overrides:
+  centros-eval: 'Built eval harness + LangFuse tracing pipeline for distributed agent runs: golden datasets,
+    task-level scorers, regression suites, visualization of failure taxonomy — caught 22+ silent regressions
+    before release.'
+  centros-platform: 'Built CentrOS multi-agent observability + orchestration runtime in TypeScript/Node:
+    typed tool contracts, distributed tracing, eval gates, HITL interrupts — collapsed 4 vendor primitives
+    into 1 governed layer.'
+  faire-perf: Drove site-wide frontend performance profiling + A/B rollouts on React/TypeScript at Faire;
+    same guardrail discipline now applied to agent versioning, shadow traffic, canary releases — 5+ wins
+    shipped.
+  webtoon-pipeline: Built Python + JavaScript image-processing pipelines processing large-scale content
+    for 445K+ subscriber WEBTOON Original at 2x/week cadence — 10% fewer re-uploads, hundreds of operator
+    hours saved.
+skills_emphasis:
+- title: Languages & Frontend
+  items:
+  - TypeScript · JavaScript · Python · React · Node.js · Next.js
+  - Frontend performance profiling · A/B testing · staged rollouts
+- title: Observability & Data
+  items:
+  - Distributed tracing (LangFuse) · eval harnesses · visualization dashboards
+  - Large-scale data pipelines · pgvector · OpenSearch · PostgreSQL
+- title: Platform & Reliability
+  items:
+  - Multi-agent orchestration · durable execution · checkpointing · retries
+  - CI/CD · testing (Vitest, Jest) · incident response · developer experience

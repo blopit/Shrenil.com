@@ -1,0 +1,62 @@
+slug: openai-product-engineer-full-stack-agents-8eff75ba
+company: OpenAI
+role: "Product Engineer, Full Stack — Agents"
+headline: "Full Stack Product Engineer · Persistent AI Agents · TypeScript + Python"
+summary: >
+  Full stack product engineer with 7+ years shipping polished user-facing products and
+  production backend systems — now building persistent AI coworkers on CentrOS with
+  TypeScript/React frontends and Python/TypeScript backends for asynchronous agent
+  execution, orchestration, and progress reporting. Deep experience with agentic
+  workflows, stateful systems, tool-calling, and HITL trust controls across enterprise
+  surfaces.
+must_have_keywords:
+  - full stack
+  - product engineer
+  - TypeScript
+  - React
+  - Python
+  - persistent
+  - agents
+  - orchestration
+  - asynchronous
+  - stateful
+  - APIs
+  - tool-calling
+  - HITL
+dropped_keywords:
+  - Go
+  - Rust
+  - enterprise readiness
+nice_to_have_keywords:
+  - agentic workflows
+  - progress reporting
+  - data models
+  - reliability
+  - user controls
+  - collaboration
+  - developer tools
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-hitl] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi, cc-handoff] }
+  - { job_id: faire, bullets: [faire-apparel, faire-perf] }
+  - { job_id: coursera, bullets: [coursera-react] }
+bullet_overrides:
+  centros-platform: "Built CentrOS persistent multi-agent orchestration runtime in TypeScript: typed tool-calling contracts, eval gates, LangFuse traces, HITL approval interrupts — collapsed 4 vendor primitives into 1 governed layer."
+  centros-runtime: "Designed asynchronous agent runtime on LangGraph state graphs + Temporal-style durability: stateful checkpointing, crash recovery, retries, versioned rollouts — 0 silent run loss across 6 months."
+  cc-fastapi: "Shipped full stack product experiences on CentrOS: React frontend for directing/reviewing agents plus Python/FastAPI backend APIs with 3-stage guest-triage pipeline and HITL approval gates."
+skills_emphasis:
+  - title: "Full Stack & Product"
+    items:
+      - "TypeScript, React, modern web app development, interaction design"
+      - "Python, FastAPI, Node.js — backend APIs, services, data models"
+      - "Product judgment: concept → ship → iterate on user-facing surfaces"
+  - title: "Agents & Orchestration"
+    items:
+      - "Persistent agents, asynchronous execution, stateful orchestration, progress reporting"
+      - "LangGraph, Temporal-style durability, checkpointing, crash recovery"
+      - "MCP tool-calling, typed tool contracts, structured outputs"
+  - title: "Trust & Reliability"
+    items:
+      - "HITL approvals, user controls, audit trails, safe execution"
+      - "Eval harness, LangFuse tracing, regression suites, observability"
+      - "A/B testing, staged rollouts, canary releases, performance tuning"

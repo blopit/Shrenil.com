@@ -1,0 +1,60 @@
+slug: openai-software-engineer-web-layer
+company: OpenAI
+role: "Software Engineer, Codex Web Layer"
+headline: "Full-Stack Engineer — Agentic Desktop Clients, Chromium & Runtime Infrastructure"
+summary: >
+  Full-stack engineer who builds hybrid agentic/interactive systems end-to-end,
+  from low-level C++ runtime primitives to TypeScript app surfaces. Ships
+  durable agent runtimes, Chromium-adjacent tooling, and production platforms
+  in fast-paced, ambiguous environments — self-directed across backend
+  infrastructure, API design, and deployment tooling in Python and TypeScript.
+must_have_keywords:
+  - C++
+  - Chromium
+  - TypeScript
+  - Python
+  - end-to-end
+  - agentic
+  - backend
+  - API design
+  - runtime
+  - infrastructure
+  - full-stack
+dropped_keywords:
+  - Electron
+  - macOS
+  - Windows
+  - in-app browser
+  - desktop client
+nice_to_have_keywords:
+  - hybrid agentic
+  - platform
+  - OS integration
+  - deployment
+  - security
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-tools] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: webtoon, bullets: [webtoon-pipeline] }
+  - { job_id: transgaming, bullets: [tg-cider] }
+  - { job_id: minted, bullets: [minted-cyber] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production agentic runtime end-to-end: typed tool contracts in TypeScript, eval gates, LangFuse traces, HITL interrupts — collapsed 4 vendor primitives into 1 governed backend layer."
+  centros-tools: "Designed MCP tool registry API in TypeScript with scoped OAuth, JSON-schema validation, retry policy, side-effect logging — 100% audited typed agent tool invocations across 20+ integrations."
+  tg-cider: "Shipped C++ dynamic libraries emulating Windows syscalls on macOS for the Cider browser-adjacent wrapper engine; delivered 3+ features into Guild Wars 2 + Eve Online (3M+ players)."
+skills_emphasis:
+  - title: "Languages & Runtimes"
+    items:
+      - "C++ · TypeScript · Python · Node.js · Swift · Objective-C"
+      - "Chromium-adjacent wrapper engines · low-level OS integration · systems programming"
+  - title: "Agentic & Backend Infrastructure"
+    items:
+      - "Agent runtime design · durable execution · checkpointing · crash recovery"
+      - "API design · typed tool contracts · MCP · OAuth-scoped tool registries"
+      - "Eval harnesses · LangFuse tracing · regression suites · prompt versioning"
+  - title: "Full-Stack Delivery"
+    items:
+      - "End-to-end feature ownership across backend + client surfaces"
+      - "A/B rollouts · shadow traffic · canary releases · production incident response"
+      - "CI/CD deployment tooling in Python + TypeScript · self-directed in ambiguous scope"

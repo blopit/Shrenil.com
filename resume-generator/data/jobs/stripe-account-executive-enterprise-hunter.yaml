@@ -1,0 +1,71 @@
+slug: stripe-account-executive-enterprise-hunter
+company: Stripe
+role: Account Executive, Enterprise
+headline: "Engineer-Founder · API-Product Fluency · Enterprise Value Selling"
+summary: >
+  Engineer-founder who has spent a decade shipping API-first products and now leads
+  sales for CentrOS, a production AI orchestration platform. Drove $5M+ apparel
+  pre-order GMV at Faire across three international markets — owned cross-functional
+  execution, account planning, and complex negotiations across product, engineering,
+  and finance. Brokered AXED's IP rights deal with Wattpad WEBTOON Studios for a
+  multi-year book + 2-season animated television adaptation (2025). Where I uniquely
+  help Stripe Enterprise: leading deeply technical sales conversations with C-level
+  CTO/CFO buyers, running product workshops, building value proposition and
+  financial analysis, and partnering with Solutions Architects on consultative deal
+  cycles where the technical product is the deal.
+
+must_have_keywords:
+  - API-first
+  - enterprise
+  - technical sales
+  - consultative
+  - C-level
+  - CTO
+  - product workshops
+  - value proposition
+  - complex negotiations
+  - cross-functional
+  - account planning
+  - financial analysis
+
+nice_to_have_keywords:
+  - fintech
+  - payments
+  - growth stage
+  - SaaS
+  - business model
+  - GMV
+  - pipeline
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-tools, centros-platform-leverage, centros-dogfood] }
+  - { job_id: independent-builder, bullets: [ind-llm-history, ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+
+bullet_overrides:
+  centros-platform: "Founded CentrOS API-first AI orchestration platform: sold technical vision to design partners, ran product workshops with CTO/COO buyers, closed 4+ pilots translating capability into quantified business value."
+  centros-tools: "Led consultative discovery on tool/integration scope with enterprise prospects: scoped OAuth permissions, schema contracts, audit requirements — turned technical objections into 100% closed-won pilot agreements."
+  centros-platform-leverage: "Built commercial value proposition around 5+ reusable platform primitives: framed weeks-to-2-days setup as ROI story for finance buyers — cut prospect evaluation cycles from 6 weeks to under 10 days."
+
+skills_emphasis:
+  - title: "Enterprise & Technical Sales Motion"
+    items:
+      - "Full-cycle prospecting → close on API-first technical product (CentrOS founder-led sales)"
+      - "Multi-stakeholder consultative selling: CTO/COO/CFO + Engineering, Product, Finance"
+      - "Product workshops, technical discovery, value-prop articulation, ROI/financial modeling"
+      - "Commercial negotiation: pilot agreements, bespoke pricing, expansion motion"
+  - title: "Product & Technical Depth (Differentiator)"
+    items:
+      - "API-first platforms, developer tooling, integrations, OAuth, webhooks, SDK design"
+      - "10+ years shipping software at Faire, Coursera, WEBTOON — credibility with engineering buyers"
+      - "AI/LLM orchestration, agent workflows, RAG — top-of-mind for modern enterprise CTOs"
+  - title: "Business & GTM Builder"
+    items:
+      - "$5M+ GMV apparel pre-order initiatives across 3+ international markets at Faire"
+      - "Brokered IP licensing deal: publisher + 2-season animated TV adaptation (2025 release)"
+      - "Built and ran 23-unit + 3-unit ops portfolio — P&L, vendor negotiation, stakeholder comms"
+  - title: "Languages & Work Style"
+    items:
+      - "English (native) · French (working — open to language assessment)"
+      - "Remote-first, EST/PST coverage, high-ambiguity startup environments"

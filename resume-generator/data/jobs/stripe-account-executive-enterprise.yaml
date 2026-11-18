@@ -1,0 +1,51 @@
+slug: stripe-account-executive-enterprise
+company: Stripe
+role: Account Executive, Enterprise (Australia)
+headline: "Builder-Operator Who Closes — Technical Depth at the Enterprise CTO Table"
+summary: >
+  Builder-operator who closes. Drove $5M+ in apparel pre-order GMV at Faire across
+  three international markets — owned the full sales cycle across enterprise
+  stakeholders, complex negotiation, and bespoke account plans. Brokered AXED's
+  IP rights deal with Wattpad WEBTOON Studios (book + 2-season animated television
+  releasing 2025). Now runs founder-led commercial conversations for CentrOS, a
+  production AI orchestration platform on the technology pipeline enterprise CTOs
+  evaluate. Translates platform capability into business value at the executive
+  table — credibility where the technical product story is the deal.
+must_have_keywords:
+  - sales cycle
+  - enterprise
+  - stakeholders
+  - negotiation
+  - account plans
+  - technology
+  - pipeline
+  - business value
+nice_to_have_keywords:
+  - fintech
+  - payments
+  - growth stage
+  - technical depth
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-platform-leverage, centros-dogfood] }
+  - { job_id: independent-builder, bullets: [ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: webtoon, bullets: [webtoon-ip, webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-download] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production AI agent platform: owned technical vision, product roadmap, and live deployment. Consolidated 4 vendor primitives into 1 governed commercial layer."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives (connectors, secrets, approval gates, eval hooks, deploy templates) — cut new customer onboarding from weeks to 2 days while preserving security and compliance standards."
+  faire-apparel: "Owned apparel pre-order revenue at Faire: $5M+ GMV across 3+ international markets over 6-month staged workstreams — full cross-functional execution with product, ops, finance, and merchant stakeholders."
+skills_emphasis:
+  - title: "Commercial & Product Outcomes"
+    items:
+      - "$5M+ GMV impact (Faire apparel pre-order, 3+ international markets)"
+      - "IP rights sale: 1 publisher + 1 animated TV studio (2-season deal, 2025)"
+      - "Founder, CentrOS — full-cycle commercial conversations with design partners"
+  - title: "Technical Depth (for credibility with CTO/Eng stakeholders)"
+    items:
+      - "LLM orchestration, RAG, agent runtimes, tool-calling, MCP"
+      - "TypeScript · Python · PostgreSQL · production CI/CD"
+  - title: "Cross-functional Leadership"
+    items:
+      - "Operator workflow design at 2M+ monthly views (WEBTOON)"
+      - "Stakeholder alignment across Eng, Product, Ops (CentrOS, Conscious Creations)"

@@ -1,0 +1,69 @@
+slug: stripe-account-executive-product-sales-capital
+company: Stripe
+role: "Product Account Executive, Capital"
+headline: "Builder-Mindset Technical Operator · Product & GTM"
+summary: >
+  Engineer-operator with a builder's mindset who has personally closed and shipped
+  high-stakes commercial deals (multi-year IP rights with Wattpad WEBTOON Studios,
+  $5M+ GMV apparel initiatives at Faire) while designing net-new product motions
+  from the ground up. Deep technical fluency in payments-adjacent workflow
+  automation, capital/lending-style approval systems, and consultative solutioning
+  — comfortable serving as SME to executives and translating customer needs into
+  product roadmap feedback in high-growth, ambiguous environments.
+must_have_keywords:
+  - enterprise sales
+  - consultative selling
+  - solution-based selling
+  - complex deals
+  - GTM strategy
+  - executive relationships
+  - cross-functional collaboration
+  - product feedback
+  - playbooks
+  - new business
+  - upsell
+  - revenue growth
+nice_to_have_keywords:
+  - payments
+  - capital
+  - lending
+  - financial services
+  - subject matter expert
+  - customer insights
+  - high-growth
+  - ambiguity
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-hitl, centros-dogfood, centros-platform-leverage] }
+  - { job_id: independent-builder, bullets: [ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel, faire-perf] }
+  - { job_id: webtoon, bullets: [webtoon-ip, webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-download] }
+bullet_overrides:
+  centros-platform: "Founded CentrOS from zero: built new product category, defined GTM narrative, closed first paying design-partner customers — sole operator on strategy, sales cycle, and roadmap across a 10+ month go-to-market motion."
+  centros-hitl: "Designed capital-grade approval workflows: confidence-gated handoff, human sign-off before irreversible financial actions, audit trails, escalation policy — 100% of high-risk transactions reviewed, matching lending-industry compliance patterns."
+  centros-dogfood: "Deployed CentrOS at a 23-unit operation handling guest comms, refunds, and vendor invoices — 3,980+ tests passing on main, live in production since Feb 2026 with direct P&L accountability and executive-level customer relationships."
+  ind-axed: "Closed multi-year, multi-format IP rights deal with Wattpad WEBTOON Studios (book + 2-season animated TV, releasing 2025) — structured, negotiated, and closed solo end-to-end as sole commercial principal."
+  faire-apparel: "Owned apparel pre-order initiative at Faire: drove $5M+ GMV across 3+ international markets over 6-month cycle — partnered cross-functionally with Product, Merch, and Ops to design a repeatable new-market playbook."
+  webtoon-ip: "Built and closed multi-year commercial agreement with Wattpad WEBTOON Studios covering book + 2-season animated TV adaptation (2025) — sole negotiator across a 12+ month enterprise-style deal cycle from cold outreach to signed contract."
+  webtoon-workflow: "Designed operator workflow (queue → tooling → review → ship) serving 2M+ monthly views on a WEBTOON Original — same GTM playbook approach now applied to selling new agent-automation motions to enterprise buyers."
+  coursera-download: "Shipped iOS course-download feature in 4 months, lifting course completion 20%+ across Coursera's 24M+ learner base — direct product impact measured against a top company priority."
+skills_emphasis:
+  - title: "GTM & Commercial"
+    items:
+      - "Enterprise deal cycles · consultative & solution-based selling · executive relationships"
+      - "New product motions · GTM playbooks · pricing & positioning · sales enablement"
+      - "Cross-functional influence across Product, Engineering, Marketing, Finance"
+  - title: "Payments-Adjacent & Financial Workflows"
+    items:
+      - "Approval workflows · audit trails · reversible operations · compliance-grade governance"
+      - "Refunds, vendor invoices, transaction ops (CentrOS live 23-unit deployment)"
+      - "PDF/deductions automation · financial data pipelines"
+  - title: "Product & Technical Fluency"
+    items:
+      - "LLM tool-calling · agent orchestration · RAG · roadmap feedback loops"
+      - "TypeScript · Python · React · production CI/CD"
+  - title: "Operating Style"
+    items:
+      - "Builder's mindset · comfortable with ambiguity · owner mentality"
+      - "Sole-founder commercial closes (WEBTOON IP deal · CentrOS design partners)"
+      - "High-growth environments · disciplined execution · humor welcomed"

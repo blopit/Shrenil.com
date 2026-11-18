@@ -1,0 +1,73 @@
+slug: replit-product-engineer-new-products-750908cf
+company: Replit
+role: "Product Engineer, New Products"
+headline: "Product Engineer — Agentic Software, TypeScript/React, Full-Stack AI UX"
+summary: >
+  Founder-mode product engineer with 8+ years shipping user-facing products in TypeScript, React,
+  Node.js, and Postgres, now building agentic software end-to-end: tool-calling, streaming,
+  long-running agent workflows, and HITL editing surfaces. I take ideas from concept to launch
+  on lean teams, pair deep AI runtime experience with strong frontend taste, and have founded
+  and shipped a high-visibility independent platform (CentrOS) plus WEBTOON IP adapted for TV.
+must_have_keywords:
+  - TypeScript
+  - React
+  - Node.js
+  - Postgres
+  - agentic software
+  - tool-calling
+  - streaming
+  - long-running agent workflows
+  - full-stack
+  - product
+  - HITL
+  - user-facing products
+dropped_keywords:
+  - HTML
+  - CSS
+  - accessibility
+  - canvas
+  - rich text
+  - real-time collaboration
+  - data visualization
+  - browser performance
+  - responsive design
+nice_to_have_keywords:
+  - founding engineer
+  - visual editors
+  - developer tools
+  - evaluations
+  - AI generation
+  - direct manipulation
+  - creative tools
+  - data applications
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-tools] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history, ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: coursera, bullets: [coursera-react] }
+bullet_overrides:
+  centros-platform: "Built CentrOS agentic software platform in TypeScript: typed tool-calling contracts, streaming responses, eval gates, LangFuse traces, HITL approval interrupts — collapsed 4 vendor primitives into 1 governed layer."
+  centros-tools: "Built MCP-style tool-calling registry with scoped OAuth, JSON-schema validation, retry policy, side-effect logging — turned ad-hoc APIs into 100% audited typed agent tools powering long-running agent workflows."
+  faire-apparel: "Shipped user-facing apparel pre-order products at Faire in React/TypeScript/MobX: $5M+ GMV across 3+ international markets over 6-month staged workstreams behind A/B guardrails."
+skills_emphasis:
+  - title: "Frontend & Product"
+    items:
+      - "TypeScript, React, MobX, Jest, Storybook"
+      - "User-facing products, A/B testing, staged rollouts, product judgment"
+      - "Visual editors, operator tooling, HITL editing surfaces"
+  - title: "Agentic Software & AI UX"
+    items:
+      - "Agentic software, tool-calling, MCP, structured outputs"
+      - "Streaming responses, long-running agent workflows, HITL approvals"
+      - "LangGraph, Temporal-style durable execution, eval harnesses, LangFuse tracing"
+  - title: "Full-Stack & Infra"
+    items:
+      - "Node.js, Python, FastAPI, Hono, REST APIs"
+      - "Postgres, Drizzle, pgvector, OpenSearch, hybrid RAG"
+      - "CI/CD, Vitest, production debugging, incident response"
+  - title: "Founder Mode"
+    items:
+      - "Founded CentrOS; shipped AXED IP deal with Wattpad WEBTOON Studios (2-season TV, 2025)"
+      - "Ran WEBTOON Original to 445K+ subscribers at 2×/week ship cadence"
+      - "3+ years compounding LLM/agent builder experience since ChatGPT launch"

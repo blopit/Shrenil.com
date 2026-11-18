@@ -1,0 +1,60 @@
+slug: stripe-account-executive-enterprise-germany
+company: Stripe
+role: Enterprise Account Executive — DACH
+headline: "Engineer-Founder turned Technical Partner for Enterprise Customers"
+summary: >
+  Founder-engineer with 10+ years shipping highly technical products to enterprise
+  customers, now applying that depth to consultative sales cycle ownership across
+  complex organizations. Owns end-to-end — technical product discovery, technical
+  requirements gathering, commercial negotiations, and account plans — with
+  measurable revenue impact ($5M+ GMV at Faire) and demonstrated ability to
+  translate platform capabilities into business case outcomes for executive
+  stakeholders. Strong presentation skills across ambiguous environment startups
+  and growth-stage organizations.
+must_have_keywords:
+  - enterprise
+  - sales cycle
+  - account plans
+  - technical product
+  - commercial negotiations
+  - executive stakeholders
+  - complex organizations
+  - business case
+  - revenue
+  - technical requirements
+  - presentation
+  - ambiguous environment
+nice_to_have_keywords:
+  - payments
+  - financial infrastructure
+  - DACH
+  - high-growth technology
+  - platform
+  - solutions
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-platform-leverage, centros-tools, centros-dogfood] }
+  - { job_id: independent-builder, bullets: [ind-llm-history, ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+  - { job_id: coursera, bullets: [coursera-download] }
+bullet_overrides:
+  centros-platform: "Founded and scaled CentrOS technical platform from zero to production: owned full lifecycle from customer discovery through architecture, build, and enterprise rollout — collapsed 4 vendor primitives into 1 governed layer."
+  centros-platform-leverage: "Built business case + shipped 5+ reusable platform primitives serving enterprise workflows — cut new-customer onboarding from weeks to 2 days while preserving security, compliance, and audit standards."
+  centros-dogfood: "Closed and operated 23-unit enterprise pilot (guest comms, refunds, vendor invoices, compliance) — owned account end-to-end from prospecting through technical integration to live revenue-generating ops."
+skills_emphasis:
+  - title: "Enterprise Sales & Account Development"
+    items:
+      - "Full-cycle ownership: prospecting → technical discovery → business case → negotiation → close"
+      - "Account planning across complex organizations and multi-stakeholder buying committees"
+      - "Executive stakeholder engagement and consultative solution selling"
+      - "Commercial negotiation of bespoke agreements and complex renewals"
+  - title: "Technical Depth for Enterprise Buyers"
+    items:
+      - "10+ years shipping highly technical products (payments-adjacent infra, APIs, platforms)"
+      - "Translate technical requirements into business outcomes across product, eng, and ops stakeholders"
+      - "Deep familiarity with developer platforms, integrations, and financial/ops workflows"
+  - title: "Operating in Ambiguity"
+    items:
+      - "Founder operator — built and scaled new business in a fast-moving, undefined market"
+      - "Cross-functional collaboration with product, engineering, and customer teams"
+      - "Strong written + verbal communication; presentation to technical and executive audiences"

@@ -1,0 +1,58 @@
+slug: stripe-account-executive-platforms
+company: Stripe
+role: Account Executive, Platforms
+headline: "Builder-Operator with Fintech Product Depth · Ex-Faire · WEBTOON IP Deal-Closer"
+summary: >
+  Engineer-founder turned operator who has closed multi-year commercial deals, shipped payments-adjacent
+  GMV at scale, and can hold business-level and technical conversations with CTOs, COOs, and CFOs. I've
+  built API-first products, negotiated bespoke IP agreements, and driven $5M+ GMV at a fintech-adjacent
+  marketplace — bringing rare technical depth to complex, multi-party enterprise sales cycles at
+  platform companies like Shopify and Mindbody.
+must_have_keywords:
+  - enterprise sales
+  - complex sales cycle
+  - API-first
+  - fintech
+  - payments
+  - platforms
+  - technical product
+  - consultative selling
+  - C-level relationships
+  - commercial negotiation
+  - product strategy
+  - value proposition
+nice_to_have_keywords:
+  - GMV
+  - B2B SaaS
+  - developer platform
+  - pipeline forecasting
+  - executive stakeholders
+  - workshops
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-tools, centros-platform-leverage, centros-dogfood] }
+  - { job_id: independent-builder, bullets: [ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel, faire-perf] }
+  - { job_id: webtoon, bullets: [webtoon-ip, webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-download] }
+  - { job_id: springboard, bullets: [sb-pdf] }
+bullet_overrides:
+  centros-platform: "Built and sold CentrOS AI orchestration platform to enterprise operators: typed API contracts, governance controls, audit trails — consolidated 4 vendor tools into 1 platform layer with API-first integrations."
+  centros-tools: "Built MCP-style API/tool registry with scoped OAuth, JSON-schema validation, and side-effect logging — turning ad-hoc integrations into 100% audited, developer-friendly platform primitives (Stripe Connect-style)."
+  ind-axed: "Structured and closed multi-year, multi-format IP rights commercial agreement with Wattpad WEBTOON Studios (book + 2-season TV adaptation, 2025) — solo-led bespoke negotiation from inception to signature."
+  faire-apparel: "Owned apparel pre-order initiatives at Faire generating $5M+ GMV across 3+ international markets over 6 months — quantified investment decisions with Finance/Product stakeholders and shipped behind A/B guardrails."
+  webtoon-ip: "Brokered AXED IP rights deal with Wattpad WEBTOON Studios — book + 2-season animated TV adaptation (2025) — a multi-year, multi-party commercial agreement structured and closed independently."
+skills_emphasis:
+  - title: "Enterprise Sales & Commercial"
+    items:
+      - "Complex multi-party sales cycles · bespoke commercial negotiation · IP + platform deals"
+      - "C-level engagement (CTO/COO/CFO) · executive stakeholder management · consultative selling"
+      - "Value articulation · product workshops · financial/ROI analysis with Finance & Product"
+  - title: "Technical Fluency — API & Fintech"
+    items:
+      - "API-first products · developer platforms · webhooks · OAuth · schema-validated integrations"
+      - "Payments-adjacent GMV ($5M+ at Faire) · marketplace + platform business models"
+      - "10+ years shipping technical products (Waterloo BSE) — credible in engineering conversations"
+  - title: "Pipeline & Operating Rigor"
+    items:
+      - "Account planning · outbound strategy · pipeline forecasting · CRM hygiene discipline"
+      - "Repeatable process design · scaled engagement models · sales enablement asset creation"

@@ -1,0 +1,78 @@
+slug: stripe-account-executive-platforms-existing-business
+company: Stripe
+role: "Account Executive, Platforms (Existing Business)"
+headline: "Technical Builder & Commercial Operator — API Platforms, Enterprise Deals, Consultative Sales"
+summary: >
+  Engineer-turned-operator who has personally structured multi-year, multi-format
+  commercial agreements (IP rights deal with Wattpad WEBTOON Studios: book + 2-season
+  animated TV adaptation) while shipping API-first platform products across 10+ years
+  at Coursera, Faire, and CentrOS. I speak fluently with CTOs, product, and finance
+  stakeholders — translating deep technical understanding of payments-adjacent
+  infrastructure (webhooks, tool-calling, retries, audit trails) into business
+  value and quantified ROI for enterprise buyers.
+must_have_keywords:
+  - enterprise
+  - API-first
+  - technical product
+  - complex negotiation
+  - commercial agreement
+  - platform partnerships
+  - consultative sale
+  - C-level relationships
+  - value proposition
+  - product workshops
+  - financial analysis
+  - CRM hygiene
+nice_to_have_keywords:
+  - payments infrastructure
+  - fintech
+  - Stripe Connect
+  - B2B software platforms
+  - developer platforms
+  - forecasting
+  - GMV
+experience_selection:
+  - job_id: centros-founder
+    bullets:
+      - centros-platform
+      - centros-tools
+      - centros-dogfood
+      - centros-platform-leverage
+  - job_id: independent-builder
+    bullets:
+      - ind-axed
+      - ind-llm-history
+  - job_id: faire
+    bullets:
+      - faire-apparel
+  - job_id: webtoon
+    bullets:
+      - webtoon-ip
+  - job_id: coursera
+    bullets:
+      - coursera-download
+bullet_overrides:
+  centros-platform: "Founded CentrOS, an API-first agent orchestration platform: typed tool contracts, webhooks, audit trails, HITL approvals — collapsed 4 vendor primitives into 1 governed layer sold into ops teams."
+  centros-tools: "Built MCP-style tool registry with scoped OAuth, JSON-schema validation, retry policy, and full audit logging — the same integration primitives (webhooks, keys, idempotency) that platforms like Stripe Connect expose to developers."
+  centros-dogfood: "Led full sales cycle on CentrOS deployment into a 23-unit hospitality operator: discovery, technical workshops, commercial terms, and go-live — 3,980+ tests green, CI-backed live ops since Feb 2026."
+  ind-axed: "Structured and closed multi-year, multi-format IP rights agreement with Wattpad WEBTOON Studios (book + 2-season animated TV adaptation, 2025) — bespoke commercial negotiation led end-to-end solo."
+  faire-apparel: "Owned enterprise apparel pre-order workstreams at Faire: $5M+ GMV across 3+ international markets over 6-month cycles; partnered with product, finance, and international GMs to quantify and close."
+  webtoon-ip: "Brokered AXED IP rights deal with Wattpad WEBTOON Studios — book + 2-season animated TV adaptation (2025) — multi-party, multi-year commercial agreement negotiated and closed independently."
+  coursera-download: "Partnered with product and engineering at Coursera to ship iOS course-download, driving 20%+ completion lift across a 24M+ learner base — quantified business case, technical scoping, cross-functional delivery."
+skills_emphasis:
+  - title: "Enterprise Sales & Commercial"
+    items:
+      - "Complex, multi-party consultative sales cycles — inception to close"
+      - "Bespoke commercial agreement negotiation (multi-year IP + platform deals)"
+      - "C-level engagement across CTO / COO / CFO stakeholders"
+      - "Account planning, outbound strategy, and forecasting discipline"
+  - title: "Technical Depth for API-First Platforms"
+    items:
+      - "API-first product architecture: webhooks, OAuth, retries, idempotency, audit trails"
+      - "Payments-adjacent infrastructure patterns: tool-calling, structured outputs, ledgering"
+      - "Product workshops + technical discovery with engineering and product buyers"
+  - title: "Cross-Functional Execution"
+    items:
+      - "Partnering with Product, Engineering, and Finance on ROI + investment cases"
+      - "Building repeatable sales processes, value narratives, and enablement assets"
+      - "Operating in ambiguous, fast-paced platform environments"

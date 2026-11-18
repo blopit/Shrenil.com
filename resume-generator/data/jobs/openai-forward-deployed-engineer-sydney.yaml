@@ -1,0 +1,65 @@
+slug: openai-forward-deployed-engineer-sydney
+company: OpenAI
+role: Forward Deployed Engineer
+posting_url: ""
+headline: "Forward Deployed Engineer — LLM Production Systems & Customer Delivery"
+summary: >
+  Forward-deployed builder who turns frontier LLM research into production systems: 3+ years
+  shipping LLM tool-calling, multi-agent orchestration, and eval-driven feedback loops end-to-end,
+  from discovery through stable production rollout. Full-stack Python + TypeScript across
+  frontend and backend, with customer-facing delivery discipline — scoping ambiguous work,
+  removing blockers, and codifying working patterns into reusable building blocks.
+must_have_keywords:
+  - LLMs
+  - Python
+  - TypeScript
+  - production
+  - end-to-end
+  - eval
+  - multi-agent
+  - full-stack
+  - tool-calling
+  - customer
+  - frontier
+  - deployment
+dropped_keywords:
+  - Sydney
+  - hybrid
+  - GRC
+nice_to_have_keywords:
+  - playbooks
+  - prototype
+  - rollout
+  - observability
+  - JavaScript
+  - RAG
+  - HITL
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-eval, centros-platform-leverage] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+  - { job_id: coursera, bullets: [coursera-download] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production multi-agent LLM runtime end-to-end: typed tool-calling contracts, eval gates, LangFuse traces, HITL approvals — collapsed 4 vendor primitives into 1 governed layer shipped to customers."
+  centros-eval: "Built eval harness + LangFuse trace pipeline for frontier LLMs in production: golden datasets, task-level scorers, regression suites, prompt versioning, failure taxonomy — caught 22+ silent regressions pre-release."
+  centros-platform-leverage: "Codified 5+ reusable full-stack platform building blocks (connectors, secrets, approval gates, eval hooks, deploy templates) — cut new customer workflow setup from weeks to 2 days at production quality."
+  cc-fastapi: "Prototyped customer accommodations workflows on CentrOS: 3-stage guest-triage LLM pipeline (classify → plan → draft) in Python/FastAPI with HITL approval gates before any irreversible action."
+skills_emphasis:
+  - title: "LLM Production Systems"
+    items:
+      - "Frontier LLM tool-calling, multi-agent orchestration (LangGraph), MCP"
+      - "Eval-driven development: golden datasets, regression suites, LangFuse tracing"
+      - "HITL approvals, guardrails, shadow traffic, canary rollouts"
+      - "Hybrid RAG on pgvector + OpenSearch"
+  - title: "Full-Stack Engineering"
+    items:
+      - "Python · FastAPI · TypeScript · Node · React"
+      - "PostgreSQL · Drizzle · Vitest · CI/CD"
+      - "Production incident response, durable execution, checkpointing"
+  - title: "Customer Delivery"
+    items:
+      - "End-to-end deployment: discovery → scoping → build → production rollout"
+      - "AI-to-human handoff design, operator workflow mapping, adoption in live ops"
+      - "Codifying playbooks + reusable building blocks for repeatable delivery"

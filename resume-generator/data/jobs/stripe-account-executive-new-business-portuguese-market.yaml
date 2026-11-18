@@ -1,0 +1,52 @@
+slug: stripe-account-executive-new-business-portuguese-market
+company: Stripe
+role: "Account Executive (New Business - Portuguese Market)"
+headline: "Account Executive — New Business · Portuguese Market"
+summary: >
+  Note: This is an enterprise sales role requiring 6+ years of quota-carrying sales
+  experience in the Portuguese market and Portuguese/English fluency — not an
+  engineering position. The candidate profile is an AI agent orchestration engineer
+  with no enterprise sales track record or Portuguese fluency on file, so this is
+  not a recommended fit. The config below surfaces the closest adjacent signal
+  (commercial deal-making, technical product depth, stakeholder workflows) for
+  completeness only.
+must_have_keywords:
+  - sales
+  - new business
+  - Portuguese market
+  - enterprise customers
+  - full sales cycle
+  - prospecting
+  - commercial negotiations
+  - account plans
+  - technical product
+  - stakeholders
+  - Portuguese
+  - English
+nice_to_have_keywords:
+  - payments
+  - pipeline
+  - outbound
+  - partnerships
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-tools, centros-platform-leverage] }
+  - { job_id: independent-builder, bullets: [ind-axed, ind-llm-history] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: property-ops, bullets: [pm-mapping] }
+  - { job_id: conscious-creations, bullets: [cc-handoff] }
+bullet_overrides: {}
+skills_emphasis:
+  - title: "Commercial & Deal-Making"
+    items:
+      - "Multi-year IP rights deal closed with Wattpad WEBTOON Studios (book + 2-season TV)"
+      - "$5M+ GMV initiatives across 3+ international markets at Faire"
+      - "Stakeholder communication, cross-functional partnering, account/workflow mapping"
+  - title: "Technical Product Depth"
+    items:
+      - "AI agent platforms, LLM tool-calling, MCP, RAG — fluency to sell technical products"
+      - "Payments-adjacent: refunds, vendor invoices, compliance workflows in production"
+      - "TypeScript · Python · React · PostgreSQL"
+  - title: "Languages"
+    items:
+      - "English (fluent)"

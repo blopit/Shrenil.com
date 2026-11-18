@@ -1,0 +1,70 @@
+slug: openai-full-stack-software-engineer-codex
+company: OpenAI
+role: Full Stack Software Engineer, Codex
+posting_url: ""
+headline: "Full Stack Engineer · AI-Powered Developer Workflows · Agent Orchestration"
+summary: >
+  Full stack engineer shipping end-to-end AI-powered developer workflows across TypeScript
+  frontends, backend services, agent orchestration, and cloud infrastructure. 3+ years
+  building LLM tool-calling, multi-agent runtimes, and MCP integrations across the software
+  development lifecycle, with production observability, evals, and HITL guardrails.
+  Product-oriented builder who owns features from prompt design through launch and iteration.
+
+must_have_keywords:
+  - TypeScript
+  - Full stack
+  - agent orchestration
+  - AI-powered
+  - developer workflows
+  - LLM
+  - MCP
+  - tool-calling
+  - backend services
+  - cloud infrastructure
+  - observability
+  - end-to-end
+
+dropped_keywords:
+  - Rust
+  - Codex IDE Extension
+  - open-source maintainers
+  - code review
+
+nice_to_have_keywords:
+  - evals
+  - prompt design
+  - reliability
+  - workflow orchestration
+  - React
+  - CI
+  - developer tooling
+
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-runtime, centros-tools] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: coursera, bullets: [coursera-react] }
+
+bullet_overrides:
+  centros-platform: "Built CentrOS production multi-agent orchestration runtime in TypeScript: typed tool contracts, eval gates, LangFuse observability, HITL approvals — collapsed 4 vendor primitives into 1 governed layer."
+  centros-tools: "Built MCP tool registry with scoped OAuth, JSON-schema validation, retry policy, side-effect logging — turned ad-hoc API calls into 100% audited typed agent tool-calling across backend services."
+  ind-llm-history: "Shipped LLM developer workflows end-to-end since ChatGPT (Nov 2022): tool-calling from 2023, LangGraph multi-agent from 2024, MCP integrations from late 2024 — 3+ years compounding."
+
+skills_emphasis:
+  - title: "AI-Powered Developer Workflows"
+    items:
+      - "Agent orchestration: LangGraph state graphs · Temporal-style durable execution · multi-agent runtimes"
+      - "LLM tool-calling · MCP tool registries · structured outputs · prompt design & versioning"
+      - "Evals: golden datasets · regression suites · LangFuse tracing · failure taxonomy"
+      - "HITL: approval gates · confidence-gated handoff · audit trails · reversible operations"
+  - title: "Full Stack Engineering"
+    items:
+      - "TypeScript · React · Hono · Node.js · Python · FastAPI"
+      - "PostgreSQL · Drizzle · pgvector · OpenSearch · hybrid RAG"
+      - "Vitest · CI/CD · A/B testing · staged rollouts · shadow traffic · canary releases"
+  - title: "Backend Services & Cloud Infrastructure"
+    items:
+      - "Backend services: typed contracts · OAuth · schema validation · retry policy"
+      - "Cloud infrastructure: deploy templates · secrets management · connectors · golden paths"
+      - "Observability: tracing · metrics · incident response · production reliability"

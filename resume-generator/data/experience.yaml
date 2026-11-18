@@ -50,8 +50,8 @@ entries:
         affinities: [grafana-revops, alpaca-platform, aot-ai-architect, cresta-integrations, acquia-staff-ai]
 
       - id: centros-dogfood
-        text: "Dogfooded CentrOS on 23-unit motel vertical (guest comms, refunds, vendor invoices, compliance) — 3,980+ Vitest tests across 347 files passing on main; CI-backed live ops."
-        keywords: [production, CI, testing, dogfood, vertical workflow]
+        text: "Deployed CentrOS in production at a 23-unit hospitality operation (guest comms, refunds, vendor invoices, compliance) — 3,980+ Vitest tests passing on main, CI-backed live ops since Feb 2026."
+        keywords: [production, CI, testing, deployment, vertical workflow, hospitality]
         affinities: [cresta-integrations, grafana-revops, aot-ai-architect, robots-and-pencils-staff]
 
       - id: centros-platform-leverage
@@ -60,7 +60,7 @@ entries:
         affinities: [alpaca-platform, aot-ai-architect, acquia-enterprise-architect]
 
   - id: conscious-creations
-    role: "Vertical automation & ops dogfood"
+    role: "Vertical Automation & Ops Lead"
     company: "Conscious Creations"
     dates: "Sep 2022 – Present"
     location: "Remote · Canada"
@@ -100,8 +100,8 @@ entries:
         affinities: [acquia-staff-ai, acquia-enterprise-architect, aot-ai-architect, grafana-revops, robots-and-pencils-staff]
 
       - id: ind-axed
-        text: "Shipped AXED creative IP — book release + 2-season animated TV adaptation deal (2025) — plus content automation tooling formalized into CentrOS platform Feb 2026."
-        keywords: [creative IP, content automation, product]
+        text: "Shipped AXED IP rights deal with Wattpad WEBTOON Studios — book + 2-season animated television adaptation (2025) — plus content automation tooling formalized into CentrOS platform Feb 2026."
+        keywords: [creative IP, IP rights deal, commercial agreement, content automation, product]
         affinities: []
 
   - id: faire
@@ -139,8 +139,8 @@ entries:
         affinities: [grafana-revops, aot-ai-architect, alpaca-platform, cresta-integrations]
 
       - id: webtoon-ip
-        text: "Brokered IP rights sale to 1 publisher + 1 animated TV studio for 2-season adaptation releasing 2025 — productized creative pipeline into licensable property."
-        keywords: [IP, business development]
+        text: "Brokered AXED IP rights deal with Wattpad WEBTOON Studios — book + 2-season animated television adaptation releasing 2025 — multi-year multi-format commercial agreement structured solo."
+        keywords: [IP, business development, commercial negotiation, deal closing]
         affinities: []
 
   - id: coursera

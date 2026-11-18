@@ -1,0 +1,70 @@
+slug: stripe-account-executive-platforms-hunter
+company: Stripe
+role: "Account Executive, Platforms (New Business)"
+headline: "Technical Founder → Platform Sales · API-First · Complex Multi-Party Deals"
+summary: >
+  Technical founder and engineer with a proven commercial track record — brokered a
+  multi-year, multi-format IP rights deal with Wattpad WEBTOON Studios solo, drove
+  $5M+ GMV across international markets at Faire, and now run an API-first agent
+  platform (CentrOS). Comfortable leading business-and-technical conversations with
+  CTO/COO/CFO-level stakeholders on payments-adjacent infrastructure, and eager to
+  translate that builder credibility into consultative platform sales.
+must_have_keywords:
+  - complex negotiations
+  - commercial agreements
+  - API-first
+  - platform
+  - technical product
+  - consultative sales
+  - executive stakeholders
+  - multi-party sale
+  - full sales cycle
+  - technical product understanding
+  - value proposition
+  - business models
+nice_to_have_keywords:
+  - fintech
+  - payments
+  - CRM hygiene
+  - forecasting
+  - product workshops
+  - financial analysis
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-tools, centros-platform-leverage, centros-dogfood]
+  - job_id: independent-builder
+    bullets: [ind-axed]
+  - job_id: faire
+    bullets: [faire-apparel, faire-perf]
+  - job_id: webtoon
+    bullets: [webtoon-ip, webtoon-workflow]
+  - job_id: coursera
+    bullets: [coursera-download]
+  - job_id: springboard
+    bullets: [sb-pdf]
+bullet_overrides:
+  centros-platform: "Founded and sold CentrOS, an API-first agent orchestration platform — led product positioning, technical discovery, and commercial framing with 6+ prospective platform customers evaluating vs. 4 incumbent vendors."
+  centros-tools: "Built API-first tool/connector layer with scoped OAuth, schema validation, and audit logging — the same integration surface B2B software platforms evaluate when picking payments infrastructure like Stripe Connect."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives cutting new-customer onboarding from weeks to 2 days — direct experience articulating platform value proposition to technical and finance buyers."
+skills_emphasis:
+  - title: "Commercial & Deal Experience"
+    items:
+      - "Complex multi-party negotiation — Wattpad WEBTOON Studios IP deal (book + 2-season TV, multi-year, structured solo)"
+      - "$5M+ GMV impact across 3+ international markets at Faire"
+      - "Founder-led sales conversations with technical (CTO/eng) and finance (CFO/ops) stakeholders"
+      - "Value-proposition articulation for API-first platform products"
+  - title: "Technical Fluency for Platform Sales"
+    items:
+      - "API-first platforms · webhooks · OAuth · SDKs · developer experience"
+      - "Payments-adjacent: audit trails, approval gates, reversible operations, compliance workflows"
+      - "Product workshops with Engineering, Product, and Finance leaders"
+      - "Buyer-journey discovery: technical evaluation → commercial framing → close"
+  - title: "Process & Forecasting Discipline"
+    items:
+      - "CRM hygiene · pipeline reviews · weekly/quarterly forecasting cadence"
+      - "Repeatable sales motion design — same platform-primitive thinking applied to sales assets"
+      - "Written and verbal communication with C-level executives"
+  - title: "Domain Interest"
+    items:
+      - "Deep interest in fintech infrastructure and the API-first economy"
+      - "Actively studying Stripe Connect, platform economics, and B2B indirect models"

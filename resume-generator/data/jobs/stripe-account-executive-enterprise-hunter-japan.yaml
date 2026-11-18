@@ -1,0 +1,58 @@
+slug: stripe-account-executive-enterprise-hunter-japan
+company: Stripe
+role: Account Executive, Enterprise (Hunter) — Japan
+headline: "Founder-Engineer Who Closes — Technical Depth for Enterprise Hunter Motions"
+summary: >
+  Founder-engineer who has owned the full commercial lifecycle on technical products
+  — discovery, value articulation, pricing, multi-party negotiation, close. Drove
+  $5M+ apparel pre-order GMV at Faire across three international markets. Brokered
+  AXED's IP rights deal with Wattpad WEBTOON Studios for a book + 2-season animated
+  television adaptation releasing 2025. Currently running founder-led sales
+  conversations for CentrOS, a production AI agent orchestration platform deployed
+  in live ops. Brings technical depth that translates platform capabilities into
+  business value at the CTO/CFO table — particularly where the deal is unlocked by
+  the engineering story.
+must_have_keywords:
+  - enterprise
+  - sales cycle
+  - account plans
+  - executive stakeholders
+  - CTO
+  - CFO
+  - product workshops
+  - technical conversations
+  - consultative
+  - negotiations
+  - Japanese
+  - English
+nice_to_have_keywords:
+  - growth stage
+  - internet
+  - software
+  - SaaS
+  - financial infrastructure
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-platform-leverage, centros-tools, centros-dogfood] }
+  - { job_id: independent-builder, bullets: [ind-llm-history, ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production AI agent platform: owned technical vision, product roadmap, and live deployment. Consolidated 4 vendor primitives into 1 governed commercial layer."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives (connectors, secrets, approval gates, eval hooks, deploy templates) — cut new customer onboarding from weeks to 2 days while preserving security and compliance standards."
+  faire-apparel: "Owned apparel pre-order revenue at Faire: $5M+ GMV across 3+ international markets over 6-month staged workstreams — full cross-functional execution with product, ops, finance, and merchant stakeholders."
+skills_emphasis:
+  - title: "Commercial & Revenue"
+    items:
+      - "$5M+ GMV ownership across three international markets (Faire)"
+      - "Multi-year, multi-format IP rights deal with Wattpad WEBTOON Studios"
+      - "Founder-led sales conversations on CentrOS (production AI platform)"
+  - title: "Technical Depth (Enterprise Buyer Credibility)"
+    items:
+      - "AI agent orchestration, LLM tool-calling, MCP, LangGraph"
+      - "Platform primitives, connectors, governed integrations"
+      - "Eval harnesses, observability, production runtime"
+  - title: "Cross-Functional Delivery"
+    items:
+      - "Engineering ↔ Product ↔ Ops workflow design"
+      - "Stakeholder communication, workshops, technical demos"
+      - "A/B rollouts, staged launches, guardrails"

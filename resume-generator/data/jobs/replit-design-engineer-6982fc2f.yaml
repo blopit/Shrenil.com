@@ -1,0 +1,61 @@
+slug: replit-design-engineer-6982fc2f
+company: Replit
+role: Design Engineer
+headline: "Design Engineer · React/TypeScript · Design Systems · AI-Native UI"
+summary: >
+  Front-end engineer with 8+ years shipping React/TypeScript UIs with a strong
+  design sensibility — from Coursera's React GUI infrastructure to Faire's
+  $5M+ apparel storefront to CentrOS agent tooling today. Deep experience in
+  design systems, component-based architecture, A/B guardrails, and
+  translating designs into production-ready code, now applied to AI-native
+  interfaces where humans and agents collaborate.
+must_have_keywords:
+  - React
+  - TypeScript
+  - JavaScript
+  - design system
+  - component-based architecture
+  - front-end
+  - production-ready code
+  - design sensibility
+  - AI
+  - accessible
+nice_to_have_keywords:
+  - developer tools
+  - prototypes
+  - design-to-development workflow
+  - MobX
+  - Storybook
+  - performance
+dropped_keywords:
+  - HTML
+  - CSS
+  - UI animations
+  - accessibility standards
+  - Replit UI
+  - pixel-perfect
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-hitl, centros-platform-leverage] }
+  - { job_id: faire, bullets: [faire-apparel, faire-perf] }
+  - { job_id: coursera, bullets: [coursera-react, coursera-download] }
+  - { job_id: webtoon, bullets: [webtoon-workflow] }
+bullet_overrides:
+  centros-platform: "Built CentrOS agent runtime + operator UI in TypeScript/React with typed tool contracts, HITL approval surfaces, trace views — collapsed 4 vendor primitives into 1 governed layer."
+  centros-platform-leverage: "Shipped 5+ reusable front-end + platform primitives (approval gates, trace viewers, connector UIs, deploy templates) — cut new-workflow setup from weeks to 2 days with consistent design system."
+  coursera-react: "Built React GUI-creation infrastructure at Coursera as design-system component library; cut new-view setup from days to 1 hour and compounded across 5+ teams as company standard."
+skills_emphasis:
+  - title: "Front-End & Design Systems"
+    items:
+      - "React · TypeScript · JavaScript · MobX · Storybook · Jest"
+      - "Design system + component-based architecture, reusable primitives"
+      - "A/B testing, staged rollouts, performance guardrails"
+  - title: "AI-Native UI & Tooling"
+    items:
+      - "Operator surfaces for LLM agents: approval gates, trace viewers, HITL"
+      - "Prototyping new interaction models for human ↔ agent workflows"
+      - "Developer tooling: cut new-view/new-workflow setup from days to hours"
+  - title: "Product & Collaboration"
+    items:
+      - "Translating designs into production-ready code across 5+ teams"
+      - "Shipped consumer + creator UIs at 445K+ subscriber and 24M+ user scale"
+      - "Accessible, responsive, performant interfaces under A/B guardrails"

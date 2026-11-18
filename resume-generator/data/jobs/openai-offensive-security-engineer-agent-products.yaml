@@ -1,0 +1,75 @@
+slug: openai-offensive-security-engineer-agent-products
+company: OpenAI
+role: "Offensive Security Engineer, Agent Products"
+posting_url: ""
+headline: "Agent Systems Engineer · Agentic Attack-Surface & Trust-Boundary Perspective"
+summary: >
+  Agent orchestration engineer who has spent 3+ years building the exact attack
+  surface OpenAI is testing: tool-calling runtimes, MCP tool registries, HITL
+  approval gates, and model-integrated product surfaces where prompt injection,
+  confused deputies, and unsafe tool use are daily threat-model concerns. Deep
+  familiarity with agentic products, trust boundaries between models, tools,
+  and infrastructure, and Python/TypeScript codebases — bringing a builder's
+  intuition for where agent systems break to offensive security work.
+must_have_keywords:
+  - agent-powered products
+  - agentic
+  - tool use
+  - prompt injection
+  - HITL
+  - trust boundaries
+  - Python
+  - TypeScript
+  - MCP
+  - model-integrated
+  - threat models
+  - code review
+dropped_keywords:
+  - penetration testing
+  - offensive security
+  - exploitation
+  - vulnerability research
+  - red team
+  - Azure
+  - Kubernetes
+  - CI/CD security
+  - GitHub security
+  - cloud security assessment
+  - confused deputies
+  - application security
+  - 7+ years pentesting
+nice_to_have_keywords:
+  - React
+  - Python-based web services
+  - Linux
+  - macOS
+  - distributed services
+  - startup
+  - fast-paced
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-tools, centros-hitl, centros-platform] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: independent-builder, bullets: [ind-llm-history] }
+  - { job_id: faire, bullets: [faire-perf] }
+  - { job_id: webtoon, bullets: [webtoon-pipeline] }
+  - { job_id: coursera, bullets: [coursera-react] }
+bullet_overrides:
+  centros-tools: "Built MCP tool registry with scoped OAuth permissions, JSON-schema validation, side-effect logging, and prompt-injection-aware input handling — turned ad-hoc API calls into 100% audited typed agent tool use invocations."
+  centros-hitl: "Designed HITL trust boundaries for agent-powered products: confidence-gated handoff, approval checkpoints before irreversible tool use, reversible operations, full audit trails — 100% of high-risk agentic actions human-reviewed."
+  centros-platform: "Built CentrOS multi-agent orchestration runtime with typed tool contracts, eval gates, LangFuse traces, and HITL interrupts — hardened threat models across model-integrated product surfaces and 4+ vendor primitives."
+skills_emphasis:
+  - title: "Agentic Systems & Trust Boundaries"
+    items:
+      - "Agent-powered products · agentic runtimes · model-integrated surfaces"
+      - "MCP tool registries · typed tool use · scoped OAuth · schema validation"
+      - "HITL approval gates · trust boundaries · reversible actions · audit trails"
+      - "Prompt injection awareness · threat models · eval harnesses · LangFuse tracing"
+  - title: "Languages & Stacks"
+    items:
+      - "Python (FastAPI) · TypeScript (Hono, React) · Node.js"
+      - "PostgreSQL · pgvector · Drizzle · Vitest · CI-backed production"
+  - title: "Code Review & Production Discipline"
+    items:
+      - "Code review across Python + TypeScript agent codebases"
+      - "3,980+ Vitest tests · regression suites · shadow traffic · canary releases"
+      - "Incident response · monitoring · production hotfixes under load"

@@ -1,0 +1,63 @@
+slug: stripe-account-executive-existing-business-platforms-ic
+company: Stripe
+role: Account Executive, Existing Business Platforms (IC)
+headline: "API-Platform Founder · Trusted Advisor for Existing-Account Expansion"
+summary: >
+  Founder of an API-first AI orchestration platform with a track record of expanding
+  existing accounts through technical product depth and commercial framing. Drove
+  $5M+ apparel pre-order GMV at Faire across three international markets — owned
+  cross-functional rollout from product strategy through finance, partnering with
+  product, engineering, and operations stakeholders. Brokered AXED's IP rights deal
+  with Wattpad WEBTOON Studios for a book + 2-season animated television adaptation
+  releasing 2025. Now runs founder-led conversations and product workshops for
+  CentrOS, deployed in production with finance, operations, and engineering
+  stakeholders. Strongest where existing-customer expansion at the C-level is
+  unlocked by translating API and platform integrations into revenue and retention
+  outcomes for enterprise technical buyers.
+must_have_keywords:
+  - API
+  - technical product
+  - enterprise
+  - C-level
+  - product strategy
+  - cross-functional
+  - workshops
+  - platform
+  - integrations
+  - stakeholder
+nice_to_have_keywords:
+  - fintech
+  - payments
+  - workshops
+  - account planning
+  - C-suite
+  - regulatory
+  - compliance
+  - negotiations
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-tools, centros-platform-leverage, centros-hitl] }
+  - { job_id: independent-builder, bullets: [ind-llm-history, ind-axed] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+  - { job_id: coursera, bullets: [coursera-react] }
+bullet_overrides:
+  centros-platform: "Built CentrOS production AI agent platform: owned technical vision, product roadmap, and live deployment. Consolidated 4 vendor primitives into 1 governed commercial layer."
+  centros-tools: "Built MCP-style tool registry with scoped OAuth permissions, JSON-schema validation, retry policy, audit logging — turned ad-hoc API calls into 100% governed typed agent tool invocations for enterprise integrations."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives (connectors, secrets, approval gates, eval hooks, deploy templates) — cut new-integration setup from weeks to 2 days while preserving security and compliance standards."
+  faire-apparel: "Owned apparel pre-order revenue at Faire: $5M+ GMV across 3+ international markets over 6-month staged workstreams — full cross-functional execution with product, ops, finance, and merchant stakeholders."
+skills_emphasis:
+  - title: "Platform & API Engineering"
+    items:
+      - "Deep technical product fluency · API design · typed contracts · OAuth scoping"
+      - "Platform primitives · connectors · integrations · golden paths"
+      - "TypeScript · Python · Node · PostgreSQL"
+  - title: "AI Agent Orchestration"
+    items:
+      - "LangGraph · Temporal-style durable execution · MCP tool-calling"
+      - "Eval harness · LangFuse tracing · regression suites"
+      - "HITL approvals · audit trails · governance"
+  - title: "Cross-Functional Delivery"
+    items:
+      - "Product + Eng + Finance partnership (Faire $5M+ GMV)"
+      - "Enterprise rollout · A/B guardrails · staged releases"
+      - "Workflow mapping · stakeholder communication"

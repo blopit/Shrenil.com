@@ -1,0 +1,71 @@
+slug: replit-staff-software-engineer-money-4e7bcf87
+company: Replit
+role: Staff Software Engineer, Money
+headline: "Staff Backend Engineer — Monetization, Billing & Payment Platforms"
+summary: >
+  Staff-level backend engineer with 10+ years shipping Python, TypeScript, React,
+  and Postgres systems — now building reliable platform abstractions, APIs, and
+  monitoring for agent-driven products. Direct experience with payment, subscription,
+  and usage-based billing surfaces (Stripe, GMV, conversion-loss trackers) plus
+  customer-facing commerce UIs. Self-directed operator comfortable owning
+  monetization end-to-end in ambiguous environments.
+must_have_keywords:
+  - Python
+  - TypeScript
+  - React
+  - Postgres
+  - backend
+  - billing
+  - subscription
+  - usage-based billing
+  - payment
+  - APIs
+  - monitoring
+  - monetization
+dropped_keywords:
+  - GraphQL
+  - Nodejs
+  - Orb
+  - Metronome
+  - Stripe
+  - tokenization
+  - taxation
+  - coupon codes
+  - referral systems
+nice_to_have_keywords:
+  - pricing and packaging
+  - abstractions
+  - edge cases
+  - customer-facing
+  - self-directed
+  - revenue growth
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform-leverage, centros-tools, centros-eval] }
+  - { job_id: faire, bullets: [faire-apparel, faire-perf] }
+  - { job_id: coursera, bullets: [coursera-react] }
+  - { job_id: minted, bullets: [minted-cyber] }
+  - { job_id: webtoon, bullets: [webtoon-pipeline] }
+bullet_overrides:
+  centros-platform-leverage: "Shipped 5+ reusable backend platform APIs + abstractions (connectors, secrets, approval gates, eval hooks, deploy templates) — cut new-workflow setup from weeks to 2 days with audit logging intact."
+  centros-tools: "Built MCP-style tool registry with scoped OAuth, JSON-schema validation, retry policy, side-effect logging + monitoring — turned ad-hoc API calls into 100% audited typed tool invocations."
+  faire-apparel: "Drove apparel pre-order monetization at Faire: $5M+ GMV across 3+ international markets over 6-month staged workstreams; React/TypeScript customer-facing payment surfaces behind A/B guardrails."
+  minted-cyber: "Built conversion-loss trackers + payment monitoring, shipped 3+ hotfixes during Cyber Monday peak (10x+ traffic) — debugged complex billing edge cases under live production load."
+skills_emphasis:
+  - title: "Monetization & Billing"
+    items:
+      - "Payment surfaces, subscription models, usage-based billing patterns"
+      - "Customer-facing commerce UIs, conversion-loss tracking, pricing experiments"
+      - "A/B guardrails, staged rollouts, revenue impact ($5M+ GMV shipped)"
+  - title: "Backend & Platform"
+    items:
+      - "Python · TypeScript · React · Postgres · Node.js"
+      - "APIs, abstractions, tool registries, schema validation, OAuth scoping"
+      - "Audit logging, monitoring, incident response, durable execution"
+  - title: "Agent & LLM Systems"
+    items:
+      - "LangGraph multi-agent orchestration, HITL approvals, eval harnesses"
+      - "Hybrid RAG on pgvector + OpenSearch, LangFuse tracing"
+  - title: "Delivery"
+    items:
+      - "Self-directed in ambiguous environments · founder + staff-level ownership"
+      - "3,980+ Vitest tests on main · CI-backed production ops"

@@ -1,0 +1,71 @@
+slug: openai-developer-marketing-lead-apac
+company: OpenAI
+role: APAC Developer Marketing Lead
+headline: "Builder-Credible Voice for Developer & Startup Ecosystems"
+summary: >
+  Engineer-founder who ships production LLM systems and translates them into
+  builder-facing stories developers actually trust. 3+ years compounding on
+  tool-calling, multi-agent orchestration, MCP, and RAG on OpenAI APIs, with
+  direct experience turning technical launches into adoption across founder
+  and developer audiences.
+must_have_keywords:
+  - developer
+  - APIs
+  - AI
+  - LLM
+  - MCP
+  - RAG
+  - multi-agent
+  - tool-calling
+  - startup
+  - builder
+  - ecosystem
+  - founder
+dropped_keywords:
+  - developer marketing
+  - 10+ years
+  - Developer Relations
+  - product marketing
+  - hackathons
+  - APAC
+  - community-led
+  - regional marketing
+  - launches
+nice_to_have_keywords:
+  - technical education
+  - content
+  - developer platforms
+  - applied AI
+  - accelerators
+  - founder storytelling
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-tools, centros-rag]
+  - job_id: independent-builder
+    bullets: [ind-llm-history, ind-axed]
+  - job_id: conscious-creations
+    bullets: [cc-fastapi]
+  - job_id: webtoon
+    bullets: [webtoon-workflow]
+  - job_id: coursera
+    bullets: [coursera-react]
+bullet_overrides:
+  ind-llm-history: "Built on OpenAI APIs since ChatGPT launch (Nov 2022): tool-calling from 2023; multi-agent patterns from 2024; MCP integrations from late 2024 — 3+ years compounding builder credibility."
+  centros-tools: "Built MCP-style tool registry with scoped OAuth, JSON-schema validation, retry policy, audit logs — turned ad-hoc API calls into 100% governed typed agent tool invocations developers trust."
+skills_emphasis:
+  - title: "Developer & Builder Credibility"
+    items:
+      - "3+ years shipping on OpenAI APIs (tool-calling, function calling, structured outputs)"
+      - "MCP integrations since late 2024 — early builder in the ecosystem"
+      - "Multi-agent orchestration, LangGraph, RAG on pgvector"
+      - "Founder shipping production LLM systems developers can learn from"
+  - title: "Technical Storytelling & Content"
+    items:
+      - "Translate runtime, eval, HITL, and RAG concepts into builder-usable narratives"
+      - "Live production dogfood: 3,980+ tests, CI-backed ops, real workflows"
+      - "IP deal-closing (Wattpad WEBTOON, 2-season TV adaptation 2025) — long-form audience building"
+  - title: "Ecosystem & Startup Fluency"
+    items:
+      - "Solo founder — lived experience of the early-stage AI builder journey"
+      - "Cross-functional shipping across product, growth, and partnerships"
+      - "Canada remote · NA-friendly · comfortable async across time zones"

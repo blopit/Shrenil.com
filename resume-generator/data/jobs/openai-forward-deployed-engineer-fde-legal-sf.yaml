@@ -1,0 +1,71 @@
+slug: openai-forward-deployed-engineer-fde-legal-sf
+company: OpenAI
+role: "Forward Deployed Engineer (FDE) — Legal"
+posting_url: ""
+headline: "Forward Deployed Engineer — LLM Systems for Regulated, Compliance-Heavy Workflows"
+summary: >
+  Full-stack engineer with 3+ years shipping production LLM systems end-to-end — from
+  discovery and prototype through adoption — in environments where errors carry real
+  regulatory and financial consequences. Deep experience embedding with operators to
+  translate complex workflows into evaluated, guardrailed agent deployments in Python
+  and TypeScript, then codifying wins into repeatable playbooks and platform primitives.
+must_have_keywords:
+  - LLM
+  - production
+  - Python
+  - TypeScript
+  - end-to-end
+  - evaluation
+  - guardrails
+  - full-stack
+  - prototype
+  - adoption
+  - repeatable
+  - compliance
+dropped_keywords:
+  - legal technology
+  - law firms
+  - 5+ years
+  - financial services
+nice_to_have_keywords:
+  - generative models
+  - hero workflow
+  - customer-facing
+  - risk
+  - incidents
+  - playbooks
+  - hybrid
+  - San Francisco
+experience_selection:
+  - job_id: centros-founder
+    bullets: [centros-platform, centros-eval, centros-hitl]
+  - job_id: conscious-creations
+    bullets: [cc-fastapi]
+  - job_id: independent-builder
+    bullets: [ind-llm-history]
+  - job_id: faire
+    bullets: [faire-perf]
+  - job_id: coursera
+    bullets: [coursera-search]
+  - job_id: minted
+    bullets: [minted-cyber]
+bullet_overrides:
+  centros-platform: "Built CentrOS production LLM runtime end-to-end: typed tool contracts, eval gates, LangFuse traces, HITL approval interrupts — collapsed 4 vendor primitives into 1 governed layer."
+  centros-eval: "Built evaluation harness + LangFuse trace pipeline in Python: golden datasets, task-level scorers, regression suites, prompt versioning — caught 22+ silent regressions before production release."
+  centros-hitl: "Designed HITL guardrails for compliance-heavy workflows: confidence-gated handoff, approval checkpoints, reversible operations, audit trails — 100% of high-risk tool calls human-reviewed before execution."
+skills_emphasis:
+  - title: "LLM Systems & Deployment"
+    items:
+      - "Production LLM runtimes · tool-calling · multi-agent orchestration · MCP"
+      - "Evaluation harnesses · guardrails · LangFuse tracing · regression suites"
+      - "HITL approvals · audit trails · compliance-heavy workflow design"
+  - title: "Full-Stack Engineering"
+    items:
+      - "Python · FastAPI · TypeScript · React · Node.js"
+      - "PostgreSQL · pgvector · Drizzle · Vitest · CI/CD"
+      - "End-to-end delivery: discovery → prototype → production adoption"
+  - title: "Forward-Deployed Practice"
+    items:
+      - "Embedded with operators to map workflows and select hero use cases"
+      - "Translated field feedback into repeatable platform primitives + playbooks"
+      - "Shipped under urgent, ambiguous, high-stakes delivery windows"

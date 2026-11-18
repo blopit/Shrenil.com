@@ -1,0 +1,91 @@
+slug: openai-forward-deployed-security-engineer
+company: OpenAI
+role: Forward Deployed Security Engineer
+posting_url: ''
+headline: Forward Deployed Engineer — Secure AI Agent Infrastructure & Governance
+summary: 'Forward-deployed builder shipping secure, production AI agent infrastructure with scoped OAuth
+  tool registries, HITL approval gates, audit trails, and eval-backed regression coverage. Comfortable
+  embedding with customers through the full lifecycle — design to production to ongoing operations — and
+  applying Python, TypeScript, and cloud-native primitives to harden novel LLM deployments against adversary
+  tactics.
+
+  '
+must_have_keywords:
+- security
+- infrastructure
+- access controls
+- authentication
+- encryption
+- Python
+- production
+- security controls
+- audit trails
+- HITL
+- OAuth
+dropped_keywords:
+- US security clearance
+- Golang
+- Azure
+- AWS
+- Kubernetes
+- Terraform
+- red team
+- penetration testing
+- insider threat
+- endpoint detection and response
+- datacenter security
+- application security
+nice_to_have_keywords:
+- threat monitoring
+- security validation
+- cross-functional
+- compliance
+- governance
+- incident response
+experience_selection:
+- job_id: centros-founder
+  bullets:
+  - centros-hitl
+  - centros-tools
+  - centros-eval
+- job_id: conscious-creations
+  bullets:
+  - cc-fastapi
+- job_id: independent-builder
+  bullets:
+  - ind-llm-history
+- job_id: faire
+  bullets:
+  - faire-perf
+- job_id: coursera
+  bullets:
+  - coursera-download
+- job_id: minted
+  bullets:
+  - minted-cyber
+bullet_overrides:
+  centros-hitl: 'Designed HITL security controls: confidence-gated handoff, approval checkpoints before
+    irreversible actions, reversible operations, audit trails, escalation policy — 100% of high-risk tool
+    calls human-reviewed.'
+  centros-tools: Built MCP-style tool registry enforcing scoped OAuth access controls, JSON-schema authentication
+    of inputs, retry policy, side-effect logging — turned ad-hoc API calls into 100% audited typed agent
+    tool invocations.
+  centros-eval: 'Built eval harness + LangFuse trace pipeline for production security validation: golden
+    datasets, task-level scorers, regression suites, prompt versioning, failure taxonomy — caught 22+
+    silent regressions before release.'
+skills_emphasis:
+- title: Security & Governance
+  items:
+  - HITL approval gates · scoped OAuth · access controls · audit trails · authentication
+  - Encryption in transit/at rest · secrets management · least-privilege tool scopes
+  - Eval harnesses · regression suites · security validation · production incident response
+- title: Infrastructure & Platforms
+  items:
+  - Python · TypeScript · Node.js · FastAPI · Hono
+  - PostgreSQL · pgvector · OpenSearch · Drizzle · CI/CD
+  - LangGraph · Temporal-style durable execution · MCP tool registries
+- title: Forward-Deployed Delivery
+  items:
+  - 'Embedded lifecycle work: design → production → ongoing ops'
+  - Cross-functional partnership with engineering, ops, and end customers
+  - Novel LLM/agent deployments hardened against adversary abuse patterns

@@ -1,0 +1,69 @@
+slug: stripe-account-executive-enterprise-billing-existing-bu
+company: Stripe
+role: "Account Executive, Enterprise Billing (Existing Business)"
+headline: "Technical Builder Turned Trusted Advisor — Billing, Automation & Revenue Growth"
+summary: >
+  Engineer-operator shipping revenue growth, billing, payments, and
+  finance-automation workflows for financial services. Translates technical
+  solutions into expansion, upsell, and account plans. Built and deployed a
+  multi-agent back-office automation platform (billing, refunds, vendor invoices,
+  compliance) — direct CFO/CTO fluency on what Stripe Billing solves. Drove $5M+
+  GMV at Faire and brokered the AXED IP rights deal with Wattpad WEBTOON Studios —
+  direct stakeholder management across product, ops, sales, and quota-aligned
+  revenue conversations.
+must_have_keywords:
+  - billing
+  - Stripe
+  - sales
+  - revenue growth
+  - quota
+  - expansion
+  - upsell
+  - account plans
+  - financial services
+  - payments
+  - technical solutions
+  - stakeholder management
+nice_to_have_keywords:
+  - finance automation
+  - revenue reporting
+  - tax
+  - CFO
+  - CTO
+  - negotiations
+  - go-to-market
+experience_selection:
+  - { job_id: centros-founder, bullets: [centros-platform, centros-dogfood, centros-platform-leverage, centros-tools] }
+  - { job_id: conscious-creations, bullets: [cc-fastapi] }
+  - { job_id: faire, bullets: [faire-apparel] }
+  - { job_id: webtoon, bullets: [webtoon-ip] }
+bullet_overrides:
+  centros-platform: "Built CentrOS multi-agent back-office automation platform spanning billing, refunds, vendor invoices, and compliance — same finance-automation surface area Stripe RFA targets in its $100B market."
+  centros-dogfood: "Deployed CentrOS in production on a 23-unit hospitality operation running real billing, guest comms, refunds, and vendor invoice workflows — direct operator empathy for the CFO/COO pain Stripe Billing solves."
+  centros-platform-leverage: "Shipped 5+ reusable platform primitives (connectors, approval gates, audit logging) — cut new customer workflow setup from weeks to 2 days, the same expansion motion that drives upsell in existing accounts."
+  faire-apparel: "Drove apparel pre-order revenue initiatives at Faire: $5M+ GMV across 3+ international markets over 6-month staged workstreams — direct quota-style ownership of revenue outcomes against KPIs."
+  webtoon-ip: "Led complex bespoke commercial negotiation: brokered IP rights deal with 1 publisher + 1 animated TV studio for 2-season adaptation (2025) — multi-stakeholder, multi-year contract structuring."
+skills_emphasis:
+  - title: "Revenue & Customer Impact"
+    items:
+      - "$5M+ GMV ownership across international markets (Faire)"
+      - "Bespoke commercial negotiations & multi-year deal structuring (WEBTOON IP)"
+      - "Existing-account expansion: platform primitives cutting customer onboarding weeks → 2 days"
+      - "CFO/CTO-level technical conversations grounded in shipping production billing/finance workflows"
+  - title: "Billing & Finance Automation Domain"
+    items:
+      - "Multi-agent back-office automation: billing, refunds, vendor invoices, compliance"
+      - "Payments & subscription workflow design across 23-unit live operational portfolio"
+      - "Audit trails, approval gates, governance — finance-grade controls"
+      - "Workflow mapping across 12+ recurring finance/ops processes"
+  - title: "Technical Solutioning & Trusted Advisor"
+    items:
+      - "Translating complex technical requirements into stakeholder-ready solutions"
+      - "Cross-functional collaboration: product, engineering, ops, executive"
+      - "Self-starter in ambiguous, fast-moving environments (founder, independent builder)"
+      - "Proactive communication, account planning, and expectation management"
+  - title: "Tools & Platforms"
+    items:
+      - "Stripe ecosystem familiarity · Payments · Subscriptions · Billing"
+      - "Python · TypeScript · SQL for technical discovery and data-driven account plans"
+      - "LLM tool-calling, RAG, automation for back-office finance workflows"
